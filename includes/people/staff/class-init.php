@@ -39,10 +39,8 @@ class Init {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		$this->includes();
-
 		$this->db   = new Database();
-		$this->meta = new Meta();
+		$this->meta = new Meta_Database();
 	}
 
 	/**
