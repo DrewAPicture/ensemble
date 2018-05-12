@@ -47,9 +47,7 @@ class Menu {
 	public function ensemble_admin() {
 		?>
 		<div class="wrap">
-
 			<h2><?php esc_html_e( 'Ensemble', 'ensemble' ); ?></h2>
-
 		</div>
 		<?php
 	}
