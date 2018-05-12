@@ -1,7 +1,7 @@
 <?php
 namespace Ensemble\Core;
 
-use Ensemble\Core;
+use Ensemble\Core\Meta_Interface as Meta;
 
 /**
  * User meta abstraction layer.

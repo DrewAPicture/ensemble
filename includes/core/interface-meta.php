@@ -1,7 +1,7 @@
 <?php
 namespace Ensemble\Core;
 
-interface Meta {
+interface Meta_Interface {
 
 	/**
 	 * Retrieves meta for the given object type.
