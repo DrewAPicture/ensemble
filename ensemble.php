@@ -402,3 +402,5 @@ final class Ensemble_Requirements_Check {
 	}
 
 }
+
+new Ensemble_Requirements_Check();
