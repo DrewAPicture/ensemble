@@ -4,15 +4,14 @@ namespace Ensemble\Admin;
 /**
  * Sets up the Ensemble Admin.
  *
- * @since 1.0
+ * @since 1.0.0
  */
 class Menu {
 
 	/**
 	 * Initializes menu registrations.
 	 *
-	 * @access public
-	 * @since  1.0
+	 * @since 1.0.0
 	 * @static
 	 */
 	public static function init() {
@@ -24,8 +23,7 @@ class Menu {
 	/**
 	 * Registers top- and sub-level Ensemble menus.
 	 *
-	 * @access public
-	 * @since  1.0
+	 * @since 1.0.0
 	 */
 	public function register_menus() {
 		add_menu_page(
@@ -41,8 +39,7 @@ class Menu {
 	/**
 	 * Renders the primary Ensemble admin.
 	 *
-	 * @access public
-	 * @since  1.0
+	 * @since 1.0.0
 	 */
 	public function ensemble_admin() {
 		?>
