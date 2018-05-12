@@ -64,16 +64,18 @@ final class Ensemble {
 	 * @since 1.0.0
 	 * @static
 	 *
+	 * @param string $file Path to the base plugin file.
 	 * @return \Ensemble Plugin instance.
 	 */
-	public static function get_instance() {
-		if ( ! isset( self::$instance ) && ! ( self::$instance instanceof Ensemble ) ) {
-			self::$instance = new Ensemble();
+	public static function get_instance( $file = '' ) {
+		if ( ! empty( $file ) && ! isset( self::$instance ) && ! ( self::$instance instanceof Ensemble ) ) {
+			self::setup_instance( $file );
 
 			self::$instance->constants();
 			self::$instance->load();
 			self::$instance->setup();
 		}
+
 		return self::$instance;
 	}
 
