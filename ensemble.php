@@ -75,10 +75,32 @@ final class Ensemble_Requirements_Check {
 
 		// File path and base.
 		$this->file = __FILE__;
-		$this->base = plugin_basename( $this->file );
+		$this->base = plugin_basename( $this->get_file() );
 
 		// Load or quit.
 		$this->requirements_met() ? $this->load() : $this->quit();
+	}
+
+	/**
+	 * Retrieves the base plugin file path.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string Plugin file.
+	 */
+	public function get_file() {
+		return $this->file;
+	}
+
+	/**
+	 * Retrieves the plugin basename.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string Plugin basename.
+	 */
+	public function get_base() {
+		return $this->base;
 	}
 
 	/**
@@ -87,9 +109,11 @@ final class Ensemble_Requirements_Check {
 	 * @since 1.0.0
 	 */
 	private function quit() {
-		add_action( 'admin_head',                        array( $this, 'admin_head'        ) );
-		add_filter( "plugin_action_links_{$this->base}", array( $this, 'plugin_row_links'  ) );
-		add_action( "after_plugin_row_{$this->base}",    array( $this, 'plugin_row_notice' ) );
+		$base = $this->get_base();
+
+		add_action( 'admin_head',                  array( $this, 'admin_head'        ) );
+		add_filter( "plugin_action_links_{$base}", array( $this, 'plugin_row_links'  ) );
+		add_action( "after_plugin_row_{$base}",    array( $this, 'plugin_row_notice' ) );
 	}
 
 	/**
@@ -98,10 +122,10 @@ final class Ensemble_Requirements_Check {
 	 * @since 1.0.0
 	 */
 	private function load() {
-		require_once dirname( $this->file ) . '/includes/class-ensemble.php';
+		require_once dirname( $this->get_file() ) . '/includes/class-ensemble.php';
 
 		if ( class_exists( 'Ensemble' ) ) {
-			Ensemble::instance( $this->file );
+			Ensemble::instance( $this->get_file() );
 		}
 		do_action( 'edd_loaded' );
 	}
@@ -257,20 +281,20 @@ final class Ensemble_Requirements_Check {
 		$name = $this->unmet_requirements_name(); ?>
 
 		<style id="<?php echo esc_attr( $name ); ?>">
-			.plugins tr[data-plugin="<?php echo esc_html( $this->base ); ?>"] th,
-			.plugins tr[data-plugin="<?php echo esc_html( $this->base ); ?>"] td,
+			.plugins tr[data-plugin="<?php echo esc_html( $this->get_base() ); ?>"] th,
+			.plugins tr[data-plugin="<?php echo esc_html( $this->get_base() ); ?>"] td,
 			.plugins .<?php echo esc_html( $name ); ?>-row th,
 			.plugins .<?php echo esc_html( $name ); ?>-row td {
 				background: #fff5f5;
 			}
-			.plugins tr[data-plugin="<?php echo esc_html( $this->base ); ?>"] th {
+			.plugins tr[data-plugin="<?php echo esc_html( $this->get_base() ); ?>"] th {
 				box-shadow: none;
 			}
 			.plugins .<?php echo esc_html( $name ); ?>-row th span {
 				margin-left: 6px;
 				color: #dc3232;
 			}
-			.plugins tr[data-plugin="<?php echo esc_html( $this->base ); ?>"] th,
+			.plugins tr[data-plugin="<?php echo esc_html( $this->get_base() ); ?>"] th,
 			.plugins .<?php echo esc_html( $name ); ?>-row th.check-column {
 				border-left: 4px solid #dc3232 !important;
 			}
