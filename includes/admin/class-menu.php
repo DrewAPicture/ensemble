@@ -28,7 +28,7 @@ class Menu {
 	 * @since  1.0
 	 */
 	public function register_menus() {
-		add_menu_page( __( 'Ensemble', 'ensemble' ), __( 'Ensemble', 'ensemble' ), 'manage_options', 'ensemble-admin', array( $this, 'ensemble_admin' ) );
+		add_menu_page( __( 'Ensemble', 'ensemble' ), __( 'Ensemble', 'ensemble' ), 'manage_options', 'ensemble-admin', array( $this, 'ensemble_admin' ), 'dashicons-universal-access-alt' );
 	}
 
 	/**
