@@ -114,6 +114,13 @@ final class Ensemble_Requirements_Check {
 		add_action( 'admin_head',                  array( $this, 'admin_head'        ) );
 		add_filter( "plugin_action_links_{$base}", array( $this, 'plugin_row_links'  ) );
 		add_action( "after_plugin_row_{$base}",    array( $this, 'plugin_row_notice' ) );
+
+		/**
+		 * Fires if Ensemble could not be loaded.
+		 *
+		 * @since 1.0.0
+		 */
+		do_action( 'ensemble_not_loaded' );
 	}
 
 	/**
@@ -129,7 +136,7 @@ final class Ensemble_Requirements_Check {
 		}
 
 		/**
-		 * Fires once Ensemble has loaded.
+		 * Fires once Ensemble has successfully loaded.
 		 *
 		 * @since 1.0.0
 		 */
