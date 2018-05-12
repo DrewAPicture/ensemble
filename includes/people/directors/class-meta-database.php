@@ -1,5 +1,5 @@
 <?php
-namespace Ensemble\People\Staff;
+namespace Ensemble\People\Directors;
 
 use Ensemble\Core\User_Meta;
 

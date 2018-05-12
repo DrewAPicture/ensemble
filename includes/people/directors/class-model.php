@@ -1,5 +1,5 @@
 <?php
-namespace Ensemble\People;
+namespace Ensemble\People\Directors;
 
 /**
  * Defines a Staff Member object model.

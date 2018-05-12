@@ -1,12 +1,12 @@
 <?php
 /**
- * Ensemble\People\Staff\Core class.
+ * Ensemble\People\Directors
  *
- * @package Ensemble\People\Staff
+ * @package Ensemble\People\Directors
  * @since   1.0.0
  */
 
-namespace Ensemble\People\Staff;
+namespace Ensemble\People\Directors;
 
 /**
  * Implements Staff functionality in Ensemble core.
