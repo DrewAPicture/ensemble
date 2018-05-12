@@ -10,7 +10,7 @@ use Ensemble\Core\User_Meta;
  *
  * @see \Ensemble\Core\User_Meta
  */
-class Meta extends User_Meta {
+class Meta_Database extends User_Meta {
 
 
 }

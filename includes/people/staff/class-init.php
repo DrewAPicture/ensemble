@@ -50,9 +50,9 @@ class Init {
 	 */
 	private function includes() {
 //		require_once( ENSEMBLE_PLUGIN_DIR . '/includes/admin/people/staff-admin.php' );
-		require_once( ENSEMBLE_PLUGIN_DIR . '/includes/people/staff/staff-database.php' );
-//		require_once( ENSEMBLE_PLUGIN_DIR . '/includes/people/staff/staff-functions.php' );
-		require_once( ENSEMBLE_PLUGIN_DIR . '/includes/people/staff/staff-meta.php' );
+		require_once( ENSEMBLE_PLUGIN_DIR . '/includes/people/staff/database.php' );
+//		require_once( ENSEMBLE_PLUGIN_DIR . '/includes/people/staff/functions.php' );
+		require_once( ENSEMBLE_PLUGIN_DIR . '/includes/people/staff/meta-database.php' );
 	}
 
 	/**

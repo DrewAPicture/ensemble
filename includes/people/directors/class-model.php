@@ -2,13 +2,13 @@
 namespace Ensemble\People;
 
 /**
- * Defines a Staff Member object.
+ * Defines a Staff Member object model.
  *
  * @since 1.0.0
  *
  * @see \Ensemble\Model
  */
-class Circuit_Staff extends \WP_User {
+class Model extends \WP_User {
 
 	/**
 	 * Staff member title.
