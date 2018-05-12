@@ -20,26 +20,23 @@ class Init {
 	/**
 	 * Meta instance.
 	 *
-	 * @access public
-	 * @since  1.0.0
-	 * @var    \Ensemble\People\Staff\Meta
+	 * @since 1.0.0
+	 * @var   \Ensemble\People\Staff\Meta
 	 */
 	private $meta;
 
 	/**
 	 * Database instance.
 	 *
-	 * @access private
-	 * @since  1.0.0
-	 * @var    \Ensemble\People\Staff\Database
+	 * @since 1.0.0
+	 * @var   \Ensemble\People\Staff\Database
 	 */
 	private $db;
 
 	/**
 	 * Constructor.
 	 *
-	 * @access public
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		$this->includes();
@@ -61,8 +58,7 @@ class Init {
 	/**
 	 * Retrieves a single staff member object.
 	 *
-	 * @access public
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @param int $member_id Staff member ID.
 	 * @return \Ensemble\People\Staff|\WP_Error Staff member object or WP_Error if there was a problem.
@@ -74,8 +70,7 @@ class Init {
 	/**
 	 * Queries for staff.
 	 *
-	 * @access public
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @param array $query_args Staff query arguments.
 	 * @param bool  $count      Optional. Whether this is a count query. Default false.
@@ -88,8 +83,7 @@ class Init {
 	/**
 	 * Retrieves a count of staff based on the given query arguments.
 	 *
-	 * @access public
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @param array $query_args Query arguments.
 	 * @return int Number of results for the given query arguments.
@@ -101,8 +95,7 @@ class Init {
 	/**
 	 * Retrieves user meta for the given staff member.
 	 *
-	 * @access public
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @param int    $staff_id Staff member ID.
 	 * @param string $meta_key User meta key.
