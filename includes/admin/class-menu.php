@@ -16,7 +16,9 @@ class Menu {
 	 * @static
 	 */
 	public static function init() {
-		add_action( 'admin_menu', array( 'Ensemble\Admin\Menu', 'register_menus' ) );
+		$instance = new self();
+
+		add_action( 'admin_menu', array( $instance, 'register_menus' ) );
 	}
 
 	/**
