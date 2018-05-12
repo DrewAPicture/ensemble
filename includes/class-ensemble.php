@@ -13,62 +13,55 @@ final class Ensemble {
 	/**
 	 * Instance.
 	 *
-	 * @access private
-	 * @since  1.0.0
-	 * @var    \Ensemble
+	 * @since 1.0.0
+	 * @var   \Ensemble
 	 */
 	private static $instance;
 
 	/**
 	 * Version.
 	 *
-	 * @access private
-	 * @since  1.0.0
-	 * @var    string
+	 * @since 1.0.0
+	 * @var   string
 	 */
 	private $version = '1.0.0';
 
 	/**
 	 * Contests instance.
 	 *
-	 * @access public
-	 * @since  1.0.0
-	 * @var    \Ensemble\Contests\Core
+	 * @since 1.0.0
+	 * @var   \Ensemble\Contests\Core
 	 */
 	public $contests;
 
 	/**
 	 * Staff instance.
 	 *
-	 * @access public
-	 * @since  1.0.0
-	 * @var    \Ensemble\People\Staff\Init
+	 * @since 1.0.0
+	 * @var   \Ensemble\People\Staff\Init
 	 */
 	public $staff;
 
 	/**
 	 * Teams instance.
 	 *
-	 * @access public
-	 * @since  1.0.0
-	 * @var    \Ensemble\Teams\Setup
+	 * @since 1.0.0
+	 * @var   \Ensemble\Teams\Setup
 	 */
 	public $teams;
 
 	/**
 	 * Venues instance.
 	 *
-	 * @access public
-	 * @since  1.0.0
-	 * @var    \Ensemble\Venues\Setup
+	 * @since 1.0.0
+	 * @var   \Ensemble\Venues\Setup
 	 */
 	public $venues;
 
 	/**
 	 * Creates an Ensemble instance.
 	 *
-	 * @access public
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 * @static
 	 *
 	 * @return \Ensemble Plugin instance.
@@ -85,10 +78,21 @@ final class Ensemble {
 	}
 
 	/**
+	 * Sets up the singleton instance.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $file Path to the base plugin file.
+	 */
+	private static function setup_instance( $file ) {
+		self::$instance       = new Ensemble();
+		self::$instance->file = $file;
+	}
+
+	/**
 	 * Defines core constants.
 	 *
-	 * @access private
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 */
 	private function constants() {
 		// Version.
@@ -105,8 +109,7 @@ final class Ensemble {
 	/**
 	 * Loads core files.
 	 *
-	 * @access private
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 */
 	private function load() {
 		require_once ENSEMBLE_PLUGIN_DIR . '/includes/lib/autoload.php';
@@ -116,7 +119,6 @@ final class Ensemble {
 	 * Sets up sub-instances.
 	 *
 	 * @since 1.0.0
-	 * @access private
 	 */
 	private function setup() {
 		Ensemble\Admin\Menu::init();
@@ -130,16 +132,14 @@ final class Ensemble {
 	/**
 	 * Prevents cloning.
 	 *
-	 * @access private
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 */
 	private function __clone() {}
 
 	/**
 	 * Prevents overloading members.
 	 *
-	 * @access public
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 */
 	public function __set( $a, $b ) {}
 
