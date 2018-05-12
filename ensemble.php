@@ -127,7 +127,13 @@ final class Ensemble_Requirements_Check {
 		if ( class_exists( 'Ensemble' ) ) {
 			Ensemble::instance( $this->get_file() );
 		}
-		do_action( 'edd_loaded' );
+
+		/**
+		 * Fires once Ensemble has loaded.
+		 *
+		 * @since 1.0.0
+		 */
+		do_action( 'ensemble_loaded' );
 	}
 
 	/**
