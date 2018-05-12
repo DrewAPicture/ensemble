@@ -12,8 +12,6 @@
 // Bail if called directly.
 defined( 'ABSPATH' ) || exit;
 
-require_once 'includes/lib/autoload.php';
-
 if ( ! class_exists( 'Ensemble' ) ) {
 
 /**
@@ -123,25 +121,7 @@ final class Ensemble {
 	 * @since  1.0.0
 	 */
 	private function load() {
-		// Bootstrap.
-		require_once( ENSEMBLE_PLUGIN_DIR . '/includes/class-database.php' );
-		require_once( ENSEMBLE_PLUGIN_DIR . '/includes/admin/class-menu.php' );
-		require_once( ENSEMBLE_PLUGIN_DIR . '/includes/interfaces/interface-meta.php' );
-		require_once( ENSEMBLE_PLUGIN_DIR . '/includes/class-user-meta.php' );
-
-		// Configuration.
-
-		// Models.
-		require_once( ENSEMBLE_PLUGIN_DIR . '/includes/models/model.php' );
-
-		// Contests.
-
-		// Staff.
-		require_once( ENSEMBLE_PLUGIN_DIR . '/includes/people/staff/staff-init.php' );
-
-		// Teams.
-
-		// Venues.
+		require_once ENSEMBLE_PLUGIN_DIR . '/includes/lib/autoload.php';
 	}
 
 	/**
