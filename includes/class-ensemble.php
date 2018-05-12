@@ -19,6 +19,14 @@ final class Ensemble {
 	private static $instance;
 
 	/**
+	 * Ensemble loader file path.
+	 *
+	 * @since 1.0.0
+	 * @var   string
+	 */
+	private $file = '';
+
+	/**
 	 * Version.
 	 *
 	 * @since 1.0.0
@@ -97,6 +105,12 @@ final class Ensemble {
 	 * @since 1.0.0
 	 */
 	private function constants() {
+
+		// Base plugin file.
+		if ( ! defined( 'ENSEMBLE_PLUGIN_FILE' ) ) {
+			define( 'ENSEMBLE_PLUGIN_FILE', $this->file );
+		}
+
 		// Version.
 		if ( ! defined( 'ENSEMBLE_VERSION' ) ) {
 			define( 'ENSEMBLE_VERSION', $this->version );
@@ -104,7 +118,7 @@ final class Ensemble {
 
 		// Plugin directory.
 		if ( ! defined( 'ENSEMBLE_PLUGIN_DIR' ) ) {
-			define( 'ENSEMBLE_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+			define( 'ENSEMBLE_PLUGIN_DIR', plugin_dir_path( ENSEMBLE_PLUGIN_FILE ) );
 		}
 	}
 
