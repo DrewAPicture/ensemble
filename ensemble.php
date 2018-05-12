@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-final class Ensemble_Requirements_Check {
+final class Ensemble_Check_Requirements {
 
 	/**
 	 * Plugin file path.
@@ -410,4 +410,4 @@ final class Ensemble_Requirements_Check {
 
 }
 
-new Ensemble_Requirements_Check();
+new Ensemble_Check_Requirements();
