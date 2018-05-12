@@ -44,16 +44,6 @@ class Init {
 	}
 
 	/**
-	 * Includes needed files.
-	 */
-	private function includes() {
-//		require_once( ENSEMBLE_PLUGIN_DIR . '/includes/admin/people/staff-admin.php' );
-		require_once( ENSEMBLE_PLUGIN_DIR . '/includes/people/staff/database.php' );
-//		require_once( ENSEMBLE_PLUGIN_DIR . '/includes/people/staff/functions.php' );
-		require_once( ENSEMBLE_PLUGIN_DIR . '/includes/people/staff/meta-database.php' );
-	}
-
-	/**
 	 * Retrieves a single staff member object.
 	 *
 	 * @since 1.0.0
