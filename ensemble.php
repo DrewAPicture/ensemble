@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Ensemble
  * Plugin URI: https://werdswords.com
- * Description:
+ * Description: Easily manage a color guard circuit (or similar sport/activity organization) with WordPress.
  * Version: 1.0.0
  * Author: Drew Jaynes (DrewAPicture)
  * Author URI: http://werdswords.com
