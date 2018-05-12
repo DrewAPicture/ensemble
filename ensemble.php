@@ -125,7 +125,7 @@ final class Ensemble_Requirements_Check {
 		require_once dirname( $this->get_file() ) . '/includes/class-ensemble.php';
 
 		if ( class_exists( 'Ensemble' ) ) {
-			Ensemble::instance( $this->get_file() );
+			Ensemble::get_instance( $this->get_file() );
 		}
 
 		/**
