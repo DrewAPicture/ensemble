@@ -3,14 +3,15 @@
  * Automatically locates and loads files based on their namespaces and their
  * file names whenever they are instantiated.
  *
- * @package TODO
+ * @package Ensemble\Core
+ * @since   1.0.0
  */
-spl_autoload_register(function( $filename ) {
+spl_autoload_register( function( $filename ) {
 
 	// First, separate the components of the incoming file.
 	$file_path = explode( '\\', $filename );
 
-	/**
+	/*
 	 * - The first index will always be the namespace since it's part of the plugin.
 	 * - All but the last index will be the path to the file.
 	 * - The final index will be the filename. If it doesn't begin with 'I' then it's a class.
@@ -42,7 +43,7 @@ spl_autoload_register(function( $filename ) {
 		}
 	}
 
-	/**
+	/*
 	 * Find the fully qualified path to the class file by iterating through the $file_path array.
 	 * We ignore the first index since it's always the top-level package. The last index is always
 	 * the file so we append that at the end.
@@ -58,10 +59,11 @@ spl_autoload_register(function( $filename ) {
 		$dir = strtolower( $file_path[ $i ] );
 		$fully_qualified_path .= trailingslashit( $dir );
 	}
+
 	$fully_qualified_path .= $file_name;
 
 	// Now include the file.
-	if ( stream_resolve_include_path($fully_qualified_path) ) {
+	if ( stream_resolve_include_path( $fully_qualified_path ) ) {
 		include_once $fully_qualified_path;
 	}
 });
