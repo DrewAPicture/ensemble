@@ -10,9 +10,9 @@
  */
 
 // Bail if called directly.
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
+
+require_once 'includes/lib/autoload.php';
 
 if ( ! class_exists( 'Ensemble' ) ) {
 
