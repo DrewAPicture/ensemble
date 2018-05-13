@@ -1,4 +1,11 @@
 <?php
+/**
+ * Functions for manipulating venues
+ *
+ * @package Ensemble\Functions
+ *
+ * @since 1.0.0
+ */
 namespace Ensemble;
 
 function get_staff_member( $member ) {

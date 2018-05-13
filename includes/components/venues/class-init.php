@@ -1,15 +1,14 @@
 <?php
 /**
- * Ensemble\People\Directors
+ * Sets up the Venues component
  *
- * @package Ensemble\People\Directors
+ * @package Ensemble\Components\Venues
  * @since   1.0.0
  */
-
-namespace Ensemble\People\Directors;
+namespace Ensemble\Components\Venues;
 
 /**
- * Implements Staff functionality in Ensemble core.
+ * Implements Contests component functionality in Ensemble core.
  *
  * @since 1.0.0
  *

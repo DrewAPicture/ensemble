@@ -1,12 +1,19 @@
 <?php
-namespace Ensemble\People\Directors;
+/**
+ * Defines an object constructor for a single Venue
+ *
+ * @package Ensemble\Components\Venues
+ *
+ * @since 1.0.0
+ */
+namespace Ensemble\Components\Venues;
 
 /**
- * Defines a Staff Member object model.
+ * Defines the structure of a single venue.
  *
  * @since 1.0.0
  *
- * @see \Ensemble\Model
+ * @see \WP_User
  */
 class Model extends \WP_User {
 

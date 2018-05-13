@@ -1,10 +1,17 @@
 <?php
-namespace Ensemble\People\Directors;
+/**
+ * Defines the database abstraction for working with the Venues component
+ *
+ * @package Ensemble\Components\Venues
+ *
+ * @since 1.0.0
+ */
+namespace Ensemble\Components\Venues;
 
 use Ensemble\Core;
 
 /**
- * Staff member database class.
+ * Venue table database class.
  *
  * @since 1.0.0
  *
