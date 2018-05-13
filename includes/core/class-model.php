@@ -1,6 +1,6 @@
 <?php
 /**
- * Objects: Base Object
+ * Objects: Base Object Model
  *
  * @package Ensemble\Core
  *
@@ -10,12 +10,12 @@
 namespace Ensemble\Core;
 
 /**
- * Implements a base object to be extended by core objects.
+ * Implements a base object model.
  *
  * @since 1.0.0
  * @abstract
  */
-abstract class Object {
+abstract class Model {
 
 	/**
 	 * Whether the object members have been populated.
