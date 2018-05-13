@@ -1,13 +1,24 @@
 <?php
+/**
+ * Defines the contract under which Meta_Database classes exist
+ *
+ * @package Ensemble\Core\Interfaces
+ *
+ * @since 1.0.0
+ */
 namespace Ensemble\Core;
 
-interface Meta_Interface {
+/**
+ * Database interface.
+ *
+ * @since 1.0.0
+ */
+interface Meta_Database_Interface extends Database_Interface {
 
 	/**
 	 * Retrieves meta for the given object type.
 	 *
-	 * @access public
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @param int    $object_id Object ID.
 	 * @param string $meta_key  Meta key.
