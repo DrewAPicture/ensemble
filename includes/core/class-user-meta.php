@@ -10,7 +10,7 @@ use Ensemble\Core\Meta_Interface as Meta;
  *
  * @see \Ensemble\Core\Meta
  */
-class User_Meta implements Meta {
+class User_Meta {
 
 	/**
 	 * Retrieves meta for the given object type.
