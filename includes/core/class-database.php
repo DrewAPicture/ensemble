@@ -1,13 +1,15 @@
 <?php
 namespace Ensemble\Core;
 
+use Ensemble\Core\Interfaces;
+
 /**
  * Core database abstraction layer.
  *
  * @since 1.0.0
  * @abstract
  */
-abstract class Database {
+abstract class Database implements Interfaces\Database {
 
 	/**
 	 * Retrieves a single core object.
