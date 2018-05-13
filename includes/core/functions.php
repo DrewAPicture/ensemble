@@ -1,6 +1,6 @@
 <?php
 /**
- * Venue Functions
+ * Core Ensemble Functions
  *
  * @package   Ensemble\Functions
  * @copyright Copyright (c) 2018, Drew Jaynes
@@ -8,3 +8,4 @@
  * @since     1.0.0
  */
 namespace Ensemble;
+

@@ -1,6 +1,6 @@
 <?php
 /**
- * Bootstraps the plugin
+ * Ensemble bootstrap
  *
  * @package   Ensemble\Core
  * @copyright Copyright (c) 2018, Drew Jaynes
@@ -134,6 +134,13 @@ final class Ensemble {
 	 */
 	private function load() {
 		require_once ENSEMBLE_PLUGIN_DIR . '/includes/lib/autoload.php';
+
+		// Functions.
+		require_once ENSEMBLE_PLUGIN_DIR . '/includes/core/functions.php';
+		require_once ENSEMBLE_PLUGIN_DIR . '/includes/components/contests/functions.php';
+		require_once ENSEMBLE_PLUGIN_DIR . '/includes/components/venues/functions.php';
+		require_once ENSEMBLE_PLUGIN_DIR . '/includes/people/directors/functions.php';
+		require_once ENSEMBLE_PLUGIN_DIR . '/includes/people/staff/functions.php';
 	}
 
 	/**
