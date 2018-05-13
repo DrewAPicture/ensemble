@@ -172,18 +172,3 @@ final class Ensemble {
 	public function __set( $a, $b ) {}
 
 }
-
-/**
- * Instantiates Ensemble and initializes the object without the need for an object
- * in the global space.
- *
- * h/t Pippin Williamson for the pattern inspiration.
- *
- * @since 1.0.0
- *
- * @return Ensemble Global Ensemble get_instance.
- */
-function ensemble() {
-	return Ensemble::get_instance();
-}
-ensemble();
