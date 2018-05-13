@@ -1,9 +1,11 @@
 <?php
 /**
- * Ensemble\People\Staff\Core class.
+ * Sets up the Staff component
  *
- * @package Ensemble\People\Staff
- * @since   1.0.0
+ * @package   Ensemble\People\Staff
+ * @copyright Copyright (c) 2018, Drew Jaynes
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
  */
 
 namespace Ensemble\People\Staff;

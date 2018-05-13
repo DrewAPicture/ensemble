@@ -1,4 +1,12 @@
 <?php
+/**
+ * Sets up the User_Database abstraction of the Database class
+ *
+ * @package   Ensemble\Core\Database
+ * @copyright Copyright (c) 2018, Drew Jaynes
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
+ */
 namespace Ensemble\Core;
 
 use Ensemble\Core\Interfaces;

@@ -1,4 +1,12 @@
 <?php
+/**
+ * Sets up the User_Meta extension of the Meta class
+ *
+ * @package   Ensemble\Core\Database
+ * @copyright Copyright (c) 2018, Drew Jaynes
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
+ */
 namespace Ensemble\Core;
 
 use Ensemble\Core\Meta_Interface as Meta;

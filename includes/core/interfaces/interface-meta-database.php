@@ -2,9 +2,10 @@
 /**
  * Defines the contract under which Meta_Database classes exist
  *
- * @package Ensemble\Core\Interfaces
- *
- * @since 1.0.0
+ * @package   Ensemble\Core\Interfaces
+ * @copyright Copyright (c) 2018, Drew Jaynes
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
  */
 namespace Ensemble\Core\Interfaces;
 

@@ -1,9 +1,11 @@
 <?php
 /**
- * Ensemble\People\Directors
+ * Sets up the Directors component
  *
- * @package Ensemble\People\Directors
- * @since   1.0.0
+ * @package   Ensemble\People\Directors
+ * @copyright Copyright (c) 2018, Drew Jaynes
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
  */
 
 namespace Ensemble\People\Directors;

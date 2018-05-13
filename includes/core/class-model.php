@@ -2,9 +2,10 @@
 /**
  * Objects: Base Object Model
  *
- * @package Ensemble\Core
- *
- * @since 1.0.0
+ * @package   Ensemble\Core
+ * @copyright Copyright (c) 2018, Drew Jaynes
+ * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @since     1.0.0
  */
 
 namespace Ensemble\Core;
