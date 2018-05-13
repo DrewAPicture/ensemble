@@ -8,11 +8,8 @@ use Ensemble\Core;
  *
  * @since 1.0.0
  *
- * @see \Ensemble\Core\Database
+ * @see \Ensemble\Core\User_Database
  */
-class Database extends Core\Database {
+class Database extends Core\User_Database {
 
-	public function query( $query_args, $count = false ) {
-
-	}
 }
