@@ -19,6 +19,7 @@ spl_autoload_register( function( $filename ) {
 
 	// Get the last index of the array. This is the class we're loading.
 	$file_name = '';
+
 	if ( isset( $file_path[ count( $file_path ) - 1 ] ) ) {
 
 		$file_name = strtolower(
@@ -31,8 +32,11 @@ spl_autoload_register( function( $filename ) {
 		// Use array_search() to handle both Interface_Foo or Foo_Interface.
 		$index = array_search( 'interface', $file_name_parts );
 
-		if ( false !== $index ) {
-			unset( $file_name_parts[ $index ] );
+		if ( false !== $index || in_array( 'Interfaces', $file_path ) ) {
+			// Only drop 'interface' if not part of the namespace.
+			if ( false !== $index ) {
+				unset( $file_name_parts[ $index ] );
+			}
 
 			// Rebuild the file name.
 			$file_name = implode( '-', $file_name_parts );
