@@ -1,17 +1,17 @@
 <?php
 /**
- * Defines the database abstraction for working with the Venues component
+ * Defines the database abstraction for working with the Contests component
  *
- * @package Ensemble\Components\Venues
+ * @package Ensemble\Components\Contests
  *
  * @since 1.0.0
  */
-namespace Ensemble\Components\Venues;
+namespace Ensemble\Components\Contests;
 
 use Ensemble\Core;
 
 /**
- * Venue table database class.
+ * Contests table database class.
  *
  * @since 1.0.0
  *
