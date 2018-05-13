@@ -6,14 +6,14 @@
  *
  * @since 1.0.0
  */
-namespace Ensemble\Core;
+namespace Ensemble\Core\Interfaces;
 
 /**
  * Database interface.
  *
  * @since 1.0.0
  */
-interface Meta_Database_Interface extends Database_Interface {
+interface Meta_Database extends Database {
 
 	/**
 	 * Retrieves meta for the given object type.

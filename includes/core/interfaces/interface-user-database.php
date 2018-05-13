@@ -6,14 +6,14 @@
  *
  * @since 1.0.0
  */
-namespace Ensemble\Core;
+namespace Ensemble\Core\Interfaces;
 
 /**
  * User database interface.
  *
  * @since 1.0.0
  */
-interface User_Database_Interface extends Database_Interface {
+interface User_Database extends Database {
 
 	/**
 	 * Retrieves a single core object.

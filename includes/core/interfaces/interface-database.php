@@ -13,7 +13,7 @@ namespace Ensemble\Core\Interfaces;
  *
  * @since 1.0.0
  */
-interface Database_Interface {
+interface Database {
 
 	/**
 	 * Retrieves a single core object.
@@ -45,16 +45,5 @@ interface Database_Interface {
 	 * @return int Number of results for the given query arguments.
 	 */
 	function query_count( $query_args );
-
-	/**
-	 * Retrieves a core object instance based on the given type.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param object|int $instance Instance or object ID.
-	 * @param string     $class    Object class name.
-	 * @return object|\WP_Error Object instance, otherwise WP_Error object if there was a problem.
-	 */
-	function get_core_object( $instance, $object_class );
 
 }
