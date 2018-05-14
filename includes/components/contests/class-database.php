@@ -63,7 +63,7 @@ class Database extends Core\Database {
 	 * @return string Query object type.
 	 */
 	public function get_query_object_type() {
-		return 'Ensemble\\Contest';
+		return 'Ensemble\\Components\\Contests\\Object';
 	}
 
 	/**
