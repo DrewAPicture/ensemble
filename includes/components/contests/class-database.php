@@ -149,6 +149,7 @@ class Database extends Core\Database {
 	public function query( $query_args = array(), $count = false ) {
 		$defaults = array(
 			'id'      => 0,
+			'exclude' => array(),
 			'status'  => '',
 		);
 
