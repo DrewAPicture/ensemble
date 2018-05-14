@@ -20,6 +20,14 @@ use Ensemble\Components\Interfaces\Object as Component_Object;
 abstract class Object implements Component_Object {
 
 	/**
+	 * Object ID.
+	 *
+	 * @since 1.0.0
+	 * @var   int
+	 */
+	private $id;
+
+	/**
 	 * Whether the object members have been populated.
 	 *
 	 * @access protected
@@ -27,6 +35,17 @@ abstract class Object implements Component_Object {
 	 * @var    bool|null
 	 */
 	protected $populated = null;
+
+	/**
+	 * Retrieves the object ID.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return int Object ID.
+	 */
+	public function get_ID() {
+		return $this->id;
+	}
 
 	/**
 	 * Retrieves the object instance.
