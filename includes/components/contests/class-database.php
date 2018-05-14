@@ -132,10 +132,10 @@ class Database extends Core\Database {
 	 * @param array $query_args {
 	 *     Optional. Arguments for querying contests. Default empty array.
 	 *
+	 *     @type int|array    $id      Contest ID or array of contest IDs to retrieve.
 	 *     @type int          $number  Number of contests to query for. Default 20.
 	 *     @type int          $offset  Number of contests to offset the query for. Default 0.
 	 *     @type int|array    $exclude Contest ID or array of IDs to explicitly exclude.
-	 *     @type int|array    $id      Contest ID or array of contest IDs to retrieve.
 	 *     @type string       $status  Contest status. Default empty.
 	 *     @type string       $order   How to order returned contest results. Accepts 'ASC' or 'DESC'.
 	 *                                 Default 'DESC'.
@@ -148,14 +148,14 @@ class Database extends Core\Database {
 	 */
 	public function query( $query_args = array(), $count = false ) {
 		$defaults = array(
-			'number'       => 20,
-			'offset'       => 0,
-			'exclude'      => array(),
-			'id'           => 0,
-			'status'       => '',
-			'order'        => 'DESC',
-			'orderby'      => 'id',
-			'fields'       => '',
+			'id'      => 0,
+			'number'  => 20,
+			'offset'  => 0,
+			'exclude' => array(),
+			'status'  => '',
+			'order'   => 'DESC',
+			'orderby' => 'id',
+			'fields'  => '',
 		);
 
 		$args = wp_parse_args( $args, $defaults );
@@ -164,7 +164,51 @@ class Database extends Core\Database {
 			$args['number'] = 999999999999;
 		}
 
-		$where = '';
+		$claws = claws();
+
+		// ID.
+		if ( ! empty( $args['id'] ) ) {
+			if ( ! is_array( $args['id'] ) ) {
+				$args['id'] = array( $args['id'] );
+			}
+
+			$claws->where( 'id' )->in( $args['id'], 'int' );
+		}
+
+		// Exclude.
+		if ( ! empty( $args['exclude'] ) ) {
+			if ( ! is_array( $args['exclude'] ) ) {
+				$args['exclude'] = array( $args['exclude'] );
+			}
+
+			$claws->where( 'id' )->not_in( $exclude, 'int' );
+		}
+
+		// Venues.
+		if ( ! empty( $args['venues'] ) ) {
+			if ( ! is_array( $args['venues'] ) ) {
+				$args['venues'] = array( $args['venues'] );
+			}
+
+			$claws->where( 'venues' )->in( $venues, 'int' );
+		}
+
+		// Type.
+		if ( ! empty( $args['type'] ) ) {
+			$claws->where( 'type' )->equals( $args['type'] );
+		}
+
+		// Status.
+		if ( ! empty( $args['status'] ) ) {
+			$claws->where( 'status' )->equals( $args['status'] );
+		}
+
+		// (is) External.
+		if ( ! empty( $args['external'] ) ) {
+			$claws->where( 'external' )->exists( $args['external'] );
+		}
+
+		$where = $claws->get_sql();
 
 		if ( 'DESC' === strtoupper( $args['order'] ) ) {
 			$order = 'DESC';
