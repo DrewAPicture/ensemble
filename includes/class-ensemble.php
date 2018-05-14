@@ -130,6 +130,8 @@ final class Ensemble {
 			load( new Util\Install );
 		}
 
+		load( new Core\Components );
+
 		if ( is_admin() ) {
 			load( new Core\Admin\Menu );
 			load( new Core\Admin\Settings );
@@ -137,7 +139,6 @@ final class Ensemble {
 
 		load( new Core\Ajax_Actions );
 		load( new Core\Assets );
-		load( new Core\Components );
 		load( new Core\Rewrite_Rules );
 
 //		log_it( \Ensemble\contests()->insert( array() ) );
