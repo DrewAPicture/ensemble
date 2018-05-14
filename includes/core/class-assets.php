@@ -34,7 +34,7 @@ class Assets implements Interfaces\Loader {
 	 * @since 1.0.0
 	 */
 	public function scripts() {
-		wp_register_script( 'esbl-parsley', ENSEMBLE_PLUGIN_URL . '/assets/js/parsley.js', array( 'jquery' ), '2.8.1' );
+
 	}
 
 	/**
@@ -45,7 +45,7 @@ class Assets implements Interfaces\Loader {
 	 * @param string $hook_suffix The current admin page.
 	 */
 	public function admin_scripts( $hook_suffix ) {
-
+		wp_register_script( 'esbl-parsley', ENSEMBLE_PLUGIN_URL . '/assets/js/parsley.js', array( 'jquery' ), '2.8.1' );
 	}
 
 }
