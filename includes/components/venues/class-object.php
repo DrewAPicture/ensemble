@@ -9,14 +9,17 @@
  */
 namespace Ensemble\Components\Venues;
 
+use Ensemble\Components;
+use Ensemble\Core;
+
 /**
  * Defines the structure of a single venue.
  *
  * @since 1.0.0
  *
- * @see \WP_User
+ * @see \Ensemble\Components\Object
  */
-class Model extends \WP_User {
+class Object extends Components\Object {
 
 	/**
 	 * Staff member title.

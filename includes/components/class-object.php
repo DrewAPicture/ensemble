@@ -1,22 +1,23 @@
 <?php
 /**
- * Objects: Base Object Model
+ * Objects: Base Component Object
  *
- * @package   Ensemble\Core
+ * @package   Ensemble\Components
  * @copyright Copyright (c) 2018, Drew Jaynes
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
  */
+namespace Ensemble\Components;
 
-namespace Ensemble\Core;
+use Ensemble\Components\Interfaces\Object as Component_Object;
 
 /**
- * Implements a base object model.
+ * Implements a base object.
  *
  * @since 1.0.0
  * @abstract
  */
-abstract class Model {
+abstract class Object implements Component_Object {
 
 	/**
 	 * Whether the object members have been populated.
