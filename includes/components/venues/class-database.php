@@ -94,9 +94,11 @@ class Database extends Core\Database {
 	 */
 	public function get_columns() {
 		return array(
-			'id'     => '%d',
-			'status' => '%s',
-			'date'   => '%s',
+			'id'         => '%d',
+			'name'       => '%s',
+			'address'    => '%s',
+			'status'     => '%s',
+			'date_added' => '%s',
 		);
 	}
 
@@ -106,7 +108,10 @@ class Database extends Core\Database {
 	 * @since 1.0.0
 	 */
 	public function get_column_defaults() {
-		return array();
+		return array(
+			'status'     => 'active',
+			'date_added' => $this->get_date_object()->format( 'Y-m-d H:i:s' ),
+		);
 	}
 
 	/**
@@ -182,7 +187,10 @@ class Database extends Core\Database {
 
 		$sql = "CREATE TABLE {$table_name} (
 			id bigint(20) NOT NULL AUTO_INCREMENT,
+			name mediumtext NOT NULL,
+			address mediumtext NOT NULL,
 			status tinytext NOT NULL,
+			date_added datetime NOT NULL,
 			PRIMARY KEY (id)
 			) CHARACTER SET utf8 COLLATE utf8_general_ci;";
 
