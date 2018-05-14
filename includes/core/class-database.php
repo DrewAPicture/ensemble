@@ -279,7 +279,7 @@ abstract class Database implements Interfaces\Database {
 
 		$deleted = $GLOBALS['wpdb']->query(
 			$GLOBALS['wpdb']->prepare(
-				"DELETE FROM $this->table_name WHERE $this->primary_key = %d", $object->{$this->primary_key}
+				"DELETE FROM $this->table_name WHERE $this->primary_key = %d", $object->{$this->get_primary_key()}
 			)
 		);
 
