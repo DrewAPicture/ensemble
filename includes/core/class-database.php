@@ -10,6 +10,7 @@
 namespace Ensemble\Core;
 
 use Ensemble\Core\Interfaces;
+use function Ensemble\clean_item_cache;
 
 /**
  * Core database abstraction layer.
@@ -133,25 +134,166 @@ abstract class Database implements Interfaces\Database {
 	/**
 	 * Inserts a new record into the database.
 	 *
-	 * Please note: inserting a record flushes the cache.
+	 * Please note: successfully inserting a record flushes the cache.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param array $data Column data. See get_column_defaults().
 	 * @return int|\WP_Error ID for the newly inserted record, otherwise a WP_Error object.
 	 */
-	public function insert( $args ) {
+	public function insert( $data ) {
+		$errors = new \WP_Error();
 
-		$defaults = array();
+		// Set any default values.
+		$data = wp_parse_args( $data, $this->get_column_defaults() );
 
-		$args = wp_parse_args( $args, $defaults );
+		// Snag columns and their formats.
+		$column_formats = $this->get_columns();
 
-		$current_date = current_time( 'mysql' );
+		// Force fields to lowercase
+		$data = array_change_key_case( $data );
 
-		// Insert the record.
-		$add = false;
+		// Validate data keys against columns defined by the component.
+		$data = array_intersect_key( $data, $column_formats );
 
-		return $add;
+		// Unslash data.
+		$data = wp_unslash( $data );
+
+		// Reorder $column_formats to match the order of columns given in $data.
+		$data_keys      = array_keys( $data );
+		$column_formats = array_merge( array_flip( $data_keys ), $column_formats );
+
+		$inserted = $GLOBALS['wpdb']->insert( $this->get_table_name(), $data, $column_formats );
+
+		if ( ! $inserted ) {
+			$errors->add( 'insert_failure', 'An Ensemble record could not be inserted.', $data );
+
+			return $errors;
+		} else {
+			$object = $this->get_core_object( $GLOBALS['wpdb']->insert_id, $this->get_query_object_type() );
+
+			// Prime the item cache, and invalidate related query caches.
+			clean_item_cache( $object );
+
+			return $object->{$this->get_primary_key()};
+		}
+	}
+
+	/**
+	 * Updates an existing record in the database.
+	 *
+	 * @access public
+	 *
+	 * @param int    $object_id Object ID for the record being updated.
+	 * @param array  $data      Optional. Array of columns and associated data to update. Default empty array.
+	 * @param string $where     Optional. Column to match against in the WHERE clause. If empty, $primary_key
+	 *                          will be used. Default empty.
+	 * @return true|\WP_Error True if the record was successfully updated, otherwise a WP_Error object.
+	 */
+	public function update( $object_id, $data = array(), $where = '' ) {
+		$errors = new \WP_Error();
+
+		// Object ID must be positive integer
+		$object_id = absint( $object_id );
+
+		$object = $this->get_core_object( $object_id, $this->get_query_object_type() );
+
+		if ( is_wp_error( $object ) ) {
+			return $object;
+		}
+
+		if ( empty( $where ) ) {
+			$where = $this->get_primary_key();
+		}
+
+		// Initialise column format array
+		$column_formats = $this->get_columns();
+
+		// Force fields to lowercase.
+		$data = array_change_key_case( $data );
+
+		// Validate data keys against columns defined by the component.
+		$data = array_intersect_key( $data, $column_formats );
+
+		// Unslash data.
+		$data = wp_unslash( $data );
+
+		// Ensure primary key is not included in the $data array
+		if ( isset( $data[ $this->primary_key ] ) ) {
+			unset( $data[ $this->primary_key ] );
+		}
+
+		// Reorder $column_formats to match the order of columns given in $data
+		$data_keys      = array_keys( $data );
+		$column_formats = array_merge( array_flip( $data_keys ), $column_formats );
+
+		$updated = $GLOBALS['wpdb']->update( $this->get_table_name(), $data, array( $where => $object->{$this->primary_key} ), $column_formats );
+
+		if ( false === $updated ) {
+			$message = sprintf( 'The %1$s object update failed for the %2$s query.', $object_id, $this->get_cache_group() );
+
+			$errors->add( 'update_failure', $message, array(
+				'id'   => $object_id,
+				'data' => $data,
+			) );
+		}
+
+		$error_codes = $errors->get_error_codes();
+
+		if ( ! empty( $error_codes ) ) {
+			return $errors;
+		} else {
+			// Invalidate and prime the item cache, and invalidate related query caches.
+			clean_item_cache( $object );
+
+			return true;
+		}
+	}
+
+	/**
+	 * Deletes a record from the database.
+	 *
+	 * Please note: successfully deleting a record flushes the cache.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int|string $object_id Object ID.
+	 * @return true|\WP_Error True if the record was successfully deleted, otherwise a WP_Error object.
+	 */
+	public function delete( $object_id ) {
+		$errors = new \WP_Error();
+
+		// Object ID must be positive integer.
+		$object_id = absint( $object_id );
+
+		$object = $this->get_core_object( $object_id, $this->query_object_type );
+
+		if ( is_wp_error( $object ) ) {
+			return $object;
+		}
+
+		$deleted = $GLOBALS['wpdb']->query(
+			$GLOBALS['wpdb']->prepare(
+				"DELETE FROM $this->table_name WHERE $this->primary_key = %d", $object->{$this->primary_key}
+			)
+		);
+
+		if ( false === $deleted ) {
+			$message = sprintf( 'Deletion of the %1$s %2$s object failed.', $object_id, $this->get_cache_group() );
+
+			$errors->add( 'delete_failure', $message, $object_id );
+		}
+
+		$error_codes = $errors->get_error_codes();
+
+		if ( ! empty( $error_codes ) ) {
+			return $errors;
+		} else {
+			// Invalidate the item cache along with related query caches.
+			clean_item_cache( $object );
+
+			return true;
+		}
 	}
 
 	/**
