@@ -445,4 +445,75 @@ abstract class Database implements Interfaces\Database {
 		return $_object;
 	}
 
+	/**
+	 * Parses a string of one or more valid object fields into a SQL-friendly format.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string|array $fields Object fields.
+	 * @return string SQL-ready fields list. If empty, default is '*'.
+	 */
+	public function parse_fields( $fields ) {
+
+		$fields_sql = '';
+
+		if ( ! is_array( $fields ) ) {
+			$fields = array( $fields );
+		}
+
+		$count     = count( $fields );
+		$whitelist = array_keys( $this->get_columns() );
+
+		foreach ( $fields as $index => $field ) {
+			if ( ! in_array( $field, $whitelist, true ) ) {
+				unset( $fields[ $index ] );
+			}
+		}
+
+		$fields_sql = implode( ', ', $fields );
+
+		if ( empty ( $fields_sql ) ) {
+			$fields_sql = '*';
+		}
+
+		return $fields_sql;
+	}
+
+	/**
+	 * Builds a caching key based on the current query arguments.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param bool  $count Whether or not this is a count query.
+	 * @param array $args  Current query arguments.
+	 * @return string Hash value to use as a cache key for the current query.
+	 */
+	public function build_cache_key( $count, $args ) {
+		if ( true === $count ) {
+			$key = md5( 'ensemble_contest_count' . serialize( $args ) );
+		} else {
+			$key = md5( 'ensemble_contest_' . serialize( $args );
+		}
+
+		return $key;
+	}
+
+	/**
+	 * Retrieves (and sets if not set) the last_changed value used for passive cache invalidation.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @see get_cache_group()
+	 */
+	public function get_last_changed() {
+		$last_changed = wp_cache_get( 'last_changed', $this->get_cache_group() );
+
+		if ( false === $last_changed ) {
+			$last_changed = microtime();
+			wp_cache_set( 'last_changed', $last_changed, $this->get_cache_group() );
+		}
+
+		return $last_changed;
+	}
+
 }
