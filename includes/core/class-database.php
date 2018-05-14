@@ -194,6 +194,206 @@ abstract class Database implements Interfaces\Database {
 	abstract public function query( $query_args = array(), $count = false );
 
 	/**
+	 * Determines whether the given object exists.
+	 *
+	 * Note: This will bypass caching and run a query.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $object_id Object ID.
+	 * @return bool True if the object exists, otherwise false.
+	 */
+	public function exists( $object_id ) {
+		$result = $GLOBALS['wpdb']->query(
+			$wpdb->prepare(
+				"SELECT 1 FROM {$this->table_name} WHERE {$this->primary_key} = %d;", $object_id
+			)
+		);
+
+		return ! empty( $result );
+	}
+
+	/**
+	 * Retrieves a record based on column and object ID.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string     $column    Column name. See get_columns().
+	 * @param int|string $object_id Object ID.
+	 * @return object|\WP_Error Database query result object, otherwise a WP_Error object.
+	 */
+	public function get_by( $column, $object_id ) {
+		$errors = new \WP_Error();
+
+		if ( ! array_key_exists( $column, $this->get_columns() ) ) {
+			$message = sprintf( 'The %1$s column is invalid for %2$s queries.', $column, $this->get_table_name() );
+
+			$errors->add( 'invalid_column', $message );
+		}
+
+		if ( empty( $object_id ) ) {
+			$message = sprintf( 'get_column() requires a valid object ID for %s queries.', $this->get_table_name() );
+
+			$errors->add( 'missing_object_id', $message );
+		}
+
+		$error_codes = $errors->get_error_codes();
+
+		if ( ! empty( $error_codes ) ) {
+			$result = $errors;
+		} else {
+			$result = $GLOBALS['wpdb']->get_row(
+				$GLOBALS['wpdb']->prepare(
+					"SELECT * FROM $this->table_name WHERE $column = '%s' LIMIT 1;", $object_id
+				)
+			);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Retrieves a value based on column name and object ID.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string     $column    Column name. See get_columns().
+	 * @param int|string $object_id Object ID.
+	 * @return string|\WP_Error Database query result (as string), otherwise a WP_Error object.
+	 */
+	public function get_column( $column, $object_id ) {
+		$errors = new \WP_Error();
+
+		if ( ! array_key_exists( $column, $this->get_columns() ) ) {
+			$message = sprintf( 'The \'%1$s\' column is invalid for \'%2$s\' queries.', $column, $this->get_table_name() );
+
+			$errors->add( 'invalid_column', $message );
+		}
+
+		if ( empty( $object_id ) ) {
+			$message = sprintf( 'get_column() requires a valid object ID for \'%s\' queries.', $this->get_table_name() );
+
+			$errors->add( 'missing_object_id', $message );
+		}
+
+		$error_codes = $errors->get_error_codes();
+
+		if ( ! empty( $error_codes ) ) {
+			$result = $errors;
+		} else {
+			$result = $GLOBALS['wpdb']->get_var(
+				$GLOBALS['wpdb']->prepare(
+					"SELECT $column FROM $this->table_name WHERE $this->primary_key_key = '%s' LIMIT 1;", $object_id
+				)
+			);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Retrieves one column value based on another given column and matching value.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $column       Column name. See get_columns().
+	 * @param string $column_where Column to match against in the WHERE clause.
+	 * @param $column_value        Value to match to the column in the WHERE clause.
+	 * @return string|\WP_Error Database query result (as string), otherwise a WP_Error object.
+	 */
+	public function get_column_by( $column, $column_where, $column_value ) {
+		$errors = new \WP_Error();
+
+		if ( empty( $column_where ) ) {
+			$message = sprintf( 'Missing column to match against for the WHERE clause in the \'%s\' query.', $this->get_table_name() );
+
+			$errors->add( 'missing_where_column', $message );
+		}
+
+		if ( empty( $column_value ) ) {
+			$message = sprintf( 'Missing column value for the \'%s\' query.', $this->get_table_name() );
+
+			$errors->add( 'missing_value', $message );
+		}
+
+		if ( ! array_key_exists( $column, $this->get_columns() ) ) {
+			$message = sprintf( 'The \'%1$s\' column is invalid for \'%2$s\' queries.', $column, $this->get_table_name() );
+
+			$errors->add( 'invalid_column', $message );
+		}
+
+		$error_codes = $errors->get_error_codes();
+
+		if ( ! empty( $error_codes ) ) {
+			$result = $errors;
+		} else {
+			$result = $GLOBALS['wpdb']->get_var(
+				$GLOBALS['wpdb']->prepare(
+					"SELECT $column FROM $this->table_name WHERE $column_where = %s LIMIT 1;", $column_value
+				)
+			);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * Retrieves results for a variety of query types.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array    $clauses  Compacted array of query clauses.
+	 * @param array    $args     Query arguments.
+	 * @param callable $callback Optional. Callback to run against results in the generic results case.
+	 *                           Default empty.
+	 * @return array|int|null|object Query results.
+	 */
+	public function get_results( $clauses, $args, $callback = '' ) {
+
+		if ( true === $clauses['count'] ) {
+
+			$results = $GLOBALS['wpdb']->get_var(
+				$GLOBALS['wpdb']->prepare(
+					"SELECT COUNT({$this->primary_key}) FROM {$this->table_name} {$clauses['where']};"
+				)
+			);
+
+			$results = absint( $results );
+
+		} else {
+
+			$fields = $clauses['fields'];
+
+			// Run the query.
+			$results = $GLOBALS['wpdb']->get_results(
+				$GLOBALS['wpdb']->prepare(
+					"SELECT {$fields} FROM {$this->table_name} {$clauses['join']} {$clauses['where']} ORDER BY {$clauses['orderby']} {$clauses['order']} LIMIT %d, %d;",
+					absint( $args['offset'] ),
+					absint( $args['number'] )
+				)
+			);
+
+			/*
+			 * If the query is for a single field, pluck the field into an array.
+			 *
+			 * Note that only the single field was selected in the query, but wpdb->get_results()
+			 * returns an array of objects, thus the pluck.
+			 */
+			if ( '*' !== $fields && false === strpos( $fields, ',' ) ) {
+				$results = wp_list_pluck( $results, $fields );
+			}
+
+			// Run the results through the fields-dictated callback.
+			if ( ! empty( $callback ) && is_callable( $callback ) ) {
+				$results = array_map( $callback, $results );
+			}
+
+		}
+
+		return $results;
+	}
+
+	/**
 	 * Retrieves the cache group value as defined by the extending class.
 	 *
 	 * @since 1.0.0
