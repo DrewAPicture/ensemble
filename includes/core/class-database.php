@@ -219,8 +219,8 @@ abstract class Database implements Interfaces\Database {
 		$data = wp_unslash( $data );
 
 		// Ensure primary key is not included in the $data array
-		if ( isset( $data[ $this->primary_key ] ) ) {
-			unset( $data[ $this->primary_key ] );
+		if ( isset( $data[ $this->get_primary_key ] ) ) {
+			unset( $data[ $this->get_primary_key ] );
 		}
 
 		// Reorder $column_formats to match the order of columns given in $data
@@ -425,7 +425,7 @@ abstract class Database implements Interfaces\Database {
 		} else {
 			$result = $GLOBALS['wpdb']->get_var(
 				$GLOBALS['wpdb']->prepare(
-					"SELECT $column FROM $this->table_name WHERE $this->primary_key_key = '%s' LIMIT 1;", $object_id
+					"SELECT $column FROM $this->table_name WHERE $this->primary_key = '%s' LIMIT 1;", $object_id
 				)
 			);
 		}
