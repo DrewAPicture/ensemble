@@ -18,6 +18,7 @@ use Ensemble\Core;
  *
  * @see \Ensemble\Core\Database
  *
+ * @method Meta_Database            meta()
  * @method Ensemble\Venue|\WP_Error get_core_object( int|Ensemble\Venue $venue )
  */
 class Database extends Core\Database {
@@ -35,6 +36,10 @@ class Database extends Core\Database {
 		switch ( $name ) {
 			case 'get_core_object':
 				return $this->get_core_object( $arguments[0] );
+				break;
+
+			case 'meta':
+				return ( new Meta_Database );
 				break;
 		}
 	}
