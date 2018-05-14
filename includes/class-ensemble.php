@@ -114,12 +114,8 @@ final class Ensemble {
 		require_once ENSEMBLE_PLUGIN_DIR . '/includes/lib/autoload.php';
 		require_once ENSEMBLE_PLUGIN_DIR . '/includes/lib/claws.php';
 
-		// Functions.
+		// Core functions.
 		require_once ENSEMBLE_PLUGIN_DIR . '/includes/functions/core-functions.php';
-		require_once ENSEMBLE_PLUGIN_DIR . '/includes/functions/contest-functions.php';
-		require_once ENSEMBLE_PLUGIN_DIR . '/includes/functions/venue-functions.php';
-		require_once ENSEMBLE_PLUGIN_DIR . '/includes/functions/director-functions.php';
-		require_once ENSEMBLE_PLUGIN_DIR . '/includes/functions/staff-functions.php';
 	}
 
 	/**
