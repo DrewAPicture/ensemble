@@ -139,8 +139,8 @@ final class Ensemble {
 		require_once ENSEMBLE_PLUGIN_DIR . '/includes/core/functions.php';
 		require_once ENSEMBLE_PLUGIN_DIR . '/includes/components/contests/functions.php';
 		require_once ENSEMBLE_PLUGIN_DIR . '/includes/components/venues/functions.php';
-		require_once ENSEMBLE_PLUGIN_DIR . '/includes/people/directors/functions.php';
-		require_once ENSEMBLE_PLUGIN_DIR . '/includes/people/staff/functions.php';
+		require_once ENSEMBLE_PLUGIN_DIR . '/includes/components/people/directors/functions.php';
+		require_once ENSEMBLE_PLUGIN_DIR . '/includes/components/people/staff/functions.php';
 	}
 
 	/**
