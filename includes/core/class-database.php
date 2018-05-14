@@ -28,7 +28,7 @@ abstract class Database implements Interfaces\Database {
 	 * @since 1.0.0
 	 * @var   string
 	 */
-	private $primary = 'id';
+	private $primary_key = 'id';
 
 	/**
 	 * Represents the table name, which can change depending on network-wide settings.
