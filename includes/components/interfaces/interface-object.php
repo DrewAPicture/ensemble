@@ -26,6 +26,16 @@ interface Object {
 	public function get_ID();
 
 	/**
+	 * Retrieves the corresponding Database instance.
+	 *
+	 * @since 1.0.0
+	 * @static
+	 *
+	 * @return \Ensemble\Core\Database
+	 */
+	public static function db();
+
+	/**
 	 * Retrieves the built cache key for the given single object.
 	 *
 	 * @since 1.0.0
