@@ -53,7 +53,7 @@ class Menu implements Loader {
 	public function ensemble_admin() {
 		?>
 		<div class="wrap">
-			<h2><?php esc_html_e( 'Ensemble', 'ensemble' ); ?></h2>
+			<h1><?php esc_html_e( 'Ensemble', 'ensemble' ); ?></h1>
 		</div>
 		<?php
 	}
