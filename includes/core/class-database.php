@@ -57,6 +57,17 @@ abstract class Database implements Interfaces\Database {
 	}
 
 	/**
+	 * Retrieves the value of the primary key.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string Value of the primary_key member.
+	 */
+	public function get_primary_key() {
+		return $this->primary_key;
+	}
+
+	/**
 	 * Retrieves the table version (used for schema changes).
 	 *
 	 * @since 1.0.0
