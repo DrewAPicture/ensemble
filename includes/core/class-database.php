@@ -125,9 +125,33 @@ abstract class Database implements Interfaces\Database {
 		if ( defined( 'ENSEMBLE_NETWORK_WIDE' ) && ENSEMBLE_NETWORK_WIDE ) {
 			$this->table_name = $suffix;
 		} else {
-			$this->table_name  = $GLOBALS['wpdb']->prefix . $suffix;
+			$this->table_name = $GLOBALS['wpdb']->prefix . $suffix;
 		}
 
+	}
+
+	/**
+	 * Inserts a new record into the database.
+	 *
+	 * Please note: inserting a record flushes the cache.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $data Column data. See get_column_defaults().
+	 * @return int|\WP_Error ID for the newly inserted record, otherwise a WP_Error object.
+	 */
+	public function insert( $args ) {
+
+		$defaults = array();
+
+		$args = wp_parse_args( $args, $defaults );
+
+		$current_date = current_time( 'mysql' );
+
+		// Insert the record.
+		$add = false;
+
+		return $add;
 	}
 
 	/**
