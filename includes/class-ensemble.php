@@ -124,6 +124,7 @@ final class Ensemble {
 	private function setup() {
 		if ( is_admin() ) {
 			load( new Admin\Menu );
+			load( new Admin\Settings );
 		}
 
 		load( new Core\Ajax_Actions );
