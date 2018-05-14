@@ -507,12 +507,13 @@ abstract class Database implements Interfaces\Database {
 
 		} else {
 
-			$fields = $clauses['fields'];
+			$fields   = $args['fields'];
+			$callback = $args['callback'];
 
 			// Run the query.
 			$results = $GLOBALS['wpdb']->get_results(
 				$GLOBALS['wpdb']->prepare(
-					"SELECT {$fields} FROM {$this->table_name} {$clauses['join']} {$clauses['where']} ORDER BY {$clauses['orderby']} {$clauses['order']} LIMIT %d, %d;",
+					"SELECT {$fields} FROM {$this->table_name} {$clauses['join']} {$clauses['where']} ORDER BY {$args['orderby']} {$args['order']} LIMIT %d, %d;",
 					absint( $args['offset'] ),
 					absint( $args['number'] )
 				)
