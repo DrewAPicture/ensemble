@@ -24,7 +24,7 @@ class Setup implements Loader {
 	 *
 	 * @since 1.0.0
 	 */
-	public function init() {
+	public function load() {
 
 	}
 
