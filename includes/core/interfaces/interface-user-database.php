@@ -24,7 +24,7 @@ interface User_Database extends Database {
 	 * @param int $user_id User ID.
 	 * @return \WP_User|\WP_Error User object or WP_Error if there was a problem.
 	 */
-	function get( $user_id );
+	public function get( $user_id );
 
 	/**
 	 * Queries for users.
@@ -35,7 +35,7 @@ interface User_Database extends Database {
 	 * @param bool  $count      Optional. Whether this is a count query. Default false.
 	 * @return array|int Array of user results, or int if `$count` is true.
 	 */
-	function query( $query_args, $count = false );
+	public function query( $query_args, $count = false );
 
 	/**
 	 * Retrieves a count of users based on the given query arguments.
@@ -45,6 +45,6 @@ interface User_Database extends Database {
 	 * @param array $query_args Query arguments.
 	 * @return int Number of results for the given query arguments.
 	 */
-	function query_count( $query_args );
+	public function count( $query_args );
 
 }
