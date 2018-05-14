@@ -185,6 +185,34 @@ class Database extends Core\Database {
 	}
 
 	/**
+	 * Inserts a new venue into the database.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $data Venue data.
+	 * @return int|\WP_Error The newly-minted venue object ID, otherwise a WP_Error object if there was a problem.
+	 */
+	public function insert( $data ) {
+		$errors = new \WP_Error();
+
+		if ( empty( $data['name'] ) ) {
+			$errors->add( 'missing_venue_name', __( 'A venue name must be specified.', 'ensemble' ), $data );
+		}
+
+		if ( empty( $data['address'] ) ) {
+			$errors->add( 'missing_venue_address', __( 'A venue address must be specified.', 'ensemble' ), $data );
+		}
+
+		$error_codes = $errors->get_error_codes();
+
+		if ( ! empty( $error_codes ) ) {
+			return $errors;
+		} else {
+			return parent::insert( $data );
+		}
+	}
+
+	/**
 	 * Creates the database table.
 	 *
 	 * @since 1.0.0
