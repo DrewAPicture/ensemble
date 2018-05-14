@@ -90,7 +90,7 @@ abstract class Object implements Component_Object {
 	 * @return string Cache key for the object type and ID.
 	 */
 	public static function get_cache_key( $object_id ) {
-		return md5( static::$cache_token . ':' . $object_id );
+		return md5( static::db()->get_table_suffix() . ':' . $object_id );
 	}
 
 	/**
