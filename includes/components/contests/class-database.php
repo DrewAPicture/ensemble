@@ -258,16 +258,17 @@ class Database extends Core\Database {
 	}
 
 	/**
-	 * Creates the database table
+	 * Creates the database table.
 	 *
 	 * @since 1.0.0
 	 */
-	public function create_table() {
+	public static function create_table() {
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
-		$table_name = $this->get_table_name();
+		$instance   = new self();
+		$table_name = $instance->get_table_name();
 
-		$sql = "CREATE TABLE $table_name (
+		$sql = "CREATE TABLE {$table_name} (
 			id bigint(20) NOT NULL AUTO_INCREMENT,
 			name mediumtext NOT NULL,
 			venues mediumtext NOT NULL,
@@ -282,7 +283,7 @@ class Database extends Core\Database {
 
 		dbDelta( $sql );
 
-		update_option( $table_name . '_db_version', $this->get_version() );
+		update_option( $table_name . '_db_version', $instance->get_version() );
 	}
 
 }
