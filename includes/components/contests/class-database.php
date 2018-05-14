@@ -95,9 +95,15 @@ class Database extends Core\Database {
 	 */
 	public function get_columns() {
 		return array(
-			'id'     => '%d',
-			'status' => '%s',
-			'date'   => '%s',
+			'id'         => '%d',
+			'name'       => '%s',
+			'venues'     => '%s',
+			'type'       => '%s',
+			'external'   => '%s',
+			'status'     => '%s',
+			'timezone'   => '%s',
+			'start_date' => '%s',
+			'end_date'   => '%s',
 		);
 	}
 
