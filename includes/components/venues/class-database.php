@@ -152,6 +152,16 @@ class Database extends Core\Database {
 			$claws->where( 'id' )->in( $args['id'], 'int' );
 		}
 
+		// Name.
+		if ( ! empty( $args['name'] ) ) {
+			$claws->where( 'name' )->equals( $args['name'] );
+		}
+
+		// Address.
+		if ( ! empty( $args['address'] ) ) {
+			$claws->where( 'address' )->equals( $args['address'] );
+		}
+
 		// Exclude.
 		if ( ! empty( $args['exclude'] ) ) {
 			$claws->where( 'id' )->not_in( $args['exclude'], 'int' );
