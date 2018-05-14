@@ -1,13 +1,13 @@
 <?php
 /**
- * Admin settings panel
+ * Core admin settings panel
  *
- * @package   Ensemble\Admin
+ * @package   Ensemble\Core\Admin
  * @copyright Copyright (c) 2018, Drew Jaynes
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
  */
-namespace Ensemble\Admin;
+namespace Ensemble\Core\Admin;
 
 use Ensemble\Core\Interfaces\Loader;
 
@@ -15,7 +15,8 @@ use Ensemble\Core\Interfaces\Loader;
  * Ensemble settings class.
  *
  * @since 1.0.0
- * @final
+ *
+ * @see Loader
  */
 final class Settings implements Loader {
 
