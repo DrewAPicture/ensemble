@@ -492,7 +492,7 @@ abstract class Database implements Interfaces\Database {
 		if ( true === $count ) {
 			$key = md5( 'ensemble_contest_count' . serialize( $args ) );
 		} else {
-			$key = md5( 'ensemble_contest_' . serialize( $args );
+			$key = md5( 'ensemble_contest_' . serialize( $args ) );
 		}
 
 		return $key;
