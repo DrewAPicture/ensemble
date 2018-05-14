@@ -20,14 +20,6 @@ use Ensemble\Components\Interfaces\Object as Component_Object;
 abstract class Object implements Component_Object {
 
 	/**
-	 * Object ID.
-	 *
-	 * @since 1.0.0
-	 * @var   int
-	 */
-	private $id;
-
-	/**
 	 * Whether the object members have been populated.
 	 *
 	 * @access protected
