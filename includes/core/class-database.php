@@ -135,7 +135,7 @@ abstract class Database implements Interfaces\Database {
 	/**
 	 * Inserts a new record into the database.
 	 *
-	 * Please note: successfully inserting a record flushes the cache.
+	 * Please note: successfully inserting a record invalidates the item and related query caches.
 	 *
 	 * @since 1.0.0
 	 *
@@ -187,7 +187,9 @@ abstract class Database implements Interfaces\Database {
 	/**
 	 * Updates an existing record in the database.
 	 *
-	 * @access public
+	 * Note: successfully updating a record invalidates the item and related query caches.
+	 *
+	 * @since 1.0.0
 	 *
 	 * @param int    $object_id Object ID for the record being updated.
 	 * @param array  $data      Optional. Array of columns and associated data to update. Default empty array.
@@ -258,7 +260,7 @@ abstract class Database implements Interfaces\Database {
 	/**
 	 * Deletes a record from the database.
 	 *
-	 * Please note: successfully deleting a record flushes the cache.
+	 * Please note: successfully deleting a record invalidates the item and related query caches.
 	 *
 	 * @since 1.0.0
 	 *
