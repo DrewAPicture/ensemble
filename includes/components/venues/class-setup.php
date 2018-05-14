@@ -27,6 +27,8 @@ class Setup implements Loader {
 	 * @since 1.0.0
 	 */
 	public function load() {
+		require_once ENSEMBLE_PLUGIN_DIR . 'includes/functions/venue-functions.php';
+
 		if ( is_admin() ) {
 			load( new Admin\Save );
 			load( new Admin\Delete );
