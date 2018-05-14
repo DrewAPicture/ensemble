@@ -78,7 +78,7 @@ class Init {
 	 * @param array $query_args Query arguments.
 	 * @return int Number of results for the given query arguments.
 	 */
-	public function query_count( $query_args ) {
+	public function count( $query_args ) {
 		return $this->db->query( $query_args, true );
 	}
 
@@ -93,7 +93,7 @@ class Init {
 	 *
 	 * @return mixed
 	 */
-	public function get_meta( $staff_id, $meta_key, $single = false ) {
+	public function meta( $staff_id, $meta_key, $single = false ) {
 		return $this->meta->get( $staff_id, $meta_key, $single );
 	}
 
