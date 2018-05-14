@@ -70,6 +70,38 @@ namespace Ensemble {
 		return ( new Components\People\Staff\Database() );
 	}
 
+	/**
+	 * Cleans the cache for a given object.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param \Ensemble\Components\Object $object Component object.
+	 * @return bool True if the item cache was cleaned, false otherwise.
+	 */
+	function clean_item_cache( $object ) {
+		if ( ! $object instanceof \Ensemble\Components\Object ) {
+			return false;
+		}
+
+		$Object_Class = get_class( $object );
+		$cache_key    = $Object_Class::get_cache_key( $object->ID );
+		$cache_group  = $Object_Class::$object_type;
+
+		// Individual object.
+		wp_cache_delete( $cache_key, $cache_group );
+
+		// Prime the item cache.
+		$Object_Class::get_instance( $object->ID );
+
+		$db_groups      = $Object_Class::get_db_groups();
+		$db_cache_group = isset( $db_groups->secondary ) ? $db_groups->secondary : $db_groups->primary;
+
+		$last_changed = microtime();
+
+		// Invalidate core object queries.
+		wp_cache_set( 'last_changed', $last_changed, $db_cache_group );
+	}
+
 }
 
 namespace {
