@@ -16,6 +16,7 @@ class Install implements Loader {
 	 */
 	public static function run() {
 		Components\Contests\Database::create_table();
+		Components\Venues\Database::create_table();
 	}
 
 	/**
