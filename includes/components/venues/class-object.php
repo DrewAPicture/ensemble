@@ -22,12 +22,14 @@ use Ensemble\Core;
 class Object extends Components\Object {
 
 	/**
-	 * Staff member title.
+	 * Retrieves a Database instance corresponding to this object.
 	 *
-	 * @access public
-	 * @since  1.0.0
-	 * @var    string
+	 * @since 1.0.0
+	 *
+	 * @return Database Contests database class instance.
 	 */
-	public $title;
+	public static function db() {
+		return ( new Database );
+	}
 
 }
