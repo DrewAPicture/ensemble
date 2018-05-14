@@ -8,6 +8,8 @@
  * @since     1.0.0
  */
 
+use Ensemble\Admin;
+use Ensemble\Core;
 use function Ensemble\load;
 
 /**
@@ -119,9 +121,13 @@ final class Ensemble {
 	 * @since 1.0.0
 	 */
 	private function setup() {
-		load( new Ensemble\Admin\Menu() );
+		if ( is_admin() ) {
+			load( new Admin\Menu );
+		}
 
-		load( new Ensemble\Core\Components() );
+		load( new Core\Ajax_Actions );
+		load( new Core\Rewrite_Rules );
+		load( new Core\Components );
 	}
 
 	/**
