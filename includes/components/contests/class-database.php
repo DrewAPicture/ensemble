@@ -225,8 +225,14 @@ class Database extends Core\Database {
 
 		$sql = "CREATE TABLE $table_name (
 			id bigint(20) NOT NULL AUTO_INCREMENT,
+			name mediumtext NOT NULL,
+			venues mediumtext NOT NULL,
+			type varchar(30) NOT NULL,
+			external varchar(255) NOT NULL,
 			status tinytext NOT NULL,
-			date datetime NOT NULL,
+			timezone varchar(30) NOT NULL,
+			start_date datetime NOT NULL,
+			end_date datetime NOT NULL,
 			PRIMARY KEY  (id),
 			) CHARACTER SET utf8 COLLATE utf8_general_ci;";
 
