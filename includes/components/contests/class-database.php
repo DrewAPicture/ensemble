@@ -219,6 +219,10 @@ class Database extends Core\Database {
 	public function insert( $data ) {
 		$errors = new \WP_Error();
 
+		if ( empty( $data['name'] ) ) {
+			$errors->add( 'missing_contest_name', __( 'A contest name must be specified when adding a new contest.', 'ensemble' ), $data );
+		}
+
 		if ( empty( $data['venues'] ) ) {
 			$errors->add( 'missing_contest_venues', __( 'One or more contest venues must be specified when adding a contest.', 'ensemble' ), $data );
 		}
