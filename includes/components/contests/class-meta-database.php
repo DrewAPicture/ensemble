@@ -7,7 +7,7 @@
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
  */
-namespace Ensemble\Components\Venues;
+namespace Ensemble\Components\Contests;
 
 use Ensemble\Core\User_Meta;
 
