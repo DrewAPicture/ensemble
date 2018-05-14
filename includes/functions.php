@@ -85,7 +85,7 @@ namespace Ensemble {
 
 		$Object_Class = get_class( $object );
 		$cache_key    = $Object_Class::get_cache_key( $object->get_ID() );
-		$cache_group  = $Object_Class::$object_type;
+		$cache_group  = $Object_Class::db()->get_cache_group();
 
 		// Individual object.
 		wp_cache_delete( $cache_key, $cache_group );
