@@ -9,23 +9,22 @@
  */
 namespace Ensemble\Admin;
 
+use Ensemble\Core\Interfaces\Loader;
+
 /**
  * Sets up the Ensemble Admin.
  *
  * @since 1.0.0
  */
-class Menu {
+class Menu implements Loader {
 
 	/**
 	 * Initializes menu registrations.
 	 *
 	 * @since 1.0.0
-	 * @static
 	 */
-	public static function init() {
-		$instance = new self();
-
-		add_action( 'admin_menu', array( $instance, 'register_menus' ) );
+	public function load() {
+		add_action( 'admin_menu', array( $this, 'register_menus' ) );
 	}
 
 	/**
