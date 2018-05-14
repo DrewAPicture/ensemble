@@ -171,11 +171,6 @@ class Database extends Core\Database {
 			$claws->where( 'name' )->equals( $args['name'], 'string' );
 		}
 
-		// Exclude.
-		if ( ! empty( $args['exclude'] ) ) {
-			$claws->where( 'id' )->not_in( $args['exclude'], 'int' );
-		}
-
 		// Venues.
 		if ( ! empty( $args['venues'] ) ) {
 			$claws->where( 'venues' )->in( $args['venues'], 'int' );
@@ -189,6 +184,11 @@ class Database extends Core\Database {
 		// Status.
 		if ( ! empty( $args['status'] ) ) {
 			$claws->where( 'status' )->equals( $args['status'] );
+		}
+
+		// Exclude.
+		if ( ! empty( $args['exclude'] ) ) {
+			$claws->where( 'id' )->not_in( $args['exclude'], 'int' );
 		}
 
 		// (is) External.
