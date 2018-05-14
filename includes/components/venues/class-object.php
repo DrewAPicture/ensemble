@@ -17,9 +17,9 @@ use Ensemble\Core;
  *
  * @since 1.0.0
  *
- * @see \Ensemble\Components\Object
+ * @see \Ensemble\Core\Object
  */
-class Object extends Components\Object {
+class Object extends Core\Object {
 
 	/**
 	 * Retrieves a Database instance corresponding to this object.

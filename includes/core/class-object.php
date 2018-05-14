@@ -2,14 +2,12 @@
 /**
  * Objects: Base Component Object
  *
- * @package   Ensemble\Components
+ * @package   Ensemble\Core
  * @copyright Copyright (c) 2018, Drew Jaynes
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
  */
-namespace Ensemble\Components;
-
-use Ensemble\Components\Interfaces\Object as Component_Object;
+namespace Ensemble\Core;
 
 /**
  * Implements a base object.
@@ -17,7 +15,7 @@ use Ensemble\Components\Interfaces\Object as Component_Object;
  * @since 1.0.0
  * @abstract
  */
-abstract class Object implements Component_Object {
+abstract class Object implements Interfaces\Object {
 
 	/**
 	 * Whether the object members have been populated.

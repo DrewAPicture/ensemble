@@ -9,7 +9,7 @@
  */
 namespace Ensemble\Components\People\Directors;
 
-use Ensemble\Components;
+use Ensemble\Core;
 
 /**
  * Defines a Staff Member object model.
@@ -18,7 +18,7 @@ use Ensemble\Components;
  *
  * @see \Ensemble\Components\User_Object
  */
-class Object extends Components\User_Object {
+class Object extends Core\User_Object {
 
 	/**
 	 * Retrieves a Database instance corresponding to this object.

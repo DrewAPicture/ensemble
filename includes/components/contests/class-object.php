@@ -19,7 +19,7 @@ use Ensemble\Core;
  *
  * @see \Ensemble\Components\Object
  */
-class Object extends Components\Object {
+class Object extends Core\Object {
 
 	/**
 	 * Contest ID.
