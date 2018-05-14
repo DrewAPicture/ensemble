@@ -112,8 +112,8 @@ class Database extends Core\Database {
 	 * @param array $query_args {
 	 *     Optional. Arguments for querying contests. Default empty array.
 	 *
-	 *     @type int          $number  Number of affiliates to query for. Default 20.
-	 *     @type int          $offset  Number of affiliates to offset the query for. Default 0.
+	 *     @type int          $number  Number of contests to query for. Default 20.
+	 *     @type int          $offset  Number of contests to offset the query for. Default 0.
 	 *     @type int|array    $exclude Contest ID or array of IDs to explicitly exclude.
 	 *     @type int|array    $id      Contest ID or array of contest IDs to retrieve.
 	 *     @type string       $status  Contest status. Default empty.
