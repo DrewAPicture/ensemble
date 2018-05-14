@@ -1,6 +1,6 @@
 <?php
 /**
- * Defines an object constructor for a single Venue
+ * Defines an object construct for a single Venue
  *
  * @package   Ensemble\Components\Venues
  * @copyright Copyright (c) 2018, Drew Jaynes
