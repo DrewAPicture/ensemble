@@ -1,6 +1,6 @@
 <?php
 /**
- * Defines the contract under which component models are built
+ * Defines the contract under which user objects are built
  *
  * @package   Ensemble\Components\Interfaces
  * @copyright Copyright (c) 2018, Drew Jaynes
@@ -10,10 +10,10 @@
 namespace Ensemble\Components\Interfaces;
 
 /**
- * Defines common traits of all component models should take.
+ * Defines common traits all people objects should take.
  *
  * @since 1.0.0
  */
-interface Object {
+interface User_Object {
 
 }
