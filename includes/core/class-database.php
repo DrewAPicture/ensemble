@@ -163,8 +163,10 @@ abstract class Database implements Interfaces\Database {
 	 * @return \Ensemble\Model|\WP_Error Core object or WP_Error if there was a problem.
 	 */
 	public function get( $object_id ) {
-		$GLOBALS['wpdb']->get_row( $wpdb->prepare(
-			"SELECT * FROM $this->table_name WHERE $this->primary = %s LIMIT 1;", $object_id )
+		$GLOBALS['wpdb']->get_row(
+			$GLOBALS['wpdb']->prepare(
+				"SELECT * FROM $this->table_name WHERE $this->primary_key = %s LIMIT 1;", $object_id
+			)
 		);
 	}
 
