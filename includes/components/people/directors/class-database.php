@@ -20,7 +20,7 @@ use Ensemble\Core;
  *
  * @method Meta_Database meta()
  */
-class User_Database extends Core\User_Database {
+class Database extends Core\User_Database {
 
 	/**
 	 * Facilitates magic method calls.
