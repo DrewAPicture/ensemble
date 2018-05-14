@@ -19,8 +19,8 @@ use function Ensemble\get_wp_timezone;
  *
  * @see \Ensemble\Core\Database
  *
- * @method Meta_Database              meta()
- * @method Ensemble\Contest|\WP_Error get_core_object( int|Ensemble\Contest $contest )
+ * @method Meta_Database    meta()
+ * @method Object|\WP_Error get_core_object( int|Object $contest )
  */
 class Database extends Core\Database {
 
