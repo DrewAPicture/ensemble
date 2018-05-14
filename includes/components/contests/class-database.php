@@ -149,20 +149,10 @@ class Database extends Core\Database {
 	public function query( $query_args = array(), $count = false ) {
 		$defaults = array(
 			'id'      => 0,
-			'number'  => 20,
-			'offset'  => 0,
-			'exclude' => array(),
 			'status'  => '',
-			'order'   => 'DESC',
-			'orderby' => 'id',
-			'fields'  => '',
 		);
 
 		$args = wp_parse_args( $args, $defaults );
-
-		if( $args['number'] < 1 ) {
-			$args['number'] = 999999999999;
-		}
 
 		$claws = claws();
 
@@ -210,33 +200,9 @@ class Database extends Core\Database {
 
 		$where = $claws->get_sql();
 
-		if ( 'DESC' === strtoupper( $args['order'] ) ) {
-			$order = 'DESC';
-		} else {
-			$order = 'ASC';
-		}
-
 		$join = '';
 
-		// Check against the columns whitelist. If no match, default to $primary_key.
-		$orderby = array_key_exists( $args['orderby'], $this->get_columns() ) ? $args['orderby'] : $this->get_primary_key();
-
-		// Overload args values for the benefit of the cache.
-		$args['orderby'] = $orderby;
-		$args['order']   = $order;
-
-		$callback = '';
-
-		if ( 'ids' === $args['fields'] ) {
-			$fields   = (string) $this->get_primary_key();
-			$callback = 'intval';
-		} else {
-			$fields = $this->parse_fields( $args['fields'] );
-
-			if ( '*' === $fields ) {
-				$callback = 'Ensemble\\get_contest';
-			}
-		}
+		$args = $this->parse_global_args( $args );
 
 		$key          = $this->build_cache_key( $count, $args );
 		$last_changed = $this->get_last_changed();

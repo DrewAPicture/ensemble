@@ -627,6 +627,59 @@ abstract class Database implements Interfaces\Database {
 	}
 
 	/**
+	 * Parses global arguments.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $args Query arguments.
+	 * @return array Parsed arguments
+	 */
+	public function parse_global_args( $args ) {
+		$defaults = array(
+			'number'  => 20,
+			'offset'  => 0,
+			'exclude' => array(),
+			'order'   => 'DESC',
+			'orderby' => 'id',
+			'fields'  => '',
+		);
+
+		$args = wp_parse_args( $args, $defaults );
+
+		if ( $args['number'] < 1 ) {
+			$args['number'] = 99999;
+		}
+
+		if ( 'DESC' === strtoupper( $args['order'] ) ) {
+			$args['order'] = 'DESC';
+		} else {
+			$args['order'] = 'ASC';
+		}
+
+		// Check against the columns whitelist. If no match, default to $primary_key.
+		if ( ! array_key_exists( $args['orderby'], $this->get_columns() ) ) {
+			$args['orderby'] = $this->get_primary_key();
+		}
+
+		$callback = '';
+
+		if ( 'ids' === $args['fields'] ) {
+			$args['fields']   = (string) $this->get_primary_key();
+			$args['callback'] = 'intval';
+		} else {
+			$args['fields'] = $this->parse_fields( $args['fields'] );
+
+			if ( '*' === $args['fields'] ) {
+				$args['callback'] = array( $this, 'get_core_object' );
+			} else {
+				$args['callback'] = '';
+			}
+		}
+
+		return $args;
+	}
+
+	/**
 	 * Builds a caching key based on the current query arguments.
 	 *
 	 * @since 1.0.0
