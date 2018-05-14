@@ -9,7 +9,7 @@
  */
 namespace Ensemble\Components;
 
-use Ensemble\Components\Interfaces\User_Object as User_Object;
+use Ensemble\Components\Interfaces;
 
 /**
  * Implements user object middleware.
@@ -17,6 +17,6 @@ use Ensemble\Components\Interfaces\User_Object as User_Object;
  * @since 1.0.0
  * @abstract
  */
-abstract class User_Object extends \WP_User implements User_Object {
+abstract class User_Object extends \WP_User implements Interfaces\User_Object {
 
 }
