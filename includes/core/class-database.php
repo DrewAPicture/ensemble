@@ -740,9 +740,15 @@ abstract class Database implements Interfaces\Database {
 	 *
 	 * @since 1.0.0
 	 *
+	 * @param string $timezone Optional. Timezone to use to generate the date object. Default UTC.
 	 * @return \DateTime DateTime object.
 	 */
-	public function get_date_object() {
-		return new \DateTime( 'now', new \DateTimeZone( get_wp_timezone() ) );
+	public function get_date_object( $timezone = null ) {
+		if ( null === $timezone ) {
+			$timezone = 'UTC';
+		}
+
+		return new \DateTime( 'now', new \DateTimeZone( $timezone ) );
 	}
+
 }
