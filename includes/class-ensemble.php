@@ -42,38 +42,6 @@ final class Ensemble {
 	private $version = '1.0.0';
 
 	/**
-	 * Contests instance.
-	 *
-	 * @since 1.0.0
-	 * @var   \Ensemble\Contests\Core
-	 */
-	public $contests;
-
-	/**
-	 * Staff instance.
-	 *
-	 * @since 1.0.0
-	 * @var   \Ensemble\People\Staff\Init
-	 */
-	public $staff;
-
-	/**
-	 * Teams instance.
-	 *
-	 * @since 1.0.0
-	 * @var   \Ensemble\Teams\Setup
-	 */
-	public $teams;
-
-	/**
-	 * Venues instance.
-	 *
-	 * @since 1.0.0
-	 * @var   \Ensemble\Venues\Setup
-	 */
-	public $venues;
-
-	/**
 	 * Creates an Ensemble instance.
 	 *
 	 * @since 1.0.0
