@@ -19,9 +19,9 @@ namespace Ensemble {
 	 * @param Loader $object Object to initialize.
 	 * @return mixed Result of the bootstrap initialization, usually an object.
 	 */
-	function init( $object ) {
+	function load( $object ) {
 		if ( $object instanceof Interfaces\Loader ) {
-			return $object->init();
+			return $object->load();
 		}
 	}
 

@@ -17,10 +17,10 @@ namespace Ensemble\Core\Interfaces;
 interface Loader {
 
 	/**
-	 * Initializes the component.
+	 * Loads the component or class.
 	 *
 	 * @since 1.0.0
 	 */
-	public function init();
+	public function load();
 
 }
