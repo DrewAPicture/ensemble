@@ -27,16 +27,6 @@ interface Database {
 	public function get( $object_id );
 
 	/**
-	 * Retrieves a single core object with caching.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param int|Ensemble\Core\Model $object Object or object ID.
-	 * @return Ensemble\Core\Model|\WP_Error Core object or WP_Error object.
-	 */
-	public function get_object( $object );
-
-	/**
 	 * Queries for component objects.
 	 *
 	 * @since 1.0.0
