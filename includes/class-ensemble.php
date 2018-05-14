@@ -150,11 +150,6 @@ final class Ensemble {
 	 */
 	private function setup() {
 		Ensemble\Admin\Menu::init();
-
-//		$this->contests = new Ensemble\Contests\Setup;
-		$this->staff    = new Ensemble\People\Staff\Init();
-//		$this->teams    = new Ensemble\Teams\Setup;
-//		$this->venues   = new Ensemble\Venues\Setup;
 	}
 
 	/**
