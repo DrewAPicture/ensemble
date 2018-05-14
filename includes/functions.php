@@ -10,6 +10,7 @@
 namespace Ensemble {
 
 	use Ensemble\Core\Interfaces;
+	use Ensemble\Components;
 
 	/**
 	 * Short-hand helper to initialize an aspect of the bootstrap.
@@ -23,6 +24,50 @@ namespace Ensemble {
 		if ( $object instanceof Interfaces\Loader ) {
 			return $object->load();
 		}
+	}
+
+	/**
+	 * Retrieves an instance of the Contests database class.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return Components\Contests\Database Contests db.
+	 */
+	function contests() {
+		return ( new Components\Contests\Database() );
+	}
+
+	/**
+	 * Retrieves an instance of the Venues database class.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return Components\Venues\Database Venues db.
+	 */
+	function venues() {
+		return ( new Components\Venues\Database() );
+	}
+
+	/**
+	 * Retrieves an instance of the Directors database class.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return Components\People\Directors\Database Directors db.
+	 */
+	function directors() {
+		return ( new Components\People\Directors\Database() );
+	}
+
+	/**
+	 * Retrieves an instance of the Circuit Staff database class.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return Components\People\Staff\Database Staff db.
+	 */
+	function staff() {
+		return ( new Components\People\Staff\Database() );
 	}
 
 }
