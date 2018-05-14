@@ -1,6 +1,6 @@
 <?php
 /**
- * Implements admin settings for Ensemble
+ * Admin settings panel
  *
  * @package   Ensemble\Admin
  * @copyright Copyright (c) 2018, Drew Jaynes
@@ -9,12 +9,23 @@
  */
 namespace Ensemble\Admin;
 
+use Ensemble\Core\Interfaces\Loader;
+
 /**
  * Ensemble settings class.
  *
  * @since 1.0.0
  * @final
  */
-final class Settings {
+final class Settings implements Loader {
+
+	/**
+	 * Registers any hook callbacks needed to implement a settings panel.
+	 *
+	 * @since 1.0.0
+	 */
+	public function load() {
+
+	}
 
 }
