@@ -41,20 +41,8 @@ class Init {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		$this->includes();
-
 		$this->db   = new Database();
 		$this->meta = new Meta();
-	}
-
-	/**
-	 * Includes needed files.
-	 */
-	private function includes() {
-//		require_once( ENSEMBLE_PLUGIN_DIR . '/includes/admin/people/staff-admin.php' );
-		require_once( ENSEMBLE_PLUGIN_DIR . '/includes/people/staff/class-database.php' );
-//		require_once( ENSEMBLE_PLUGIN_DIR . '/includes/people/staff/functions.php' );
-		require_once( ENSEMBLE_PLUGIN_DIR . '/includes/people/staff/meta-class-database.php' );
 	}
 
 	/**

@@ -18,6 +18,6 @@ use Ensemble\Core;
  *
  * @see \Ensemble\Core\User_Database
  */
-class User_Database extends Core\User_Database {
+class Database extends Core\User_Database {
 
 }
