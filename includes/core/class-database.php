@@ -11,6 +11,7 @@ namespace Ensemble\Core;
 
 use Ensemble\Core\Interfaces;
 use function Ensemble\clean_item_cache;
+use function Ensemble\get_wp_timezone;
 
 /**
  * Core database abstraction layer.
@@ -662,4 +663,14 @@ abstract class Database implements Interfaces\Database {
 		return $last_changed;
 	}
 
+	/**
+	 * Builds and retrieves a DateTime object based on the WP timezone.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return \DateTime DateTime object.
+	 */
+	public function get_date_object() {
+		return new \DateTime( 'now', new \DateTimeZone( get_wp_timezone() ) );
+	}
 }
