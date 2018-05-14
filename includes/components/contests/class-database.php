@@ -213,9 +213,9 @@ class Database extends Core\Database {
 
 		if ( false === $results ) {
 
-			$clauses = compact( 'fields', 'join', 'where', 'orderby', 'order', 'count' );
+			$clauses = compact( 'join', 'where', 'count' );
 
-			$results = $this->get_results( $clauses, $args, $callback );
+			$results = $this->get_results( $clauses, $args );
 		}
 
 		wp_cache_add( $cache_key, $results, $this->get_cache_group(), HOUR_IN_SECONDS );

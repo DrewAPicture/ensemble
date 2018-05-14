@@ -489,13 +489,11 @@ abstract class Database implements Interfaces\Database {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array    $clauses  Compacted array of query clauses.
-	 * @param array    $args     Query arguments.
-	 * @param callable $callback Optional. Callback to run against results in the generic results case.
-	 *                           Default empty.
+	 * @param array $clauses Compacted array of query clauses.
+	 * @param array $args    Query arguments.
 	 * @return array|int|null|object Query results.
 	 */
-	public function get_results( $clauses, $args, $callback = '' ) {
+	public function get_results( $clauses, $args ) {
 
 		if ( true === $clauses['count'] ) {
 
