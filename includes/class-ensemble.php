@@ -8,6 +8,8 @@
  * @since     1.0.0
  */
 
+use function Ensemble\load;
+
 /**
  * Sets up the Ensemble plugin.
  *
@@ -149,7 +151,9 @@ final class Ensemble {
 	 * @since 1.0.0
 	 */
 	private function setup() {
-		Ensemble\Admin\Menu::init();
+		load( new Ensemble\Admin\Menu() );
+
+		load( new Ensemble\Core\Components() );
 	}
 
 	/**
