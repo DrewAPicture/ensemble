@@ -135,8 +135,8 @@ final class Ensemble {
 		}
 
 		if ( is_admin() ) {
-			load( new Admin\Menu );
-			load( new Admin\Settings );
+			load( new Core\Admin\Menu );
+			load( new Core\Admin\Settings );
 		}
 
 		load( new Core\Ajax_Actions );
