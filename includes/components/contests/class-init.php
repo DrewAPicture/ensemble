@@ -18,6 +18,6 @@ use Ensemble\Core;
  *
  * @see Ensemble\Base
  */
-class Init extends Core\Init {
+class Init {
 
 }
