@@ -30,6 +30,7 @@ class Setup implements Loader {
 		require_once ENSEMBLE_PLUGIN_DIR . 'includes/functions/contest-functions.php';
 
 		if ( is_admin() ) {
+			load( new Admin\Menu );
 			load( new Admin\Save );
 			load( new Admin\Delete );
 			load( new Admin\Overview );
