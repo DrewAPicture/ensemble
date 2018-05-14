@@ -2,12 +2,12 @@
 /**
  * Sets up the base Database class to be extended by components
  *
- * @package   Ensemble\Core\Database
+ * @package   Ensemble\Components
  * @copyright Copyright (c) 2018, Drew Jaynes
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
  */
-namespace Ensemble\Core;
+namespace Ensemble\Components;
 
 use Ensemble\Core\Interfaces;
 use function Ensemble\clean_item_cache;
