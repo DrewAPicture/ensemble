@@ -79,7 +79,7 @@ abstract class Object implements Component_Object {
 	 * @static
 	 *
 	 * @see Object::get_instance()
-	 * @see affwp_clean_item_cache()
+	 * @see clean_item_cache()
 	 *
 	 * @param int $object_id Object ID.
 	 * @return string Cache key for the object type and ID.

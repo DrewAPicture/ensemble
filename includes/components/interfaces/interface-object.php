@@ -16,4 +16,27 @@ namespace Ensemble\Components\Interfaces;
  */
 interface Object {
 
+	/**
+	 * Retrieves the built cache key for the given single object.
+	 *
+	 * @since 1.0.0
+	 * @static
+	 *
+	 * @param int $object_id Object ID.
+	 * @return string Cache key for the object type and ID.
+	 */
+	public static function get_cache_key( $object_id );
+
+	/**
+	 * Splits the db groups if there is more than one.
+	 *
+	 * CURIE is ':'.
+	 *
+	 * @since 1.0.0
+	 * @static
+	 *
+	 * @return mixed Object containing the primary and secondary group values.
+	 */
+	public static function get_db_groups();
+
 }
