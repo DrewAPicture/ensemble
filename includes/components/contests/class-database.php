@@ -158,29 +158,17 @@ class Database extends Core\Database {
 
 		// ID.
 		if ( ! empty( $args['id'] ) ) {
-			if ( ! is_array( $args['id'] ) ) {
-				$args['id'] = array( $args['id'] );
-			}
-
 			$claws->where( 'id' )->in( $args['id'], 'int' );
 		}
 
 		// Exclude.
 		if ( ! empty( $args['exclude'] ) ) {
-			if ( ! is_array( $args['exclude'] ) ) {
-				$args['exclude'] = array( $args['exclude'] );
-			}
-
-			$claws->where( 'id' )->not_in( $exclude, 'int' );
+			$claws->where( 'id' )->not_in( $args['exclude'], 'int' );
 		}
 
 		// Venues.
 		if ( ! empty( $args['venues'] ) ) {
-			if ( ! is_array( $args['venues'] ) ) {
-				$args['venues'] = array( $args['venues'] );
-			}
-
-			$claws->where( 'venues' )->in( $venues, 'int' );
+			$claws->where( 'venues' )->in( $args['venues'], 'int' );
 		}
 
 		// Type.
