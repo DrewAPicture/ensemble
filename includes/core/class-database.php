@@ -266,7 +266,7 @@ abstract class Database implements Interfaces\Database {
 		// Object ID must be positive integer.
 		$object_id = absint( $object_id );
 
-		$object = $this->get_core_object( $object_id, $this->query_object_type );
+		$object = $this->get_core_object( $object_id, $this->get_query_object_type() );
 
 		if ( is_wp_error( $object ) ) {
 			return $object;
