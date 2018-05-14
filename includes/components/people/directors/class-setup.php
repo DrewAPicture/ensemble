@@ -7,8 +7,9 @@
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
  */
-
 namespace Ensemble\Components\People\Directors;
+
+use Ensemble\Core\Interfaces\Loader;
 
 /**
  * Implements Staff functionality in Ensemble core.

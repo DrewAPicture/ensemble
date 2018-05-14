@@ -9,6 +9,8 @@
  */
 namespace Ensemble\Components\Venues;
 
+use Ensemble\Core\Interfaces\Loader;
+
 /**
  * Implements Contests component functionality in Ensemble core.
  *
