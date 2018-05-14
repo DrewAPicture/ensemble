@@ -94,28 +94,6 @@ class Object extends Components\Object {
 	public $end_date;
 
 	/**
-	 * Token to use for generating cache keys.
-	 *
-	 * @since 1.0.0
-	 * @var   string
-	 * @static
-	 *
-	 * @see get_cache_key()
-	 */
-	public static $cache_token = 'ensemble_contests';
-
-	/**
-	 * Object type.
-	 *
-	 * Used as the cache group and for accessing object DB classes in the parent.
-	 *
-	 * @since 1.0.0
-	 * @var   string
-	 * @static
-	 */
-	public static $object_type = 'contests';
-
-	/**
 	 * Retrieves a Database instance corresponding to this object.
 	 *
 	 * @since 1.0.0
