@@ -154,12 +154,12 @@ class Database extends Core\Database {
 
 		// Name.
 		if ( ! empty( $args['name'] ) ) {
-			$claws->where( 'name' )->equals( $args['name'] );
+			$claws->where( 'name' )->equals( $args['name'], 'string' );
 		}
 
 		// Address.
 		if ( ! empty( $args['address'] ) ) {
-			$claws->where( 'address' )->equals( $args['address'] );
+			$claws->where( 'address' )->equals( $args['address'], 'string' );
 		}
 
 		// Exclude.
@@ -169,7 +169,7 @@ class Database extends Core\Database {
 
 		// Status.
 		if ( ! empty( $args['status'] ) ) {
-			$claws->where( 'status' )->equals( $args['status'] );
+			$claws->where( 'status' )->equals( $args['status'], 'string' );
 		}
 
 		// Clauses.
