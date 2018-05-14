@@ -136,7 +136,7 @@ final class Ensemble {
 		require_once ENSEMBLE_PLUGIN_DIR . '/includes/lib/autoload.php';
 
 		// Functions.
-		require_once ENSEMBLE_PLUGIN_DIR . '/includes/core/functions.php';
+		require_once ENSEMBLE_PLUGIN_DIR . '/includes/functions.php';
 		require_once ENSEMBLE_PLUGIN_DIR . '/includes/components/contests/functions.php';
 		require_once ENSEMBLE_PLUGIN_DIR . '/includes/components/venues/functions.php';
 		require_once ENSEMBLE_PLUGIN_DIR . '/includes/components/people/directors/functions.php';

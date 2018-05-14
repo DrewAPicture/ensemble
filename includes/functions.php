@@ -9,6 +9,20 @@
  */
 namespace Ensemble {
 
+	/**
+	 * Short-hand helper to initialize an aspect of the bootstrap.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param Loader $object Object to initialize.
+	 * @return mixed Result of the bootstrap initialization, usually an object.
+	 */
+	function init( $object ) {
+		if ( $object instanceof Interfaces\Loader ) {
+			return $object->init();
+		}
+	}
+
 }
 
 namespace {
