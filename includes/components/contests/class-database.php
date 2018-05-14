@@ -10,6 +10,7 @@
 namespace Ensemble\Components\Contests;
 
 use Ensemble\Core;
+use function Ensemble\get_wp_timezone;
 
 /**
  * Contests table database class.
@@ -62,7 +63,7 @@ class Database extends Core\Database {
 	 * @return string Query object type.
 	 */
 	public function get_query_object_type() {
-		return 'Ensemble\Contest';
+		return 'Ensemble\\Contest';
 	}
 
 	/**
@@ -73,7 +74,7 @@ class Database extends Core\Database {
 	 * @return string Table name
 	 */
 	public function get_table_suffix() {
-		return 'ensemble_contest';
+		return 'ensemble_contests';
 	}
 
 	/**
