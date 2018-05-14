@@ -637,9 +637,9 @@ abstract class Database implements Interfaces\Database {
 	 */
 	public function build_cache_key( $count, $args ) {
 		if ( true === $count ) {
-			$key = md5( 'ensemble_contest_count' . serialize( $args ) );
+			$key = md5( 'ensemble_' . $this->get_cache_group() . '_count_' . serialize( $args ) );
 		} else {
-			$key = md5( 'ensemble_contest_' . serialize( $args ) );
+			$key = md5( 'ensemble_' . $this->get_cache_group() . '_' . serialize( $args ) );
 		}
 
 		return $key;
