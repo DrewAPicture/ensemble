@@ -22,6 +22,78 @@ use Ensemble\Core;
 class Object extends Components\Object {
 
 	/**
+	 * Contest ID.
+	 *
+	 * @since 1.0.0
+	 * @var   int
+	 */
+	public $id;
+
+	/**
+	 * Contest name.
+	 *
+	 * @since 1.0.0
+	 * @var   string
+	 */
+	public $name = '';
+
+	/**
+	 * Array of associated venue(s).
+	 *
+	 * @since 1.0.0
+	 * @var   array
+	 */
+	public $venues = array();
+
+	/**
+	 * Contest type.
+	 *
+	 * @since 1.0.0
+	 * @var   string
+	 */
+	public $type = '';
+
+	/**
+	 * Contest URL (if external).
+	 *
+	 * @since 1.0.0
+	 * @var   string|null
+	 */
+	public $external;
+
+	/**
+	 * Contest status.
+	 *
+	 * @since 1.0.0
+	 * @var   string
+	 */
+	public $status;
+
+	/**
+	 * Contest timezone.
+	 *
+	 * @since 1.0.0
+	 * @var   string
+	 */
+	public $timezone;
+
+	/**
+	 * Contest start date and time.
+	 *
+	 * @since 1.0.0
+	 * @var   string
+	 */
+	public $start_date;
+
+	/**
+	 * Contest end date and time.
+	 *
+	 * @since 1.0.0
+	 * @var   string
+	 */
+	public $end_date;
+
+	/**
 	 * Retrieves a Database instance corresponding to this object.
 	 *
 	 * @since 1.0.0
