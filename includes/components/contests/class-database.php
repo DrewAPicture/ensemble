@@ -220,11 +220,11 @@ class Database extends Core\Database {
 		$errors = new \WP_Error();
 
 		if ( empty( $data['name'] ) ) {
-			$errors->add( 'missing_contest_name', __( 'A contest name must be specified when adding a new contest.', 'ensemble' ), $data );
+			$errors->add( 'missing_contest_name', __( 'A name must be specified when adding a new contest.', 'ensemble' ), $data );
 		}
 
 		if ( empty( $data['venues'] ) ) {
-			$errors->add( 'missing_contest_venues', __( 'One or more contest venues must be specified when adding a contest.', 'ensemble' ), $data );
+			$errors->add( 'missing_contest_venues', __( 'One or more venues must be specified when adding a contest.', 'ensemble' ), $data );
 		}
 
 		$error_codes = $errors->get_error_codes();

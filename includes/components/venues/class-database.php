@@ -196,11 +196,11 @@ class Database extends Core\Database {
 		$errors = new \WP_Error();
 
 		if ( empty( $data['name'] ) ) {
-			$errors->add( 'missing_venue_name', __( 'A venue name must be specified.', 'ensemble' ), $data );
+			$errors->add( 'missing_venue_name', __( 'A name must be specified when adding a new venue.', 'ensemble' ), $data );
 		}
 
 		if ( empty( $data['address'] ) ) {
-			$errors->add( 'missing_venue_address', __( 'A venue address must be specified.', 'ensemble' ), $data );
+			$errors->add( 'missing_venue_address', __( 'An address must be specified when adding a new venue.', 'ensemble' ), $data );
 		}
 
 		$error_codes = $errors->get_error_codes();
