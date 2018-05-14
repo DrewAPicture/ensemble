@@ -9,6 +9,8 @@
  */
 namespace Ensemble {
 
+	use Ensemble\Core\Interfaces;
+
 	/**
 	 * Short-hand helper to initialize an aspect of the bootstrap.
 	 *
