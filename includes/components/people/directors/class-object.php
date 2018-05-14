@@ -9,14 +9,16 @@
  */
 namespace Ensemble\Components\People\Directors;
 
+use Ensemble\Components;
+
 /**
  * Defines a Staff Member object model.
  *
  * @since 1.0.0
  *
- * @see \Ensemble\Model
+ * @see \Ensemble\Components\User_Object
  */
-class Model extends \WP_User {
+class Object extends Components\User_Object {
 
 	/**
 	 * Staff member title.
