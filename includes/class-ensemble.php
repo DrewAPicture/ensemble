@@ -10,6 +10,7 @@
 
 use Ensemble\Admin;
 use Ensemble\Core;
+use Ensemble\Util;
 use function Ensemble\load;
 
 /**
@@ -122,6 +123,12 @@ final class Ensemble {
 	 * @since 1.0.0
 	 */
 	private function setup() {
+		register_activation_hook( ENSEMBLE_PLUGIN_FILE, array( 'Ensemble\\Util\\Install', 'run' ) );
+
+		if ( ! get_option( 'ensemble_installed' ) ) {
+			load( new Util\Install );
+		}
+
 		if ( is_admin() ) {
 			load( new Admin\Menu );
 			load( new Admin\Settings );
