@@ -9,15 +9,24 @@
  */
 namespace Ensemble\Components\Contests;
 
-use Ensemble\Core;
+use Ensemble\Core\Interfaces\Loader;
 
 /**
  * Implements Contests component functionality in Ensemble core.
  *
  * @since 1.0.0
  *
- * @see Ensemble\Base
+ * @see Ensemble\Core\Interfaces\Loader
  */
-class Init {
+class Setup implements Loader {
+
+	/**
+	 * Initializes the component.
+	 *
+	 * @since 1.0.0
+	 */
+	public function init() {
+
+	}
 
 }
