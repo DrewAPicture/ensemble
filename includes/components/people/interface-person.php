@@ -1,5 +1,5 @@
 <?php
-namespace Ensemble\People;
+namespace Ensemble\Components\People;
 
 interface Person {
 

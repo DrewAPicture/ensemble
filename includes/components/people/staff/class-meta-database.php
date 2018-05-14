@@ -2,12 +2,12 @@
 /**
  * Sets up running meta queries for circuit staff
  *
- * @package   Ensemble\People
+ * @package   Ensemble\Components\People
  * @copyright Copyright (c) 2018, Drew Jaynes
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
  */
-namespace Ensemble\People\Staff;
+namespace Ensemble\Components\People\Staff;
 
 use Ensemble\Core\User_Meta;
 

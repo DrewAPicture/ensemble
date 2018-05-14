@@ -2,13 +2,13 @@
 /**
  * Sets up the Directors component
  *
- * @package   Ensemble\People\Directors
+ * @package   Ensemble\Components\People\Directors
  * @copyright Copyright (c) 2018, Drew Jaynes
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
  */
 
-namespace Ensemble\People\Directors;
+namespace Ensemble\Components\People\Directors;
 
 /**
  * Implements Staff functionality in Ensemble core.
@@ -23,7 +23,7 @@ class Init {
 	 * Meta instance.
 	 *
 	 * @since 1.0.0
-	 * @var   \Ensemble\People\Staff\Meta
+	 * @var   \Ensemble\Components\People\Staff\Meta
 	 */
 	private $meta;
 
@@ -31,7 +31,7 @@ class Init {
 	 * Database instance.
 	 *
 	 * @since 1.0.0
-	 * @var   \Ensemble\People\Staff\Database
+	 * @var   \Ensemble\Components\People\Staff\Database
 	 */
 	private $db;
 
@@ -51,7 +51,7 @@ class Init {
 	 * @since 1.0.0
 	 *
 	 * @param int $member_id Staff member ID.
-	 * @return \Ensemble\People\Staff|\WP_Error Staff member object or WP_Error if there was a problem.
+	 * @return \Ensemble\Components\People\Staff|\WP_Error Staff member object or WP_Error if there was a problem.
 	 */
 	public function get( $member_id ) {
 

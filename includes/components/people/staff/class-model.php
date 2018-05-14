@@ -2,12 +2,12 @@
 /**
  * Defines the object construct for a single staff member
  *
- * @package   Ensemble\People
+ * @package   Ensemble\Components\People
  * @copyright Copyright (c) 2018, Drew Jaynes
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
  */
-namespace Ensemble\People;
+namespace Ensemble\Components\People;
 
 /**
  * Defines a Staff Member object model.
