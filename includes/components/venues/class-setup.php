@@ -26,7 +26,11 @@ class Setup implements Loader {
 	 * @since 1.0.0
 	 */
 	public function load() {
-
+		if ( is_admin() ) {
+			load( new Admin\Save );
+			load( new Admin\Delete );
+			load( new Admin\Overview );
+		}
 	}
 
 }
