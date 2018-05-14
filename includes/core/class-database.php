@@ -347,7 +347,7 @@ abstract class Database implements Interfaces\Database {
 	 */
 	public function exists( $object_id ) {
 		$result = $GLOBALS['wpdb']->query(
-			$wpdb->prepare(
+			$GLOBALS['wpdb']->prepare(
 				"SELECT 1 FROM {$this->table_name} WHERE {$this->primary_key} = %d;", $object_id
 			)
 		);
