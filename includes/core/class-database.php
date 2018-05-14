@@ -495,6 +495,19 @@ abstract class Database implements Interfaces\Database {
 	 */
 	public function get_results( $clauses, $args ) {
 
+		$key          = $this->build_cache_key( $clauses['count'], $args );
+		$last_changed = $this->get_last_changed();
+
+		$cache_key = "{$key}:{$last_changed}";
+
+		$results = wp_cache_get( $cache_key, $this->get_cache_group() );
+
+		// If there are cached results, return them.
+		if ( false !== $results ) {
+			return $results;
+		}
+
+		// Continue with the query.
 		if ( true === $clauses['count'] ) {
 
 			$results = $GLOBALS['wpdb']->get_var(
@@ -535,6 +548,8 @@ abstract class Database implements Interfaces\Database {
 			}
 
 		}
+
+		wp_cache_add( $cache_key, $results, $this->get_cache_group(), HOUR_IN_SECONDS );
 
 		return $results;
 	}

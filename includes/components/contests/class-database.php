@@ -186,29 +186,16 @@ class Database extends Core\Database {
 			$claws->where( 'external' )->exists( $args['external'] );
 		}
 
+		// Clauses.
+		$join  = '';
 		$where = $claws->get_sql();
 
-		$join = '';
-
+		// Factor in global arguments.
 		$args = $this->parse_global_args( $args );
 
-		$key          = $this->build_cache_key( $count, $args );
-		$last_changed = $this->get_last_changed();
+		$clauses = compact( 'join', 'where', 'count' );
 
-		$cache_key = "{$key}:{$last_changed}";
-
-		$results = wp_cache_get( $cache_key, $this->cache_group );
-
-		if ( false === $results ) {
-
-			$clauses = compact( 'join', 'where', 'count' );
-
-			$results = $this->get_results( $clauses, $args );
-		}
-
-		wp_cache_add( $cache_key, $results, $this->get_cache_group(), HOUR_IN_SECONDS );
-
-		return $results;
+		return $this->get_results( $clauses, $args );
 	}
 
 	/**
