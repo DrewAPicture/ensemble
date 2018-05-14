@@ -50,13 +50,7 @@ abstract class Object implements Component_Object {
 		$_object = wp_cache_get( $cache_key, $cache_group );
 
 		if ( false === $_object ) {
-			$db_groups = self::get_db_groups();
-
-			if ( isset( $db_groups->secondary ) ) {
-				$_object = ensemble()->{$db_groups->primary}->{$db_groups->secondary}->get( $object_id );
-			} else {
-				$_object = ensemble()->{$db_groups->primary}->get( $object_id );
-			}
+			$_object = static::db()->get( $object_id );
 
 			if ( is_wp_error( $_object ) ) {
 				return $_object;
@@ -115,107 +109,6 @@ abstract class Object implements Component_Object {
 		if ( isset( $this->{$key} ) ) {
 			return $this->{$key};
 		}
-	}
-
-	/**
-	 * Sets a property.
-	 *
-	 * @access public
-	 * @since  1.0.0
-	 *
-	 * @see set()
-	 *
-	 * @param string $key   Property name.
-	 * @param mixed  $value Property value.
-	 */
-	public function __set( $key, $value ) {
-		$this->set( $key, $value );
-	}
-
-	/**
-	 * Sets an object property value and optionally saves.
-	 *
-	 * @internal Note: Checking isset() on $this->{$key} is missing here because
-	 *           this method is also used directly by __set() which is leveraged for
-	 *           magic properties.
-	 *
-	 * @access public
-	 * @since  1.0.0
-	 *
-	 * @param string $key   Property name.
-	 * @param mixed  $value Property value.
-	 * @param bool   $save  Optional. Whether to save the new value in the database.
-	 * @return int|\WP_Error True if the value was set. If `$save` is true, true if the save was successful.
-	 *                       WP_Error object if `$save` is true and the save was unsuccessful..
-	 */
-	public function set( $key, $value, $save = false ) {
-		$this->$key = static::sanitize_field( $key, $value );
-
-		if ( true === $save ) {
-			// Only real properties can be saved.
-			$keys = array_keys( get_class_vars( get_called_class() ) );
-
-			if ( ! in_array( $key, $keys ) ) {
-				return new \WP_Error( 'model_set_invalid_key', '', compact( $key, $keys ) );
-			}
-
-			return $this->save();
-		}
-
-		return true;
-	}
-
-	/**
-	 * Saves an object with current property values.
-	 *
-	 * @access public
-	 * @since  1.0.0
-	 *
-	 * @return bool True on success, false on failure.
-	 */
-	public function save() {
-		$db_groups = self::get_db_groups();
-
-		// Handle secondary groups.
-		if ( isset( $db_groups->secondary ) ) {
-			$updated = ensemble()->{$db_groups->primary}->{$db_groups->secondary}->update( $this->ID, $this->to_array() );
-		} else {
-			$updated = ensemble()->{$db_groups->primary}->update( $this->ID, $this->to_array() );
-		}
-
-		if ( $updated ) {
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
-	 * Splits the db groups if there is more than one.
-	 *
-	 * CURIE is ':'.
-	 *
-	 * @access public
-	 * @since  1.0.0
-	 * @static
-	 *
-	 * @return object Object containing the primary and secondary group values.
-	 */
-	public static function get_db_groups() {
-		$groups = [
-			'primary' => static::$db_group
-		];
-
-		if ( false !== strpos( static::$db_group, ':' ) ) {
-			$split = explode( ':', static::$db_group, 2 );
-
-			if ( 2 == count( $split) ) {
-				$groups['primary']   = $split[0];
-				$groups['secondary'] = $split[1];
-			}
-		}
-
-		return (object) $groups;
 	}
 
 	/**
