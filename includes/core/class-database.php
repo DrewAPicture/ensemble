@@ -575,7 +575,7 @@ abstract class Database implements Interfaces\Database {
 		if ( $instance instanceof $object_class ) {
 			$_object = $instance;
 		} elseif ( is_object( $instance ) ) {
-			if ( isset( $instance->ID ) ) {
+			if ( isset( $instance->id ) ) {
 				$_object = new $object_class( $instance );
 			} else {
 				$_object = $object_class::get_instance( $instance );
