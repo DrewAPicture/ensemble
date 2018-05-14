@@ -56,7 +56,7 @@ abstract class Object implements Component_Object {
 
 		$Sub_Class   = get_called_class();
 		$cache_key   = self::get_cache_key( $object_id );
-		$cache_group = static::$object_type;
+		$cache_group = static::db()->get_cache_group();
 
 		$_object = wp_cache_get( $cache_key, $cache_group );
 
