@@ -148,9 +148,13 @@ class Database extends Core\Database {
 	 */
 	public function query( $query_args = array(), $count = false ) {
 		$defaults = array(
-			'id'      => 0,
-			'exclude' => array(),
-			'status'  => '',
+			'id'         => 0,
+			'name'       => '',
+			'type'       => '',
+			'exclude'    => array(),
+			'status'     => '',
+			'start_date' => '',
+			'end_date'   => '',
 		);
 
 		$args = wp_parse_args( $args, $defaults );
@@ -160,6 +164,11 @@ class Database extends Core\Database {
 		// ID.
 		if ( ! empty( $args['id'] ) ) {
 			$claws->where( 'id' )->in( $args['id'], 'int' );
+		}
+
+		// Name.
+		if ( ! empty( $args['name'] ) ) {
+			$claws->where( 'name' )->equals( $args['name'], 'string' );
 		}
 
 		// Exclude.
@@ -197,6 +206,30 @@ class Database extends Core\Database {
 		$clauses = compact( 'join', 'where', 'count' );
 
 		return $this->get_results( $clauses, $args );
+	}
+
+	/**
+	 * Inserts a new contest record into the database.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $data Contest data.
+	 * @return int|\WP_Error Newly-minted contest object ID if successfully inserted, otherwise a WP_Error object.
+	 */
+	public function insert( $data ) {
+		$errors = new \WP_Error();
+
+		if ( empty( $data['venues'] ) ) {
+			$errors->add( 'missing_contest_venues', __( 'One or more contest venues must be specified when adding a contest.', 'ensemble' ), $data );
+		}
+
+		$error_codes = $errors->get_error_codes();
+
+		if ( ! empty( $error_codes ) ) {
+			return $errors;
+		} else {
+			return parent::insert( $data );
+		}
 	}
 
 	/**
