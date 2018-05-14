@@ -178,12 +178,12 @@ class Database extends Core\Database {
 
 		// Type.
 		if ( ! empty( $args['type'] ) ) {
-			$claws->where( 'type' )->equals( $args['type'] );
+			$claws->where( 'type' )->equals( $args['type'], 'string' );
 		}
 
 		// Status.
 		if ( ! empty( $args['status'] ) ) {
-			$claws->where( 'status' )->equals( $args['status'] );
+			$claws->where( 'status' )->equals( $args['status'], 'string' );
 		}
 
 		// Exclude.
