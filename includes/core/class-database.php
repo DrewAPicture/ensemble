@@ -650,32 +650,37 @@ abstract class Database implements Interfaces\Database {
 	 */
 	public function parse_global_args( $args ) {
 		$defaults = array(
-			'number'  => 20,
-			'offset'  => 0,
-			'exclude' => array(),
-			'order'   => 'DESC',
-			'orderby' => 'id',
-			'fields'  => '',
+			'number'   => 20,
+			'offset'   => 0,
+			'order'    => 'DESC',
+			'orderby'  => 'id',
+			'fields'   => '',
+			'callback' => '',
 		);
 
 		$args = wp_parse_args( $args, $defaults );
 
+		// Number of results.
 		if ( $args['number'] < 1 ) {
 			$args['number'] = 99999;
 		}
 
+		// Number of results to offset.
+		if ( $args['offset'] < 0 ) {
+			$args['offset'] = 0;
+		}
+
+		// Order.
 		if ( 'DESC' === strtoupper( $args['order'] ) ) {
 			$args['order'] = 'DESC';
 		} else {
 			$args['order'] = 'ASC';
 		}
 
-		// Check against the columns whitelist. If no match, default to $primary_key.
+		// Orderby. Check against the columns whitelist. If no match, default to the primary key.
 		if ( ! array_key_exists( $args['orderby'], $this->get_columns() ) ) {
 			$args['orderby'] = $this->get_primary_key();
 		}
-
-		$callback = '';
 
 		if ( 'ids' === $args['fields'] ) {
 			$args['fields']   = (string) $this->get_primary_key();
@@ -685,8 +690,6 @@ abstract class Database implements Interfaces\Database {
 
 			if ( '*' === $args['fields'] ) {
 				$args['callback'] = array( $this, 'get_core_object' );
-			} else {
-				$args['callback'] = '';
 			}
 		}
 
