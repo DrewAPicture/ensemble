@@ -170,12 +170,16 @@ abstract class Database implements Interfaces\Database {
 
 			return $errors;
 		} else {
-			$object = $this->get_core_object( $GLOBALS['wpdb']->insert_id, $this->get_query_object_type() );
+			$object = $this->get_core_object( $GLOBALS['wpdb']->insert_id );
 
-			// Prime the item cache, and invalidate related query caches.
-			clean_item_cache( $object );
+			if ( is_wp_error( $object ) ) {
+				return $object;
+			} else {
+				// Prime the item cache, and invalidate related query caches.
+				clean_item_cache( $object );
 
-			return $object->{$this->get_primary_key()};
+				return $object->{$this->get_primary_key()};
+			}
 		}
 	}
 
