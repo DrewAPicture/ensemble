@@ -272,13 +272,13 @@ class Database extends Core\Database {
 			id bigint(20) NOT NULL AUTO_INCREMENT,
 			name mediumtext NOT NULL,
 			venues mediumtext NOT NULL,
-			type varchar(30) NOT NULL,
-			external varchar(255) NOT NULL,
+			type tinytext NOT NULL,
+			external mediumtext NOT NULL,
 			status tinytext NOT NULL,
 			timezone varchar(30) NOT NULL,
 			start_date datetime NOT NULL,
 			end_date datetime NOT NULL,
-			PRIMARY KEY  (id),
+			PRIMARY KEY (id)
 			) CHARACTER SET utf8 COLLATE utf8_general_ci;";
 
 		dbDelta( $sql );
