@@ -113,7 +113,15 @@ class Database extends Core\Database {
 	 * @since 1.0.0
 	 */
 	public function get_column_defaults() {
-		return array();
+		$today = new \DateTime( 'now', new DateTimeZone( get_wp_timezone() ) );
+
+		return array(
+			'type'       => 'regular',
+			'status'     => 'published',
+			'timezone'   => get_wp_timezone(),
+			'start_date' => $today->format( 'Y-m-d 00:00:00' ),
+			'end_date'   => $today->format( 'Y-m-d 23:59:59' ),
+		);
 	}
 
 	/**
