@@ -106,6 +106,7 @@ final class Ensemble {
 	 */
 	private function load() {
 		require_once ENSEMBLE_PLUGIN_DIR . '/includes/lib/autoload.php';
+		require_once ENSEMBLE_PLUGIN_DIR . '/includes/lib/claws.php';
 
 		// Functions.
 		require_once ENSEMBLE_PLUGIN_DIR . '/includes/functions.php';
