@@ -196,10 +196,12 @@ class Database extends Core\Database {
 		$errors = new \WP_Error();
 
 		if ( empty( $data['name'] ) ) {
+			// Translated for surfacing in the UI.
 			$errors->add( 'missing_venue_name', __( 'A name must be specified when adding a new venue.', 'ensemble' ), $data );
 		}
 
 		if ( empty( $data['address'] ) ) {
+			// Translated for surfacing in the UI.
 			$errors->add( 'missing_venue_address', __( 'An address must be specified when adding a new venue.', 'ensemble' ), $data );
 		}
 

@@ -220,10 +220,12 @@ class Database extends Core\Database {
 		$errors = new \WP_Error();
 
 		if ( empty( $data['name'] ) ) {
+			// Translated for surfacing in the UI.
 			$errors->add( 'missing_contest_name', __( 'A name must be specified when adding a new contest.', 'ensemble' ), $data );
 		}
 
 		if ( empty( $data['venues'] ) ) {
+			// Translated for surfacing in the UI.
 			$errors->add( 'missing_contest_venues', __( 'One or more venues must be specified when adding a contest.', 'ensemble' ), $data );
 		}
 
