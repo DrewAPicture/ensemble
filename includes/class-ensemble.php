@@ -89,6 +89,11 @@ final class Ensemble {
 			define( 'ENSEMBLE_PLUGIN_FILE', $this->file );
 		}
 
+		// Plugin Folder URL.
+		if ( ! defined( 'ENSEMBLE_PLUGIN_URL' ) ) {
+			define( 'ENSEMBLE_PLUGIN_URL', plugin_dir_url( $this->file ) );
+		}
+
 		// Version.
 		if ( ! defined( 'ENSEMBLE_VERSION' ) ) {
 			define( 'ENSEMBLE_VERSION', $this->version );
@@ -135,8 +140,12 @@ final class Ensemble {
 		}
 
 		load( new Core\Ajax_Actions );
-		load( new Core\Rewrite_Rules );
+		load( new Core\Assets );
 		load( new Core\Components );
+		load( new Core\Rewrite_Rules );
+
+//		log_it( \Ensemble\contests()->insert( array() ) );
+//		log_it( \Ensemble\venues()->insert( array() ) );
 	}
 
 	/**
