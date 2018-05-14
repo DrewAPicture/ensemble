@@ -18,8 +18,8 @@ use Ensemble\Core;
  *
  * @see \Ensemble\Core\Database
  *
- * @method Meta_Database            meta()
- * @method Ensemble\Venue|\WP_Error get_core_object( int|Ensemble\Venue $venue )
+ * @method Meta_Database                               meta()
+ * @method Ensemble\Components\Venues\Object|\WP_Error get_core_object( int|Ensemble\Components\Venues\Object $venue )
  */
 class Database extends Core\Database {
 
