@@ -49,7 +49,7 @@ class Assets implements Interfaces\Loader {
 
 		// Stylesheets.
 		wp_register_style( 'esbl-bootstrap', ENSEMBLE_PLUGIN_URL . '/assets/css/bootstrap' . $suffix . '.css', array(), '3.0.0' );
-		wp_register_style( 'esbl-admin', ENSEMBLE_PLUGIN_URL . '/assets/css/ensemble-admin.css', array( 'esbl-bootstrap' ), ensemble()->get_version() );
+		wp_register_style( 'esbl-admin', ENSEMBLE_PLUGIN_URL . '/assets/css/ensemble-admin.css', array( 'esbl-bootstrap' ), ENSEMBLE_VERSION );
 
 		if ( false !== strpos( $hook_suffix, 'page_ensemble-admin' ) ) {
 			wp_enqueue_style( 'esbl-admin' );
