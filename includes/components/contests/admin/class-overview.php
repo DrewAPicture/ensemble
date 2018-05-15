@@ -38,6 +38,20 @@ class Overview implements View_Loader {
 		?>
 		<div class="wrap">
 			<h1><?php esc_html_e( 'Contests Overview', 'ensemble' ); ?></h1>
+			<a href="<?php echo esc_url( add_query_arg( array( 'view' => 'add' ) ) ); ?>" class="page-title-action">
+				<?php esc_html_e( 'Add New', 'ensemble' ); ?>
+			</a>
+			<?php
+			$list_table = new List_Table();
+			$list_table->prepare_items();
+			?>
+			<form id="ensemble-contests" method="get">
+				<?php
+				$list_table->search_box( __( 'Search', 'ensemble' ), 'ensemble-contests-search' );
+				$list_table->views();
+				$list_table->display();
+				?>
+			</form>
 		</div>
 		<?php
 	}
