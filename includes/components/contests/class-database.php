@@ -136,7 +136,7 @@ class Database extends Core\Database {
 	 *     @type int          $number  Number of contests to query for. Default 20.
 	 *     @type int          $offset  Number of contests to offset the query for. Default 0.
 	 *     @type int|array    $exclude Contest ID or array of IDs to explicitly exclude.
-	 *     @type string       $status  Contest status. Default empty.
+	 *     @type string       $status  Contest status. Accepts 'published' or 'draft'. Default empty (all).
 	 *     @type string       $order   How to order returned contest results. Accepts 'ASC' or 'DESC'.
 	 *                                 Default 'DESC'.
 	 *     @type string       $orderby Contests table column to order results by. Default 'id'.
