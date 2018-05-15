@@ -126,7 +126,7 @@ class List_Table extends \WP_List_Table {
 	 * @return array All available views.
 	 */
 	public function get_views() {
-		$base           = add_query_arg( 'page', 'ensemble-admin-contests', admin_url( 'admin.php' ) );
+		$base = add_query_arg( 'page', 'ensemble-admin-contests', admin_url( 'admin.php' ) );
 
 		$current         = isset( $_GET['status'] ) ? $_GET['status'] : '';
 		$total_count     = '&nbsp;<span class="count">(' . $this->total_count     . ')</span>';
