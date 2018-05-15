@@ -9,14 +9,16 @@
  */
 namespace Ensemble\Components\Venues\Admin;
 
-use Ensemble\Core\Interfaces\Loader;
+use Ensemble\Core\Interfaces\View_Loader;
 
 /**
  * Handles displaying and managing the venues overview.
  *
  * @since 1.0.0
+ *
+ * @see View_Loader
  */
-class Overview implements Loader {
+class Overview implements View_Loader {
 
 	/**
 	 * Registers hook callbacks for listing venues.
@@ -25,6 +27,21 @@ class Overview implements Loader {
 	 */
 	public function load() {
 
+	}
+
+	/**
+	 * Loads a view based on the 'ensbl-view' $_REQUEST arg.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $args Optional. Passed-thru display arguments (if any). Default empty array.
+	 */
+	public function load_view( $args = array() ) {
+		?>
+		<div class="wrap">
+			<h1><?php esc_html_e( 'Venues Overview', 'ensemble' ); ?></h1>
+		</div>
+		<?php
 	}
 
 }
