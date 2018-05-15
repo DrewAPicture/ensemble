@@ -37,7 +37,7 @@ class Delete implements View_Loader {
 	public function load_view( $args = array() ) {
 		?>
 		<div class="wrap">
-			<h1><?php esc_html_e( 'Delete Contest', 'ensemble' ); ?></h1>
+			<h1 class="wp-heading-inline"><?php esc_html_e( 'Delete Contest', 'ensemble' ); ?></h1>
 		</div>
 		<?php
 	}

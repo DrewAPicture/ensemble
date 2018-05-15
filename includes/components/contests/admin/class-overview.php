@@ -37,8 +37,8 @@ class Overview implements View_Loader {
 	public function load_view( $args = array() ) {
 		?>
 		<div class="wrap">
-			<h1><?php esc_html_e( 'Contests Overview', 'ensemble' ); ?></h1>
-			<a href="<?php echo esc_url( add_query_arg( array( 'view' => 'add' ) ) ); ?>" class="page-title-action">
+			<h1 class="wp-heading-inline"><?php esc_html_e( 'Contests Overview', 'ensemble' ); ?></h1>
+			<a href="<?php echo esc_url( add_query_arg( array( 'view' => 'add' ) ) ); ?>" class="page-title-action" role="button">
 				<?php esc_html_e( 'Add New', 'ensemble' ); ?>
 			</a>
 			<?php

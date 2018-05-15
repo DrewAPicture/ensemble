@@ -75,7 +75,7 @@ class Save implements View_Loader {
 	public function display_add_contest( $contest ) {
 		?>
 		<div class="wrap">
-			<h1><?php esc_html_e( 'Add Contest', 'ensemble' ); ?></h1>
+			<h1 class="wp-heading-inline"><?php esc_html_e( 'Add Contest', 'ensemble' ); ?></h1>
 		</div>
 		<?php
 	}
