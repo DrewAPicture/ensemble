@@ -26,13 +26,13 @@ class Components implements Loader {
 	 * @since 1.0.0
 	 */
 	public function load() {
-
 		load( new Component\Contests\Setup );
-		load( new Component\Venues\Setup );
+
 		load( new Component\People\Directors\Setup );
 		load( new Component\People\Judges\Setup );
 		load( new Component\People\Staff\Setup );
 
+		load( new Component\Venues\Setup );
 	}
 
 }
