@@ -30,6 +30,7 @@ class Components implements Loader {
 		load( new Component\Contests\Setup );
 		load( new Component\Venues\Setup );
 		load( new Component\People\Directors\Setup );
+		load( new Component\People\Judges\Setup );
 		load( new Component\People\Staff\Setup );
 
 	}
