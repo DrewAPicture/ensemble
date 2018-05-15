@@ -7,7 +7,7 @@
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
  */
-namespace Ensemble;
+namespace Ensemble\Contests;
 
 /**
  * Retrieves the contest status label for a given status.
@@ -17,7 +17,7 @@ namespace Ensemble;
  * @param string $status Status.
  * @return string Status label.
  */
-function get_contest_status_label( $status ) {
+function get_status_label( $status ) {
 	switch( $status ) {
 		case 'draft':
 			return __( 'Draft', 'ensemble' );
