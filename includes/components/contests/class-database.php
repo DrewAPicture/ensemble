@@ -227,6 +227,8 @@ class Database extends Core\Database {
 		if ( empty( $data['venues'] ) ) {
 			// Translated for surfacing in the UI.
 			$errors->add( 'missing_contest_venues', __( 'One or more venues must be specified when adding a contest.', 'ensemble' ), $data );
+		} elseif ( is_array( $data['venues'] ) ) {
+			$data['venues'] = implode( ',', $data['venues'] );
 		}
 
 		$error_codes = $errors->get_error_codes();
