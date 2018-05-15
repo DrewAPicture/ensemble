@@ -62,7 +62,7 @@ class Save implements View_Loader {
 	public function display_edit_venue( $venue ) {
 		?>
 		<div class="wrap">
-			<h1><?php esc_html_e( 'Edit Venue', 'ensemble' ); ?></h1>
+			<h1 class="wp-heading-inline"><?php esc_html_e( 'Edit Venue', 'ensemble' ); ?></h1>
 		</div>
 		<?php
 	}
@@ -77,7 +77,7 @@ class Save implements View_Loader {
 	public function display_add_venue( $venue ) {
 		?>
 		<div class="wrap">
-			<h1><?php esc_html_e( 'Add Venue', 'ensemble' ); ?></h1>
+			<h1 class="wp-heading-inline"><?php esc_html_e( 'Add Venue', 'ensemble' ); ?></h1>
 		</div>
 		<?php
 	}
