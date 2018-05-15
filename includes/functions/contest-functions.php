@@ -8,3 +8,23 @@
  * @since     1.0.0
  */
 namespace Ensemble;
+
+/**
+ * Retrieves the contest status label for a given status.
+ *
+ * @since 1.0.0
+ *
+ * @param string $status Status.
+ * @return string Status label.
+ */
+function get_contest_status_label( $status ) {
+	switch( $status ) {
+		case 'draft':
+			return __( 'Draft', 'ensemble' );
+			break;
+
+		case 'published':
+			return __( 'Published', 'ensemble' );
+			break;
+	}
+}

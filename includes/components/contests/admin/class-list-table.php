@@ -11,6 +11,7 @@ namespace Ensemble\Components\Contests\Admin;
 
 use Ensemble\Components\Contests\Database;
 use Ensemble\Components\Contests\Object;
+use function Ensemble\get_contest_status_label;
 
 /**
  * Implements a list table for contests.
@@ -38,20 +39,20 @@ class List_Table extends \WP_List_Table {
 	public $total_count;
 
 	/**
-	 * Number of items with the 'active' status found.
+	 * Number of items with the 'published' status found.
 	 *
 	 * @since 1.0.0
 	 * @var   int
 	 */
-	public $active_count;
+	public $published_count;
 
 	/**
-	 *  Number of items with the 'inactive' status found.
+	 *  Number of items with the 'draft' status found.
 	 *
 	 * @since 1.0.0
 	 * @var   int
 	 */
-	public $inactive_count;
+	public $draft_count;
 
 	/**
 	 * Total item count for the current query.
@@ -104,17 +105,17 @@ class List_Table extends \WP_List_Table {
 	public function calculate_counts() {
 		$search = isset( $_GET['s'] ) ? $_GET['s'] : '';
 
-		$this->active_count = ( new Database )->count( array(
-			'status' => 'active',
+		$this->published_count = ( new Database )->count( array(
+			'status' => 'published',
 			'search' => $search,
 		) );
 
-		$this->inactive_count = ( new Database )->count( array(
-			'status' => 'inactive',
+		$this->draft_count = ( new Database )->count( array(
+			'status' => 'draft',
 			'search' => $search,
 		) );
 
-		$this->total_count = $this->active_count + $this->inactive_count;
+		$this->total_count = $this->published_count + $this->draft_count;
 	}
 
 	/**
@@ -127,10 +128,10 @@ class List_Table extends \WP_List_Table {
 	public function get_views() {
 		$base           = add_query_arg( 'page', 'ensemble-admin-contests', admin_url( 'admin.php' ) );
 
-		$current        = isset( $_GET['status'] ) ? $_GET['status'] : '';
-		$total_count    = '&nbsp;<span class="count">(' . $this->total_count    . ')</span>';
-		$active_count   = '&nbsp;<span class="count">(' . $this->active_count . ')</span>';
-		$inactive_count = '&nbsp;<span class="count">(' . $this->inactive_count  . ')</span>';
+		$current         = isset( $_GET['status'] ) ? $_GET['status'] : '';
+		$total_count     = '&nbsp;<span class="count">(' . $this->total_count     . ')</span>';
+		$published_count = '&nbsp;<span class="count">(' . $this->published_count . ')</span>';
+		$draft_count     = '&nbsp;<span class="count">(' . $this->draft_count     . ')</span>';
 
 		$views = array(
 			'all' => sprintf( '<a href="%1$s"%2$s>%3$s</a>',
@@ -139,16 +140,16 @@ class List_Table extends \WP_List_Table {
 				esc_html__( 'All', 'ensemble') . $total_count
 			),
 
-			'active'   => sprintf( '<a href="%1$ss"%2$s>%3$s</a>',
-				esc_url( add_query_arg( 'status', 'active', $base ) ),
-				$current === 'active' ? ' class="current"' : '',
-				esc_html__( 'Active', 'ensemble') . $active_count
+			'published' => sprintf( '<a href="%1$ss"%2$s>%3$s</a>',
+				esc_url( add_query_arg( 'status', 'published', $base ) ),
+				$current === 'published' ? ' class="current"' : '',
+				get_contest_status_label( 'published' ) . $published_count
 			),
 
-			'inactive' => sprintf( '<a href="%1$ss"%2$s>%3$s</a>',
-				esc_url( add_query_arg( 'status', 'inactive', $base ) ),
-				$current === 'inactive' ? ' class="current"' : '',
-				esc_html__( 'Inactive', 'ensemble') . $inactive_count
+			'draft' => sprintf( '<a href="%1$ss"%2$s>%3$s</a>',
+				esc_url( add_query_arg( 'status', 'draft', $base ) ),
+				$current === 'draft' ? ' class="current"' : '',
+				get_contest_status_label( 'draft' ) . $draft_count
 			),
 		);
 
@@ -266,11 +267,11 @@ class List_Table extends \WP_List_Table {
 		$status = isset( $_GET['status'] ) ? $_GET['status'] : 'any';
 
 		switch( $status ) {
-			case 'active':
-				$total_items = $this->active_count;
+			case 'published':
+				$total_items = $this->published_count;
 				break;
-			case 'inactive':
-				$total_items = $this->inactive_count;
+			case 'draft':
+				$total_items = $this->draft_count;
 				break;
 			case 'any':
 			default:
