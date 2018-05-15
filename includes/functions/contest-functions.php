@@ -10,6 +10,29 @@
 namespace Ensemble\Contests;
 
 /**
+ * Retrieves the list of allowed contest statuses and their corresponding labels.
+ *
+ * @since 1.0.0
+ *
+ * @return array Allowed statuses.
+ */
+function get_allowed_statuses() {
+	$statuses = array(
+		'draft'     => __( 'Draft', 'ensemble' ),
+		'published' => __( 'Published', 'ensemble' ),
+	);
+
+	/**
+	 * Filters the list of whitelisted statuses for contests.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $statuses List of whitelisted contest status/label pairs.
+	 */
+	return apply_filters( 'ensemble_contests_statuses', $statuses );
+}
+
+/**
  * Retrieves the label for a given contest status.
  *
  * @since 1.0.0
@@ -18,15 +41,13 @@ namespace Ensemble\Contests;
  * @return string Status label.
  */
 function get_status_label( $status ) {
-	switch( $status ) {
-		case 'draft':
-			return __( 'Draft', 'ensemble' );
-			break;
+	$statuses = get_allowed_statuses();
 
-		case 'published':
-			return __( 'Published', 'ensemble' );
-			break;
+	if ( ! in_array( $status, $statuses, true ) ) {
+		$status = 'draft';
 	}
+
+	return $statuses[ $status ];
 }
 
 /**
