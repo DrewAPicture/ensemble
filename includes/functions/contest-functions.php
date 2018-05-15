@@ -43,7 +43,7 @@ function get_allowed_statuses() {
 function get_status_label( $status ) {
 	$statuses = get_allowed_statuses();
 
-	if ( ! in_array( $status, $statuses, true ) ) {
+	if ( ! array_key_exists( $status, $statuses ) ) {
 		$status = 'draft';
 	}
 
