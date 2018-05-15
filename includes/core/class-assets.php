@@ -45,6 +45,17 @@ class Assets implements Interfaces\Loader {
 	 * @param string $hook_suffix The current admin page.
 	 */
 	public function admin_assets( $hook_suffix ) {
+		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.min' : '';
+
+		// Stylesheets.
+		wp_register_style( 'esbl-bootstrap', ENSEMBLE_PLUGIN_URL . '/assets/css/bootstrap' . $suffix . '.css', array(), '3.0.0' );
+		wp_register_style( 'esbl-admin', ENSEMBLE_PLUGIN_URL . '/assets/css/ensemble-admin.css', array( 'esbl-bootstrap' ), ensemble()->get_version() );
+
+		if ( false !== strpos( $hook_suffix, 'page_ensemble-admin' ) ) {
+			wp_enqueue_style( 'esbl-admin' );
+		}
+
+		// Scripts.
 		wp_register_script( 'esbl-parsley', ENSEMBLE_PLUGIN_URL . '/assets/js/parsley.js', array( 'jquery' ), '2.8.1' );
 	}
 
