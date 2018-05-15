@@ -140,13 +140,13 @@ class List_Table extends \WP_List_Table {
 				esc_html__( 'All', 'ensemble') . $total_count
 			),
 
-			'published' => sprintf( '<a href="%1$ss"%2$s>%3$s</a>',
+			'published' => sprintf( '<a href="%1$s"%2$s>%3$s</a>',
 				esc_url( add_query_arg( 'status', 'published', $base ) ),
 				$current === 'published' ? ' class="current"' : '',
 				Contests\get_status_label( 'published' ) . $published_count
 			),
 
-			'draft' => sprintf( '<a href="%1$ss"%2$s>%3$s</a>',
+			'draft' => sprintf( '<a href="%1$s"%2$s>%3$s</a>',
 				esc_url( add_query_arg( 'status', 'draft', $base ) ),
 				$current === 'draft' ? ' class="current"' : '',
 				Contests\get_status_label( 'draft' ) . $draft_count
