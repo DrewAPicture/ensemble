@@ -10,7 +10,7 @@
 namespace Ensemble\Contests;
 
 /**
- * Retrieves the contest status label for a given status.
+ * Retrieves the label for a given contest status.
  *
  * @since 1.0.0
  *
@@ -25,6 +25,34 @@ function get_status_label( $status ) {
 
 		case 'published':
 			return __( 'Published', 'ensemble' );
+			break;
+	}
+}
+
+/**
+ * Retrieves the label for a given contest type.
+ *
+ * @since 1.0.0
+ *
+ * @param string $type Contest type.
+ * @return string Type label.
+ */
+function get_type_label( $type ) {
+	switch ( $type ) {
+		case 'regular':
+			return __( 'Regular', 'ensemble' );
+			break;
+
+		default:
+			/**
+			 * Filters the contest type label for non-core types.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param string $label Type label.
+			 * @param string $type  Contest type.
+			 */
+			return apply_filters( 'ensemble_contests_type_label', '', $type );
 			break;
 	}
 }
