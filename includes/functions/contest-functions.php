@@ -23,13 +23,13 @@ function get_allowed_statuses() {
 	);
 
 	/**
-	 * Filters the list of whitelisted statuses for contests.
+	 * Filters the list of allowed statuses for contests.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $statuses List of whitelisted contest status/label pairs.
+	 * @param array $statuses List of allowed contest status/label pairs.
 	 */
-	return apply_filters( 'ensemble_contests_statuses', $statuses );
+	return apply_filters( 'ensemble_contests_allowed_statuses', $statuses );
 }
 
 /**
@@ -47,7 +47,35 @@ function get_status_label( $status ) {
 		$status = 'draft';
 	}
 
-	return $statuses[ $status ];
+	if ( ! empty( $statuses[ $status ] ) ) {
+		$label = $statuses[ $status ];
+	} else {
+		$label = '';
+	}
+
+	return $label;
+}
+
+/**
+ * Retrieves the list of allowed contest types and their corresponding labels.
+ *
+ * @since 1.0.0
+ *
+ * @return array Allowed contest type/label pairs.
+ */
+function get_allowed_types() {
+	$types = array(
+		'regular' => __( 'Regular', 'ensemble' ),
+	);
+
+	/**
+	 * Filters the list of allowed types for contests.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $statuses List of allowed contest type/label pairs.
+	 */
+	return apply_filters( 'ensemble_contests_allowed_types', $types );
 }
 
 /**
@@ -59,21 +87,17 @@ function get_status_label( $status ) {
  * @return string Type label.
  */
 function get_type_label( $type ) {
-	switch ( $type ) {
-		case 'regular':
-			return __( 'Regular', 'ensemble' );
-			break;
+	$types = get_allowed_types();
 
-		default:
-			/**
-			 * Filters the contest type label for non-core types.
-			 *
-			 * @since 1.0.0
-			 *
-			 * @param string $label Type label.
-			 * @param string $type  Contest type.
-			 */
-			return apply_filters( 'ensemble_contests_type_label', '', $type );
-			break;
+	if ( ! array_key_exists( $type, $types ) ) {
+		$type = 'regular';
 	}
+
+	if ( ! empty( $types[ $type ] ) ) {
+		$label = $types[ $type ];
+	} else {
+		$label = '';
+	}
+
+	return $label;
 }
