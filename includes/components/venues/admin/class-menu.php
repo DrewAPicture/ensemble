@@ -9,16 +9,17 @@
  */
 namespace Ensemble\Components\Venues\Admin;
 
-use Ensemble\Core\Interfaces\Loader;
+use Ensemble\Core\Interfaces\Menu_Router;
+use function Ensemble\load_view;
 
 /**
  * Sets up the Venues menu.
  *
  * @since 1.0.0
  *
- * @see Loader
+ * @see Menu_Router
  */
-class Menu implements Loader {
+class Menu implements Menu_Router {
 
 	/**
 	 * Initializes menu registrations.
@@ -41,21 +42,37 @@ class Menu implements Loader {
 			__( 'Venues', 'ensemble' ),
 			'manage_options',
 			'ensemble-admin-venues',
-			array( $this, 'venues_overview' )
+			array( $this, 'route_request' )
 		);
 	}
 
 	/**
-	 * Renders the secondary Venues Overview admin screen.
+	 * Routes the request based on the current ensbl-view value.
 	 *
 	 * @since 1.0.0
 	 */
-	public function venues_overview() {
-		?>
-		<div class="wrap">
-			<h1><?php esc_html_e( 'Venues Overview', 'ensemble' ); ?></h1>
-		</div>
-		<?php
+	public function route_request() {
+
+		$display_args = array(
+			'view' => isset( $_REQUEST['ensbl-view'] ) ? sanitize_key( $_REQUEST['ensbl-view' ] ) : '',
+			'id'   => isset( $_REQUEST['venue_id'] )   ? absint( $_REQUEST['venue_id'] )          :  0,
+		);
+
+		switch ( $display_args['view'] ) {
+
+			case 'add':
+			case 'edit':
+				load_view( new Save, $display_args );
+				break;
+
+			case 'delete':
+				load_view( new Delete, $display_args );
+				break;
+
+			default:
+				load_view( new Overview, $display_args );
+				break;
+		}
 	}
 
 }
