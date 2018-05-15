@@ -8,6 +8,7 @@
  * @since     1.0.0
  */
 namespace Ensemble\Components\Contests\Admin;
+
 use Ensemble\Components\Contests\Database;
 use Ensemble\Components\Contests\Object;
 
