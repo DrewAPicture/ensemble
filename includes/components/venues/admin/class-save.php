@@ -37,15 +37,15 @@ class Save implements View_Loader {
 	 * @param array $args Optional. Passed-thru display arguments (if any). Default empty array.
 	 */
 	public function load_view( $args = array() ) {
-		if ( ! empty( $args['view'] ) && ! empty( $args['id'] ) ) {
+		if ( ! empty( $args['view'] ) ) {
 
 			switch( $args['view'] ) {
 				case 'edit':
-					$this->display_edit_venue( $args['id'] );
+					$this->display_edit_venue( empty( $args['id'] ) ? 0 : $args['id'] );
 					break;
 
 				case 'add':
-					$this->display_add_venue( $args['id'] );
+					$this->display_add_venue();
 					break;
 			}
 
@@ -71,10 +71,8 @@ class Save implements View_Loader {
 	 * Displays the Add Venue screen markup.
 	 *
 	 * @since 1.0.0
-	 *
-	 * @param int $venue Venue ID.
 	 */
-	public function display_add_venue( $venue ) {
+	public function display_add_venue() {
 		?>
 		<div class="wrap">
 			<h1 class="wp-heading-inline"><?php esc_html_e( 'Add Venue', 'ensemble' ); ?></h1>

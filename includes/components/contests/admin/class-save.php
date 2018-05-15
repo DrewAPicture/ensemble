@@ -35,15 +35,15 @@ class Save implements View_Loader {
 	 * @param array $args Optional. Passed-thru display arguments (if any). Default empty array.
 	 */
 	public function load_view( $args = array() ) {
-		if ( ! empty( $args['view'] ) && ! empty( $args['id'] ) ) {
+		if ( ! empty( $args['view'] ) ) {
 
 			switch( $args['view'] ) {
 				case 'edit':
-					$this->display_edit_contest( $args['id'] );
+					$this->display_edit_contest( empty( $args['id'] ) ? 0 : $args['id'] );
 					break;
 
 				case 'add':
-					$this->display_add_contest( $args['id'] );
+					$this->display_add_contest();
 					break;
 			}
 
@@ -69,10 +69,8 @@ class Save implements View_Loader {
 	 * Displays the Add Contest screen markup.
 	 *
 	 * @since 1.0.0
-	 *
-	 * @param int $contest Contest ID.
 	 */
-	public function display_add_contest( $contest ) {
+	public function display_add_contest() {
 		?>
 		<div class="wrap">
 			<h1 class="wp-heading-inline"><?php esc_html_e( 'Add Contest', 'ensemble' ); ?></h1>
