@@ -24,27 +24,27 @@ class Assets implements Interfaces\Loader {
 	 * @since 1.0.0
 	 */
 	public function load() {
-		add_action( 'wp_enqueue_scripts',    array( $this, 'scripts'       ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
+		add_action( 'wp_enqueue_scripts',    array( $this, 'assets'       ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_assets' ) );
 	}
 
 	/**
-	 * Registers scripts for general use.
+	 * Registers scripts and styles for general use.
 	 *
 	 * @since 1.0.0
 	 */
-	public function scripts() {
+	public function assets() {
 
 	}
 
 	/**
-	 * Registers scripts for admin use.
+	 * Registers scripts and styles for admin use.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param string $hook_suffix The current admin page.
 	 */
-	public function admin_scripts( $hook_suffix ) {
+	public function admin_assets( $hook_suffix ) {
 		wp_register_script( 'esbl-parsley', ENSEMBLE_PLUGIN_URL . '/assets/js/parsley.js', array( 'jquery' ), '2.8.1' );
 	}
 
