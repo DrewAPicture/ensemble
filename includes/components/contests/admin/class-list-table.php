@@ -304,6 +304,10 @@ class List_Table extends \WP_List_Table {
 				$value = isset( $contest->status ) ? Contests\get_status_label( $contest->status ) : '';
 				break;
 
+			case 'type':
+				$value = isset( $contest->type ) ? Contests\get_type_label( $contest->type ) : '';
+				break;
+
 			default:
 				$value = isset( $contest->$column_name ) ? $contest->$column_name : '';
 				break;
