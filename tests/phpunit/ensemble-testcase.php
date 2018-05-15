@@ -61,14 +61,14 @@ class UnitTestCase extends \WP_UnitTestCase {
 	protected static function _delete_all_data() {
 		global $wpdb;
 
-		foreach ( array(
-			ensemble()->contests->table_name,
-			ensemble()->staff->table_name,
-			ensemble()->teams->table_name,
-			ensemble()->venues->table_name
-		) as $table ) {
-			$wpdb->query( "DELETE FROM {$table}" );
-		}
+//		foreach ( array(
+//			ensemble()->contests->table_name,
+//			ensemble()->staff->table_name,
+//			ensemble()->teams->table_name,
+//			ensemble()->venues->table_name
+//		) as $table ) {
+//			$wpdb->query( "DELETE FROM {$table}" );
+//		}
 	}
 
 	/**
