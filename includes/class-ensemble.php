@@ -139,9 +139,6 @@ final class Ensemble {
 		load( new Core\Assets );
 		load( new Core\Components );
 		load( new Core\Rewrite_Rules );
-
-//		log_it( \Ensemble\contests()->insert( array() ) );
-//		log_it( \Ensemble\venues()->insert( array() ) );
 	}
 
 	/**
