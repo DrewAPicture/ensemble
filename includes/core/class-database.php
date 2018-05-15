@@ -513,9 +513,7 @@ abstract class Database implements Interfaces\Database {
 		if ( true === $clauses['count'] ) {
 
 			$results = $GLOBALS['wpdb']->get_var(
-				$GLOBALS['wpdb']->prepare(
-					"SELECT COUNT({$this->primary_key}) FROM {$this->table_name} {$clauses['where']};"
-				)
+				"SELECT COUNT({$this->primary_key}) FROM {$this->table_name} {$clauses['where']};"
 			);
 
 			$results = absint( $results );
