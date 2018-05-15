@@ -27,6 +27,21 @@ namespace Ensemble {
 	}
 
 	/**
+	 * Short-hand helper to load a view defined by qualified classes.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param View_Loader $object Object to load the view for.
+	 * @param array       $args   Optional. Optional display arguments to pass through to the object.
+	 * @return void (Displays).
+	 */
+	function load_view( $object, $args = array() ) {
+		if ( $object instanceof Interfaces\View_Loader ) {
+			$object->load_view( $args );
+		}
+	}
+
+	/**
 	 * Retrieves an instance of the Contests database class.
 	 *
 	 * @since 1.0.0
