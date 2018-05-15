@@ -158,4 +158,15 @@ final class Ensemble {
 	 */
 	public function __set( $a, $b ) {}
 
+	/**
+	 * Retrieves the Ensemble version string.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string Version string.
+	 */
+	public function get_version() {
+		return $this->version;
+	}
+
 }
