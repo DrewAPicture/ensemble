@@ -300,6 +300,10 @@ class List_Table extends \WP_List_Table {
 	public function column_default( $contest, $column_name ) {
 		switch( $column_name ){
 
+			case 'status':
+				$value = isset( $contest->status ) ? get_contest_status_label( $contest->status ) : '';
+				break;
+
 			default:
 				$value = isset( $contest->$column_name ) ? $contest->$column_name : '';
 				break;
