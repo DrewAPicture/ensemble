@@ -36,7 +36,7 @@ class Database extends Core\Database {
 	public function __call( $name, $arguments ) {
 		switch ( $name ) {
 			case 'get_core_object':
-				return $this->get_core_object( $arguments[0] );
+				return parent::get_core_object( $arguments[0] );
 				break;
 
 			case 'meta':
