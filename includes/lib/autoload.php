@@ -30,18 +30,29 @@ spl_autoload_register( function( $filename ) {
 		$file_name_parts = explode( '-', $file_name );
 
 		// Use array_search() to handle both Interface_Foo or Foo_Interface.
-		$index = array_search( 'interface', $file_name_parts );
+		$interface_index = array_search( 'interface', $file_name_parts );
+		$trait_index     = array_search( 'trait', $file_name_parts );
 
-		if ( false !== $index || in_array( 'Interfaces', $file_path ) ) {
+		if ( false !== $interface_index || in_array( 'Interfaces', $file_path ) ) {
 			// Only drop 'interface' if not part of the namespace.
-			if ( false !== $index ) {
-				unset( $file_name_parts[ $index ] );
+			if ( false !== $interface_index ) {
+				unset( $file_name_parts[ $interface_index ] );
 			}
 
 			// Rebuild the file name.
 			$file_name = implode( '-', $file_name_parts );
 
 			$file_name = "interface-{$file_name}.php";
+		} elseif ( false !== $trait_index || in_array( 'Traits', $file_path ) ) {
+			// Only drop 'trait' if not part of the namespace.
+			if ( false !== $trait_index ) {
+				unset( $file_name_parts[ $trait_index ] );
+			}
+
+			// Rebuild the file name.
+			$file_name = implode( '-', $file_name_parts );
+
+			$file_name = "trait-{$file_name}.php";
 		} else {
 			$file_name = "class-$file_name.php";
 		}
