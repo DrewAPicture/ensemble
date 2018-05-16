@@ -119,7 +119,7 @@ class Object extends Core\Object {
 	 * @param string $format Optional. How to format the date. Default 'm/d/Y'.
 	 * @return string Formatted start date.
 	 */
-	public function start_date( $format = 'm/d/Y' ) {
+	public function get_start_date( $format = 'm/d/Y' ) {
 		return date( $format, strtotime( $this->start_date ) );
 	}
 
@@ -131,7 +131,7 @@ class Object extends Core\Object {
 	 * @param string $format Optional. How to format the date. Default 'm/d/Y'.
 	 * @return string Formatted end date.
 	 */
-	public function end_date( $format = 'm/d/Y' ) {
+	public function get_end_date( $format = 'm/d/Y' ) {
 		return date( $format, strtotime( $this->end_date ) );
 	}
 

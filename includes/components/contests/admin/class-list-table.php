@@ -300,7 +300,7 @@ class List_Table extends \WP_List_Table {
 		switch( $column_name ){
 
 			case 'start_date':
-				$value = $contest->start_date();
+				$value = $contest->get_start_date();
 				break;
 
 			case 'status':
