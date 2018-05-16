@@ -45,6 +45,44 @@ use function Ensemble\html;
 
 				<div class="card mb-3 md-md-5">
 					<div class="card-body">
+						<div class="form-group">
+							<?php
+							html()->select( array(
+								'id'               => 'contest-venues',
+								'label'            => __( 'Venue(s)', 'ensemble' ),
+								'class'            => array( 'form-control' ),
+								'options'          => array(),
+								'show_option_all'  => false,
+								'show_option_none' => false,
+							) );
+							?>
+						</div>
+
+						<div class="form-row form-group">
+							<div class="col">
+								<?php
+								html()->text( array(
+									'id'    => 'contest-start-date',
+									'label' => __( 'Start Date', 'ensemble' ),
+									'class' => array( 'form-control' ),
+								) );
+								?>
+							</div>
+							<div class="col">
+								<?php
+								html()->text( array(
+									'id'    => 'contest-end-date',
+									'label' => __( 'End Date', 'ensemble' ),
+									'class' => array( 'form-control' ),
+								) );
+								?>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="card mb-3 md-md-5">
+					<div class="card-body">
 						<div class="form-row form-group">
 							<div class="col">
 								<?php
@@ -82,44 +120,6 @@ use function Ensemble\html;
 								'class' => array( 'form-control' ),
 							) );
 							?>
-						</div>
-					</div>
-				</div>
-
-				<div class="card mb-3 md-md-5">
-					<div class="card-body">
-						<div class="form-group">
-							<?php
-							html()->select( array(
-								'id'               => 'contest-venues',
-								'label'            => __( 'Venue(s)', 'ensemble' ),
-								'class'            => array( 'form-control' ),
-								'options'          => array(),
-								'show_option_all'  => false,
-								'show_option_none' => false,
-							) );
-							?>
-						</div>
-
-						<div class="form-row form-group">
-							<div class="col">
-								<?php
-								html()->text( array(
-									'id'    => 'contest-start-date',
-									'label' => __( 'Start Date', 'ensemble' ),
-									'class' => array( 'form-control' ),
-								) );
-								?>
-							</div>
-							<div class="col">
-								<?php
-								html()->text( array(
-									'id'    => 'contest-end-date',
-									'label' => __( 'End Date', 'ensemble' ),
-									'class' => array( 'form-control' ),
-								) );
-								?>
-							</div>
 						</div>
 					</div>
 				</div>

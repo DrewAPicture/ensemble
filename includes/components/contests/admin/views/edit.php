@@ -59,6 +59,47 @@ $contest    = get_contest( $contest_id );
 
 					<div class="card mb-3 md-md-5">
 						<div class="card-body">
+							<div class="form-group">
+								<?php
+								html()->select( array(
+									'id'               => 'contest-venues',
+									'label'            => __( 'Venue(s)', 'ensemble' ),
+									'class'            => array( 'form-control' ),
+									'selected'         => $contest->venues,
+									'options'          => array(),
+									'show_option_all'  => false,
+									'show_option_none' => false,
+								) );
+								?>
+							</div>
+
+							<div class="form-row form-group">
+								<div class="col">
+									<?php
+									html()->text( array(
+										'id'    => 'contest-start-date',
+										'label' => __( 'Start Date', 'ensemble' ),
+										'class' => array( 'form-control' ),
+										'value' => $contest->start_date,
+									) );
+									?>
+								</div>
+								<div class="col">
+									<?php
+									html()->text( array(
+										'id'    => 'contest-end-date',
+										'label' => __( 'End Date', 'ensemble' ),
+										'class' => array( 'form-control' ),
+										'value' => $contest->end_date,
+									) );
+									?>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="card mb-3 md-md-5">
+						<div class="card-body">
 							<div class="form-row form-group">
 								<div class="col">
 									<?php
@@ -97,47 +138,6 @@ $contest    = get_contest( $contest_id );
 									'value' => $contest->external,
 								) );
 								?>
-							</div>
-						</div>
-					</div>
-
-					<div class="card mb-3 md-md-5">
-						<div class="card-body">
-							<div class="form-group">
-								<?php
-								html()->select( array(
-									'id'               => 'contest-venues',
-									'label'            => __( 'Venue(s)', 'ensemble' ),
-									'class'            => array( 'form-control' ),
-									'selected'         => $contest->venues,
-									'options'          => array(),
-									'show_option_all'  => false,
-									'show_option_none' => false,
-								) );
-								?>
-							</div>
-
-							<div class="form-row form-group">
-								<div class="col">
-									<?php
-									html()->text( array(
-										'id'    => 'contest-start-date',
-										'label' => __( 'Start Date', 'ensemble' ),
-										'class' => array( 'form-control' ),
-										'value' => $contest->start_date,
-									) );
-									?>
-								</div>
-								<div class="col">
-									<?php
-									html()->text( array(
-										'id'    => 'contest-end-date',
-										'label' => __( 'End Date', 'ensemble' ),
-										'class' => array( 'form-control' ),
-										'value' => $contest->end_date,
-									) );
-									?>
-								</div>
 							</div>
 						</div>
 					</div>
