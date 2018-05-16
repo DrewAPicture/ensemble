@@ -10,6 +10,7 @@
 namespace Ensemble\Components\Contests\Admin;
 
 use Ensemble\Components\Contests\Database;
+use function Ensemble\Components\Contests\get_allowed_types;
 use Ensemble\Core\Interfaces\Loader;
 use Ensemble\Core\Traits\View_Loader;
 
