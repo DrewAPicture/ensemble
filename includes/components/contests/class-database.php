@@ -95,15 +95,16 @@ class Database extends Core\Database {
 	 */
 	public function get_columns() {
 		return array(
-			'id'         => '%d',
-			'name'       => '%s',
-			'venues'     => '%s',
-			'type'       => '%s',
-			'external'   => '%s',
-			'status'     => '%s',
-			'timezone'   => '%s',
-			'start_date' => '%s',
-			'end_date'   => '%s',
+			'id'          => '%d',
+			'name'        => '%s',
+			'description' => '%s',
+			'venues'      => '%s',
+			'type'        => '%s',
+			'external'    => '%s',
+			'status'      => '%s',
+			'timezone'    => '%s',
+			'start_date'  => '%s',
+			'end_date'    => '%s',
 		);
 	}
 
@@ -254,6 +255,7 @@ class Database extends Core\Database {
 		$sql = "CREATE TABLE {$table_name} (
 			id bigint(20) NOT NULL AUTO_INCREMENT,
 			name mediumtext NOT NULL,
+			description longtext NOT NULL,
 			venues mediumtext NOT NULL,
 			type tinytext NOT NULL,
 			external mediumtext NOT NULL,

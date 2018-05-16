@@ -37,6 +37,14 @@ class Object extends Core\Object {
 	public $name = '';
 
 	/**
+	 * Contest description.
+	 *
+	 * @since 1.0.0
+	 * @var   string
+	 */
+	public $description = '';
+
+	/**
 	 * Array of associated venue(s).
 	 *
 	 * @since 1.0.0
