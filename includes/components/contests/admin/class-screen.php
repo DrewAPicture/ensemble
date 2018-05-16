@@ -40,7 +40,7 @@ abstract class Screen {
 	 * @return string Path to the view templates directory.
 	 */
 	public function get_views_dir() {
-		return __DIR__ . '/tmpl';
+		return __DIR__ . '/tmpl/';
 	}
 
 }
