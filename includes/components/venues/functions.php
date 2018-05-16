@@ -55,3 +55,50 @@ function get_status_label( $status ) {
 
 	return $label;
 }
+
+/**
+ * Retrieves the list of allowed venue types and their corresponding labels.
+ *
+ * @since 1.0.0
+ *
+ * @return array Allowed venue type/label pairs.
+ */
+function get_allowed_types() {
+	$types = array(
+		'school' => __( 'School', 'ensemble' ),
+		'arena'  => __( 'Arena', 'ensemble' ),
+	);
+
+	/**
+	 * Filters the list of allowed types for venues.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $types List of allowed venue type/label pairs.
+	 */
+	return apply_filters( 'ensemble_venues_allowed_types', $types );
+}
+
+/**
+ * Retrieves the label for a given venue type.
+ *
+ * @since 1.0.0
+ *
+ * @param string $type Venue type.
+ * @return string Type label.
+ */
+function get_type_label( $type ) {
+	$types = get_allowed_types();
+
+	if ( ! array_key_exists( $type, $types ) ) {
+		$type = 'school';
+	}
+
+	if ( ! empty( $types[ $type ] ) ) {
+		$label = $types[ $type ];
+	} else {
+		$label = '';
+	}
+
+	return $label;
+}
