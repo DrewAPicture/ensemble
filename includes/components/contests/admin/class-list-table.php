@@ -9,9 +9,8 @@
  */
 namespace Ensemble\Components\Contests\Admin;
 
-use Ensemble\Contests;
-use Ensemble\Components\Contests\Database;
-use Ensemble\Components\Contests\Object;
+use Ensemble\Components\Contests\{Database, Object};
+use function Ensemble\Components\Contests\{get_status_label, get_type_label};
 
 /**
  * Implements a list table for contests.
@@ -143,13 +142,13 @@ class List_Table extends \WP_List_Table {
 			'published' => sprintf( '<a href="%1$s"%2$s>%3$s</a>',
 				esc_url( add_query_arg( 'status', 'published', $base ) ),
 				$current === 'published' ? ' class="current"' : '',
-				Contests\get_status_label( 'published' ) . $published_count
+				get_status_label( 'published' ) . $published_count
 			),
 
 			'draft' => sprintf( '<a href="%1$s"%2$s>%3$s</a>',
 				esc_url( add_query_arg( 'status', 'draft', $base ) ),
 				$current === 'draft' ? ' class="current"' : '',
-				Contests\get_status_label( 'draft' ) . $draft_count
+				get_status_label( 'draft' ) . $draft_count
 			),
 		);
 
@@ -301,11 +300,11 @@ class List_Table extends \WP_List_Table {
 		switch( $column_name ){
 
 			case 'status':
-				$value = isset( $contest->status ) ? Contests\get_status_label( $contest->status ) : '';
+				$value = isset( $contest->status ) ? get_status_label( $contest->status ) : '';
 				break;
 
 			case 'type':
-				$value = isset( $contest->type ) ? Contests\get_type_label( $contest->type ) : '';
+				$value = isset( $contest->type ) ? get_type_label( $contest->type ) : '';
 				break;
 
 			default:
