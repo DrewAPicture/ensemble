@@ -10,6 +10,26 @@
 namespace Ensemble\Components\Venues;
 
 /**
+ * Retrieves a venue.
+ *
+ * @since 1.0.0
+ *
+ * @param int|Object $venue Venue ID or object.
+ * @return \Ensemble\Components\Venues\Object|\WP_Error Venue object if found, otherwise a WP_Error object.
+ */
+function get_venue( $venue ) {
+	if ( is_object( $venue ) && isset( $venue->id ) ) {
+		$venue_id = $venue->id;
+	} elseif ( is_numeric( $venue ) ) {
+		$venue_id = absint( $venue );
+	} else {
+		$venue_id = 0;
+	}
+
+	return ( new Database )->get_core_object( $venue_id );
+}
+
+/**
  * Retrieves the list of allowed venue statuses and their corresponding labels.
  *
  * @since 1.0.0
