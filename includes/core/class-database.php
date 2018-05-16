@@ -309,14 +309,25 @@ abstract class Database implements Interfaces\Database {
 	 * @since 1.0.0
 	 *
 	 * @param int $object_id Object ID.
-	 * @return \Ensemble\Model|\WP_Error Core object or WP_Error if there was a problem.
+	 * @return Object|\WP_Error Core object or WP_Error if there was a problem.
 	 */
 	public function get( $object_id ) {
-		return $GLOBALS['wpdb']->get_row(
+		$object = $GLOBALS['wpdb']->get_row(
 			$GLOBALS['wpdb']->prepare(
 				"SELECT * FROM $this->table_name WHERE $this->primary_key = %s LIMIT 1;", $object_id
 			)
 		);
+
+		if ( null !== $object ) {
+			return $object;
+		} else {
+			/* translators: 1: Query object type, 2: object ID */
+			$message = sprintf( __( 'The %1$s object with ID %2$d does is invalid.', 'ensemble' ),
+				$this->get_query_object_type(),
+				$object_id
+			);
+			return new \WP_Error( 'invalid_object', $message );
+		}
 	}
 
 	/**
