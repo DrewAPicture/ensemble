@@ -93,7 +93,7 @@ function get_allowed_types() {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $statuses List of allowed contest type/label pairs.
+	 * @param array $types List of allowed contest type/label pairs.
 	 */
 	return apply_filters( 'ensemble_contests_allowed_types', $types );
 }
