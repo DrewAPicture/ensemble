@@ -9,6 +9,7 @@
  */
 namespace Ensemble\Components\Contests\Admin;
 
+use Ensemble\Components\Venues\Database as Venues;
 use function Ensemble\Components\Contests\{get_allowed_types, get_allowed_statuses};
 use function Ensemble\{html};
 ?>
@@ -47,11 +48,25 @@ use function Ensemble\{html};
 					<div class="card-body">
 						<div class="form-group">
 							<?php
+							$venues = ( new Venues )->query( array(
+								'fields' => array( 'id', 'name' ),
+								'number' => 500,
+							) );
+
+							if ( ! empty( $venues ) ) :
+								foreach ( $venues as $venue ) {
+									$options[ $venue->id ] = $venue->name;
+								}
+							else :
+								$options = array();
+							endif;
 							html()->select( array(
 								'id'               => 'contest-venues',
+								'name'             => 'contest-venues[]',
 								'label'            => __( 'Venue(s)', 'ensemble' ),
 								'class'            => array( 'form-control' ),
-								'options'          => array(),
+								'multiple'         => true,
+								'options'          => $options,
 								'show_option_all'  => false,
 								'show_option_none' => false,
 							) );
