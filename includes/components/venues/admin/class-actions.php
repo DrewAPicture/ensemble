@@ -10,6 +10,7 @@
 namespace Ensemble\Components\Venues\Admin;
 
 use Ensemble\Components\Contests\Setup;
+use Ensemble\Components\Venues\Database;
 use Ensemble\Core\Interfaces\Loader;
 use Ensemble\Core\Traits\View_Loader;
 
@@ -47,6 +48,30 @@ class Actions implements Loader {
 		// Bail if the request doesn't even match.
 		if ( false === $valid_request ) {
 			return;
+		}
+
+		$redirect = add_query_arg( 'page', 'ensemble-admin-venues', admin_url( 'admin.php' ) );
+		$nonce    = $_REQUEST['ensemble-add-venue-nonce'] ?? false;
+
+		if ( ! wp_verify_nonce( $nonce, 'ensemble-add-venue-nonce' ) ) {
+			// TODO add notice handler for the different cases.
+			if ( wp_redirect( $redirect ) ) {
+				exit;
+			}
+		}
+
+		$data = array(
+			'name'    => empty( $_REQUEST['venue-name'] ) ? '' : sanitize_text_field( $_REQUEST['venue-name'] ),
+			'type'    => empty( $_REQUEST['venue-type'] ) ? '' : sanitize_key( $_REQUEST['venue-type'] ),
+			'status'  => empty( $_REQUEST['venue-status'] ) ? '' : sanitize_key( $_REQUEST['venue-status'] ),
+			'address' => empty( $_REQUEST['venue-address'] ) ? '' : wp_kses_post( $_REQUEST['venue-address'] ),
+		);
+
+		$added = ( new Database )->insert( $data );
+
+		// TODO add notice handler for the different cases.
+		if ( wp_redirect( $redirect ) ) {
+			exit;
 		}
 	}
 
