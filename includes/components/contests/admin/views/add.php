@@ -119,7 +119,7 @@ use function Ensemble\{html};
 										'label'            => __( 'Type', 'ensemble' ),
 										'class'            => array( 'form-control' ),
 										'selected'         => 'regular',
-										'options'          => get_allowed_types(),
+										'options'          => $types,
 										'show_option_all'  => false,
 										'show_option_none' => false,
 									) );
