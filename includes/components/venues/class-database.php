@@ -143,7 +143,7 @@ class Database extends Core\Database {
 			'status'  => '',
 		);
 
-		$args = wp_parse_args( $args, $defaults );
+		$args = wp_parse_args( $query_args, $defaults );
 
 		$claws = claws();
 
