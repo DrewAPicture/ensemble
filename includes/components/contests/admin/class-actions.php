@@ -42,6 +42,20 @@ class Actions implements Loader {
 	 * @since 1.0.0
 	 */
 	public function add_contest() {
+		$valid_request = $_REQUEST['ensemble-add-contest'] ?? false;
+
+		// Bail if the request doesn't even match.
+		if ( false === $valid_request ) {
+			return;
+		}
+
+		$redirect = add_query_arg( 'page', 'ensemble-admin-contests', admin_url( 'admin.php' ) );
+
+		$nonce = $_REQUEST['ensemble-add-contest-nonce'] ?? false;
+
+		if ( ! wp_verify_nonce( $nonce, 'ensemble-add-contest-nonce' ) ) {
+			return;
+		}
 
 	}
 
@@ -51,6 +65,20 @@ class Actions implements Loader {
 	 * @since 1.0.0
 	 */
 	public function update_contest() {
+		$valid_request = $_REQUEST['ensemble-update-contest'] ?? false;
+
+		// Bail if the request doesn't even match.
+		if ( false === $valid_request ) {
+			return;
+		}
+
+		$redirect = add_query_arg( 'page', 'ensemble-admin-contests', admin_url( 'admin.php' ) );
+
+		$nonce = $_REQUEST['ensemble-update-contest-nonce'] ?? false;
+
+		if ( ! wp_verify_nonce( $nonce, 'ensemble-update-contest-nonce' ) ) {
+			return;
+		}
 
 	}
 
