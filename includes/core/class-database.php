@@ -588,8 +588,8 @@ abstract class Database implements Interfaces\Database {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param object|int $instance Instance or object ID.
-	 * @return object|\WP_Error Object instance, otherwise WP_Error object if there was a problem.
+	 * @param Object|int $instance Instance or object ID.
+	 * @return Object|\WP_Error Object instance, otherwise WP_Error object if there was a problem.
 	 */
 	public function get_core_object( $instance ) {
 		$object_class = $this->get_query_object_type();
