@@ -102,7 +102,7 @@ $contest    = get_contest( $contest_id );
 
 							wp_nonce_field( 'ensemble-delete-contest-nonce', 'ensemble-delete-contest-nonce' );
 
-							// Delete Contest button.
+							// Submit button.
 							html()->input( 'submit', array(
 								'name'  => 'ensemble-delete-contest',
 								'value' => 'Submit',
