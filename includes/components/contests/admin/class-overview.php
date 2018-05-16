@@ -9,14 +9,18 @@
  */
 namespace Ensemble\Components\Contests\Admin;
 
-use Ensemble\Core\Interfaces\View_Loader;
+use Ensemble\Components\Contests\Setup;
+use Ensemble\Core\Interfaces\Loader;
+use Ensemble\Core\Traits\View_Loader;
 
 /**
  * Handles displaying and managing the contests overview.
  *
  * @since 1.0.0
  */
-class Overview implements View_Loader {
+class Overview extends Screen implements Loader {
+
+	use View_Loader;
 
 	/**
 	 * Registers hook callbacks for listing contests.
@@ -25,35 +29,6 @@ class Overview implements View_Loader {
 	 */
 	public function load() {
 
-	}
-
-	/**
-	 * Loads a view based on the 'ensbl-view' $_REQUEST arg.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param array $args Optional. Passed-thru display arguments (if any). Default empty array.
-	 */
-	public function load_view( $args = array() ) {
-		?>
-		<div class="wrap">
-			<h1 class="wp-heading-inline"><?php esc_html_e( 'Contests Overview', 'ensemble' ); ?></h1>
-			<a href="<?php echo esc_url( add_query_arg( array( 'ensbl-view' => 'add' ) ) ); ?>" class="page-title-action" role="button">
-				<?php esc_html_e( 'Add New', 'ensemble' ); ?>
-			</a>
-			<?php
-			$list_table = new List_Table();
-			$list_table->prepare_items();
-			?>
-			<form id="ensemble-contests" method="get">
-				<?php
-				$list_table->search_box( __( 'Search', 'ensemble' ), 'ensemble-contests-search' );
-				$list_table->views();
-				$list_table->display();
-				?>
-			</form>
-		</div>
-		<?php
 	}
 
 }

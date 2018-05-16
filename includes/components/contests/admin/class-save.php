@@ -9,14 +9,18 @@
  */
 namespace Ensemble\Components\Contests\Admin;
 
-use Ensemble\Core\Interfaces\View_Loader;
+use Ensemble\Components\Contests\Setup;
+use Ensemble\Core\Interfaces\Loader;
+use Ensemble\Core\Traits\View_Loader;
 
 /**
  * Handles adding and editing contests in the admin.
  *
  * @since 1.0.0
  */
-class Save implements View_Loader {
+class Save extends Screen implements Loader {
+
+	use View_Loader;
 
 	/**
 	 * Registers hook callbacks for adding and editing contests.
@@ -25,57 +29,6 @@ class Save implements View_Loader {
 	 */
 	public function load() {
 
-	}
-
-	/**
-	 * Loads a view based on the 'ensbl-view' $_REQUEST arg.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param array $args Optional. Passed-thru display arguments (if any). Default empty array.
-	 */
-	public function load_view( $args = array() ) {
-		if ( ! empty( $args['view'] ) ) {
-
-			switch( $args['view'] ) {
-				case 'edit':
-					$this->display_edit_contest( empty( $args['id'] ) ? 0 : $args['id'] );
-					break;
-
-				case 'add':
-					$this->display_add_contest();
-					break;
-			}
-
-		}
-	}
-
-	/**
-	 * Displays the Edit Contest screen markup.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param int $contest Contest ID.
-	 */
-	public function display_edit_contest( $contest ) {
-		?>
-		<div class="wrap">
-			<h1 class="wp-heading-inline"><?php esc_html_e( 'Edit Contest', 'ensemble' ); ?></h1>
-		</div>
-		<?php
-	}
-
-	/**
-	 * Displays the Add Contest screen markup.
-	 *
-	 * @since 1.0.0
-	 */
-	public function display_add_contest() {
-		?>
-		<div class="wrap">
-			<h1 class="wp-heading-inline"><?php esc_html_e( 'Add Contest', 'ensemble' ); ?></h1>
-		</div>
-		<?php
 	}
 
 }
