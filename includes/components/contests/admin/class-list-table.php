@@ -312,7 +312,7 @@ class List_Table extends \WP_List_Table {
 				break;
 
 			default:
-				$value = isset( $contest->$column_name ) ? $contest->$column_name : '';
+				$value = $contest->$column_name ?? '';
 				break;
 		}
 
