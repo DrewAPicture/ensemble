@@ -53,24 +53,22 @@ class Menu implements Menu_Router {
 	 */
 	public function route_request() {
 
-		$display_args = array(
-			'view' => isset( $_REQUEST['ensbl-view'] ) ? sanitize_key( $_REQUEST['ensbl-view' ] ) : '',
-			'id'   => isset( $_REQUEST['venue_id'] )   ? absint( $_REQUEST['venue_id'] )          :  0,
-		);
+		$view = isset( $_REQUEST['ensbl-view'] ) ? sanitize_key( $_REQUEST['ensbl-view' ] ) : '';
 
-		switch ( $display_args['view'] ) {
+		switch ( $view ) {
 
 			case 'add':
 			case 'edit':
-				load_view( new Save, $display_args );
+				load_view( new Save, $view );
 				break;
 
 			case 'delete':
-				load_view( new Delete, $display_args );
+				load_view( new Delete, $view );
 				break;
 
+			case 'overview':
 			default:
-				load_view( new Overview, $display_args );
+				load_view( new Overview, 'overview' );
 				break;
 		}
 	}
