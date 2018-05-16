@@ -486,6 +486,11 @@ class HTML {
 	 * @return string|void HTML markup if `$echo` is false, otherwise void (echo).
 	 */
 	public function textarea( $args = array(), $echo = true ) {
+		// Ensure the name attribute is always set if the ID is set.
+		if ( ! empty( $args['id'] ) && empty( $args['name'] ) ) {
+			$args['name'] = $args['id'];
+		}
+
 		$defaults = array(
 			'id'       => '',
 			'name'     => '',
