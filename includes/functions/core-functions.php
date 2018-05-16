@@ -10,6 +10,7 @@
 namespace Ensemble {
 
 	use Ensemble\Core\Interfaces;
+	use Ensemble\Core\Traits;
 	use Ensemble\Components;
 
 	/**
@@ -31,13 +32,15 @@ namespace Ensemble {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param View_Loader $object Object to load the view for.
-	 * @param array       $args   Optional. Optional display arguments to pass through to the object.
+	 * @param Traits\View_Loader $object Object to load the view for.
+	 * @param string             $view   View to (attempt to) load.
 	 * @return void (Displays).
 	 */
-	function load_view( $object, $args = array() ) {
-		if ( $object instanceof Interfaces\View_Loader ) {
-			$object->load_view( $args );
+	function load_view( $object, $view ) {
+		$traits = class_uses( $object );
+
+		if ( array_key_exists( 'Ensemble\\Core\\Traits\\View_Loader', $traits ) ) {
+			$object->load_view( $view );
 		}
 	}
 
