@@ -23,8 +23,6 @@ use Ensemble\Core\Traits\View_Loader;
  */
 class Overview extends Screen implements Loader {
 
-	use View_Loader;
-
 	/**
 	 * Registers hook callbacks for listing contests.
 	 *
