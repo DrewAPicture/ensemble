@@ -67,6 +67,7 @@ function get_allowed_types() {
 	$types = array(
 		'school' => __( 'School', 'ensemble' ),
 		'arena'  => __( 'Arena', 'ensemble' ),
+		'other'  => __( 'Other', 'ensemble' ),
 	);
 
 	/**
