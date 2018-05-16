@@ -103,6 +103,11 @@ final class Ensemble {
 		if ( ! defined( 'ENSEMBLE_PLUGIN_DIR' ) ) {
 			define( 'ENSEMBLE_PLUGIN_DIR', plugin_dir_path( ENSEMBLE_PLUGIN_FILE ) );
 		}
+
+		// Component directory.
+		if ( ! defined( 'ENSEMBLE_COMPONENT_DIR' ) ) {
+			define( 'ENSEMBLE_COMPONENT_DIR', ENSEMBLE_PLUGIN_DIR . 'includes/components/' );
+		}
 	}
 
 	/**
