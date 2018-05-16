@@ -9,7 +9,6 @@
  */
 namespace Ensemble\Components\Venues;
 
-use Ensemble\Components;
 use Ensemble\Core;
 
 /**
