@@ -94,11 +94,6 @@ final class Ensemble {
 			define( 'ENSEMBLE_PLUGIN_URL', plugin_dir_url( $this->file ) );
 		}
 
-		// Version.
-		if ( ! defined( 'ENSEMBLE_VERSION' ) ) {
-			define( 'ENSEMBLE_VERSION', $this->version );
-		}
-
 		// Plugin directory.
 		if ( ! defined( 'ENSEMBLE_PLUGIN_DIR' ) ) {
 			define( 'ENSEMBLE_PLUGIN_DIR', plugin_dir_path( ENSEMBLE_PLUGIN_FILE ) );
@@ -107,6 +102,11 @@ final class Ensemble {
 		// Component directory.
 		if ( ! defined( 'ENSEMBLE_COMPONENT_DIR' ) ) {
 			define( 'ENSEMBLE_COMPONENT_DIR', ENSEMBLE_PLUGIN_DIR . 'includes/components/' );
+		}
+
+		// Version.
+		if ( ! defined( 'ENSEMBLE_VERSION' ) ) {
+			define( 'ENSEMBLE_VERSION', $this->version );
 		}
 	}
 
