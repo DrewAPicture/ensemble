@@ -143,6 +143,7 @@ final class Ensemble {
 		load( new Core\Ajax_Actions );
 		load( new Core\Assets );
 		load( new Core\Components );
+		load( new Core\Requests );
 		load( new Core\Rewrite_Rules );
 	}
 
