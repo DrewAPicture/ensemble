@@ -21,7 +21,8 @@ jQuery(document).ready(function($) {
 	$('.date').each(function () {
 		console.log($(this));
 		$(this).datepicker({
-			dateFormat: 'mm/dd/yy'
+			dateFormat: 'mm/dd/yy',
+			minDate: 0
 		});
 	});
 
