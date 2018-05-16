@@ -17,6 +17,9 @@ use Ensemble\Core\Traits\View_Loader;
  * Handles adding and editing contests in the admin.
  *
  * @since 1.0.0
+ *
+ * @see Screen
+ * @see Loader
  */
 class Save extends Screen implements Loader {
 

@@ -17,6 +17,9 @@ use Ensemble\Core\Traits\View_Loader;
  * Handles displaying and managing the contests overview.
  *
  * @since 1.0.0
+ *
+ * @see Screen
+ * @see Loader
  */
 class Overview extends Screen implements Loader {
 

@@ -16,6 +16,9 @@ use Ensemble\Core\Traits\View_Loader;
  * Handles deleting contests.
  *
  * @since 1.0.0
+ *
+ * @see Screen
+ * @see Loader
  */
 class Delete extends Screen implements Loader {
 
