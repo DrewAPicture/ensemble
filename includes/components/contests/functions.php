@@ -17,7 +17,7 @@ use function Ensemble\contests;
  * @since 1.0.0
  *
  * @param int|Object $contest Contest ID or object.
- * @return Object|\WP_Error Contest object if found, otherwise a WP_Error object.
+ * @return \Ensemble\Components\Contests\Object|\WP_Error Contest object if found, otherwise a WP_Error object.
  */
 function get_contest( $contest ) {
 	if ( is_object( $contest ) && isset( $contest->id ) ) {
