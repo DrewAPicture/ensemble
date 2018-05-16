@@ -122,3 +122,7 @@
 .bootstrap-iso .h1, .bootstrap-iso h1 {
 	font-size: 2em;
 }
+
+.bootstrap-iso .form-check-input {
+	margin-top: 0;
+}
