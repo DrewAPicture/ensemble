@@ -31,6 +31,35 @@ class Actions implements Loader {
 	 * @since 1.0.0
 	 */
 	public function load() {
+		add_action( 'init', array( 'add_contest' ) );
+		add_action( 'init', array( 'update_contest' ) );
+		add_action( 'init', array( 'delete_contest' ) );
+	}
+
+	/**
+	 * Processes adding a new contest.
+	 *
+	 * @since 1.0.0
+	 */
+	public function add_contest() {
+
+	}
+
+	/**
+	 * Processes updating an existing contest.
+	 *
+	 * @since 1.0.0
+	 */
+	public function update_contest() {
+
+	}
+
+	/**
+	 * Processes deleting a contest.
+	 *
+	 * @since 1.0.0
+	 */
+	public function delete_contest() {
 
 	}
 
