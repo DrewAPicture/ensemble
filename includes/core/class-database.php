@@ -321,9 +321,9 @@ abstract class Database implements Interfaces\Database {
 		if ( null !== $object ) {
 			return $object;
 		} else {
-			/* translators: 1: Query object type, 2: object ID */
-			$message = sprintf( __( 'The %1$s object with ID %2$d does is invalid.', 'ensemble' ),
-				$this->get_query_object_type(),
+			/* translators: 1: Query type, 2: object ID */
+			$message = sprintf( __( 'The %1$s object with ID %2$d is invalid. Please try again.', 'ensemble' ),
+				$this->get_cache_group(),
 				$object_id
 			);
 			return new \WP_Error( 'invalid_object', $message );
