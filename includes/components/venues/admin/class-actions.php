@@ -42,7 +42,12 @@ class Actions implements Loader {
 	 * @since 1.0.0
 	 */
 	public function add_venue() {
+		$valid_request = $_REQUEST['ensemble-add-venue'] ?? false;
 
+		// Bail if the request doesn't even match.
+		if ( false === $valid_request ) {
+			return;
+		}
 	}
 
 	/**
@@ -51,7 +56,12 @@ class Actions implements Loader {
 	 * @since 1.0.0
 	 */
 	public function update_venue() {
+		$valid_request = $_REQUEST['ensemble-update-venue'] ?? false;
 
+		// Bail if the request doesn't even match.
+		if ( false === $valid_request ) {
+			return;
+		}
 	}
 
 	/**
@@ -60,7 +70,12 @@ class Actions implements Loader {
 	 * @since 1.0.0
 	 */
 	public function delete_venue() {
+		$valid_request = $_REQUEST['ensemble-delete-venue'] ?? false;
 
+		// Bail if the request doesn't even match.
+		if ( false === $valid_request ) {
+			return;
+		}
 	}
 
 	/**
