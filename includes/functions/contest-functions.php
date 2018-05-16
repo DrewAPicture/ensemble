@@ -9,6 +9,26 @@
  */
 namespace Ensemble\Contests;
 
+use function Ensemble\contests;
+
+/**
+ * Retrieves a contest.
+ *
+ * @since 1.0.0
+ *
+ * @param int|\Ensemble\Components\Contests\Object $contest Contest ID or object.
+ * @param false|\Ensemble\Components\Contests\Object Contest object if found, otherwise false.
+ */
+function get_contest( $contest = null ) {
+	$contest = contests()->get_core_object( $contest );
+
+	if ( ! is_wp_error( $contest ) ) {
+		return $contest;
+	} else {
+		return false;
+	}
+}
+
 /**
  * Retrieves the list of allowed contest statuses and their corresponding labels.
  *
