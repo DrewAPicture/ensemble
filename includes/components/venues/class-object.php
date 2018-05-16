@@ -87,7 +87,7 @@ class Object extends Core\Object {
 	 * @param string $format Optional. How to format the date. Default 'm/d/Y'.
 	 * @return string Formatted date.
 	 */
-	public function get_start_date( $format = 'm/d/Y' ) {
+	public function get_date_added( $format = 'm/d/Y' ) {
 		return date( $format, strtotime( $this->date_added ) );
 	}
 

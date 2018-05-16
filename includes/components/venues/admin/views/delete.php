@@ -9,8 +9,7 @@
  */
 namespace Ensemble\Components\Venues\Admin;
 
-use function Ensemble\Components\Venues\get_status_label;
-use function Ensemble\Components\Venues\{get_type_label, get_venue};
+use function Ensemble\Components\Venues\{get_type_label, get_status_label, get_venue};
 
 $venue_id = $_REQUEST['venue'] ?? 0;
 $venue    = get_venue( $venue_id );
@@ -50,7 +49,7 @@ $venue    = get_venue( $venue_id );
 										<td><?php echo apply_filters( 'the_title', $venue->name ); ?></td>
 										<td><?php echo get_type_label( $venue->type ); ?></td>
 										<td><?php echo get_status_label( $venue->status ); ?></td>
-										<td><?php echo $venue->date_added(); ?></td>
+										<td><?php echo $venue->get_date_added(); ?></td>
 									</tr>
 
 									</tbody>
