@@ -203,6 +203,7 @@ abstract class Database implements Interfaces\Database {
 
 		$object = $this->get_core_object( $object_id );
 
+		// Bail if there was a problem retrieving the original object.
 		if ( is_wp_error( $object ) ) {
 			return $object;
 		}
@@ -232,8 +233,15 @@ abstract class Database implements Interfaces\Database {
 		$data_keys      = array_keys( $data );
 		$column_formats = array_merge( array_flip( $data_keys ), $column_formats );
 
-		$updated = $GLOBALS['wpdb']->update( $this->get_table_name(), $data, array( $where => $object->{$this->primary_key} ), $column_formats );
+		// Update the object.
+		$updated = $GLOBALS['wpdb']->update(
+			$this->get_table_name(),
+			$data,
+			array( $where => $object->{$this->get_primary_key()} ),
+			$column_formats
+		);
 
+		// Log an error if there was a problem.
 		if ( false === $updated ) {
 			$message = sprintf( 'The %1$s object update failed for the %2$s query.', $object_id, $this->get_cache_group() );
 
@@ -273,6 +281,7 @@ abstract class Database implements Interfaces\Database {
 
 		$object = $this->get_core_object( $object_id );
 
+		// Bail if there was a problem retrieving the object.
 		if ( is_wp_error( $object ) ) {
 			return $object;
 		}
@@ -283,6 +292,7 @@ abstract class Database implements Interfaces\Database {
 			)
 		);
 
+		// Log an error if there was a problem deleting the object.
 		if ( false === $deleted ) {
 			$message = sprintf( 'Deletion of the %1$s %2$s object failed.', $object_id, $this->get_cache_group() );
 
@@ -383,12 +393,14 @@ abstract class Database implements Interfaces\Database {
 	public function get_by( $column, $object_id ) {
 		$errors = new \WP_Error();
 
+		// Log an error if the column is invalid.
 		if ( ! array_key_exists( $column, $this->get_columns() ) ) {
 			$message = sprintf( 'The %1$s column is invalid for %2$s queries.', $column, $this->get_table_name() );
 
 			$errors->add( 'invalid_column', $message );
 		}
 
+		// Log an error if the object ID is empty.
 		if ( empty( $object_id ) ) {
 			$message = sprintf( 'get_column() requires a valid object ID for %s queries.', $this->get_table_name() );
 
@@ -422,12 +434,14 @@ abstract class Database implements Interfaces\Database {
 	public function get_column( $column, $object_id ) {
 		$errors = new \WP_Error();
 
+		// Log an error if the column is invalid.
 		if ( ! array_key_exists( $column, $this->get_columns() ) ) {
 			$message = sprintf( 'The \'%1$s\' column is invalid for \'%2$s\' queries.', $column, $this->get_table_name() );
 
 			$errors->add( 'invalid_column', $message );
 		}
 
+		// Log an error if the object ID is empty.
 		if ( empty( $object_id ) ) {
 			$message = sprintf( 'get_column() requires a valid object ID for \'%s\' queries.', $this->get_table_name() );
 
@@ -462,18 +476,21 @@ abstract class Database implements Interfaces\Database {
 	public function get_column_by( $column, $column_where, $column_value ) {
 		$errors = new \WP_Error();
 
+		// Log an error if the column to compare against is empty.
 		if ( empty( $column_where ) ) {
 			$message = sprintf( 'Missing column to match against for the WHERE clause in the \'%s\' query.', $this->get_table_name() );
 
 			$errors->add( 'missing_where_column', $message );
 		}
 
+		// Log an error if the column value is empty.
 		if ( empty( $column_value ) ) {
 			$message = sprintf( 'Missing column value for the \'%s\' query.', $this->get_table_name() );
 
 			$errors->add( 'missing_value', $message );
 		}
 
+		// Log an error if the column is invalid.
 		if ( ! array_key_exists( $column, $this->get_columns() ) ) {
 			$message = sprintf( 'The \'%1$s\' column is invalid for \'%2$s\' queries.', $column, $this->get_table_name() );
 
