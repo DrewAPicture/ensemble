@@ -9,9 +9,7 @@
  */
 namespace Ensemble\Core;
 
-use Ensemble\Core\Interfaces;
-use function Ensemble\clean_item_cache;
-use function Ensemble\get_wp_timezone;
+use function Ensemble\{clean_item_cache, get_wp_timezone};
 
 /**
  * Core database abstraction layer.

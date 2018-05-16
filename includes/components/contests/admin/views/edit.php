@@ -10,7 +10,7 @@
 namespace Ensemble\Components\Contests\Admin;
 
 use function Ensemble\Components\Contests\{get_contest, get_allowed_statuses, get_allowed_types};
-use function Ensemble\html;
+use function Ensemble\{html};
 
 $contest_id = $_REQUEST['contest_id'] ?? 0;
 $contest    = get_contest( $contest_id );

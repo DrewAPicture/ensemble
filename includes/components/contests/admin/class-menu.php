@@ -10,7 +10,7 @@
 namespace Ensemble\Components\Contests\Admin;
 
 use Ensemble\Core\Interfaces\Menu_Router;
-use function Ensemble\load_view;
+use function Ensemble\{load_view};
 
 /**
  * Sets up the Contests menu.

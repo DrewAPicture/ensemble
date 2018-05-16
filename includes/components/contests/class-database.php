@@ -10,7 +10,7 @@
 namespace Ensemble\Components\Contests;
 
 use Ensemble\Core;
-use function Ensemble\get_wp_timezone;
+use function Ensemble\{get_wp_timezone};
 
 /**
  * Contests table database class.

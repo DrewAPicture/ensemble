@@ -10,7 +10,7 @@
 namespace Ensemble\Components\Contests;
 
 use Ensemble\Core\Interfaces\Loader;
-use function Ensemble\load;
+use function Ensemble\{load};
 
 /**
  * Implements Contests component functionality in Ensemble core.

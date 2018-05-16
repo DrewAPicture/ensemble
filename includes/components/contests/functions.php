@@ -9,8 +9,6 @@
  */
 namespace Ensemble\Components\Contests;
 
-use function Ensemble\contests;
-
 /**
  * Retrieves a contest.
  *

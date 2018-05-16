@@ -9,8 +9,8 @@
  */
 namespace Ensemble\Components\Contests\Admin;
 
-use Ensemble\Contests;
-use function Ensemble\html;
+use function Ensemble\Components\Contests\{get_allowed_types, get_allowed_statuses};
+use function Ensemble\{html};
 ?>
 <div class="wrap bootstrap-iso">
 	<h1 class="wp-heading-inline"><?php esc_html_e( 'Add Contest', 'ensemble' ); ?></h1>
@@ -91,7 +91,7 @@ use function Ensemble\html;
 									'label'            => __( 'Type', 'ensemble' ),
 									'class'            => array( 'form-control' ),
 									'selected'         => 'regular',
-									'options'          => Contests\get_allowed_types(),
+									'options'          => get_allowed_types(),
 									'show_option_all'  => false,
 									'show_option_none' => false,
 								) );
@@ -104,7 +104,7 @@ use function Ensemble\html;
 									'label'            => __( 'Status', 'ensemble' ),
 									'class'            => array( 'form-control' ),
 									'selected'         => 'draft',
-									'options'          => Contests\get_allowed_statuses(),
+									'options'          => get_allowed_statuses(),
 									'show_option_all'  => false,
 									'show_option_none' => false,
 								) );

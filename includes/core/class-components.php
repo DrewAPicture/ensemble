@@ -10,15 +10,14 @@
 namespace Ensemble\Core;
 
 use Ensemble\Components as Component;
-use Ensemble\Core\Interfaces\Loader;
-use function Ensemble\load;
+use function Ensemble\{load};
 
 /**
  * Sets up components.
  *
  * @since 1.0.0
  */
-class Components implements Loader {
+class Components implements Interfaces\Loader {
 
 	/**
 	 * Initializes the components.

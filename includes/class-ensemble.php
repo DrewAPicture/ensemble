@@ -8,10 +8,8 @@
  * @since     1.0.0
  */
 
-use Ensemble\Admin;
-use Ensemble\Core;
-use Ensemble\Util;
-use function Ensemble\load;
+use Ensemble\{Admin, Core, Util};
+use function Ensemble\{load};
 
 /**
  * Sets up the Ensemble plugin.
