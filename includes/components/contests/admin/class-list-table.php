@@ -180,7 +180,7 @@ class List_Table extends \WP_List_Table {
 			'venues'     => __( 'Venue(s)', 'ensemble' ),
 			'type'       => __( 'Type', 'ensemble' ),
 			'status'     => __( 'Status', 'ensemble' ),
-			'start_date' => __( 'Date', 'ensemble' ),
+			'start_date' => __( 'Start Date', 'ensemble' ),
 		);
 
 		/**
