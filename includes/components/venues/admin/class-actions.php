@@ -15,7 +15,7 @@ use Ensemble\Core\Interfaces\Loader;
 use Ensemble\Core\Traits\View_Loader;
 
 /**
- * Sets up logic for performing CRUD actions on contests.
+ * Sets up logic for performing CRUD actions on venues.
  *
  * @since 1.0.0
  *
@@ -27,7 +27,7 @@ class Actions implements Loader {
 	use View_Loader;
 
 	/**
-	 * Registers hook callbacks for contest actions.
+	 * Registers hook callbacks for venue actions.
 	 *
 	 * @since 1.0.0
 	 */
@@ -101,14 +101,37 @@ class Actions implements Loader {
 		if ( false === $valid_request ) {
 			return;
 		}
+
+		$nonce    = $_REQUEST['ensemble-delete-venue-nonce'] ?? false;
+		$answer   = $_REQUEST['venue-delete'] ?? 'no';
+		$venue_id = $_REQUEST['venue-id'] ?? 0;
+
+		$redirect = add_query_arg( 'page', 'ensemble-admin-venues', admin_url( 'admin.php' ) );
+
+		if ( ! wp_verify_nonce( $nonce, 'ensemble-delete-venue-nonce' ) || 'no' === $answer || 0 === $venue_id ) {
+			// TODO add notice handler for the different cases.
+			if ( wp_redirect( $redirect ) ) {
+				exit;
+			}
+		}
+
+		if ( 'yes' === $answer ) {
+			$deleted = ( new Database )->delete( $venue_id );
+
+			// TODO add notice handler for the different cases.
+			if ( wp_redirect( $redirect ) ) {
+				exit;
+			}
+		}
+
 	}
 
 	/**
-	 * Retrieves registered contest views.
+	 * Retrieves registered venue views.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return array Registered contest views.
+	 * @return array Registered venue views.
 	 */
 	public function get_views() {
 		return array( 'overview', 'add', 'edit', 'delete' );
