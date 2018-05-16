@@ -86,15 +86,29 @@ use function Ensemble\{html};
 						<div class="form-row form-group">
 							<div class="col">
 								<?php
-								html()->select( array(
-									'id'               => 'contest-type',
-									'label'            => __( 'Type', 'ensemble' ),
-									'class'            => array( 'form-control' ),
-									'selected'         => 'regular',
-									'options'          => get_allowed_types(),
-									'show_option_all'  => false,
-									'show_option_none' => false,
-								) );
+								$types = get_allowed_types();
+
+								// If only one type, don't bother with a select.
+								if ( 1 === count( $types ) ) :
+									$first = key( $types );
+									html()->text( array(
+										'id'       => 'contest-type',
+										'label'    => __( 'Type', 'ensemble' ),
+										'class'    => array( 'form-control', 'form-control-plaintext' ),
+										'value'    => $types[ $first ],
+										'readonly' => true,
+									) );
+								else :
+									html()->select( array(
+										'id'               => 'contest-type',
+										'label'            => __( 'Type', 'ensemble' ),
+										'class'            => array( 'form-control' ),
+										'selected'         => 'regular',
+										'options'          => get_allowed_types(),
+										'show_option_all'  => false,
+										'show_option_none' => false,
+									) );
+								endif;
 								?>
 							</div>
 							<div class="col">

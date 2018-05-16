@@ -9,7 +9,7 @@
  */
 namespace Ensemble\Components\Contests\Admin;
 
-use function Ensemble\Components\Contests\{get_contest, get_allowed_statuses, get_allowed_types};
+use function Ensemble\Components\Contests\{get_contest, get_allowed_statuses, get_allowed_types, get_type_label};
 use function Ensemble\{html};
 
 $contest_id = $_REQUEST['contest_id'] ?? 0;
@@ -103,15 +103,26 @@ $contest    = get_contest( $contest_id );
 							<div class="form-row form-group">
 								<div class="col">
 									<?php
-									html()->select( array(
-										'id'               => 'contest-type',
-										'label'            => __( 'Type', 'ensemble' ),
-										'class'            => array( 'form-control' ),
-										'selected'         => $contest->type,
-										'options'          => get_allowed_types(),
-										'show_option_all'  => false,
-										'show_option_none' => false,
-									) );
+									$types = get_allowed_types();
+
+									if ( count( $types ) > 1 || ! array_key_exists( $contest->type, $types ) ) :
+										html()->select( array(
+											'id'               => 'contest-type',
+											'label'            => __( 'Type', 'ensemble' ),
+											'class'            => array( 'form-control' ),
+											'selected'         => $contest->type,
+											'options'          => get_allowed_types(),
+											'show_option_all'  => false,
+											'show_option_none' => false,
+										) );
+									else :
+										html()->text( array(
+											'id'       => 'contest-type',
+											'label'    => __( 'Type', 'ensemble' ),
+											'class'    => array( 'form-control' ),
+											'value'    => get_type_label( $contest->type ),
+										) );
+									endif;
 									?>
 								</div>
 								<div class="col">
