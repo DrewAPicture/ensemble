@@ -10,5 +10,5 @@
 namespace Ensemble\Components\Venues\Admin;
 ?>
 <div class="wrap">
-	<h1 class="wp-heading-inline"><?php esc_html_e( 'Add Contest', 'ensemble' ); ?></h1>
+	<h1 class="wp-heading-inline"><?php esc_html_e( 'Add Venue', 'ensemble' ); ?></h1>
 </div>
