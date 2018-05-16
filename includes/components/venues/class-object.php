@@ -79,4 +79,16 @@ class Object extends Core\Object {
 		return ( new Database );
 	}
 
+	/**
+	 * Retrieves the date the venue was added, formatted with the given format.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $format Optional. How to format the date. Default 'm/d/Y'.
+	 * @return string Formatted date.
+	 */
+	public function get_start_date( $format = 'm/d/Y' ) {
+		return date( $format, strtotime( $this->date_added ) );
+	}
+
 }
