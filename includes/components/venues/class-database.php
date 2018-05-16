@@ -97,6 +97,7 @@ class Database extends Core\Database {
 			'id'         => '%d',
 			'name'       => '%s',
 			'address'    => '%s',
+			'type'       => '%s',
 			'status'     => '%s',
 			'date_added' => '%s',
 		);
@@ -109,6 +110,7 @@ class Database extends Core\Database {
 	 */
 	public function get_column_defaults() {
 		return array(
+			'type'       => 'school',
 			'status'     => 'active',
 			'date_added' => $this->get_date_object()->format( 'Y-m-d H:i:s' ),
 		);
@@ -142,6 +144,7 @@ class Database extends Core\Database {
 			'id'      => 0,
 			'exclude' => array(),
 			'status'  => '',
+			'type'    => '',
 		);
 
 		$args = wp_parse_args( $query_args, $defaults );
