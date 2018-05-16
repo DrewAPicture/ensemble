@@ -52,6 +52,17 @@ namespace Ensemble {
 	}
 
 	/**
+	 * Helper to retrieve an instance of the HTML class.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return Util\HTML HTML class instance.
+	 */
+	function html() {
+		return new Util\HTML;
+	}
+
+	/**
 	 * Retrieves an instance of the Contests database class.
 	 *
 	 * @since 1.0.0
