@@ -253,8 +253,8 @@ class List_Table extends \WP_List_Table {
 	public function prepare_items() {
 		$per_page = $this->get_items_per_page( 'ensemble_contests_per_page', $this->per_page );
 
-		$columns = $this->get_columns();
-		$hidden  = array();
+		$columns  = $this->get_columns();
+		$hidden   = array();
 		$sortable = $this->get_sortable_columns();
 
 		$this->_column_headers = array( $columns, $hidden, $sortable );
