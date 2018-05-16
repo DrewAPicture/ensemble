@@ -26,7 +26,7 @@ class Setup implements Loader {
 	 * @since 1.0.0
 	 */
 	public function load() {
-		require_once ENSEMBLE_PLUGIN_DIR . 'includes/functions/judge-functions.php';
+		require_once __DIR__ . '/functions.php';
 	}
 
 }

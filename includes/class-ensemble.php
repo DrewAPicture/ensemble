@@ -116,6 +116,7 @@ final class Ensemble {
 	 * @since 1.0.0
 	 */
 	private function load() {
+		// Autoloader and third-party libraries.
 		require_once ENSEMBLE_PLUGIN_DIR . '/includes/lib/autoload.php';
 		require_once ENSEMBLE_PLUGIN_DIR . '/includes/lib/claws.php';
 
