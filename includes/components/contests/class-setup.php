@@ -10,6 +10,7 @@
 namespace Ensemble\Components\Contests;
 
 use Ensemble\Core\Interfaces\Loader;
+use Ensemble\Core\Interfaces\Views_Manifest;
 use function Ensemble\load;
 
 /**
@@ -19,7 +20,7 @@ use function Ensemble\load;
  *
  * @see Ensemble\Core\Interfaces\Loader
  */
-class Setup implements Loader {
+class Setup implements Loader, Views_Manifest {
 
 	/**
 	 * Initializes the component.
@@ -35,6 +36,17 @@ class Setup implements Loader {
 			load( new Admin\Delete );
 			load( new Admin\Overview );
 		}
+	}
+
+	/**
+	 * Retrieves a list of all contest admin views.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array Contest admin views.
+	 */
+	public function get_views() {
+		return array( 'overview', 'add', 'edit', 'delete' );
 	}
 
 }
