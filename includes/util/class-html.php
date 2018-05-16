@@ -69,6 +69,11 @@ class HTML {
 	public function select( $args = array(), $echo = true ) {
 		$this->type = 'select';
 
+		// Ensure the name attribute is always set if the ID is set.
+		if ( ! empty( $args['id'] ) && empty( $args['name'] ) ) {
+			$args['name'] = $args['id'];
+		}
+
 		$defaults = array(
 			'id'               => '',
 			'name'             => '',
@@ -229,6 +234,11 @@ class HTML {
 			$this->type = 'checkbox';
 		}
 
+		// Ensure the name attribute is always set if the ID is set.
+		if ( ! empty( $args['id'] ) && empty( $args['name'] ) ) {
+			$args['name'] = $args['id'];
+		}
+
 		$defaults = array(
 			'id'          => '',
 			'name'        => '',
@@ -310,6 +320,11 @@ class HTML {
 			$this->type = 'text';
 		} else {
 			$this->type = $type;
+		}
+
+		// Ensure the name attribute is always set if the ID is set.
+		if ( ! empty( $args['id'] ) && empty( $args['name'] ) ) {
+			$args['name'] = $args['id'];
 		}
 
 		$defaults = array(
