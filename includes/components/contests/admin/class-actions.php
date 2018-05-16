@@ -31,9 +31,9 @@ class Actions implements Loader {
 	 * @since 1.0.0
 	 */
 	public function load() {
-		add_action( 'init', array( 'add_contest' ) );
-		add_action( 'init', array( 'update_contest' ) );
-		add_action( 'init', array( 'delete_contest' ) );
+		add_action( 'init', array( $this, 'add_contest' ) );
+		add_action( 'init', array( $this, 'update_contest' ) );
+		add_action( 'init', array( $this, 'delete_contest' ) );
 	}
 
 	/**
