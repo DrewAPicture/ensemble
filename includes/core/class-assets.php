@@ -58,7 +58,7 @@ class Assets implements Interfaces\Loader {
 		wp_register_script( 'ensbl-bootstrap', ENSEMBLE_PLUGIN_URL . '/assets/js/vendor/bootstrap' . $suffix . '.js', array( 'jquery' ), $this->get_asset_version( '/assets/js/vendor/bootstrap' . $suffix . '.js' ) );
 		wp_register_script( 'ensbl-parsley', ENSEMBLE_PLUGIN_URL . '/assets/js/vendor/parsley.js', array( 'jquery', 'ensbl-bootstrap' ), $this->get_asset_version( '/assets/js/vendor/parsley.js' ) );
 		wp_register_script( 'ensbl-selectWoo', ENSEMBLE_PLUGIN_URL . '/assets/js/vendor/selectWoo.js', array( 'jquery' ), $this->get_asset_version( '/assets/js/vendor/selectWoo.js' ) );
-		wp_register_script( 'ensbl-admin', ENSEMBLE_PLUGIN_URL . '/assets/js/ensemble-admin.js', array( 'ensbl-parsley', 'ensbl-selectWoo' ), $this->get_asset_version( '/assets/js/ensemble-admin.js' ) );
+		wp_register_script( 'ensbl-admin', ENSEMBLE_PLUGIN_URL . '/assets/js/ensemble-admin.js', array( 'ensbl-parsley', 'ensbl-selectWoo', 'jquery-ui-datepicker' ), $this->get_asset_version( '/assets/js/ensemble-admin.js' ) );
 
 		if ( false !== strpos( $hook_suffix, 'page_ensemble-admin' ) ) {
 			wp_enqueue_style( 'ensbl-admin-css' );
