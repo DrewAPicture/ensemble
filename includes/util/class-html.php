@@ -548,6 +548,14 @@ class HTML {
 			),
 		);
 
+		if ( ! empty( $args['content'] ) ) {
+			$content = $args['content'];
+
+			unset( $args['content'] );
+		} else {
+			$content = '';
+		}
+
 		$args = $this->parse_args( $args, $defaults );
 
 		if ( 'add' === $args['context'] ) {
@@ -563,10 +571,6 @@ class HTML {
 				esc_html( $args['label'] )
 			);
 		}
-
-		$content = $args['content'];
-
-		unset( $args['content'] );
 
 		ob_start();
 
