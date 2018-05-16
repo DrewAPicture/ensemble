@@ -126,7 +126,8 @@ class Database extends Core\Database {
 	 *     @type int          $number  Number of venues to query for. Default 20.
 	 *     @type int          $offset  Number of venues to offset the query for. Default 0.
 	 *     @type int|array    $exclude Venue ID or array of IDs to explicitly exclude.
-	 *     @type string       $status  Venue status. Default empty.
+	 *     @type string       $status  Venue type. Default empty (all).
+	 *     @type string       $status  Venue status. Default empty (all).
 	 *     @type string       $order   How to order returned venue results. Accepts 'ASC' or 'DESC'.
 	 *                                 Default 'DESC'.
 	 *     @type string       $orderby Venues table column to order results by. Default 'id'.
@@ -165,6 +166,11 @@ class Database extends Core\Database {
 		// Exclude.
 		if ( ! empty( $args['exclude'] ) ) {
 			$claws->where( 'id' )->not_in( $args['exclude'], 'int' );
+		}
+
+		// Type.
+		if ( ! empty( $args['type'] ) ) {
+			$claws->where( 'type' )->equals( $args['type'] );
 		}
 
 		// Status.
