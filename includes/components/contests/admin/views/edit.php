@@ -79,7 +79,7 @@ $contest    = get_contest( $contest_id );
 									html()->text( array(
 										'id'    => 'contest-start-date',
 										'label' => __( 'Start Date', 'ensemble' ),
-										'class' => array( 'form-control' ),
+										'class' => array( 'form-control', 'date' ),
 										'value' => $contest->start_date,
 									) );
 									?>
@@ -89,7 +89,7 @@ $contest    = get_contest( $contest_id );
 									html()->text( array(
 										'id'    => 'contest-end-date',
 										'label' => __( 'End Date', 'ensemble' ),
-										'class' => array( 'form-control' ),
+										'class' => array( 'form-control', 'date' ),
 										'value' => $contest->end_date,
 									) );
 									?>

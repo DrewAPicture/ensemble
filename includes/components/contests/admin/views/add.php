@@ -64,7 +64,7 @@ use function Ensemble\{html};
 								html()->text( array(
 									'id'    => 'contest-start-date',
 									'label' => __( 'Start Date', 'ensemble' ),
-									'class' => array( 'form-control' ),
+									'class' => array( 'form-control', 'date' ),
 								) );
 								?>
 							</div>
@@ -73,7 +73,7 @@ use function Ensemble\{html};
 								html()->text( array(
 									'id'    => 'contest-end-date',
 									'label' => __( 'End Date', 'ensemble' ),
-									'class' => array( 'form-control' ),
+									'class' => array( 'form-control', 'date' ),
 								) );
 								?>
 							</div>
