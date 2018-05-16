@@ -141,6 +141,24 @@ $contest    = get_contest( $contest_id );
 							</div>
 						</div>
 					</div>
+					<div class="pb-5">
+						<?php
+						wp_nonce_field( 'ensemble-update-contest-nonce', 'ensemble-update-contest-nonce' );
+
+						// Contest ID (hidden).
+						html()->hidden( array(
+							'name'  => 'contest-id',
+							'value' => $contest->id,
+						) );
+
+						// Update Contest button
+						html()->input( 'submit', array(
+							'name'  => 'ensemble-update-contest',
+							'value' => 'Update Contest',
+							'class' => array( 'btn-dark', 'btn', 'btn-primary' )
+						) );
+						?>
+					</div>
 				</form>
 
 			<?php endif; ?>

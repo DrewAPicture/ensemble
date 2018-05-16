@@ -123,6 +123,19 @@ use function Ensemble\{html};
 						</div>
 					</div>
 				</div>
+
+				<div class="pb-5">
+					<?php
+					wp_nonce_field( 'ensemble-add-contest-nonce', 'ensemble-add-contest-nonce' );
+
+					// Add Contest button
+					html()->input( 'submit', array(
+						'name'  => 'ensemble-add-contest',
+						'value' => 'Add Contest',
+						'class' => array( 'btn-dark', 'btn', 'btn-primary' )
+					) );
+					?>
+				</div>
 			</form>
 		</div>
 	</div>
