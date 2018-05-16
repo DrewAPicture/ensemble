@@ -120,7 +120,7 @@ final class Ensemble {
 		require_once ENSEMBLE_PLUGIN_DIR . '/includes/lib/claws.php';
 
 		// Core functions.
-		require_once ENSEMBLE_PLUGIN_DIR . '/includes/functions/core-functions.php';
+		require_once ENSEMBLE_PLUGIN_DIR . '/includes/functions.php';
 	}
 
 	/**
