@@ -26,7 +26,21 @@ class Requests implements Loader {
 	 * @since 1.0.0
 	 */
 	public function load() {
-
+		add_action( 'query_vars', array( $this, 'whitelist_query_vars' ) );
 	}
 
+	/**
+	 * Registers query variables needed by the plugin.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $query_vars Existing list of query vars.
+	 * @return array Modified list of query vars.
+	 */
+	public function whitelist_query_vars( $query_vars ) {
+		return array_merge( $query_vars, array(
+			'contest_id',
+			'venue_id',
+		) );
+	}
 }
