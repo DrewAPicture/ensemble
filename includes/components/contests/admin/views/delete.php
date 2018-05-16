@@ -35,7 +35,7 @@ $contest    = get_contest( $contest_id );
 							<h3><?php esc_html_e( 'Contest Information', 'ensemble' ); ?></h3>
 
 							<div class="table-responsive">
-								<table id="product-table" class="table">
+								<table class="table">
 									<thead>
 									<tr>
 										<th><?php esc_html_e( 'Name', 'ensemble' ); ?></th>
