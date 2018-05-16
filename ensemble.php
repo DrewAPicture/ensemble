@@ -46,7 +46,7 @@ final class Ensemble_Check_Requirements {
 
 		// PHP.
 		'php' => array(
-			'minimum' => '5.5.0',
+			'minimum' => '7.0',
 			'name'    => 'PHP',
 			'exists'  => true,
 			'current' => false,
