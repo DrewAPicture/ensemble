@@ -37,10 +37,17 @@ namespace Ensemble {
 	 * @return void (Displays).
 	 */
 	function load_view( $object, $view ) {
-		$traits = class_uses( $object );
+		$needle = 'Ensemble\\Core\\Traits\\View_Loader';
 
-		if ( array_key_exists( 'Ensemble\\Core\\Traits\\View_Loader', $traits ) ) {
+		if ( array_key_exists( $needle, class_uses( $object ) ) ) {
 			$object->load_view( $view );
+		} else {
+			// class_uses() doesn't travel up the inheritance chain, so check the parents manually.
+			foreach ( class_parents( $object ) as $parent ) {
+				if ( array_key_exists( $needle, class_uses( $parent ) ) ) {
+					$object->load_view( $view );
+				}
+			}
 		}
 	}
 
