@@ -48,16 +48,16 @@ class Assets implements Interfaces\Loader {
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.min' : '';
 
 		// Stylesheets.
-		wp_register_style( 'ensbl-jquery-ui-css', ENSEMBLE_PLUGIN_URL . '/assets/css/jquery-ui-fresh.min.css', array(), $this->get_asset_version( '/assets/css/jquery-ui-fresh.min.css' ) );
-		wp_register_style( 'ensbl-selectWoo-css', ENSEMBLE_PLUGIN_URL . '/assets/css/selectWoo.min.css', array(), $this->get_asset_version( '/assets/css/selectWoo.min.css' ) );
-		wp_register_style( 'ensbl-select2-bootstrap-css', ENSEMBLE_PLUGIN_URL . '/assets/css/select2-bootstrap.min.css', array(), $this->get_asset_version( '/assets/css/select2-bootstrap.min.css' ) );
-		wp_register_style( 'ensbl-bootstrap-css', ENSEMBLE_PLUGIN_URL . '/assets/css/bootstrap' . $suffix . '.css', array(), $this->get_asset_version( '/assets/css/bootstrap' . $suffix . '.css' ) );
+		wp_register_style( 'ensbl-jquery-ui-css', ENSEMBLE_PLUGIN_URL . '/assets/css/vendor/jquery-ui-fresh.min.css', array(), $this->get_asset_version( '/assets/css/vendor/jquery-ui-fresh.min.css' ) );
+		wp_register_style( 'ensbl-selectWoo-css', ENSEMBLE_PLUGIN_URL . '/assets/css/vendor/selectWoo.min.css', array(), $this->get_asset_version( '/assets/css/vendor/selectWoo.min.css' ) );
+		wp_register_style( 'ensbl-select2-bootstrap-css', ENSEMBLE_PLUGIN_URL . '/assets/css/vendor/select2-bootstrap.min.css', array(), $this->get_asset_version( '/assets/css/vendor/select2-bootstrap.min.css' ) );
+		wp_register_style( 'ensbl-bootstrap-css', ENSEMBLE_PLUGIN_URL . '/assets/css/vendor/bootstrap' . $suffix . '.css', array(), $this->get_asset_version( '/assets/css/vendor/bootstrap' . $suffix . '.css' ) );
 		wp_register_style( 'ensbl-admin-css', ENSEMBLE_PLUGIN_URL . '/assets/css/ensemble-admin.css', array( 'ensbl-bootstrap-css', 'ensbl-selectWoo-css' ), $this->get_asset_version( '/assets/css/ensemble-admin.css' ) );
 
 		// Scripts.
-		wp_register_script( 'ensbl-bootstrap', ENSEMBLE_PLUGIN_URL . '/assets/js/bootstrap' . $suffix . '.js', array( 'jquery' ), $this->get_asset_version( '/assets/js/bootstrap' . $suffix . '.js' ) );
-		wp_register_script( 'ensbl-parsley', ENSEMBLE_PLUGIN_URL . '/assets/js/parsley.js', array( 'jquery', 'ensbl-bootstrap' ), $this->get_asset_version( '/assets/js/parsley.js' ) );
-		wp_register_script( 'ensbl-selectWoo', ENSEMBLE_PLUGIN_URL . '/assets/js/selectWoo.js', array( 'jquery' ), $this->get_asset_version( '/assets/js/selectWoo.js' ) );
+		wp_register_script( 'ensbl-bootstrap', ENSEMBLE_PLUGIN_URL . '/assets/js/vendor/bootstrap' . $suffix . '.js', array( 'jquery' ), $this->get_asset_version( '/assets/js/vendor/bootstrap' . $suffix . '.js' ) );
+		wp_register_script( 'ensbl-parsley', ENSEMBLE_PLUGIN_URL . '/assets/js/vendor/parsley.js', array( 'jquery', 'ensbl-bootstrap' ), $this->get_asset_version( '/assets/js/vendor/parsley.js' ) );
+		wp_register_script( 'ensbl-selectWoo', ENSEMBLE_PLUGIN_URL . '/assets/js/vendor/selectWoo.js', array( 'jquery' ), $this->get_asset_version( '/assets/js/vendor/selectWoo.js' ) );
 		wp_register_script( 'ensbl-admin', ENSEMBLE_PLUGIN_URL . '/assets/js/ensemble-admin.js', array( 'ensbl-parsley', 'ensbl-selectWoo' ), $this->get_asset_version( '/assets/js/ensemble-admin.js' ) );
 
 		if ( false !== strpos( $hook_suffix, 'page_ensemble-admin' ) ) {
