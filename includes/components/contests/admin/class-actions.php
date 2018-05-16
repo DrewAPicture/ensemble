@@ -9,7 +9,7 @@
  */
 namespace Ensemble\Components\Contests\Admin;
 
-use Ensemble\Components\Contests\Setup;
+use Ensemble\Components\Contests\Database;
 use Ensemble\Core\Interfaces\Loader;
 use Ensemble\Core\Traits\View_Loader;
 
@@ -60,7 +60,34 @@ class Actions implements Loader {
 	 * @since 1.0.0
 	 */
 	public function delete_contest() {
+		$valid_request = $_REQUEST['ensemble-delete-contest'] ?? false;
 
+		// Bail if the request doesn't even match.
+		if ( false === $valid_request ) {
+			return;
+		}
+
+		$nonce      = $_REQUEST['ensemble-delete-contest-nonce'] ?? false;
+		$answer     = $_REQUEST['contest-delete'] ?? 'no';
+		$contest_id = $_REQUEST['contest-id'] ?? 0;
+
+		$redirect = add_query_arg( 'page', 'ensemble-admin-contests', admin_url( 'admin.php' ) );
+
+		if ( ! wp_verify_nonce( $nonce, 'ensemble-delete-contest-nonce' ) || 'no' === $answer || 0 === $contest_id ) {
+			// TODO add notice handler for the different cases.
+			if ( wp_redirect( $redirect ) ) {
+				exit;
+			}
+		}
+
+		if ( 'yes' === $answer ) {
+			$deleted = ( new Database )->delete( $contest_id );
+
+			// TODO add notice handler for the different cases.
+			if ( wp_redirect( $redirect ) ) {
+				exit;
+			}
+		}
 	}
 
 	/**
