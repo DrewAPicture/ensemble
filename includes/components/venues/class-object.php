@@ -53,6 +53,14 @@ class Object extends Core\Object {
 	public $status;
 
 	/**
+	 * Venue type.
+	 *
+	 * @since 1.0.0
+	 * @var   string
+	 */
+	public $type;
+
+	/**
 	 * Date the venue was added.
 	 *
 	 * @since 1.0.0

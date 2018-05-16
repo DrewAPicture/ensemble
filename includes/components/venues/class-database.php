@@ -229,6 +229,7 @@ class Database extends Core\Database {
 			id bigint(20) NOT NULL AUTO_INCREMENT,
 			name mediumtext NOT NULL,
 			address mediumtext NOT NULL,
+			type tinytext NOT NULL,
 			status tinytext NOT NULL,
 			date_added datetime NOT NULL,
 			PRIMARY KEY (id)
