@@ -22,6 +22,46 @@ use Ensemble\Core;
 class Object extends Core\Object {
 
 	/**
+	 * Venue ID.
+	 *
+	 * @since 1.0.0
+	 * @var   int
+	 */
+	public $id;
+
+	/**
+	 * Venue name.
+	 *
+	 * @since 1.0.0
+	 * @var   string
+	 */
+	public $name = '';
+
+	/**
+	 * Venue address.
+	 *
+	 * @since 1.0.0
+	 * @var   array
+	 */
+	public $address = '';
+
+	/**
+	 * Venue status.
+	 *
+	 * @since 1.0.0
+	 * @var   string
+	 */
+	public $status;
+
+	/**
+	 * Date the venue was added.
+	 *
+	 * @since 1.0.0
+	 * @var   string
+	 */
+	public $date_added;
+
+	/**
 	 * Retrieves a Database instance corresponding to this object.
 	 *
 	 * @since 1.0.0
