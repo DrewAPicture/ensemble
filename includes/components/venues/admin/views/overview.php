@@ -15,14 +15,14 @@ namespace Ensemble\Components\Venues\Admin;
 		<?php esc_html_e( 'Add New', 'ensemble' ); ?>
 	</a>
 	<?php
-//	$list_table = new List_Table();
-//	$list_table->prepare_items();
+	$list_table = new List_Table();
+	$list_table->prepare_items();
 	?>
 	<form id="ensemble-venues" method="get">
 		<?php
-//		$list_table->search_box( __( 'Search', 'ensemble' ), 'ensemble-contests-search' );
-//		$list_table->views();
-//		$list_table->display();
+		$list_table->search_box( __( 'Search', 'ensemble' ), 'ensemble-contests-search' );
+		$list_table->views();
+		$list_table->display();
 		?>
 	</form>
 </div>
