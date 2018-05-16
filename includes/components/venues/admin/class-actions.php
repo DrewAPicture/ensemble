@@ -31,6 +31,35 @@ class Actions implements Loader {
 	 * @since 1.0.0
 	 */
 	public function load() {
+		add_action( 'init', array( $this, 'add_venue'    ) );
+		add_action( 'init', array( $this, 'update_venue' ) );
+		add_action( 'init', array( $this, 'delete_venue' ) );
+	}
+
+	/**
+	 * Processes adding a new venue.
+	 *
+	 * @since 1.0.0
+	 */
+	public function add_venue() {
+
+	}
+
+	/**
+	 * Processes updating a venue.
+	 *
+	 * @since 1.0.0
+	 */
+	public function update_venue() {
+
+	}
+
+	/**
+	 * Processes deleting a venue.
+	 *
+	 * @since 1.0.0
+	 */
+	public function delete_venue() {
 
 	}
 
