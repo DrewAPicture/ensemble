@@ -110,7 +110,7 @@ function get_type_label( $type ) {
 	$types = get_allowed_types();
 
 	if ( ! array_key_exists( $type, $types ) ) {
-		$type = 'regular';
+		$type = 'standard';
 	}
 
 	if ( ! empty( $types[ $type ] ) ) {
