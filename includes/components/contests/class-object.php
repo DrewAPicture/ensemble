@@ -111,4 +111,28 @@ class Object extends Core\Object {
 		return ( new Database );
 	}
 
+	/**
+	 * Retrieves the contest start date, formatted with the given format.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $format Optional. How to format the date. Default 'm/d/Y'.
+	 * @return string Formatted start date.
+	 */
+	public function start_date( $format = 'm/d/Y' ) {
+		return date( $format, strtotime( $this->start_date ) );
+	}
+
+	/**
+	 * Retrieves the contest end date, formatted with the given format.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $format Optional. How to format the date. Default 'm/d/Y'.
+	 * @return string Formatted end date.
+	 */
+	public function end_date( $format = 'm/d/Y' ) {
+		return date( $format, strtotime( $this->end_date ) );
+	}
+
 }

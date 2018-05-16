@@ -299,6 +299,10 @@ class List_Table extends \WP_List_Table {
 	public function column_default( $contest, $column_name ) {
 		switch( $column_name ){
 
+			case 'start_date':
+				$value = $contest->start_date();
+				break;
+
 			case 'status':
 				$value = isset( $contest->status ) ? get_status_label( $contest->status ) : '';
 				break;
