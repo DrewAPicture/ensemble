@@ -97,7 +97,7 @@ namespace Ensemble {
 	 * @return bool True if the item cache was cleaned, false otherwise.
 	 */
 	function clean_item_cache( $object ) {
-		if ( ! $object instanceof \Ensemble\Components\Object ) {
+		if ( ! $object instanceof \Ensemble\Core\Object ) {
 			return false;
 		}
 
