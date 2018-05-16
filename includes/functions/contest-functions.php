@@ -65,7 +65,7 @@ function get_status_label( $status ) {
  */
 function get_allowed_types() {
 	$types = array(
-		'regular' => __( 'Regular', 'ensemble' ),
+		'standard' => __( 'Standard', 'ensemble' ),
 	);
 
 	/**

@@ -117,7 +117,7 @@ class Database extends Core\Database {
 		$today = $this->get_date_object();
 
 		return array(
-			'type'       => 'regular',
+			'type'       => 'standard',
 			'status'     => 'published',
 			'timezone'   => get_wp_timezone(),
 			'start_date' => $today->format( 'Y-m-d 00:00:00' ),
