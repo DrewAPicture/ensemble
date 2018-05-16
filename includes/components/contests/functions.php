@@ -17,7 +17,7 @@ use function Ensemble\contests;
  * @since 1.0.0
  *
  * @param int|Object $contest Contest ID or object.
- * @return false|Object Contest object if found, otherwise false.
+ * @return Object|\WP_Error Contest object if found, otherwise a WP_Error object.
  */
 function get_contest( $contest ) {
 	if ( is_object( $contest ) && isset( $contest->id ) ) {
@@ -25,16 +25,10 @@ function get_contest( $contest ) {
 	} elseif ( is_numeric( $contest ) ) {
 		$contest_id = absint( $contest );
 	} else {
-		return false;
+		$contest_id = 0;
 	}
 
-	$contest = ( new Database )->get_core_object( $contest_id );
-
-	if ( is_wp_error( $contest ) ) {
-		return false;
-	} else {
-		return $contest;
-	}
+	return ( new Database )->get_core_object( $contest_id );
 }
 
 /**
