@@ -113,8 +113,18 @@ class HTML {
 				);
 			}
 
+			if ( ! empty( $args['multiple'] ) && ! empty( $args['selected'] ) ) {
+				$selected_multiple = array_map( 'absint', explode( ',', $args['selected'] ) );
+			} else {
+				$selected_multiple = array();
+			}
+
 			foreach ( $args['options'] as $key => $option ) {
-				$selected = empty( $args['selected'] ) ? '' : selected( $args['selected'], $key, false );
+				if ( ! empty( $args['multiple'] ) ) {
+					$selected = in_array( $key, $selected_multiple, true );
+				} else {
+					$selected = empty( $args['selected'] ) ? '' : selected( $args['selected'], $key, false );
+				}
 
 				$options .= sprintf( '<option value="%1$s" %2$s>%3$s</option>',
 					esc_attr( $key ),
