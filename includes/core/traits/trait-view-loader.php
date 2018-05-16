@@ -9,8 +9,6 @@
  */
 namespace Ensemble\Core\Traits;
 
-use Ensemble\Core\Interfaces;
-
 /**
  * Core trait used for component classes needing to load views for various purposes.
  *
