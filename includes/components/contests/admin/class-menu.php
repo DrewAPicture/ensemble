@@ -52,25 +52,9 @@ class Menu implements Menu_Router {
 	 * @since 1.0.0
 	 */
 	public function route_request() {
+		$view = isset( $_REQUEST['ensbl-view'] ) ? sanitize_key( $_REQUEST['ensbl-view' ] ) : 'overview';
 
-		$view = isset( $_REQUEST['ensbl-view'] ) ? sanitize_key( $_REQUEST['ensbl-view' ] ) : '';
-
-		switch ( $view ) {
-
-			case 'add':
-			case 'edit':
-				load_view( new Save, $view );
-				break;
-
-			case 'delete':
-				load_view( new Delete, $view );
-				break;
-
-			case 'overview':
-			default:
-				load_view( new Overview, 'overview' );
-				break;
-		}
+		load_view( new Actions, $view );
 	}
 
 }
