@@ -110,3 +110,15 @@
 	border-color: #ddd #ddd #ddd transparent;
 	*border-left-color: #ffffff;
 }
+
+.bootstrap-iso .card {
+	max-width: 100%;
+}
+
+.form-group label {
+	font-size: 16px;
+}
+
+.bootstrap-iso .h1, .bootstrap-iso h1 {
+	font-size: 2em;
+}
