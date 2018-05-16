@@ -9,7 +9,6 @@
  */
 namespace Ensemble\Components\Contests;
 
-use Ensemble\Components;
 use Ensemble\Core;
 
 /**
@@ -17,7 +16,7 @@ use Ensemble\Core;
  *
  * @since 1.0.0
  *
- * @see \Ensemble\Components\Object
+ * @see \Ensemble\Core\Object
  */
 class Object extends Core\Object {
 
