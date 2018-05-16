@@ -7,7 +7,7 @@
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
  */
-namespace Ensemble\Venues;
+namespace Ensemble\Components\Venues;
 
 /**
  * Retrieves the list of allowed venue statuses and their corresponding labels.
