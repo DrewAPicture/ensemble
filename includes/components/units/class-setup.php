@@ -38,8 +38,18 @@ class Setup implements Loader {
 			load( new Admin\Actions );
 		}
 
-		add_action( 'init',        array( $this, 'register_units_tax' ) );
-		add_filter( 'parent_file', array( $this, 'fix_menu_highlight' ) );
+		$this->register_taxonomy_callbacks();
+	}
+
+	/**
+	 * Retrieves the taxonomy slug for Units.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string Taxonomy slug.
+	 */
+	public function get_taxonomy_slug() {
+		return 'ensemble_unit';
 	}
 
 	/**
@@ -47,7 +57,7 @@ class Setup implements Loader {
 	 *
 	 * @since 1.0.0
 	 */
-	public function register_units_tax() {
+	public function register_taxonomy() {
 		// Competing Units taxonomy.
 		register_taxonomy( 'ensemble_unit', array(), array(
 			'hierarchical'          => false,
@@ -93,7 +103,7 @@ class Setup implements Loader {
 	 * @param string $parent_file Menu parent file/slug.
 	 * @return string (Maybe) modified parent file.
 	 */
-	public function fix_menu_highlight( $parent_file ) {
+	public function set_menu_highlight( $parent_file ) {
 		$current_screen = get_current_screen();
 
 		if ( isset( $current_screen->taxonomy ) && 'ensemble_unit' === $current_screen->taxonomy ) {
