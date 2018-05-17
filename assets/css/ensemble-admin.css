@@ -132,6 +132,10 @@
 	margin-top: 0;
 }
 
+.bootstrap-iso small {
+	font-size: 100%;
+}
+
 .select2-container .select2-selection--single {
 	height: auto;
 }
