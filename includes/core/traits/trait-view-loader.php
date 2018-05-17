@@ -40,6 +40,7 @@ trait View_Loader {
 	 * @since 1.0.0
 	 *
 	 * @param string $view View to retrieve the path for (if it exists).
+	 * @return string File path if it exists, otherwise an empty string.
 	 */
 	public function get_view_path( $view ) {
 		$views = $this->get_views();
