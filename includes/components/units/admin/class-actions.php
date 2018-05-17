@@ -152,26 +152,13 @@ class Actions implements Loader {
 	 * @param null|\WP_Term $term Optional. Term object. Default null (ignored).
 	 */
 	private function output_directors_field( $term = null ) {
-		$directors_results = ( new Database )->query( array(
-			'fields' => array( 'ID', 'display_name' ),
-			'number' => 500,
-		) );
-
-		if ( ! empty( $directors_results ) ) {
-			foreach ( $directors_results as $director ) {
-				$directors[ $director->ID ] = $director->display_name;
-			}
-		} else {
-			$directors = array();
-		}
-
 		$args = array(
 			'id'               => 'unit-directors',
 			'name'             => 'unit-directors[]',
 			'label'            => __( 'Director(s)', 'ensemble' ),
 			'class'            => array( 'form-control' ),
 			'multiple'         => true,
-			'options'          => $directors,
+			'options'          => $this->get_directors_as_options(),
 			'show_option_all'  => false,
 			'show_option_none' => false,
 		);
@@ -179,11 +166,13 @@ class Actions implements Loader {
 		if ( null !== $term ) {
 			$selected = get_term_meta( $term->term_id, 'ensemble-directors', true );
 			$args['selected'] = array_map( 'absint', explode( ',', $selected ) );
-		}
-		?>
-		<div class="form-field bootstrap-iso w-95 fs-13">
-			<?php
+
+			// If $term is available this is for the Units > Edit form where the label is output separately.
+			unset( $args['label'] );
+
+			// Output the element without the wrapper.
 			html()->select( $args );
+		} else {
 			?>
 		</div>
 		<?php
