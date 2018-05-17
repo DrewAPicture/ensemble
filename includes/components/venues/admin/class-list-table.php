@@ -175,7 +175,6 @@ class List_Table extends \WP_List_Table {
 	 */
 	public function get_columns() {
 		$columns = array(
-			'cb'         => '<input type="checkbox" />',
 			'name'       => __( 'Name', 'ensemble' ),
 			'type'       => __( 'Type', 'ensemble' ),
 			'status'     => __( 'Status', 'ensemble' ),
@@ -327,15 +326,12 @@ class List_Table extends \WP_List_Table {
 	}
 
 	/**
-	 * Renders the checkbox column in the venues list table.
+	 * Renders the message to be displayed when there are no venues.
 	 *
 	 * @since 1.0.0
-	 *
-	 * @param Object $contest The current venue object.
-	 * @return string Displays a checkbox.
 	 */
-	function column_cb( $venue ) {
-		return '<input type="checkbox" name="venue_id[]" value="' . esc_attr( $venue->id ) . '" />';
+	function no_items() {
+		esc_html_e( 'No venues found.', 'ensemble' );
 	}
 
 }

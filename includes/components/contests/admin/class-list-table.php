@@ -175,7 +175,6 @@ class List_Table extends \WP_List_Table {
 	 */
 	public function get_columns() {
 		$columns = array(
-			'cb'         => '<input type="checkbox" />',
 			'name'       => __( 'Name', 'ensemble' ),
 			'venues'     => __( 'Venue(s)', 'ensemble' ),
 			'type'       => __( 'Type', 'ensemble' ),
@@ -328,16 +327,12 @@ class List_Table extends \WP_List_Table {
 	}
 
 	/**
-	 * Renders the checkbox column in the contests list table.
+	 * Renders the message to be displayed when there are no contests.
 	 *
 	 * @since 1.0.0
-	 *
-	 * @param Object $contest The current contest object.
-	 * @return string Displays a checkbox.
 	 */
-	function column_cb( $contest ) {
-		return '<input type="checkbox" name="contest_id[]" value="' . esc_attr( $contest->id ) . '" />';
+	function no_items() {
+		esc_html_e( 'No contests found.', 'ensemble' );
 	}
-
 
 }
