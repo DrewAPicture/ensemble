@@ -29,7 +29,6 @@ class Components implements Interfaces\Loader {
 		load( new Component\Contests\Setup );
 
 		load( new Component\People\Directors\Setup );
-		load( new Component\People\Judges\Setup );
 		load( new Component\People\Staff\Setup );
 
 		load( new Component\Units\Setup );
