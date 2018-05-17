@@ -242,6 +242,31 @@ class Database extends Core\Database {
 	}
 
 	/**
+	 * Updatea a contest record in the database.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int    $object_id Contest ID.
+	 * @param array  $data      Data array.
+	 * @param string $where     Optional. Column to match against in the WHERE clause. If empty, $primary_key
+	 *                          will be used. Default empty.
+	 * @return true|\WP_Error True if the contest was successfully updated, otherwise a WP_Error object.
+	 */
+	public function update( $object_id, $data = array(), $where = '' ) {
+		$contest = get_contest( $object_id );
+
+		if ( is_wp_error( $contest ) ) {
+			return $contest;
+		}
+
+		if ( ! empty( $data['venues'] ) && is_array( $data['venues'] ) ) {
+			$data['venues'] = implode( ',', $data['venues'] );
+		}
+
+		return parent::update( $object_id, $data, $where );
+	}
+
+	/**
 	 * Creates the database table.
 	 *
 	 * @since 1.0.0
