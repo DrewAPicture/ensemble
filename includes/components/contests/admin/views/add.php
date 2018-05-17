@@ -145,7 +145,7 @@ use function Ensemble\{html};
 						</div>
 					</div>
 
-					<div class="form-row">
+					<div class="form-row form-group">
 						<?php
 						html()->input( 'url', array(
 							'id'    => 'contest-external',
