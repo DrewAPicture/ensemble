@@ -29,7 +29,12 @@ trait View_Loader {
 		$file_path = $this->get_views_dir() . "{$view}.php";
 
 		if ( in_array( $view, $views, true ) && file_exists( $file_path ) ) {
-			include $file_path;
+			$classes = 'overview' === $view ? 'wrap' : 'wrap bootstrap-iso';
+			?>
+			<div class="<?php echo esc_attr( $classes ); ?>">
+				<?php include $file_path; ?>
+			</div>
+			<?php
 		}
 	}
 
