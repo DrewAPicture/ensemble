@@ -43,7 +43,7 @@ class List_Table extends \WP_List_Table {
 	 * @since 1.0.0
 	 * @var   int
 	 */
-	public $active;
+	public $active_count;
 
 	/**
 	 *  Number of items with the 'inactive' status found.
@@ -51,7 +51,7 @@ class List_Table extends \WP_List_Table {
 	 * @since 1.0.0
 	 * @var   int
 	 */
-	public $inactive;
+	public $inactive_count;
 
 	/**
 	 * Total item count for the current query.
