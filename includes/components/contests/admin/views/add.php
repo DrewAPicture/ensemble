@@ -19,137 +19,131 @@ use function Ensemble\{html};
 	<div class="row">
 		<div class="col-12 col-xl-8">
 			<form method="post">
-				<div class="card mb-3 md-md-5">
-					<div class="card-body">
-						<div class="form-group">
+				<div class="card mb-3 md-md-5 pt-4">
+					<div class="form-group">
+						<?php
+						html()->text( array(
+							'id'    => 'contest-name',
+							'label' => __( 'Name', 'ensemble' ),
+							'class' => array( 'form-control' ),
+						) );
+						?>
+					</div>
+
+					<div class="form-group">
+						<?php
+						html()->editor( array(
+							'id'      => 'contest-desc',
+							'label'   => __( 'Description', 'ensemble' ),
+							'context' => 'add',
+							'class'   => array( 'form-control' ),
+						) );
+						?>
+					</div>
+				</div>
+
+				<div class="card mb-3 md-md-5 pt-4">
+					<div class="form-group">
+						<?php
+						$venues = ( new Venues )->query( array(
+							'fields' => array( 'id', 'name' ),
+							'number' => 500,
+						) );
+
+						if ( ! empty( $venues ) ) :
+							foreach ( $venues as $venue ) {
+								$options[ $venue->id ] = $venue->name;
+							}
+						else :
+							$options = array();
+						endif;
+						html()->select( array(
+							'id'               => 'contest-venues',
+							'name'             => 'contest-venues[]',
+							'label'            => __( 'Venue(s)', 'ensemble' ),
+							'class'            => array( 'form-control' ),
+							'multiple'         => true,
+							'options'          => $options,
+							'show_option_all'  => false,
+							'show_option_none' => false,
+						) );
+						?>
+					</div>
+
+					<div class="form-row form-group">
+						<div class="col">
 							<?php
 							html()->text( array(
-								'id'    => 'contest-name',
-								'label' => __( 'Name', 'ensemble' ),
-								'class' => array( 'form-control' ),
+								'id'    => 'contest-start-date',
+								'label' => __( 'Start Date', 'ensemble' ),
+								'class' => array( 'form-control', 'date' ),
 							) );
 							?>
 						</div>
-
-						<div class="form-group">
+						<div class="col">
 							<?php
-							html()->editor( array(
-								'id'      => 'contest-desc',
-								'label'   => __( 'Description', 'ensemble' ),
-								'context' => 'add',
-								'class'   => array( 'form-control' ),
+							html()->text( array(
+								'id'    => 'contest-end-date',
+								'label' => __( 'End Date', 'ensemble' ),
+								'class' => array( 'form-control', 'date' ),
 							) );
 							?>
 						</div>
 					</div>
 				</div>
 
-				<div class="card mb-3 md-md-5">
-					<div class="card-body">
-						<div class="form-group">
+				<div class="card mb-3 md-md-5 pt-4">
+					<div class="form-row form-group">
+						<div class="col">
 							<?php
-							$venues = ( new Venues )->query( array(
-								'fields' => array( 'id', 'name' ),
-								'number' => 500,
-							) );
+							$types = get_allowed_types();
 
-							if ( ! empty( $venues ) ) :
-								foreach ( $venues as $venue ) {
-									$options[ $venue->id ] = $venue->name;
-								}
+							// If only one type, don't bother with a select.
+							if ( 1 === count( $types ) ) :
+								$first = key( $types );
+								html()->text( array(
+									'id'       => 'contest-type',
+									'label'    => __( 'Type', 'ensemble' ),
+									'class'    => array( 'form-control', 'form-control-plaintext' ),
+									'value'    => $types[ $first ],
+									'readonly' => true,
+								) );
 							else :
-								$options = array();
+								html()->select( array(
+									'id'               => 'contest-type',
+									'label'            => __( 'Type', 'ensemble' ),
+									'class'            => array( 'form-control' ),
+									'selected'         => 'regular',
+									'options'          => $types,
+									'show_option_all'  => false,
+									'show_option_none' => false,
+								) );
 							endif;
+							?>
+						</div>
+						<div class="col">
+							<?php
 							html()->select( array(
-								'id'               => 'contest-venues',
-								'name'             => 'contest-venues[]',
-								'label'            => __( 'Venue(s)', 'ensemble' ),
+								'id'               => 'contest-status',
+								'label'            => __( 'Status', 'ensemble' ),
 								'class'            => array( 'form-control' ),
-								'multiple'         => true,
-								'options'          => $options,
+								'selected'         => 'draft',
+								'options'          => get_allowed_statuses(),
 								'show_option_all'  => false,
 								'show_option_none' => false,
 							) );
 							?>
 						</div>
-
-						<div class="form-row form-group">
-							<div class="col">
-								<?php
-								html()->text( array(
-									'id'    => 'contest-start-date',
-									'label' => __( 'Start Date', 'ensemble' ),
-									'class' => array( 'form-control', 'date' ),
-								) );
-								?>
-							</div>
-							<div class="col">
-								<?php
-								html()->text( array(
-									'id'    => 'contest-end-date',
-									'label' => __( 'End Date', 'ensemble' ),
-									'class' => array( 'form-control', 'date' ),
-								) );
-								?>
-							</div>
-						</div>
 					</div>
-				</div>
 
-				<div class="card mb-3 md-md-5">
-					<div class="card-body">
-						<div class="form-row form-group">
-							<div class="col">
-								<?php
-								$types = get_allowed_types();
-
-								// If only one type, don't bother with a select.
-								if ( 1 === count( $types ) ) :
-									$first = key( $types );
-									html()->text( array(
-										'id'       => 'contest-type',
-										'label'    => __( 'Type', 'ensemble' ),
-										'class'    => array( 'form-control', 'form-control-plaintext' ),
-										'value'    => $types[ $first ],
-										'readonly' => true,
-									) );
-								else :
-									html()->select( array(
-										'id'               => 'contest-type',
-										'label'            => __( 'Type', 'ensemble' ),
-										'class'            => array( 'form-control' ),
-										'selected'         => 'regular',
-										'options'          => $types,
-										'show_option_all'  => false,
-										'show_option_none' => false,
-									) );
-								endif;
-								?>
-							</div>
-							<div class="col">
-								<?php
-								html()->select( array(
-									'id'               => 'contest-status',
-									'label'            => __( 'Status', 'ensemble' ),
-									'class'            => array( 'form-control' ),
-									'selected'         => 'draft',
-									'options'          => get_allowed_statuses(),
-									'show_option_all'  => false,
-									'show_option_none' => false,
-								) );
-								?>
-							</div>
-						</div>
-
-						<div class="form-row">
-							<?php
-							html()->input( 'url', array(
-								'id'    => 'contest-external',
-								'label' => __( 'External Contest URL', 'ensemble' ),
-								'class' => array( 'form-control' ),
-							) );
-							?>
-						</div>
+					<div class="form-row">
+						<?php
+						html()->input( 'url', array(
+							'id'    => 'contest-external',
+							'label' => __( 'External Contest URL', 'ensemble' ),
+							'class' => array( 'form-control' ),
+						) );
+						?>
 					</div>
 				</div>
 

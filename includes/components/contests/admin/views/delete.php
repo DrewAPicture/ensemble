@@ -30,87 +30,82 @@ $contest    = get_contest( $contest_id );
 
 				<?php else : ?>
 
-					<div class="card mb-3 md-md-5">
-						<div class="card-body">
-							<h3><?php esc_html_e( 'Contest Information', 'ensemble' ); ?></h3>
+					<div class="card mb-3 md-md-5 pt-4">
+						<h3><?php esc_html_e( 'Contest Information', 'ensemble' ); ?></h3>
 
-							<div class="table-responsive">
-								<table class="table">
-									<thead>
-									<tr>
-										<th><?php esc_html_e( 'Name', 'ensemble' ); ?></th>
-										<th><?php esc_html_e( 'Venues', 'ensemble' ); ?></th>
-										<th><?php esc_html_e( 'Status', 'ensemble' ); ?></th>
-										<th><?php esc_html_e( 'Start Date', 'ensemble' ); ?></th>
-									</tr>
-									</thead>
-									<tbody>
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+								<tr>
+									<th><?php esc_html_e( 'Name', 'ensemble' ); ?></th>
+									<th><?php esc_html_e( 'Venues', 'ensemble' ); ?></th>
+									<th><?php esc_html_e( 'Status', 'ensemble' ); ?></th>
+									<th><?php esc_html_e( 'Start Date', 'ensemble' ); ?></th>
+								</tr>
+								</thead>
+								<tbody>
 
-									<tr>
-										<td><?php echo apply_filters( 'the_title', $contest->name ); ?></td>
-										<td><?php echo $contest->venues; ?></td>
-										<td><?php echo get_status_label( $contest->status ); ?></td>
-										<td><?php echo $contest->get_start_date(); ?></td>
-									</tr>
+								<tr>
+									<td><?php echo apply_filters( 'the_title', $contest->name ); ?></td>
+									<td><?php echo $contest->venues; ?></td>
+									<td><?php echo get_status_label( $contest->status ); ?></td>
+									<td><?php echo $contest->get_start_date(); ?></td>
+								</tr>
 
-									</tbody>
-								</table>
-							</div>
+								</tbody>
+							</table>
 						</div>
 					</div>
 
-					<div class="card mb-3 md-md-5">
-						<div class="card-body">
-							<h3><?php esc_html_e( 'Are you sure?', 'ensemble' ); ?></h3>
+					<div class="card mb-3 md-md-5 pt-4">
+						<h3><?php esc_html_e( 'Are you sure?', 'ensemble' ); ?></h3>
 
-							<div class="form-group">
-								<div class="form-check mb-3">
-									<?php
-									// Radio button: Yes.
-									html()->radio( array(
-										'id'          => 'contest-delete-yes',
-										'name'        => 'contest-delete',
-										'label'       => __( 'Yes, delete', 'ensemble' ),
-										'label_class' => 'form-check-label',
-										'value'       => 'yes',
-										'class'       => array( 'form-check-input' ),
-									) );
-									?>
-								</div>
-
-								<div class="form-check">
-									<?php
-									// Radio button: No
-									html()->radio( array(
-										'id'          => 'contest-delete-no',
-										'name'        => 'contest-delete',
-										'label'       => __( 'No, cancel', 'ensemble' ),
-										'label_class' => 'form-check-label',
-										'class'       => array( 'form-check-input' ),
-										'value'       => 'no',
-										'checked'     => true,
-									) );
-									?>
-								</div>
+						<div class="form-group">
+							<div class="form-check mb-3">
+								<?php
+								// Radio button: Yes.
+								html()->radio( array(
+									'id'          => 'contest-delete-yes',
+									'name'        => 'contest-delete',
+									'label'       => __( 'Yes, delete', 'ensemble' ),
+									'label_class' => 'form-check-label',
+									'value'       => 'yes',
+									'class'       => array( 'form-check-input' ),
+								) );
+								?>
 							</div>
-							<?php
-							// Contest ID (hidden).
-							html()->hidden( array(
-								'name'  => 'contest-id',
-								'value' => $contest->id,
-							) );
 
-							wp_nonce_field( 'ensemble-delete-contest-nonce', 'ensemble-delete-contest-nonce' );
-
-							// Submit button.
-							html()->input( 'submit', array(
-								'name'  => 'ensemble-delete-contest',
-								'value' => 'Submit',
-								'class' => array( 'btn-dark', 'btn', 'btn-primary' ),
-							) );
-							?>
-
+							<div class="form-check">
+								<?php
+								// Radio button: No
+								html()->radio( array(
+									'id'          => 'contest-delete-no',
+									'name'        => 'contest-delete',
+									'label'       => __( 'No, cancel', 'ensemble' ),
+									'label_class' => 'form-check-label',
+									'class'       => array( 'form-check-input' ),
+									'value'       => 'no',
+									'checked'     => true,
+								) );
+								?>
+							</div>
 						</div>
+						<?php
+						// Contest ID (hidden).
+						html()->hidden( array(
+							'name'  => 'contest-id',
+							'value' => $contest->id,
+						) );
+
+						wp_nonce_field( 'ensemble-delete-contest-nonce', 'ensemble-delete-contest-nonce' );
+
+						// Submit button.
+						html()->input( 'submit', array(
+							'name'  => 'ensemble-delete-contest',
+							'value' => 'Submit',
+							'class' => array( 'btn-dark', 'btn', 'btn-primary' ),
+						) );
+						?>
 					</div>
 
 				<?php endif; ?>
