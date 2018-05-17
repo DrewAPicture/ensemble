@@ -28,7 +28,10 @@ class Install implements Loader {
 	 * @since 1.0.0
 	 */
 	public function load() {
-		( new Users )->add_caps();
+		$users = new Users;
+
+		$users->add_roles();
+		$users->add_caps();
 
 		self::run();
 
