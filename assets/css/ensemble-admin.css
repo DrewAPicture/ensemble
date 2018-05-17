@@ -115,7 +115,8 @@
 	max-width: 100%;
 }
 
-.bootstrap-iso label {
+.bootstrap-iso label,
+.bootstrap-iso .alert {
 	font-size: 14px;
 }
 
