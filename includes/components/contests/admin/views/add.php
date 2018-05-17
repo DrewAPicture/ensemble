@@ -9,15 +9,24 @@
  */
 namespace Ensemble\Components\Contests\Admin;
 
+use Ensemble\Components\Contests\Database;
 use Ensemble\Components\Venues\Database as Venues;
 use function Ensemble\Components\Contests\{get_allowed_types, get_allowed_statuses};
 use function Ensemble\{html};
+
 ?>
 <div class="wrap bootstrap-iso">
 	<h1 class="wp-heading-inline"><?php esc_html_e( 'Add Contest', 'ensemble' ); ?></h1>
 
 	<div class="row">
 		<div class="col-12 col-xl-8">
+			<?php if ( 0 === ( new Database )->count() ) : ?>
+				<div class="alert alert-info" role="alert">
+					<h5><?php esc_html_e( 'Howdy!', 'ensemble' ); ?></h5>
+					<?php esc_html_e( 'It looks like this is your first contest. To get started, choose a name, assign a venue, and select start and end dates.', 'ensemble' ); ?>
+				</div>
+			<?php endif; ?>
+
 			<form method="post">
 				<div class="card mb-3 md-md-5 pt-4">
 					<div class="form-group">
