@@ -225,8 +225,8 @@ abstract class Database implements Interfaces\Database {
 		$data = wp_unslash( $data );
 
 		// Ensure primary key is not included in the $data array
-		if ( isset( $data[ $this->get_primary_key ] ) ) {
-			unset( $data[ $this->get_primary_key ] );
+		if ( isset( $data[ $this->get_primary_key() ] ) ) {
+			unset( $data[ $this->get_primary_key() ] );
 		}
 
 		// Reorder $column_formats to match the order of columns given in $data
