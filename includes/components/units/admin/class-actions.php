@@ -103,10 +103,15 @@ class Actions implements Loader {
 		$args = array(
 			'id'    => 'unit-city',
 			'label' => __( 'Home City', 'ensemble' ),
+			'class' => array( 'mb-3' ),
 		);
 
 		if ( null !== $term ) {
-			$args['value'] = get_term_meta( $term->term_id, 'ensemble_city', true );
+			$city_meta = get_term_meta( $term->term_id, 'ensemble-city', true );
+
+			if ( $city_meta ) {
+				$args['value'] = $city_meta;
+			}
 
 			// If $term is available this is for the Units > Edit form where the label is output separately.
 			unset( $args['label'] );
@@ -130,14 +135,18 @@ class Actions implements Loader {
 			'label'            => __( 'Director(s)', 'ensemble' ),
 			'class'            => array( 'form-control' ),
 			'multiple'         => true,
+			'selected'         => $selected,
 			'options'          => $this->get_directors_as_options(),
 			'show_option_all'  => false,
 			'show_option_none' => false,
 		);
 
 		if ( null !== $term ) {
-			$selected = get_term_meta( $term->term_id, 'ensemble-directors', true );
-			$args['selected'] = array_map( 'absint', explode( ',', $selected ) );
+			$director_meta = get_term_meta( $term->term_id, 'ensemble-directors', true );
+
+			if ( $director_meta ) {
+				$args['selected'] = wp_parse_id_list( explode( ',', $director_meta ) );
+			}
 
 			// If $term is available this is for the Units > Edit form where the label is output separately.
 			unset( $args['label'] );
