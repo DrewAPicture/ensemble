@@ -23,18 +23,14 @@ use function Ensemble\html;
 class Actions implements Loader {
 
 	/**
-	 * Registers hook callbacks for contest actions.
+	 * Registers hook callbacks for unit actions.
 	 *
 	 * @since 1.0.0
 	 */
 	public function load() {
-		// Units > Add fields.
-		add_action( 'ensemble_unit_add_form_fields', array( $this, 'add_unit_city_field'      ), 11 );
-		add_action( 'ensemble_unit_add_form_fields', array( $this, 'add_unit_directors_field' ), 12 );
-
-		// Units > Edit fields.
-		add_action( 'ensemble_unit_edit_form', array( $this, 'edit_unit_city_field'      ), 11 );
-		add_action( 'ensemble_unit_edit_form', array( $this, 'edit_unit_directors_field' ), 12 );
+		// Units > Add and > Edit fields.
+		add_action( 'ensemble_unit_add_form_fields', array( $this, 'add_unit_fields'  ) );
+		add_action( 'ensemble_unit_edit_form',       array( $this, 'edit_unit_fields' ) );
 
 		// Units > Add List table columns.
 		add_filter( 'manage_edit-ensemble_unit_columns',  array( $this, 'filter_unit_table_columns' ),   100 );
@@ -47,24 +43,31 @@ class Actions implements Loader {
 	}
 
 	/**
-	 * Inserts a 'Home City' field into the New Unit form.
+	 * Inserts custom fields markup into the Add Unit form.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param string $taxonomy Taxonomy.
 	 */
-	public function add_unit_city_field() {
-		$this->output_city_field();
+	public function add_unit_fields() {
+		?>
+		<div class="form-field bootstrap-iso w-95 fs-13">
+			<?php
+			$this->output_city_field();
+			$this->output_directors_field();
+			?>
+		</div>
+		<?php
 	}
 
 	/**
-	 * Inserts a 'Home City' field in to the Edit Unit form.
+	 * Inserts custom fields into the Edit Unit form.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param \WP_Term $term Unit term object.
 	 */
-	public function edit_unit_city_field( $term ) {
+	public function edit_unit_fields( $term ) {
 		?>
 		<table class="form-table bootstrap-iso">
 			<tbody>
@@ -74,6 +77,14 @@ class Actions implements Loader {
 				</th>
 				<td>
 					<?php $this->output_city_field( $term ); ?>
+				</td>
+			</tr>
+			<tr class="form-field">
+				<th scope="row">
+					<label for="ensemble-directors"><?php esc_html_e( 'Director(s)', 'ensemble' ); ?></label>
+				</th>
+				<td>
+					<?php $this->output_directors_field( $term ); ?>
 				</td>
 			</tr>
 			</tbody>
@@ -99,49 +110,10 @@ class Actions implements Loader {
 
 			// If $term is available this is for the Units > Edit form where the label is output separately.
 			unset( $args['label'] );
-
-			// Output the element without the wrapper.
-			html()->text( $args );
-		} else {
-			?>
-			<div class="form-field bootstrap-iso w-95 fs-13">
-				<?php html()->text( $args ); ?>
-			</div>
-			<?php
 		}
-	}
 
-	/**
-	 * Inserts a 'Director(s)' multi-select field into the New Unit form.
-	 *
-	 * @since 1.0.0
-	 */
-	public function add_unit_directors_field() {
-		$this->output_directors_field();
-	}
-
-	/**
-	 * Inserts a 'Director(s)' field in to the Edit Unit form.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param \WP_Term $term Unit term object.
-	 */
-	public function edit_unit_directors_field( $term ) {
-		?>
-		<table class="form-table bootstrap-iso">
-			<tbody>
-				<tr class="form-field">
-					<th scope="row">
-						<label for="ensemble-directors"><?php esc_html_e( 'Director(s)', 'ensemble' ); ?></label>
-					</th>
-					<td>
-						<?php $this->output_directors_field( $term ); ?>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<?php
+		// Output the element.
+		html()->text( $args );
 	}
 
 	/**
@@ -169,16 +141,10 @@ class Actions implements Loader {
 
 			// If $term is available this is for the Units > Edit form where the label is output separately.
 			unset( $args['label'] );
-
-			// Output the element without the wrapper.
-			html()->select( $args );
-		} else {
-			?>
-			<div class="form-field bootstrap-iso w-95 fs-13">
-				<?php html()->select( $args ); ?>
-			</div>
-			<?php
 		}
+
+		// Output the element.
+		html()->select( $args );
 	}
 
 	/**
