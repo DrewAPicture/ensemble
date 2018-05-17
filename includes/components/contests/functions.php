@@ -85,7 +85,9 @@ function get_status_label( $status ) {
  */
 function get_allowed_types() {
 	$types = array(
+		'preview'  => __( 'Preview Clinic', 'ensemble' ),
 		'standard' => __( 'Standard', 'ensemble' ),
+		'state'    => __( 'State Championships', 'ensemble' ),
 	);
 
 	/**
