@@ -10,6 +10,7 @@
 namespace Ensemble\Components\Classes;
 
 use Ensemble\Core\Interfaces\Loader;
+use Ensemble\Core\Traits\Taxonomy_Component;
 use function Ensemble\{load};
 
 /**
@@ -18,8 +19,11 @@ use function Ensemble\{load};
  * @since 1.0.0
  *
  * @see Loader
+ * @see Taxonomy_Component
  */
 class Setup implements Loader {
+
+	use Taxonomy_Component;
 
 	/**
 	 * Initializes the component.
