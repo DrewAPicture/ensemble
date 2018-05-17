@@ -25,6 +25,7 @@ class Components implements Interfaces\Loader {
 	 * @since 1.0.0
 	 */
 	public function load() {
+		load( new Component\Classes\Setup );
 		load( new Component\Contests\Setup );
 
 		load( new Component\People\Directors\Setup );
