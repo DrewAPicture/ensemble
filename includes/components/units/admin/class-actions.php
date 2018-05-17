@@ -160,13 +160,20 @@ class Actions implements Loader {
 	 *
 	 * @since 1.0.0
 	 *
+	 * @param array $ids Optional. Specific array of director IDs to query for. Default empty array.
 	 * @return array Director ID\name pairs if any are found, otherwise an empty array.
 	 */
-	private function get_directors_as_options() {
-		$directors_results = ( new Directors\Database )->query( array(
+	private function get_directors_as_options( $ids = array() ) {
+		$args = array(
 			'fields' => array( 'ID', 'display_name' ),
 			'number' => 500,
-		) );
+		);
+
+		if ( ! empty( $ids ) ) {
+			$args['include'] = $ids;
+		}
+
+		$directors_results = ( new Directors\Database )->query( $args );
 
 		if ( ! empty( $directors_results ) ) {
 			foreach ( $directors_results as $director ) {
