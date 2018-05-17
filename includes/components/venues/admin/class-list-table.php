@@ -295,8 +295,21 @@ class List_Table extends \WP_List_Table {
 	 * @return string The column value.
 	 */
 	public function column_default( $venue, $column_name ) {
+		$base_url = add_query_arg( 'page', 'ensemble-admin-venues', admin_url( 'admin.php' ) );
+
 		switch( $column_name ){
 
+			case 'name':
+				if ( current_user_can( 'manage_options' ) ) {
+					$value = sprintf( '<a href="%1$s" aria-label="%2$s">%3$s</a>',
+						esc_url( add_query_arg( array( 'ensbl-view' => 'edit', 'venue_id' => $venue->id ), $base_url ) ),
+						sprintf( _x( 'Edit %s', 'ensemble' ), $venue->name ),
+						$venue->name
+					);
+				} else {
+					$value = $venue->name;
+				}
+				break;
 			case 'date_added':
 				$value = $venue->get_date_added();
 				break;
