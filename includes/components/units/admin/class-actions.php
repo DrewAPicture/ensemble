@@ -217,4 +217,25 @@ class Actions implements Loader {
 		return $value;
 	}
 
+	/**
+	 * Handles saving custom term meta fields when a new unit is added.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $unit_id Unit term ID.
+	 */
+	public function add_unit_save_meta( $unit_id ) {
+
+	}
+
+	/**
+	 * Handles saving custom term meta fields when a unit is updated.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $unit_id Unit term ID.
+	 */
+	public function edit_unit_save_meta( $unit_id ) {
+
+	}
 }
