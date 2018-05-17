@@ -68,4 +68,29 @@ class Users implements Loader {
 		return $caps;
 	}
 
+	/**
+	 * Register Ensemble capabilities for admins.
+	 *
+	 * @since 1.0.0
+	 */
+	public function add_caps() {
+		$wp_roles = wp_roles();
+
+		$wp_roles->add_cap( 'administrator', 'manage_contests' );
+		$wp_roles->add_cap( 'administrator', 'manage_venues' );
+	}
+
+
+	/**
+	 * Remove Ensemble capabilities (called during uninstall).
+	 *
+	 * @since 1.0.0
+	 */
+	public function remove_caps() {
+		$wp_roles = wp_roles();
+
+		$wp_roles->remove_cap( 'administrator', 'manage_contests' );
+		$wp_roles->remove_cap( 'administrator', 'manage_venues' );
+	}
+
 }
