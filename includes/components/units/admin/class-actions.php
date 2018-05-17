@@ -251,7 +251,18 @@ class Actions implements Loader {
 			return $value;
 		}
 
-		$value = 'Director1, Director2';
+		$directors_meta = get_term_meta( $unit_id, 'ensemble-directors', true );
+
+		if ( $directors_meta ) {
+			$ids = wp_parse_id_list( explode( ',', $directors_meta ) );
+
+			$directors = array_values( $this->get_directors_as_options( $ids ) );
+
+			if ( ! empty( $directors ) ) {
+				$value = implode( ', ', $directors );
+			}
+
+		}
 
 		return $value;
 	}
