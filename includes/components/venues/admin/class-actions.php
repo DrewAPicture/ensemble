@@ -87,6 +87,35 @@ class Actions implements Loader {
 		if ( false === $valid_request ) {
 			return;
 		}
+
+		$venue_id = $_REQUEST['venue-id'] ?? 0;
+
+		$redirect = add_query_arg( array(
+			'page'       => 'ensemble-admin-venues',
+			'ensbl-view' => 'edit',
+			'venue_id'   => $venue_id,
+		), admin_url( 'admin.php' ) );
+
+		$nonce = $_REQUEST['ensemble-update-venue-nonce'] ?? false;
+
+		if ( ! wp_verify_nonce( $nonce, 'ensemble-update-venue-nonce' ) || 0 === $venue_id ) {
+			return;
+		}
+
+		$data = array(
+			'name'    => empty( $_REQUEST['venue-name'] ) ? '' : sanitize_text_field( $_REQUEST['venue-name'] ),
+			'type'    => empty( $_REQUEST['venue-type'] ) ? '' : sanitize_key( $_REQUEST['venue-type'] ),
+			'status'  => empty( $_REQUEST['venue-status'] ) ? '' : sanitize_key( $_REQUEST['venue-status'] ),
+			'address' => empty( $_REQUEST['venue-address'] ) ? '' : wp_kses_post( $_REQUEST['venue-address'] ),
+		);
+
+		$updated = ( new Database )->update( $venue_id, $data );
+
+		// TODO add notice handler for the different cases.
+		if ( wp_redirect( $redirect ) ) {
+			exit;
+		}
+
 	}
 
 	/**
