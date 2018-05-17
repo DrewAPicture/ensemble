@@ -358,26 +358,24 @@ class List_Table extends \WP_List_Table {
 	 * @return string Row actions output for venues.
 	 */
 	protected function handle_row_actions( $venue, $column_name, $primary ) {
-		if ( $primary !== $column_name ) {
+		if ( $primary !== $column_name || ! current_user_can( 'manage_options' ) ) {
 			return '';
 		}
 
 		$actions  = array();
 		$base_url = add_query_arg( 'page', 'ensemble-admin-venues', admin_url( 'admin.php' ) );
 
-		if ( current_user_can( 'manage_options' ) ) {
-			$actions['edit'] = sprintf( '<a href="%1$s" aria-label="%2$s">%3$s</a>',
-				esc_url( add_query_arg( array( 'ensbl-view' => 'edit', 'venue_id' => $venue->id ), $base_url ) ),
-				sprintf( _x( 'Edit %s', 'ensemble' ), $venue->name ),
-				_x( 'Edit', 'venue', 'ensemble' )
-			);
+		$actions['edit'] = sprintf( '<a href="%1$s" aria-label="%2$s">%3$s</a>',
+			esc_url( add_query_arg( array( 'ensbl-view' => 'edit', 'venue_id' => $venue->id ), $base_url ) ),
+			sprintf( _x( 'Edit %s', 'ensemble' ), $venue->name ),
+			_x( 'Edit', 'venue', 'ensemble' )
+		);
 
-			$actions['delete'] = sprintf( '<a href="%1$s" aria-label="%2$s">%3$s</a>',
-				esc_url( add_query_arg( array( 'ensbl-view' => 'delete', 'venue_id' => $venue->id ), $base_url ) ),
-				sprintf( _x( 'Delete %s', 'ensemble' ), $venue->name ),
-				_x( 'Delete', 'venue', 'ensemble' )
-			);
-		}
+		$actions['delete'] = sprintf( '<a href="%1$s" aria-label="%2$s">%3$s</a>',
+			esc_url( add_query_arg( array( 'ensbl-view' => 'delete', 'venue_id' => $venue->id ), $base_url ) ),
+			sprintf( _x( 'Delete %s', 'ensemble' ), $venue->name ),
+			_x( 'Delete', 'venue', 'ensemble' )
+		);
 
 		/**
 		 * Filters the array of row action links on the venues list table.
@@ -391,6 +389,5 @@ class List_Table extends \WP_List_Table {
 
 		return $this->row_actions( $actions );
 	}
-
 
 }
