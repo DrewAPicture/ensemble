@@ -104,6 +104,7 @@ $contest    = get_contest( $contest_id );
 									'label' => __( 'End Date', 'ensemble' ),
 									'class' => array( 'form-control', 'date' ),
 									'value' => $contest->end_date,
+									'desc'  => __( 'Leave blank to default to the same date as Start Date.', 'ensemble' ),
 								) );
 								?>
 							</div>
