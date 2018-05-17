@@ -46,15 +46,17 @@ class Setup implements Loader {
 	public function register_units_tax() {
 		// Competing Units taxonomy.
 		register_taxonomy( 'ensemble_unit', array(), array(
-			'hierarchical'      => false,
-			'public'            => true,
-			'show_in_nav_menus' => true,
-			'show_ui'           => true,
-			'show_admin_column' => false,
-			'query_var'         => true,
-			'rewrite'           => true,
-			'show_in_rest'      => false,
-			'labels'            => array(
+			'hierarchical'          => false,
+			'public'                => true,
+			'show_in_nav_menus'     => true,
+			'show_ui'               => true,
+			'show_admin_column'     => false,
+			'query_var'             => true,
+			'rewrite'               => true,
+			'show_in_rest'          => true,
+			'rest_base'             => 'ensemble_class',
+			'rest_controller_class' => 'WP_REST_Terms_Controller',
+			'labels'                => array(
 				'name'                       => __( 'Competing Units', 'ensemble' ),
 				'singular_name'              => _x( 'Competing Unit', 'taxonomy general name', 'ensemble' ),
 				'search_items'               => __( 'Search Competing Units', 'ensemble' ),
