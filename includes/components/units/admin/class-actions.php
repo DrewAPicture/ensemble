@@ -28,12 +28,22 @@ class Actions implements Loader {
 	 * @since 1.0.0
 	 */
 	public function load() {
-		add_action( 'add_tag_form_fields', array( $this, 'insert_unit_city_field'      ), 11 );
-		add_action( 'add_tag_form_fields', array( $this, 'insert_director_multiselect' ), 12 );
+		// Units > Add fields.
+		add_action( 'ensemble_unit_add_form_fields', array( $this, 'add_unit_city_field'      ), 11 );
+		add_action( 'ensemble_unit_add_form_fields', array( $this, 'add_unit_directors_field' ), 12 );
 
+		// Units > Edit fields.
+		add_action( 'ensemble_unit_edit_form', array( $this, 'edit_unit_city_field'      ), 11 );
+		add_action( 'ensemble_unit_edit_form', array( $this, 'edit_unit_directors_field' ), 12 );
+
+		// Units > Add List table columns.
 		add_filter( 'manage_edit-ensemble_unit_columns',  array( $this, 'filter_unit_table_columns' ),   100 );
 		add_filter( 'manage_ensemble_unit_custom_column', array( $this, 'column_city'               ), 11, 3 );
 		add_filter( 'manage_ensemble_unit_custom_column', array( $this, 'column_directors'          ), 12, 3 );
+
+		// Save custom meta on add and edit.
+		add_action( 'create_ensemble_unit', array( $this, 'add_unit_save_meta' ) );
+		add_action( 'edit_ensemble_unit',   array( $this, 'edit_unit_save_meta' ) );
 	}
 
 	/**
