@@ -23,7 +23,7 @@ use function Ensemble\{html};
 			<?php if ( 0 === ( new Database )->count() ) : ?>
 				<div class="alert alert-info" role="alert">
 					<h5><?php esc_html_e( 'Howdy!', 'ensemble' ); ?></h5>
-					<?php esc_html_e( 'It looks like this is your first contest. To get started, choose a name, assign a venue, and select start and end dates.', 'ensemble' ); ?>
+					<?php esc_html_e( 'It looks like this is your first contest. Adding a contest is simple, just choose a name, assign a venue, and select start and end dates to get started.', 'ensemble' ); ?>
 				</div>
 			<?php endif; ?>
 
