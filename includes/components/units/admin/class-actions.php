@@ -53,17 +53,42 @@ class Actions implements Loader {
 	 *
 	 * @param string $taxonomy Taxonomy.
 	 */
-	public function insert_unit_city_field( $taxonomy ) {
-		if ( 'ensemble_unit' !== $taxonomy ) {
-			return;
+	public function add_unit_city_field() {
+		$this->output_city_field();
+	}
+
+	/**
+	 * Inserts a 'Home City' field in to the Edit Unit form.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param \WP_Term $term Unit term object.
+	 */
+	public function edit_unit_city_field( $term ) {
+		$this->output_city_field( $term );
+	}
+
+	/**
+	 * Private helper to output the markup for the Home City field.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param null|\WP_Term $term Optional. Term object. Default null (ignored).
+	 */
+	private function output_city_field( $term = null ) {
+		$args = array(
+			'id'    => 'unit-city',
+			'label' => __( 'Home City', 'ensemble' ),
+		);
+
+		if ( null !== $term ) {
+			$args['value'] = get_term_meta( $term->term_id, 'ensemble_city', true );
 		}
 		?>
 		<div class="form-field bootstrap-iso w-95 fs-13">
 			<?php
-			html()->text( array(
-				'id'    => 'unit-city',
-				'label' => __( 'Home City', 'ensemble' ),
-			) );
+
+			html()->text( $args );
 			?>
 		</div>
 		<?php
