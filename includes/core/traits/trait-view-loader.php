@@ -24,17 +24,32 @@ trait View_Loader {
 	 * @param array $view View to load (if it exists).
 	 */
 	public function load_view( $view ) {
+		if ( $path = $this->get_view_path( $view ) ) {
+			$classes = 'overview' === $view ? 'wrap' : 'wrap bootstrap-iso';
+			?>
+			<div class="<?php echo esc_attr( $classes ); ?>">
+				<?php include $path; ?>
+			</div>
+			<?php
+		}
+	}
+
+	/**
+	 * Retrieves a given view's path (if it exists).
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $view View to retrieve the path for (if it exists).
+	 */
+	public function get_view_path( $view ) {
 		$views = $this->get_views();
 
 		$file_path = $this->get_views_dir() . "{$view}.php";
 
 		if ( in_array( $view, $views, true ) && file_exists( $file_path ) ) {
-			$classes = 'overview' === $view ? 'wrap' : 'wrap bootstrap-iso';
-			?>
-			<div class="<?php echo esc_attr( $classes ); ?>">
-				<?php include $file_path; ?>
-			</div>
-			<?php
+			return $file_path;
+		} else {
+			return '';
 		}
 	}
 
