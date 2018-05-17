@@ -144,6 +144,7 @@ final class Ensemble {
 		load( new Core\Components );
 		load( new Core\Requests );
 		load( new Core\Rewrite_Rules );
+		load( new Core\Users );
 	}
 
 	/**
