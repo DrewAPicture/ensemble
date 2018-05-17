@@ -90,24 +90,23 @@ $contest    = get_contest( $contest_id );
 								?>
 							</div>
 						</div>
-						<?php
-						// Contest ID (hidden).
-						html()->hidden( array(
-							'name'  => 'contest-id',
-							'value' => $contest->id,
-						) );
-
-						wp_nonce_field( 'ensemble-delete-contest-nonce', 'ensemble-delete-contest-nonce' );
-
-						// Submit button.
-						html()->input( 'submit', array(
-							'name'  => 'ensemble-delete-contest',
-							'value' => 'Submit',
-							'class' => array( 'btn-dark', 'btn', 'btn-primary' ),
-						) );
-						?>
 					</div>
+					<?php
+					// Contest ID (hidden).
+					html()->hidden( array(
+						'name'  => 'contest-id',
+						'value' => $contest->id,
+					) );
 
+					wp_nonce_field( 'ensemble-delete-contest-nonce', 'ensemble-delete-contest-nonce' );
+
+					// Submit button.
+					html()->input( 'submit', array(
+						'name'  => 'ensemble-delete-contest',
+						'value' => 'Submit',
+						'class' => array( 'btn-dark', 'btn', 'btn-primary' ),
+					) );
+					?>
 				<?php endif; ?>
 			</form>
 		</div>
