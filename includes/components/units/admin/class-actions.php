@@ -65,7 +65,20 @@ class Actions implements Loader {
 	 * @param \WP_Term $term Unit term object.
 	 */
 	public function edit_unit_city_field( $term ) {
-		$this->output_city_field( $term );
+		?>
+		<table class="form-table bootstrap-iso">
+			<tbody>
+			<tr class="form-field">
+				<th scope="row">
+					<label for="ensemble-city"><?php esc_html_e( 'Home City', 'ensemble' ); ?></label>
+				</th>
+				<td>
+					<?php $this->output_city_field( $term ); ?>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+		<?php
 	}
 
 	/**
