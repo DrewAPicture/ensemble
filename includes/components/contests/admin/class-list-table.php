@@ -296,7 +296,18 @@ class List_Table extends \WP_List_Table {
 	 * @return string The column value.
 	 */
 	public function column_default( $contest, $column_name ) {
+		$base_url = add_query_arg( 'page', 'ensemble-admin-contests', admin_url( 'admin.php' ) );
+
 		switch( $column_name ){
+
+			case 'name':
+				$value = sprintf( '<a href="%1$s" aria-label="%2$s">%3$s</a>',
+					esc_url( add_query_arg( array( 'ensbl-view' => 'edit', 'contest_id' => $contest->id ), $base_url ) ),
+					sprintf( _x( 'Edit %s', 'ensemble' ), $contest->name ),
+					$contest->name
+				);
+
+				break;
 
 			case 'start_date':
 				$value = $contest->get_start_date();
