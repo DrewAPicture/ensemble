@@ -9,7 +9,7 @@
  */
 namespace Ensemble\Core;
 
-use Ensemble\Components\Interfaces;
+use Ensemble\Core\Interfaces;
 
 /**
  * Implements user object middleware.
