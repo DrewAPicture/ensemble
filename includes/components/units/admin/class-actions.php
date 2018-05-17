@@ -96,15 +96,19 @@ class Actions implements Loader {
 
 		if ( null !== $term ) {
 			$args['value'] = get_term_meta( $term->term_id, 'ensemble_city', true );
-		}
-		?>
-		<div class="form-field bootstrap-iso w-95 fs-13">
-			<?php
 
+			// If $term is available this is for the Units > Edit form where the label is output separately.
+			unset( $args['label'] );
+
+			// Output the element without the wrapper.
 			html()->text( $args );
+		} else {
 			?>
-		</div>
-		<?php
+			<div class="form-field bootstrap-iso w-95 fs-13">
+				<?php html()->text( $args ); ?>
+			</div>
+			<?php
+		}
 	}
 
 	/**
