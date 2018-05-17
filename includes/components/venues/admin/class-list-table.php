@@ -297,7 +297,7 @@ class List_Table extends \WP_List_Table {
 	public function column_default( $venue, $column_name ) {
 		switch( $column_name ){
 
-			case 'start_date':
+			case 'date_added':
 				$value = $venue->get_date_added();
 				break;
 
