@@ -135,7 +135,6 @@ class Actions implements Loader {
 			'label'            => __( 'Director(s)', 'ensemble' ),
 			'class'            => array( 'form-control' ),
 			'multiple'         => true,
-			'selected'         => $selected,
 			'options'          => $this->get_directors_as_options(),
 			'show_option_all'  => false,
 			'show_option_none' => false,
