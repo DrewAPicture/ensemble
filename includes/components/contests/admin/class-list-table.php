@@ -347,7 +347,7 @@ class List_Table extends \WP_List_Table {
 	 * @since 1.0.0
 	 */
 	function no_items() {
-		esc_html_e( 'No contests found.', 'ensemble' );
+		esc_html_e( 'You haven&#8217;t created any contests yet!', 'ensemble' );
 	}
 
 	/**
