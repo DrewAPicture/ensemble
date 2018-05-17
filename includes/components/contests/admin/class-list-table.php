@@ -218,12 +218,12 @@ class List_Table extends \WP_List_Table {
 	 * @return array Query results.
 	 */
 	public function get_data() {
-		$page    = isset( $_GET['paged'] )   ? absint( $_GET['paged'] ) : 1;
-		$status  = isset( $_GET['status'] )  ? $_GET['status']          : '';
-		$search  = isset( $_GET['s'] )       ? $_GET['s']               : '';
-		$order   = isset( $_GET['order'] )   ? $_GET['order']           : 'DESC';
-		$orderby = isset( $_GET['orderby'] ) ? $_GET['orderby']         : 'start_date';
-		$venue   = isset( $_REQUEST['venue_id'] ) ? absint( $_REQUEST['venue_id'] ) : '';
+		$page    = isset( $_REQUEST['paged'] )    ? absint( $_GET['paged'] )                  : 1;
+		$status  = isset( $_REQUEST['status'] )   ? sanitize_key( $_REQUEST['status'] )       : '';
+		$search  = isset( $_REQUEST['s'] )        ? sanitize_text_field( $_REQUEST['s'] )     : '';
+		$order   = isset( $_REQUEST['order'] )    ? sanitize_text_field( $_REQUEST['order'] ) : 'DESC';
+		$orderby = isset( $_REQUEST['orderby'] )  ? sanitize_key( $_REQUEST['orderby'] )      : 'start_date';
+		$venue   = isset( $_REQUEST['venue_id'] ) ? absint( $_REQUEST['venue_id'] )           : '';
 
 		$per_page = $this->get_items_per_page( 'ensemble_contests_per_page', $this->per_page );
 
@@ -232,8 +232,8 @@ class List_Table extends \WP_List_Table {
 			'offset'  => $per_page * ( $page - 1 ),
 			'status'  => $status,
 			'search'  => $search,
-			'orderby' => sanitize_text_field( $orderby ),
-			'order'   => sanitize_text_field( $order ),
+			'orderby' => $orderby,
+			'order'   => $order,
 		);
 
 		if ( ! empty( $venue ) ) {
