@@ -48,7 +48,24 @@ $contest    = get_contest( $contest_id );
 
 								<tr>
 									<td><?php echo apply_filters( 'the_title', $contest->name ); ?></td>
-									<td><?php echo $contest->venues; ?></td>
+									<td>
+										<?php
+										// Convert to an array.
+										$venue_ids = array_map( 'absint', explode( ',', $contest->venues ) );
+
+										if ( ! empty( $venue_ids ) ) {
+											$venues = ( new Venues\Database )->query( array(
+												'id'     => $venue_ids,
+												'number' => count( $venue_ids ),
+												'fields' => 'name',
+											) );
+
+											if ( ! empty( $venues ) ) {
+												echo implode( ', ', $venues );
+											}
+										}
+										?>
+									</td>
 									<td><?php echo get_status_label( $contest->status ); ?></td>
 									<td><?php echo $contest->get_start_date(); ?></td>
 								</tr>
