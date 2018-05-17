@@ -97,14 +97,43 @@ class Actions implements Loader {
 			return;
 		}
 
-		$redirect = add_query_arg( 'page', 'ensemble-admin-contests', admin_url( 'admin.php' ) );
+		$contest_id = $_REQUEST['contest-id'] ?? 0;
+
+		$redirect = add_query_arg( array(
+			'page'       => 'ensemble-admin-contests',
+			'ensbl-view' => 'edit',
+			'contest_id' => $contest_id,
+		), admin_url( 'admin.php' ) );
 
 		$nonce = $_REQUEST['ensemble-update-contest-nonce'] ?? false;
 
-		if ( ! wp_verify_nonce( $nonce, 'ensemble-update-contest-nonce' ) ) {
+		if ( ! wp_verify_nonce( $nonce, 'ensemble-update-contest-nonce' ) || 0 === $contest_id ) {
 			return;
 		}
 
+		$data = array(
+			'id'          => $contest_id,
+			'name'        => empty( $_REQUEST['contest-name'] ) ? '' : sanitize_text_field( $_REQUEST['contest-name'] ),
+			'description' => empty( $_REQUEST['contest-desc'] ) ? '' : wp_kses_post( $_REQUEST['contest-desc'] ),
+			'start_date'  => empty( $_REQUEST['contest-start-date'] ) ? '' : sanitize_text_field( $_REQUEST['contest-start-date'] ),
+			'start_date'  => empty( $_REQUEST['contest-end-date'] ) ? '' : sanitize_text_field( $_REQUEST['contest-end-date'] ),
+			'type'        => empty( $_REQUEST['contest-type'] ) ? '' : sanitize_key( $_REQUEST['contest-type'] ),
+			'status'      => empty( $_REQUEST['contest-status'] ) ? '' : sanitize_key( $_REQUEST['contest-status'] ),
+			'external'    => empty( $_REQUEST['contest-external'] ) ? '' : sanitize_text_field( $_REQUEST['contest-external'] ),
+		);
+
+		if ( ! empty( $_REQUEST['contest-venues'] ) ) {
+			$data['venues'] = array_map( 'absint', $_REQUEST['contest-venues'] );
+		} else {
+			$data['venues'] = array();
+		}
+
+		$updated = ( new Database )->update( $contest_id, $data );
+
+		// TODO add notice handler for the different cases.
+		if ( wp_redirect( $redirect ) ) {
+			exit;
+		}
 	}
 
 	/**
