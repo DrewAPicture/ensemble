@@ -15,14 +15,8 @@ namespace Ensemble\Components\Units;
  * @since 1.0.0
  *
  * @param int|\WP_Term $unit Unit ID or object.
- * @return array|null|\WP_Term|\WP_Error Unit if it exists, otherwise object if found, otherwise a WP_Error object.
+ * @return \WP_Term|\WP_Error Unit object if it exists, otherwise a WP_Error.
  */
 function get_unit( $unit ) {
-	$term = get_term( $unit, 'ensemble_unit' );
-
-	if ( is_wp_error( $unit ) ) {
-		return false;
-	} else {
-		return $unit;
-	}
+	return get_term( $unit, 'ensemble_unit' );
 }
