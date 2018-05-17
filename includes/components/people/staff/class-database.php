@@ -39,4 +39,19 @@ class Database extends Core\User_Database {
 		}
 	}
 
+	/**
+	 * Queries for directors in the Users database.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $query_args Query arguments.
+	 * @param bool  $count      Optional. Whether this is a count query. Default false.
+	 * @return array|int If `$count` is true, an integer, otherwise an array of results.
+	 */
+	public function query( $query_args, $count = false ) {
+		$query_args['role__in'] = array( 'ensemble_staff' );
+
+		return parent::query( $query_args, $count );
+	}
+
 }
