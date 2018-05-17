@@ -32,7 +32,7 @@ $venue    = get_venue( $venue_id );
 
 					<div class="card mb-3 md-md-5">
 						<div class="card-body">
-							<h3><?php esc_html_e( 'Venue Information', 'ensemble' ); ?></h3>
+							<h5><?php esc_html_e( 'Venue Information', 'ensemble' ); ?></h5>
 
 							<div class="table-responsive">
 								<table class="table">
@@ -61,7 +61,7 @@ $venue    = get_venue( $venue_id );
 
 					<div class="card mb-3 md-md-5">
 						<div class="card-body">
-							<h3><?php esc_html_e( 'Are you sure?', 'ensemble' ); ?></h3>
+							<h5><?php esc_html_e( 'Are you sure?', 'ensemble' ); ?></h5>
 
 							<div class="form-group">
 								<div class="form-check mb-3">

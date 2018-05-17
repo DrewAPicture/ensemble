@@ -31,7 +31,7 @@ $contest    = get_contest( $contest_id );
 				<?php else : ?>
 
 					<div class="card mb-3 md-md-5 pt-4">
-						<h3><?php esc_html_e( 'Contest Information', 'ensemble' ); ?></h3>
+						<h5><?php esc_html_e( 'Contest Information', 'ensemble' ); ?></h5>
 
 						<div class="table-responsive">
 							<table class="table">
@@ -58,7 +58,7 @@ $contest    = get_contest( $contest_id );
 					</div>
 
 					<div class="card mb-3 md-md-5 pt-4">
-						<h3><?php esc_html_e( 'Are you sure?', 'ensemble' ); ?></h3>
+						<h5><?php esc_html_e( 'Are you sure?', 'ensemble' ); ?></h5>
 
 						<div class="form-group">
 							<div class="form-check mb-3">
