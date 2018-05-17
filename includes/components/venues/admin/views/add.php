@@ -9,6 +9,7 @@
  */
 namespace Ensemble\Components\Venues\Admin;
 
+use Ensemble\Components\Venues\Database;
 use function Ensemble\Components\Venues\{get_allowed_statuses, get_allowed_types};
 use function Ensemble\{html};
 ?>
@@ -17,6 +18,13 @@ use function Ensemble\{html};
 
 	<div class="row">
 		<div class="col-12 col-xl-8">
+			<?php if ( 0 === ( new Database )->count() ) : ?>
+				<div class="alert alert-info" role="alert">
+					<h5><?php esc_html_e( 'Howdy!', 'ensemble' ); ?></h5>
+					<?php esc_html_e( 'It looks like this is your first venue. Adding a new venue is simple, just choose a name, assign a type, and enter an address to get started.', 'ensemble' ); ?>
+				</div>
+			<?php endif; ?>
+
 			<form method="post">
 				<div class="card mb-3 md-md-5 pt-4">
 					<div class="form-group">
