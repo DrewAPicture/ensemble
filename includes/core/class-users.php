@@ -26,46 +26,37 @@ class Users implements Loader {
 	 * @since 1.0.0
 	 */
 	public function load() {
-		add_filter( 'map_meta_cap', array( $this, 'map_meta_cap' ), 10, 4 );
+
 	}
 
 	/**
-	 * Maps meta capabilities to primitive ones.
+	 * Adds roles for user-based components.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array  $caps    The user's actual capabilities.
-	 * @param string $cap     Capability name.
-	 * @param int    $user_id The user ID.
-	 * @param array  $args    Adds the context to the cap. Typically the object ID.
-	 * @return array (Maybe) modified capabilities.
+	 * @param \WP_Roles $wp_roles WP_Roles instance.
 	 */
-	public function map_meta_caps( $caps, $cap, $user_id, $args ) {
-		switch( $cap ) {
-			case 'add_contest':
-				$caps[] = 'manage_contests';
-				break;
+	public function add_roles() {
+		$wp_roles = wp_roles();
 
-			case 'add_venue':
-				$caps[] = 'manage_venues';
-				break;
+		$wp_roles->add_role( 'ensemble_director', __( 'Unit Director', 'ensemble' ), array(
+			'ensemble_manage_own_units' => true,
+			'ensemble_view_own_units'   => true,
+			'ensemble_delete_own_units' => true,
+			'ensemble_add_units'        => false,
+			'ensemble_contact_circuit'  => true,
+		) );
 
-			case 'edit_contest':
-			case 'delete_contest':
-				$contest = get_contest( $args[0] );
-
-				$caps[] = is_wp_error( $contest ) ? 'do_not_allow' : 'manage_contests';
-				break;
-
-			case 'edit_venue':
-			case 'delete_venue':
-				$venue = get_venue( $args[0] );
-
-				$caps[] = is_wp_error( $venue ) ? 'do_not_allow' : 'manage_venues';
-				break;
-		}
-
-		return $caps;
+		$wp_roles->add_role( 'ensemble_staff', __( 'Circuit Staff', 'ensemble' ), array(
+			'ensemble_manage_units'      => true,
+			'ensemble_add_units'         => true,
+			'ensemble_view_units'        => true,
+			'ensemble_delete_units'      => true,
+			'ensemble_manage_directors'  => true,
+			'ensemble_add_directors'     => true,
+			'ensemble_view_directors'    => true,
+			'ensemble_contact_directors' => true,
+		) );
 	}
 
 	/**
