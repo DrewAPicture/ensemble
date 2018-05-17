@@ -9,6 +9,7 @@
  */
 namespace Ensemble\Components\Venues\Admin;
 
+use Ensemble\Components\Venues\Database;
 use Ensemble\Core\Interfaces\Menu_Router;
 use function Ensemble\{load_view};
 
@@ -53,6 +54,12 @@ class Menu implements Menu_Router {
 	 */
 	public function route_request() {
 		$view = isset( $_REQUEST['ensbl-view'] ) ? sanitize_key( $_REQUEST['ensbl-view' ] ) : 'overview';
+
+		if ( 'overview' === $view ) {
+			if ( 0 === ( new Database )->count() ) {
+				$view = 'add';
+			}
+		}
 
 		load_view( new Actions, $view );
 	}
