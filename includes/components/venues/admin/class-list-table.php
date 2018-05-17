@@ -175,7 +175,7 @@ class List_Table extends \WP_List_Table {
 	 */
 	public function get_columns() {
 		$columns = array(
-			'name'       => __( 'Name', 'ensemble' ),
+			'name'       => __( 'Venue Name', 'ensemble' ),
 			'type'       => __( 'Type', 'ensemble' ),
 			'status'     => __( 'Status', 'ensemble' ),
 			'date_added' => __( 'Date Added', 'ensemble' ),
