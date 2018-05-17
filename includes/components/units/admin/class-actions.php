@@ -38,8 +38,8 @@ class Actions implements Loader {
 		add_filter( 'manage_ensemble_unit_custom_column', array( $this, 'column_directors'          ), 12, 3 );
 
 		// Save custom meta on add and edit.
-		add_action( 'create_ensemble_unit', array( $this, 'add_unit_save_meta' ) );
-		add_action( 'edit_ensemble_unit',   array( $this, 'edit_unit_save_meta' ) );
+		add_action( 'create_ensemble_unit', array( $this, 'save_meta' ) );
+		add_action( 'edit_ensemble_unit',   array( $this, 'save_meta' ) );
 	}
 
 	/**
