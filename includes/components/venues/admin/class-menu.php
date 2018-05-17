@@ -55,6 +55,7 @@ class Menu implements Menu_Router {
 	public function route_request() {
 		$view = isset( $_REQUEST['ensbl-view'] ) ? sanitize_key( $_REQUEST['ensbl-view' ] ) : 'overview';
 
+		// If 'overview' is requested and there are no venues, take the user to the Add Venue screen instead.
 		if ( 'overview' === $view ) {
 			if ( 0 === ( new Database )->count() ) {
 				$view = 'add';
