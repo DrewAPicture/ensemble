@@ -326,4 +326,16 @@ class List_Table extends \WP_List_Table {
 		return apply_filters( 'ensemble_venues_table_' . $column_name, $value, $venue );
 	}
 
+	/**
+	 * Renders the checkbox column in the venues list table.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param Object $contest The current venue object.
+	 * @return string Displays a checkbox.
+	 */
+	function column_cb( $venue ) {
+		return '<input type="checkbox" name="venue_id[]" value="' . esc_attr( $venue->id ) . '" />';
+	}
+
 }

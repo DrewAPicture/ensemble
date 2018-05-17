@@ -327,4 +327,17 @@ class List_Table extends \WP_List_Table {
 		return apply_filters( 'ensemble_contests_table_' . $column_name, $value, $contest );
 	}
 
+	/**
+	 * Renders the checkbox column in the contests list table.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param Object $contest The current contest object.
+	 * @return string Displays a checkbox.
+	 */
+	function column_cb( $contest ) {
+		return '<input type="checkbox" name="contest_id[]" value="' . esc_attr( $contest->id ) . '" />';
+	}
+
+
 }
