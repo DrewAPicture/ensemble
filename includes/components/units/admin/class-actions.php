@@ -214,6 +214,13 @@ class Actions implements Loader {
 	 * @return array Modified columns array.
 	 */
 	public function filter_unit_table_columns( $columns ) {
+		global $hook_suffix;
+
+		// For some reason core is evaluating this filter on term.php. Nip that in the bud.
+		if ( 'term.php' === $hook_suffix ) {
+			return $columns;
+		}
+
 		$new_columns = array(
 			'cb'        => $columns['cb'],
 			'name'      => $columns['name'],
