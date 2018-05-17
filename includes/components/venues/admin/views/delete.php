@@ -91,7 +91,24 @@ $venue    = get_venue( $venue_id );
 							</div>
 						</div>
 					</div>
+					<div class="pb-5">
+						<?php
+						// Venue ID (hidden).
+						html()->hidden( array(
+							'name'  => 'venue-id',
+							'value' => $venue->id,
+						) );
 
+						wp_nonce_field( 'ensemble-delete-venue-nonce', 'ensemble-delete-venue-nonce' );
+
+						// Submit button.
+						html()->input( 'submit', array(
+							'name'  => 'ensemble-delete-venue',
+							'value' => 'Submit',
+							'class' => array( 'btn-dark', 'btn', 'btn-primary' ),
+						) );
+						?>
+					</div>
 				<?php endif; ?>
 			</form>
 		</div>
