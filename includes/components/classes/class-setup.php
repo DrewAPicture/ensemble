@@ -38,8 +38,18 @@ class Setup implements Loader {
 			load( new Admin\Actions );
 		}
 
-		add_action( 'init',        array( $this, 'register_class_tax' ) );
-		add_filter( 'parent_file', array( $this, 'fix_menu_highlight' ) );
+		$this->register_taxonomy_callbacks();
+	}
+
+	/**
+	 * Retrieves the taxonomy slug for Classes.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string Taxonomy slug.
+	 */
+	public function get_taxonomy_slug() {
+		return 'ensemble_class';
 	}
 
 	/**
@@ -47,9 +57,9 @@ class Setup implements Loader {
 	 *
 	 * @since 1.0.0
 	 */
-	public function register_class_tax() {
+	public function register_taxonomy() {
 		// Competing Classes taxonomy.
-		register_taxonomy( 'ensemble_class', array(), array(
+		register_taxonomy( $this->get_taxonomy_slug(), array(), array(
 			'hierarchical'          => false,
 			'public'                => true,
 			'show_in_nav_menus'     => true,
@@ -95,7 +105,7 @@ class Setup implements Loader {
 	 * @param string $parent_file Menu parent file/slug.
 	 * @return string (Maybe) modified parent file.
 	 */
-	public function fix_menu_highlight( $parent_file ) {
+	public function set_menu_highlight( $parent_file ) {
 		$current_screen = get_current_screen();
 
 		if ( isset( $current_screen->taxonomy ) && 'ensemble_class' === $current_screen->taxonomy ) {
