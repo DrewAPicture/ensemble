@@ -63,7 +63,7 @@ class Setup implements Loader {
 				'edit_item'                  => __( 'Edit Competing Unit', 'ensemble' ),
 				'update_item'                => __( 'Update Unit', 'ensemble' ),
 				'view_item'                  => __( 'View Competing Unit', 'ensemble' ),
-				'add_new_item'               => __( 'New Competing Unit', 'ensemble' ),
+				'add_new_item'               => __( 'Add Competing Unit', 'ensemble' ),
 				'new_item_name'              => __( 'New Competing Unit', 'ensemble' ),
 				'separate_items_with_commas' => __( 'Separate Units with commas', 'ensemble' ),
 				'add_or_remove_items'        => __( 'Add or remove Competing Units', 'ensemble' ),
