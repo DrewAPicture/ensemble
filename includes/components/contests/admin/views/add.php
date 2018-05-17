@@ -95,6 +95,7 @@ use function Ensemble\{html};
 								'id'    => 'contest-end-date',
 								'label' => __( 'End Date', 'ensemble' ),
 								'class' => array( 'form-control', 'date' ),
+								'desc'  => __( 'Leave blank to default to the same date as Start Date.', 'ensemble' ),
 							) );
 							?>
 						</div>
