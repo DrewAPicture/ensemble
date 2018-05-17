@@ -350,4 +350,47 @@ class List_Table extends \WP_List_Table {
 		esc_html_e( 'No contests found.', 'ensemble' );
 	}
 
+	/**
+	 * Generates and displays row action links.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param Object $contest     Current contest object.
+	 * @param string $column_name Current column name.
+	 * @param string $primary     Primary column name.
+	 * @return string Row actions output for contests.
+	 */
+	protected function handle_row_actions( $contest, $column_name, $primary ) {
+		if ( $primary !== $column_name || ! current_user_can( 'manage_options' ) ) {
+			return '';
+		}
+
+		$actions  = array();
+		$base_url = add_query_arg( 'page', 'ensemble-admin-contests', admin_url( 'admin.php' ) );
+
+		$actions['edit'] = sprintf( '<a href="%1$s" aria-label="%2$s">%3$s</a>',
+			esc_url( add_query_arg( array( 'ensbl-view' => 'edit', 'contest_id' => $contest->id ), $base_url ) ),
+			sprintf( _x( 'Edit %s', 'ensemble' ), $contest->name ),
+			_x( 'Edit', 'contest', 'ensemble' )
+		);
+
+		$actions['delete'] = sprintf( '<a href="%1$s" aria-label="%2$s">%3$s</a>',
+			esc_url( add_query_arg( array( 'ensbl-view' => 'delete', 'contest_id' => $contest->id ), $base_url ) ),
+			sprintf( _x( 'Delete %s', 'ensemble' ), $contest->name ),
+			_x( 'Delete', 'contest', 'ensemble' )
+		);
+
+		/**
+		 * Filters the array of row action links on the contests list table.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string[] $actions An array of row action links.
+		 * @param Object   $contest The current contest object.
+		 */
+		$actions = apply_filters( 'ensemble_contests_row_actions', $actions, $contest );
+
+		return $this->row_actions( $actions );
+	}
+
 }
