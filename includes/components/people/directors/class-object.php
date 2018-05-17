@@ -9,6 +9,7 @@
  */
 namespace Ensemble\Components\People\Directors;
 
+use function Ensemble\Components\Units\{get_unit};
 use Ensemble\Core;
 
 /**
@@ -29,6 +30,24 @@ class Object extends Core\User_Object {
 	 */
 	public static function db() {
 		return ( new Database );
+	}
+
+	/**
+	 * Associates a competing unit (if it exists) with the current director.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int|\WP_Term $unit Unit ID or object.
+	 * @return bool
+	 */
+	public function associate_unit( $unit ) {
+		if ( ! $unit = get_unit( $unit ) ) {
+			return false;
+		} else {
+			$tt_ids = wp_set_object_terms( $this->ID, $unit->term_id, 'ensemble_unit', true );
+
+			return is_wp_error( $tt_ids ) ? false : true;
+		}
 	}
 
 }
