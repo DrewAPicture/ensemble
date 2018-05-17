@@ -5,7 +5,7 @@ jQuery(document).ready(function($) {
 	$('select[multiple="multiple"]').each(function () {
 		$(this).selectWoo({
 			width: '100%',
-			// theme: 'bootstrap'
+			theme: 'bootstrap'
 		});
 	});
 
