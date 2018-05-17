@@ -9,6 +9,7 @@
  */
 namespace Ensemble\Components\Contests\Admin;
 
+use Ensemble\Components\Venues;
 use Ensemble\Components\Contests\{Database, Object};
 use function Ensemble\Components\Contests\{get_status_label, get_type_label};
 
@@ -222,6 +223,7 @@ class List_Table extends \WP_List_Table {
 		$search  = isset( $_GET['s'] )       ? $_GET['s']               : '';
 		$order   = isset( $_GET['order'] )   ? $_GET['order']           : 'DESC';
 		$orderby = isset( $_GET['orderby'] ) ? $_GET['orderby']         : 'start_date';
+		$venue   = isset( $_REQUEST['venue_id'] ) ? absint( $_REQUEST['venue_id'] ) : '';
 
 		$per_page = $this->get_items_per_page( 'ensemble_contests_per_page', $this->per_page );
 
@@ -231,8 +233,12 @@ class List_Table extends \WP_List_Table {
 			'status'  => $status,
 			'search'  => $search,
 			'orderby' => sanitize_text_field( $orderby ),
-			'order'   => sanitize_text_field( $order )
+			'order'   => sanitize_text_field( $order ),
 		);
+
+		if ( ! empty( $venue ) ) {
+			$args['venues'] = array( $venue );
+		}
 
 		$contests = ( new Database )->query( $args );
 
