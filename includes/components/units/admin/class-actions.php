@@ -227,7 +227,12 @@ class Actions implements Loader {
 			return $value;
 		}
 
-		$value = 'City';
+		$city_meta = get_term_meta( $unit_id, 'ensemble-city', true );
+
+		if ( $city_meta ) {
+			$value = $city_meta;
+		}
+
 		return $value;
 	}
 
