@@ -171,14 +171,30 @@ $contest    = get_contest( $contest_id );
 							'name'  => 'contest-id',
 							'value' => $contest->id,
 						) );
-
-						// Update Contest button
-						html()->input( 'submit', array(
-							'name'  => 'ensemble-update-contest',
-							'value' => 'Update Contest',
-							'class' => array( 'btn-dark', 'btn', 'btn-primary' )
-						) );
 						?>
+						<div class="pb-5 d-flex justify-content-between">
+
+							<?php
+							// Update Contest button
+							html()->input( 'submit', array(
+								'name'  => 'ensemble-update-contest',
+								'value' => 'Update Contest',
+								'class' => array( 'btn-dark', 'btn', 'btn-primary' )
+							) );
+
+							$base_url = add_query_arg( 'page', 'ensemble-admin-contests', admin_url( 'admin.php' ) );
+
+							// Delete link.
+							html()->button( array(
+								'url'   => add_query_arg( array( 'ensbl-view' => 'delete', 'contest_id' => $contest->id ), $base_url ),
+								'class' => array( 'btn', 'btn-link', 'btn-link-delete', 'text-danger' ),
+								'value' => _x( 'Delete', 'contest', 'ensemble' ),
+								'aria'  => array(
+									'label' => __( 'Delete contest', 'ensemble' ),
+								),
+							) );
+							?>
+						</div>
 					</div>
 				</form>
 

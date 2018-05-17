@@ -18,72 +18,70 @@ use function Ensemble\{html};
 	<div class="row">
 		<div class="col-12 col-xl-8">
 			<form method="post">
-				<div class="card mb-3 md-md-5">
-					<div class="card-body">
-						<div class="form-group">
+				<div class="card mb-3 md-md-5 pt-4">
+					<div class="form-group">
+						<?php
+						// Name.
+						html()->text( array(
+							'id'    => 'venue-name',
+							'label' => __( 'Name', 'ensemble' ),
+							'class' => array( 'form-control' ),
+						) );
+						?>
+					</div>
+
+					<div class="form-row form-group">
+						<div class="col">
 							<?php
-							// Name.
-							html()->text( array(
-								'id'    => 'venue-name',
-								'label' => __( 'Name', 'ensemble' ),
-								'class' => array( 'form-control' ),
-							) );
-							?>
-						</div>
+							$types = get_allowed_types();
 
-						<div class="form-row form-group">
-							<div class="col">
-								<?php
-								$types = get_allowed_types();
-
-								// If only one type, don't bother with a select.
-								if ( 1 === count( $types ) ) :
-									$first = key( $types );
-									html()->text( array(
-										'id'       => 'venue-type',
-										'label'    => _x( 'Type', 'venue', 'ensemble' ),
-										'class'    => array( 'form-control', 'form-control-plaintext' ),
-										'value'    => $types[ $first ],
-										'readonly' => true,
-									) );
-								else :
-									html()->select( array(
-										'id'               => 'venue-type',
-										'label'            => _x( 'Type', 'venue', 'ensemble' ),
-										'class'            => array( 'form-control' ),
-										'selected'         => 'regular',
-										'options'          => $types,
-										'show_option_all'  => false,
-										'show_option_none' => false,
-									) );
-								endif;
-								?>
-							</div>
-							<div class="col">
-								<?php
+							// If only one type, don't bother with a select.
+							if ( 1 === count( $types ) ) :
+								$first = key( $types );
+								html()->text( array(
+									'id'       => 'venue-type',
+									'label'    => _x( 'Type', 'venue', 'ensemble' ),
+									'class'    => array( 'form-control', 'form-control-plaintext' ),
+									'value'    => $types[ $first ],
+									'readonly' => true,
+								) );
+							else :
 								html()->select( array(
-									'id'               => 'venue-status',
-									'label'            => __( 'Status', 'ensemble' ),
+									'id'               => 'venue-type',
+									'label'            => _x( 'Type', 'venue', 'ensemble' ),
 									'class'            => array( 'form-control' ),
-									'selected'         => 'draft',
-									'options'          => get_allowed_statuses(),
+									'selected'         => 'regular',
+									'options'          => $types,
 									'show_option_all'  => false,
 									'show_option_none' => false,
 								) );
-								?>
-							</div>
+							endif;
+							?>
 						</div>
-
-						<div class="form-group">
+						<div class="col">
 							<?php
-							// Address.
-							html()->textarea( array(
-								'id'    => 'venue-address',
-								'label' => __( 'Address', 'ensemble' ),
-								'class' => array( 'form-control', 'form-textarea' ),
+							html()->select( array(
+								'id'               => 'venue-status',
+								'label'            => __( 'Status', 'ensemble' ),
+								'class'            => array( 'form-control' ),
+								'selected'         => 'draft',
+								'options'          => get_allowed_statuses(),
+								'show_option_all'  => false,
+								'show_option_none' => false,
 							) );
 							?>
 						</div>
+					</div>
+
+					<div class="form-group">
+						<?php
+						// Address.
+						html()->textarea( array(
+							'id'    => 'venue-address',
+							'label' => __( 'Address', 'ensemble' ),
+							'class' => array( 'form-control', 'form-textarea' ),
+						) );
+						?>
 					</div>
 				</div>
 
