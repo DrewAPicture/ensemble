@@ -301,11 +301,15 @@ class List_Table extends \WP_List_Table {
 		switch( $column_name ){
 
 			case 'name':
-				$value = sprintf( '<a href="%1$s" aria-label="%2$s">%3$s</a>',
-					esc_url( add_query_arg( array( 'ensbl-view' => 'edit', 'contest_id' => $contest->id ), $base_url ) ),
-					sprintf( _x( 'Edit %s', 'ensemble' ), $contest->name ),
-					$contest->name
-				);
+				if ( current_user_can( 'manage_options' ) ) {
+					$value = sprintf( '<a href="%1$s" aria-label="%2$s">%3$s</a>',
+						esc_url( add_query_arg( array( 'ensbl-view' => 'edit', 'contest_id' => $contest->id ), $base_url ) ),
+						sprintf( _x( 'Edit %s', 'ensemble' ), $contest->name ),
+						$contest->name
+					);
+				} else {
+					$value = $contest->name;
+				}
 
 				break;
 
