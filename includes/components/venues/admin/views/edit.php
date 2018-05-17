@@ -108,7 +108,6 @@ $venue    = get_venue( $venue_id );
 						) );
 						?>
 						<div class="pb-5 d-flex justify-content-between">
-
 							<?php
 							// Update Venue button
 							html()->input( 'submit', array(
