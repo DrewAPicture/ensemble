@@ -11,10 +11,13 @@ jQuery(document).ready(function($) {
 
 	// selectWoo instances for selects.
 	$('select').each(function () {
-		$(this).selectWoo({
-			width: '100%',
-			theme: 'bootstrap'
-		});
+		// Skip it for list table bulk actions selects.
+		if ( ! $( this ).parent().hasClass( 'bulkactions' ) ) {
+			$(this).selectWoo({
+				width: '100%',
+				theme: 'bootstrap'
+			});
+		}
 	});
 
 	// Datepickers.
