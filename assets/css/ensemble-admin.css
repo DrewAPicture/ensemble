@@ -136,10 +136,15 @@
 	font-size: 100%;
 }
 
+.select2-container .select2-selection--single {
+	height: auto;
+}
+
+/** Units > Add overrides */
 .bootstrap-iso.w-95 {
 	width: 95% !important;
 }
 
-.select2-container .select2-selection--single {
-	height: auto;
+.bootstrap-iso.fs-13 label {
+	font-size: 13px;
 }
