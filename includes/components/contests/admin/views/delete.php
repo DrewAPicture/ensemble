@@ -56,7 +56,6 @@ $contest    = get_contest( $contest_id );
 										if ( ! empty( $venue_ids ) ) {
 											$venues = ( new Venues\Database )->query( array(
 												'id'     => $venue_ids,
-												'number' => count( $venue_ids ),
 												'fields' => 'name',
 											) );
 
