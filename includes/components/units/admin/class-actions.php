@@ -98,14 +98,30 @@ class Actions implements Loader {
 	 * Inserts a 'Director(s)' multi-select field into the New Unit form.
 	 *
 	 * @since 1.0.0
-	 *
-	 * @param string $taxonomy Taxonomy.
 	 */
-	public function insert_director_multiselect( $taxonomy ) {
-		if ( 'ensemble_unit' !== $taxonomy ) {
-			return;
-		}
+	public function add_unit_directors_field() {
+		$this->output_directors_field();
+	}
 
+	/**
+	 * Inserts a 'Director(s)' field in to the Edit Unit form.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param \WP_Term $term Unit term object.
+	 */
+	public function edit_unit_directors_field( $term ) {
+		$this->output_directors_field( $term );
+	}
+
+	/**
+	 * Private helper to output the markup for the 'Director(s)' field.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param null|\WP_Term $term Optional. Term object. Default null (ignored).
+	 */
+	private function output_directors_field( $term = null ) {
 		$directors_results = ( new Database )->query( array(
 			'fields' => array( 'ID', 'display_name' ),
 			'number' => 500,
@@ -118,24 +134,31 @@ class Actions implements Loader {
 		} else {
 			$directors = array();
 		}
+
+		$args = array(
+			'id'               => 'unit-directors',
+			'name'             => 'unit-directors[]',
+			'label'            => __( 'Director(s)', 'ensemble' ),
+			'class'            => array( 'form-control' ),
+			'multiple'         => true,
+			'options'          => $directors,
+			'show_option_all'  => false,
+			'show_option_none' => false,
+		);
+
+		if ( null !== $term ) {
+			$selected = get_term_meta( $term->term_id, 'ensemble-directors', true );
+			$args['selected'] = array_map( 'absint', explode( ',', $selected ) );
+		}
 		?>
 		<div class="form-field bootstrap-iso w-95 fs-13">
 			<?php
-			html()->select( array(
-				'id'               => 'unit-directors',
-				'name'             => 'unit-directors[]',
-				'label'            => __( 'Director(s)', 'ensemble' ),
-				'class'            => array( 'form-control' ),
-				'multiple'         => true,
-				'options'          => $directors,
-				'show_option_all'  => false,
-				'show_option_none' => false,
-			) );
+			html()->select( $args );
 			?>
 		</div>
 		<?php
-	}
 
+	}
 	/**
 	 * Filters the columns in the Competing Units list table.
 	 *
