@@ -10,7 +10,7 @@
 namespace Ensemble\Components\Venues\Admin;
 ?>
 <div class="wrap">
-	<h1 class="wp-heading-inline"><?php esc_html_e( 'Venues Overview', 'ensemble' ); ?></h1>
+	<h1 class="wp-heading-inline"><?php esc_html_e( 'Venues', 'ensemble' ); ?></h1>
 	<a href="<?php echo esc_url( add_query_arg( array( 'ensbl-view' => 'add' ) ) ); ?>" class="page-title-action" role="button">
 		<?php esc_html_e( 'Add New', 'ensemble' ); ?>
 	</a>
