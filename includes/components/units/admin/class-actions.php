@@ -246,24 +246,28 @@ class Actions implements Loader {
 	}
 
 	/**
-	 * Handles saving custom term meta fields when a new unit is added.
+	 * Handles saving custom term meta fields when adding and editing units.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param int $unit_id Unit term ID.
 	 */
-	public function add_unit_save_meta( $unit_id ) {
+	public function save_meta( $unit_id ) {
+		$city      = $_REQUEST['unit-city'] ?? '';
+		$directors = $_REQUEST['unit-directors'] ?? array();
 
-	}
+		if ( ! empty( $city ) ) {
+			update_term_meta( $unit_id, 'ensemble-city', $city, true );
+		} else {
+			delete_term_meta( $unit_id, 'ensemble-city' );
+		}
 
-	/**
-	 * Handles saving custom term meta fields when a unit is updated.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param int $unit_id Unit term ID.
-	 */
-	public function edit_unit_save_meta( $unit_id ) {
+		if ( ! empty( $directors ) ) {
+			$directors = implode( ',', $directors );
 
+			update_term_meta( $unit_id, 'ensemble-directors', $directors );
+		} else {
+			delete_term_meta( $unit_id, 'ensemble-directors' );
+		}
 	}
 }
