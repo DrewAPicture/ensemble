@@ -2,6 +2,7 @@
 namespace Ensemble\Util;
 
 use Ensemble\Components;
+use Ensemble\Core\Users;
 use Ensemble\Core\Interfaces\Loader;
 
 /**
@@ -13,6 +14,8 @@ class Install implements Loader {
 
 	/**
 	 * Runs the create_table() methods for all component database classes.
+	 *
+	 * @since 1.0.0
 	 */
 	public static function run() {
 		Components\Contests\Database::create_table();
@@ -25,6 +28,8 @@ class Install implements Loader {
 	 * @since 1.0.0
 	 */
 	public function load() {
+		( new Users )->add_caps();
+
 		self::run();
 
 		update_option( 'ensemble_installed', 1 );
