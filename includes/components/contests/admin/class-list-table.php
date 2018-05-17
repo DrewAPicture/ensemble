@@ -348,6 +348,46 @@ class List_Table extends \WP_List_Table {
 	}
 
 	/**
+	 * Renders the Venue(s) column value.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param Object $contest Current contest object.
+	 * @return string Value of the Venue(s) column.
+	 */
+	public function column_venues( $contest ) {
+		// Convert to an array.
+		$venue_ids = array_map( 'absint', explode( ',', $contest->venues ) );
+
+		if ( empty( $venue_ids ) ) {
+			return '';
+		} else {
+			$venues = ( new Venues\Database )->query( array(
+				'id'     => $venue_ids,
+				'number' => count( $venue_ids ),
+				'fields' => array( 'id', 'name' ),
+			) );
+
+			$venue_links = array();
+
+			if ( ! empty( $venues ) ) {
+				$base_url = add_query_arg( 'page', 'ensemble-admin-contests', admin_url( 'admin.php' ) );
+
+				foreach ( $venues as $venue ) {
+					$venue_links[] = sprintf( '<a href="%1$s" aria-label="%2$s">%3$s</a>',
+						esc_url( add_query_arg( array( 'venue_id' => $venue->id ), $base_url ) ),
+						/* translators: Venue name */
+						esc_attr( sprintf( __( 'View contests for the %s venue', 'ensemble' ), $venue->name ) ),
+						$venue->name
+					);
+				}
+
+				return implode( ', ', $venue_links );
+			}
+		}
+	}
+
+	/**
 	 * Renders the message to be displayed when there are no contests.
 	 *
 	 * @since 1.0.0
