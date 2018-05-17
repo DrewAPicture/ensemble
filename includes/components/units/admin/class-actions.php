@@ -9,7 +9,7 @@
  */
 namespace Ensemble\Components\Units\Admin;
 
-use Ensemble\Components\People\Directors\Database;
+use Ensemble\Components\People\Directors;
 use Ensemble\Core\Interfaces\Loader;
 use function Ensemble\html;
 
@@ -189,7 +189,7 @@ class Actions implements Loader {
 	 * @return array Director ID\name pairs if any are found, otherwise an empty array.
 	 */
 	private function get_directors_as_options() {
-		$directors_results = ( new Database )->query( array(
+		$directors_results = ( new Directors\Database )->query( array(
 			'fields' => array( 'ID', 'display_name' ),
 			'number' => 500,
 		) );
