@@ -334,4 +334,50 @@ class List_Table extends \WP_List_Table {
 		esc_html_e( 'No venues found.', 'ensemble' );
 	}
 
+	/**
+	 * Generates and displays row action links.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param Object $venue       Current venue object.
+	 * @param string $column_name Current column name.
+	 * @param string $primary     Primary column name.
+	 * @return string Row actions output for venues.
+	 */
+	protected function handle_row_actions( $venue, $column_name, $primary ) {
+		if ( $primary !== $column_name ) {
+			return '';
+		}
+
+		$actions  = array();
+		$base_url = add_query_arg( 'page', 'ensemble-admin-venues', admin_url( 'admin.php' ) );
+
+		if ( current_user_can( 'manage_options' ) ) {
+			$actions['edit'] = sprintf( '<a href="%1$s" aria-label="%2$s">%3$s</a>',
+				esc_url( add_query_arg( array( 'ensbl-view' => 'edit', 'venue_id' => $venue->id ), $base_url ) ),
+				sprintf( _x( 'Edit %s', 'ensemble' ), $venue->name ),
+				_x( 'Edit', 'venue', 'ensemble' )
+			);
+
+			$actions['delete'] = sprintf( '<a href="%1$s" aria-label="%2$s">%3$s</a>',
+				esc_url( add_query_arg( array( 'ensbl-view' => 'delete', 'venue_id' => $venue->id ), $base_url ) ),
+				sprintf( _x( 'Delete %s', 'ensemble' ), $venue->name ),
+				_x( 'Delete', 'venue', 'ensemble' )
+			);
+		}
+
+		/**
+		 * Filters the array of row action links on the venues list table.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string[] $actions An array of row action links.
+		 * @param Object   $venue   The current venue object.
+		 */
+		$actions = apply_filters( 'ensemble_venues_row_actions', $actions, $venue );
+
+		return $this->row_actions( $actions );
+	}
+
+
 }
