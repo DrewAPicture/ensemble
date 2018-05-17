@@ -128,7 +128,20 @@ class Actions implements Loader {
 	 * @param \WP_Term $term Unit term object.
 	 */
 	public function edit_unit_directors_field( $term ) {
-		$this->output_directors_field( $term );
+		?>
+		<table class="form-table bootstrap-iso">
+			<tbody>
+				<tr class="form-field">
+					<th scope="row">
+						<label for="ensemble-directors"><?php esc_html_e( 'Director(s)', 'ensemble' ); ?></label>
+					</th>
+					<td>
+						<?php $this->output_directors_field( $term ); ?>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<?php
 	}
 
 	/**
