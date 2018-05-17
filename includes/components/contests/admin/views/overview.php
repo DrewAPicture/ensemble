@@ -9,20 +9,18 @@
  */
 namespace Ensemble\Components\Contests\Admin;
 ?>
-<div class="wrap">
-	<h1 class="wp-heading-inline"><?php esc_html_e( 'Contests', 'ensemble' ); ?></h1>
-	<a href="<?php echo esc_url( add_query_arg( array( 'ensbl-view' => 'add' ) ) ); ?>" class="page-title-action" role="button">
-		<?php esc_html_e( 'Add New', 'ensemble' ); ?>
-	</a>
+<h1 class="wp-heading-inline"><?php esc_html_e( 'Contests', 'ensemble' ); ?></h1>
+<a href="<?php echo esc_url( add_query_arg( array( 'ensbl-view' => 'add' ) ) ); ?>" class="page-title-action" role="button">
+	<?php esc_html_e( 'Add New', 'ensemble' ); ?>
+</a>
+<?php
+$list_table = new List_Table();
+$list_table->prepare_items();
+?>
+<form id="ensemble-contests" method="get">
 	<?php
-	$list_table = new List_Table();
-	$list_table->prepare_items();
+	$list_table->search_box( __( 'Search', 'ensemble' ), 'ensemble-contests-search' );
+	$list_table->views();
+	$list_table->display();
 	?>
-	<form id="ensemble-contests" method="get">
-		<?php
-		$list_table->search_box( __( 'Search', 'ensemble' ), 'ensemble-contests-search' );
-		$list_table->views();
-		$list_table->display();
-		?>
-	</form>
-</div>
+</form>
