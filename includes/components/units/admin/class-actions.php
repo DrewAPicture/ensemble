@@ -174,10 +174,37 @@ class Actions implements Loader {
 			html()->select( $args );
 		} else {
 			?>
-		</div>
-		<?php
-
+			<div class="form-field bootstrap-iso w-95 fs-13">
+				<?php html()->select( $args ); ?>
+			</div>
+			<?php
+		}
 	}
+
+	/**
+	 * Retrieves a list of director ID\name pairs for use as an options array.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array Director ID\name pairs if any are found, otherwise an empty array.
+	 */
+	private function get_directors_as_options() {
+		$directors_results = ( new Database )->query( array(
+			'fields' => array( 'ID', 'display_name' ),
+			'number' => 500,
+		) );
+
+		if ( ! empty( $directors_results ) ) {
+			foreach ( $directors_results as $director ) {
+				$directors[ $director->ID ] = $director->display_name;
+			}
+		} else {
+			$directors = array();
+		}
+
+		return $directors;
+	}
+
 	/**
 	 * Filters the columns in the Competing Units list table.
 	 *
