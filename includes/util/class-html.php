@@ -358,6 +358,15 @@ class HTML {
 			'readonly'     => false,
 		);
 
+		if ( ! empty( $args['desc'] ) ) {
+			$description = $args['desc'];
+
+			// Skip parsing this argument as an attribute.
+			unset( $args['desc'] );
+		} else {
+			$description = '';
+		}
+
 		$args = $this->parse_args( $args, $defaults );
 
 		$output = '';
@@ -369,18 +378,18 @@ class HTML {
 			);
 		}
 
-		if ( ! empty( $args['desc'] ) ) {
-			$output .= sprintf( '<span class="description">%s</span>',
-				esc_html( $args['desc'] )
-			);
-		}
-
 		if ( ! empty( $this->atts ) ) {
 			$atts = implode( ' ', $this->atts );
 
 			$output .= sprintf( '<input type="%1$s" %2$s />', esc_attr( $this->type ), $atts );
 		} else {
 			$output .= sprintf( '<input type="%1$s" />', esc_attr( $this->type ) );
+		}
+
+		if ( ! empty( $description ) ) {
+			$output .= sprintf( '<small class="form-text text-muted">%s</small>',
+				esc_html( $description )
+			);
 		}
 
 		if ( true === $echo ) {
