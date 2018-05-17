@@ -55,10 +55,10 @@ class Menu implements Menu_Router {
 	public function route_request() {
 		$view = isset( $_REQUEST['ensbl-view'] ) ? sanitize_key( $_REQUEST['ensbl-view' ] ) : 'overview';
 
-		$contests = ( new Database )->count();
-
-		if ( 'overview' === $view && 0 === $contests ) {
-			$view = 'add';
+		if ( 'overview' === $view ) {
+			if ( 0 === ( new Database )->count() ) {
+				$view = 'add';
+			}
 		}
 
 		load_view( new Actions, $view );
