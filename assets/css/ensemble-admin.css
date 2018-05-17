@@ -116,11 +116,15 @@
 }
 
 .bootstrap-iso label {
-	font-size: 16px;
+	font-size: 14px;
 }
 
 .bootstrap-iso .h1, .bootstrap-iso h1 {
 	font-size: 2em;
+}
+
+.bootstrap-iso .btn-link.text-danger {
+	color: #dc3545;
 }
 
 .bootstrap-iso .form-check-input {
