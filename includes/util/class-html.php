@@ -897,6 +897,7 @@ class HTML {
 
 				// Attributes to leave alone.
 				case 'editor_args':
+				case 'selected':
 				case 'label':
 				case 'site':
 					$value = $value;
