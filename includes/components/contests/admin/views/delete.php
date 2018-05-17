@@ -9,6 +9,7 @@
  */
 namespace Ensemble\Components\Contests\Admin;
 
+use Ensemble\Components\Venues;
 use function Ensemble\Components\Contests\{get_contest, get_status_label};
 use function Ensemble\{html};
 
@@ -38,7 +39,7 @@ $contest    = get_contest( $contest_id );
 								<thead>
 								<tr>
 									<th><?php esc_html_e( 'Name', 'ensemble' ); ?></th>
-									<th><?php esc_html_e( 'Venues', 'ensemble' ); ?></th>
+									<th><?php esc_html_e( 'Venue(s)', 'ensemble' ); ?></th>
 									<th><?php esc_html_e( 'Status', 'ensemble' ); ?></th>
 									<th><?php esc_html_e( 'Start Date', 'ensemble' ); ?></th>
 								</tr>
