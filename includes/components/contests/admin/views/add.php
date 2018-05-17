@@ -23,7 +23,7 @@ use function Ensemble\{html};
 			<?php if ( 0 === ( new Database )->count() ) : ?>
 				<div class="alert alert-info" role="alert">
 					<h5><?php esc_html_e( 'Howdy!', 'ensemble' ); ?></h5>
-					<?php esc_html_e( 'It looks like this is your first contest. Adding a contest is simple, just choose a name, assign a venue, and select start and end dates to get started.', 'ensemble' ); ?>
+					<?php esc_html_e( 'It looks like you&#8217;re adding your first contest. To get started, just choose a name and venue, and tell us when you want your contest to start and end. If you haven&#8217;t created any venues yet, not to worry, you can always come back and set one later, ', 'ensemble' ); ?>
 				</div>
 			<?php endif; ?>
 

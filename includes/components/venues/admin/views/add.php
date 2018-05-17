@@ -21,7 +21,7 @@ use function Ensemble\{html};
 			<?php if ( 0 === ( new Database )->count() ) : ?>
 				<div class="alert alert-info" role="alert">
 					<h5><?php esc_html_e( 'Howdy!', 'ensemble' ); ?></h5>
-					<?php esc_html_e( 'It looks like this is your first venue. Adding a new venue is simple, just choose a name, assign a type, and enter an address to get started.', 'ensemble' ); ?>
+					<?php esc_html_e( 'It looks like you&#8217;re adding your first venue. Adding venues is super simple, just choose a name, assign a type, and enter an address to get started.', 'ensemble' ); ?>
 				</div>
 			<?php endif; ?>
 
