@@ -60,7 +60,9 @@ class Assets implements Interfaces\Loader {
 		wp_register_script( 'ensbl-selectWoo', ENSEMBLE_PLUGIN_URL . '/assets/js/vendor/selectWoo.js', array( 'jquery' ), $this->get_asset_version( '/assets/js/vendor/selectWoo.js' ) );
 		wp_register_script( 'ensbl-admin', ENSEMBLE_PLUGIN_URL . '/assets/js/ensemble-admin.js', array( 'ensbl-parsley', 'ensbl-selectWoo', 'jquery-ui-datepicker' ), $this->get_asset_version( '/assets/js/ensemble-admin.js' ) );
 
-		if ( false !== strpos( $hook_suffix, 'page_ensemble-admin' ) || 'edit-tags.php' === $hook_suffix ) {
+		$special_screens = array( 'edit.tags.php', 'term.php' );
+
+		if ( false !== strpos( $hook_suffix, 'page_ensemble-admin' ) || in_array( $hook_suffix, $special_screens, true ) ) {
 			wp_enqueue_style( 'ensbl-admin-css' );
 			wp_enqueue_script( 'ensbl-admin' );
 		}
