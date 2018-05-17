@@ -9,16 +9,19 @@
  */
 namespace Ensemble\Core\Admin;
 
-use Ensemble\Core\Interfaces\Loader;
+use Ensemble\Core\Interfaces\Menu_Router;
+use Ensemble\Core\Traits\View_Loader;
+use function Ensemble\load_view;
 
 /**
  * Sets up the Ensemble Admin.
  *
  * @since 1.0.0
  *
- * @see Loader
+ * @see Menu_Router
+ * @see View_Loader
  */
-class Menu implements Loader {
+class Menu implements Menu_Router {
 
 	/**
 	 * Initializes menu registrations.
@@ -40,22 +43,18 @@ class Menu implements Loader {
 			__( 'Ensemble', 'ensemble' ),
 			'manage_options',
 			'ensemble-admin',
-			array( $this, 'ensemble_admin' ),
+			array( $this, 'route_request' ),
 			'dashicons-universal-access-alt'
 		);
 	}
 
 	/**
-	 * Renders the primary Ensemble admin.
+	 * Routes core admin requests.
 	 *
 	 * @since 1.0.0
 	 */
-	public function ensemble_admin() {
-		?>
-		<div class="wrap">
-			<h1><?php esc_html_e( 'Ensemble', 'ensemble' ); ?></h1>
-		</div>
-		<?php
+	public function route_request() {
+		load_view( new Actions, 'overview' );
 	}
 
 }
