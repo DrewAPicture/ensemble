@@ -10,6 +10,7 @@
 namespace Ensemble\Components\Venues;
 
 use Ensemble\Core;
+use function Ensemble\{get_date};
 
 /**
  * Venue table database class.
@@ -112,7 +113,7 @@ class Database extends Core\Database {
 		return array(
 			'type'       => 'school',
 			'status'     => 'active',
-			'date_added' => \Ensemble\date()->format( 'Y-m-d H:i:s' ),
+			'date_added' =>  get_date()->format( 'Y-m-d H:i:s' ),
 		);
 	}
 

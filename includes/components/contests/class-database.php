@@ -10,7 +10,7 @@
 namespace Ensemble\Components\Contests;
 
 use Ensemble\Core;
-use function Ensemble\{get_wp_timezone};
+use function Ensemble\{get_wp_timezone, get_date};
 
 /**
  * Contests table database class.
@@ -114,7 +114,7 @@ class Database extends Core\Database {
 	 * @since 1.0.0
 	 */
 	public function get_column_defaults() {
-		$today = \Ensemble\date();
+		$today = get_date();
 
 		return array(
 			'type'       => 'standard',

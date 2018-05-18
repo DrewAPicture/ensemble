@@ -152,7 +152,7 @@ function get_wp_timezone() {
  *                            or any other valid timezone string. Default UTC.
  * @return \DateTime DateTime object.
  */
-function date( $date_string = 'now', $timezone = 'UTC' ) {
+function get_date( $date_string = 'now', $timezone = 'UTC' ) {
 	$wp_time = false;
 
 	if ( 'wp' === $timezone ) {
