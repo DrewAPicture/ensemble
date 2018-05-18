@@ -9,6 +9,7 @@
  */
 namespace Ensemble\Components\Classes\Admin;
 
+use Ensemble\Components\Classes\Setup;
 use Ensemble\Core\Interfaces\Loader;
 use function Ensemble\html;
 
