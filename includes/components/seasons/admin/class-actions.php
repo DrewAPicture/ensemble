@@ -38,6 +38,7 @@ class Actions implements Loader {
 		// Custom column callbacks.
 		add_filter( 'manage_ensemble_season_custom_column', array( $this, 'column_start_date' ), 11, 3 );
 		add_filter( 'manage_ensemble_season_custom_column', array( $this, 'column_end_date'   ), 12, 3 );
+		add_filter( 'manage_ensemble_season_custom_column', array( $this, 'column_contests'   ), 13, 3 );
 
 		// Save meta.
 		add_action( 'create_ensemble_season', array( $this, 'save_season_meta' ) );
@@ -209,6 +210,7 @@ class Actions implements Loader {
 			'name'       => $columns['name'],
 			'start_date' => _x( 'Start Date', 'seasons', 'ensemble' ),
 			'end_date'   => _x( 'End Date', 'seasons', 'ensemble' ),
+			'contests'   => __( 'Contests', 'ensemble' ),
 		);
 
 		/**
@@ -266,6 +268,42 @@ class Actions implements Loader {
 
 		if ( $end_date ) {
 			$value = create_date( $end_date, 'wp' )->format( 'm/d/Y' );
+		}
+
+		return $value;
+	}
+
+	/**
+	 * Renders the contents of a single 'Contests' column row in the Seasons list table.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $string      Blank string.
+	 * @param string $column_name Name of the column.
+	 * @param int    $term_id     Term ID.
+	 * @return string Markup for the column row.
+	 */
+	public function column_contests( $value, $column_name, $term_id ) {
+		if ( 'contests' !== $column_name ) {
+			return $value;
+		}
+
+		$contest_ids = get_objects_in_term( $term_id, ( new Setup )->get_taxonomy_slug() );
+
+		if ( ! is_wp_error( $contest_ids ) && ! empty( $contest_ids ) ) {
+			$contests_url = add_query_arg( array(
+				'page'       => 'ensemble-admin-contests',
+				'ensbl-view' => 'overview',
+				'season_id'  => $term_id,
+			), admin_url( 'admin.php' ) );
+
+			$value = sprintf( '<a href="%1$s" aria-label="%2$s">%3$s</a>',
+				esc_url( $contests_url ),
+				__( 'View contests assigned to this season', 'ensemble' ),
+				count( $contest_ids )
+			);
+		} else {
+			$value = 0;
 		}
 
 		return $value;
