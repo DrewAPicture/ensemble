@@ -1,13 +1,13 @@
 <?php
 /**
- * Sets up the Classes component
+ * Sets up the Classifications component
  *
- * @package   Ensemble\Components\Classes
+ * @package   Ensemble\Components\Classifications
  * @copyright Copyright (c) 2018, Drew Jaynes
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
  */
-namespace Ensemble\Components\Classes;
+namespace Ensemble\Components\Classifications;
 
 use Ensemble\Core\Interfaces\Loader;
 use Ensemble\Core\Traits\Taxonomy_Component;
@@ -42,7 +42,7 @@ class Setup implements Loader {
 	}
 
 	/**
-	 * Retrieves the taxonomy slug for Classes.
+	 * Retrieves the taxonomy slug for Classifications.
 	 *
 	 * @since 1.0.0
 	 *
@@ -58,7 +58,7 @@ class Setup implements Loader {
 	 * @since 1.0.0
 	 */
 	public function register_taxonomy() {
-		// Competing Classes taxonomy.
+		// Classifications taxonomy.
 		register_taxonomy( $this->get_taxonomy_slug(), array(), array(
 			'hierarchical'          => false,
 			'public'                => true,

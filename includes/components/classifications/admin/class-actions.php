@@ -1,20 +1,20 @@
 <?php
 /**
- * Class Actions
+ * Classification Actions
  *
- * @package   Ensemble\Components\Classes\Admin
+ * @package   Ensemble\Components\Classifications\Admin
  * @copyright Copyright (c) 2018, Drew Jaynes
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
  */
-namespace Ensemble\Components\Classes\Admin;
+namespace Ensemble\Components\Classifications\Admin;
 
-use Ensemble\Components\Classes\Setup;
+use Ensemble\Components\Classifications\Setup;
 use Ensemble\Core\Interfaces\Loader;
 use function Ensemble\html;
 
 /**
- * Sets up logic for performing actions for classes.
+ * Sets up logic for performing actions for classifications.
  *
  * @since 1.0.0
  *
@@ -23,7 +23,7 @@ use function Ensemble\html;
 class Actions implements Loader {
 
 	/**
-	 * Registers hook callbacks for classes actions.
+	 * Registers hook callbacks for classifications actions.
 	 *
 	 * @since 1.0.0
 	 */
@@ -40,10 +40,10 @@ class Actions implements Loader {
 		add_action( 'create_ensemble_unit', array( $this, 'save_unit_meta' ) );
 		add_action( 'edit_ensemble_unit',   array( $this, 'save_unit_meta' ) );
 
-		// Filter the Classes list table columns.
+		// Filter the Classifications list table columns.
 		add_filter( 'manage_edit-ensemble_class_columns', array( $this, 'filter_class_table_columns' ), 100 );
 
-		// Hide (unimportant) slug field on Classes > Add.
+		// Hide (unimportant) slug field on Classifications > Add.
 		add_action( 'add_tag_form_pre', array( $this, 'hide_add_class_slug_field' ) );
 	}
 
@@ -90,7 +90,7 @@ class Actions implements Loader {
 	 * @param null|\WP_Term $term Optional. Term object. Default null (ignored).
 	 */
 	private function output_class_field( $term = null ) {
-		$classes = get_terms( array(
+		$classifications = get_terms( array(
 			'taxonomy'   => ( new Setup )->get_taxonomy_slug(),
 			'hide_empty' => false,
 			'fields'   => 'id=>name',
@@ -100,7 +100,7 @@ class Actions implements Loader {
 			'id'               => 'unit-class',
 			'label'            => __( 'Classification', 'ensemble' ),
 			'class'            => array( 'form-control' ),
-			'options'          => $classes,
+			'options'          => $classifications,
 			'show_option_all'  => false,
 			'show_option_none' => false,
 		);
@@ -180,7 +180,7 @@ class Actions implements Loader {
 	}
 
 	/**
-	 * Filters the columns in the Classes list table.
+	 * Filters the columns in the Classifications list table.
 	 *
 	 * @since 1.0.0
 	 *
@@ -202,7 +202,7 @@ class Actions implements Loader {
 		);
 
 		/**
-		 * Filters the list of Classes list table columns directly after the component has modified
+		 * Filters the list of Classifications list table columns directly after the component has modified
 		 * the original list.
 		 *
 		 * @since 1.0.0
@@ -210,12 +210,12 @@ class Actions implements Loader {
 		 * @param array $new_columns Class-defined columns and keys.
 		 * @param array $columns     Original list table columns supplied to the parent callback.
 		 */
-		return apply_filters( 'ensemble_classess-ensemble_class_coloumns', $new_columns, $columns );
+		return apply_filters( 'ensemble_classifications-ensemble_class_columns', $new_columns, $columns );
 	}
 
 
 	/**
-	 * Bit of a hack, but outputs some inline CSS at the top of the Classes > Add form to hide the slug field.
+	 * Bit of a hack, but outputs some inline CSS at the top of the Classifications > Add form to hide the slug field.
 	 *
 	 * @since 1.0.0
 	 *

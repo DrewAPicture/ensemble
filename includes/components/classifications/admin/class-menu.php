@@ -1,19 +1,19 @@
 <?php
 /**
- * Sets up the Classes admin menu item
+ * Sets up the Classifications admin menu item
  *
- * @package   Ensemble\Components\Classes\Admin
+ * @package   Ensemble\Components\Classifications\Admin
  * @copyright Copyright (c) 2018, Drew Jaynes
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
  * @since     1.0.0
  */
-namespace Ensemble\Components\Classes\Admin;
+namespace Ensemble\Components\Classifications\Admin;
 
 use Ensemble\Core\Interfaces\Loader;
 use function Ensemble\{load};
 
 /**
- * Sets up the Classes menu.
+ * Sets up the Classifications menu.
  *
  * @since 1.0.0
  *
