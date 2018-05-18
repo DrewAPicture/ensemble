@@ -67,10 +67,11 @@ function html() {
  *
  * @since 1.0.0
  *
+ * @param string $default Optional. Default view to return if ensbl-view isn't set. Default 'overview'.
  * @return string View variable vlaue.
  */
-function get_current_view() {
-	return sanitize_key( $_REQUEST['ensbl-view'] ?? 'overview' );
+function get_current_view( $default = 'overview' ) {
+	return sanitize_key( $_REQUEST['ensbl-view'] ?? $default );
 }
 
 /**
