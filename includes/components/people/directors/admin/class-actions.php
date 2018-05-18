@@ -9,6 +9,7 @@
  */
 namespace Ensemble\Components\People\Directors\Admin;
 
+use Ensemble\Components\Units\Setup as Units;
 use Ensemble\Core\Interfaces\Loader;
 use Ensemble\Core\Traits\{View_Loader, Tab_Loader};
 
@@ -59,6 +60,28 @@ class Actions implements Loader {
 			if ( wp_redirect( $redirect ) ) {
 				exit;
 			}
+		}
+
+		$name  = sanitize_text_field( $_REQUEST['director-name'] ?? '' );
+		$email = sanitize_text_field( $_REQUEST['director-email'] ?? '' );
+		$units = array_map( 'absint', $_REQUEST['director-units'] ?? array() );
+
+		$user_id = wp_insert_user( array(
+			'user_login'   => $email,
+			'user_email'   => $email,
+			'user_pass'    => wp_generate_password( 24, true ),
+			'display_name' => $name,
+			'role'         => 'ensemble_director',
+		) );
+
+		if ( ! is_wp_error( $user_id ) && ! empty( $units ) ) {
+			// Assign the units to this new director.
+			wp_set_object_terms( $user_id, $units, ( new Units )->get_taxonomy_slug() );
+		}
+
+		// TODO add notice handler for the different cases.
+		if ( wp_redirect( $redirect ) ) {
+			exit;
 		}
 	}
 
