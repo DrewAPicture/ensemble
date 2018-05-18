@@ -115,7 +115,9 @@ abstract class Object implements Interfaces\Object {
 	 * @return mixed Otherwise, the value of the property if set.
 	 */
 	public function __get( $key ) {
-		if ( isset( $this->{$key} ) ) {
+		if ( method_exists( "get_{$key}" ) ) {
+			return call_user_func( "get_{$key}" );
+		} elseif ( isset( $this->{$key} ) ) {
 			return $this->{$key};
 		}
 	}
