@@ -99,6 +99,17 @@ class Actions implements Loader {
 					<?php $this->output_directors_field( $term ); ?>
 				</td>
 			</tr>
+
+			<?php
+			/**
+			 * Fires inside the form-table container in the Units > Edit form.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param \WP_Term $term Unit term object.
+			 */
+			do_action( 'ensemble_units-edit_unit_fields', $term );
+			?>
 			</tbody>
 		</table>
 		<?php
