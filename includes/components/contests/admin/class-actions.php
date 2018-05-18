@@ -107,10 +107,14 @@ class Actions implements Loader {
 			'contest_id' => $contest_id,
 		), admin_url( 'admin.php' ) );
 
-		$nonce = $_REQUEST['ensemble-update-contest-nonce'] ?? false;
+		$nonce  = $_REQUEST['ensemble-update-contest-nonce'] ?? false;
+		$season = absint( $_REQUEST['contest-season'] ?? 0 );
 
 		if ( ! wp_verify_nonce( $nonce, 'ensemble-update-contest-nonce' ) || 0 === $contest_id ) {
-			return;
+			// TODO add notice handler for the different cases.
+			if ( wp_redirect( $redirect ) ) {
+				exit;
+			}
 		}
 
 		$data = array(
@@ -131,6 +135,10 @@ class Actions implements Loader {
 		}
 
 		$updated = ( new Database )->update( $contest_id, $data );
+
+		IF ( $updated && ! empty( $season ) ) {
+			wp_set_object_terms( $contest_id, $season, ( new Seasons )->get_taxonomy_slug() );
+		}
 
 		// TODO add notice handler for the different cases.
 		if ( wp_redirect( $redirect ) ) {
