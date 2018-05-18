@@ -11,7 +11,7 @@ namespace Ensemble\Components\Seasons\Admin;
 
 use Ensemble\Components\Seasons\Setup;
 use Ensemble\Core\Interfaces\Loader;
-use function Ensemble\html;
+use function Ensemble\{html, create_date};
 
 /**
  * Sets up logic for performing actions for seasons.
@@ -148,7 +148,7 @@ class Actions implements Loader {
 			$start_date = get_term_meta( $term->term_id, 'ensemble-start-date', true );
 
 			if ( $start_date ) {
-				$args['value'] = date( 'm/d/Y', strtotime( $start_date ) );
+				$args['value'] = create_date( $start_date, 'wp' )->format( 'm/d/Y' );
 			}
 
 			// If $term is available this is for the Seasons > Edit form where the label is output separately.
@@ -177,7 +177,7 @@ class Actions implements Loader {
 			$end_date = get_term_meta( $term->term_id, 'ensemble-end-date', true );
 
 			if ( $end_date ) {
-				$args['value'] = date( 'm/d/Y', strtotime( $end_date ) );
+				$args['value'] = create_date( $end_date, 'wp' )->format( 'm/d/Y' );
 			}
 
 			// If $term is available this is for the Seasons > Edit form where the label is output separately.
@@ -241,7 +241,7 @@ class Actions implements Loader {
 		$start_date = get_term_meta( $term_id, 'ensemble-start-date', true );
 
 		if ( $start_date ) {
-			$value = date( 'm/d/Y', strtotime( $start_date ) );
+			$value = create_date( $start_date, 'wp' )->format( 'm/d/Y' );
 		}
 
 		return $value;
@@ -265,7 +265,7 @@ class Actions implements Loader {
 		$end_date = get_term_meta( $term_id, 'ensemble-end-date', true );
 
 		if ( $end_date ) {
-			$value = date( 'm/d/Y', strtotime( $end_date ) );
+			$value = create_date( $end_date, 'wp' )->format( 'm/d/Y' );
 		}
 
 		return $value;
@@ -283,12 +283,14 @@ class Actions implements Loader {
 		$end_date   = sanitize_text_field( $_REQUEST['season-end-date'] ?? '' );
 
 		if ( ! empty( $start_date ) ) {
+			$start_date = create_date( $start_date, 'UTC', true )->format( 'Y-m-d 00:00:00' );
 			update_term_meta( $term_id, 'ensemble-start-date', $start_date );
 		} else {
 			delete_term_meta( $term_id, 'ensemble-start-date' );
 		}
 
 		if ( ! empty( $end_date ) ) {
+			$end_date = create_date( $end_date, 'UTC', true )->format( 'Y-m-d 23:59:59' );
 			update_term_meta( $term_id, 'ensemble-end-date', $end_date );
 		} else {
 			delete_term_meta( $term_id, 'ensemble-end-date' );
