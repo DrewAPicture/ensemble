@@ -173,7 +173,7 @@ class Actions implements Loader {
 		$class = $_REQUEST['unit-class'] ?? '';
 
 		if ( ! empty( $class ) ) {
-			update_term_meta( $unit_id, 'ensemble-class', $class );
+			update_term_meta( $unit_id, 'ensemble-class', sanitize_text_field( $class ) );
 		} else {
 			delete_term_meta( $unit_id, 'ensemble-class' );
 		}

@@ -283,13 +283,13 @@ class Actions implements Loader {
 		$end_date   = $_REQUEST['season-end-date'] ?? '';
 
 		if ( ! empty( $start_date ) ) {
-			update_term_meta( $term_id, 'ensemble-start-date', $start_date );
+			update_term_meta( $term_id, 'ensemble-start-date', sanitize_text_field( $start_date ) );
 		} else {
 			delete_term_meta( $term_id, 'ensemble-start-date' );
 		}
 
 		if ( ! empty( $end_date ) ) {
-			update_term_meta( $term_id, 'ensemble-end-date', $end_date );
+			update_term_meta( $term_id, 'ensemble-end-date', sanitize_text_field( $end_date ) );
 		} else {
 			delete_term_meta( $term_id, 'ensemble-end-date' );
 		}
