@@ -38,8 +38,8 @@ class Menu implements Loader {
 	public function register_submenu() {
 		add_submenu_page(
 			'ensemble-admin',
-			__( 'Classes', 'ensemble' ),
-			__( 'Classes', 'ensemble' ),
+			__( 'Classifications', 'ensemble' ),
+			__( 'Classifications', 'ensemble' ),
 			'manage_options',
 			'edit-tags.php?taxonomy=ensemble_class'
 		);
