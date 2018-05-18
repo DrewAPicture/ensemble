@@ -229,6 +229,25 @@ class Database extends Core\Database {
 	}
 
 	/**
+	 * Updates an existing venue in the database.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int    $object_id Venue ID.
+	 * @param array  $data      Venue data to update.
+	 * @param string $where     Optional. Column to match against in the WHERE clause. If empty, $primary_key
+	 *                          will be used. Default empty.
+	 * @return true|\WP_Error True if the venue was successfully updated, otherwise a WP_Error object.
+	 */
+	public function update( $object_id, $data = array(), $where = '' ) {
+		if ( ! empty( $data['date_added'] ) ) {
+			$data['date_added'] = create_date( $data['date_added'], 'UTC', true )->format( 'Y-m-d H:i:s' );
+		}
+
+		return parent::update( $object_id, $data, $where );
+	}
+
+	/**
 	 * Creates the database table.
 	 *
 	 * @since 1.0.0
