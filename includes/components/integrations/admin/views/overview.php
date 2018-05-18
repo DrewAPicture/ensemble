@@ -11,6 +11,8 @@ namespace Ensemble\Core;
 
 use function Ensemble\{load_view};
 ?>
-<h1 class="wp-heading-inline"><?php esc_html_e( 'Integrations', 'ensemble' ); ?></h1>
+<div class="bootstrap-iso">
+	<h1 class="wp-heading-inline"><?php esc_html_e( 'Integrations', 'ensemble' ); ?></h1>
 
-<div class="alert alert-warning"><?php esc_html_e( 'Calendar integrations and other goodies are coming soon. Stay tuned!', 'ensemble' ); ?></div>
+	<div class="alert alert-warning"><?php esc_html_e( 'Calendar integrations and other goodies are coming soon. Stay tuned!', 'ensemble' ); ?></div>
+</div>
