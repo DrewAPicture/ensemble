@@ -231,7 +231,15 @@ class Actions implements Loader {
 			'directors' => _x( 'Director(s)', 'competing unit', 'ensemble' ),
 		);
 
-		return $new_columns;
+		/**
+		 * Filters the list of Units list table columns directly after the Units component has modified it.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $new_columns Unit-defined columns and keys.
+		 * @param array $columns     Original list table columns supplied to the parent callback.
+		 */
+		return apply_filters( 'ensemble_units-ensemble_unit_coloumns', $new_columns, $columns );
 	}
 
 	/**
