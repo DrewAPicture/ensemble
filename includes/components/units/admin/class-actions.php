@@ -52,6 +52,12 @@ class Actions implements Loader {
 	public function add_unit_fields() {
 		?>
 		<div class="form-field bootstrap-iso w-95 fs-13">
+			<div class="form-group">
+				<?php $this->output_city_field(); ?>
+			</div>
+			<div class="form-group">
+				<?php $this->output_directors_field(); ?>
+			</div>
 			<?php
 			$this->output_city_field();
 			$this->output_directors_field();
