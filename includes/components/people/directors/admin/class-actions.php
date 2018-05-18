@@ -98,15 +98,52 @@ class Actions implements Loader {
 			return;
 		}
 
-		$redirect = add_query_arg( 'page', 'ensemble-admin-people-directors', admin_url( 'admin.php' ) );
-		$nonce    = $_REQUEST['ensemble-update-director-nonce'] ?? false;
+		$user_id = absint( $_REQUEST['user-id'] ?? 0 );
 
+		$redirect = add_query_arg( array(
+			'page'       => 'ensemble-admin-people-directors',
+			'ensbl-view' => 'edit',
+			'user_id'    => $user_id,
+		), admin_url( 'admin.php' ) );
 
-		if ( ! wp_verify_nonce( $nonce, 'ensemble-update-director-nonce' ) ) {
-			// TODO add notice handler for the different cases.
+		$nonce = $_REQUEST['ensemble-update-director-nonce'] ?? false;
+
+		if ( ! wp_verify_nonce( $nonce, 'ensemble-update-director-nonce' ) || 0 === $user_id ) {
 			if ( wp_redirect( $redirect ) ) {
 				exit;
 			}
+		}
+
+		$units_tax_slug = ( new Units )->get_taxonomy_slug();
+
+		// Current user data.
+		$user = get_userdata( $user_id );
+
+		$current_units  = wp_get_object_terms( $user_id, $units_tax_slug, array( 'fields' => 'ids' ) );
+		$incoming_units = array_map( 'absint', $_REQUEST['director-units'] ?? array() );
+
+
+		$user_id = wp_update_user( array(
+			'ID'           => $user_id,
+			'display_name' => sanitize_text_field( $_REQUEST['director-name'] ?? $user->display_name ),
+			'user_email'   => sanitize_text_field( $_REQUEST['director-email'] ?? $user->user_email ),
+		) );
+
+		if ( ! is_wp_error( $user_id ) ) {
+			if ( ! empty( $incoming_units ) ) {
+
+				wp_set_object_terms( $user_id, $incoming_units, $units_tax_slug );
+
+			} elseif ( ! empty( $current_units ) && empty( $incoming_units ) ) {
+
+				wp_remove_object_terms( $user_id, $current_units, $units_tax_slug );
+
+			}
+		}
+
+		// TODO add notice handler for the different cases.
+		if ( wp_redirect( $redirect ) ) {
+			exit;
 		}
 	}
 
