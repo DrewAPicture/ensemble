@@ -39,6 +39,9 @@ class Actions implements Loader {
 		// Save custom meta on add and edit.
 		add_action( 'create_ensemble_unit', array( $this, 'save_unit_meta' ) );
 		add_action( 'edit_ensemble_unit',   array( $this, 'save_unit_meta' ) );
+
+		// Hide (unimportant) slug field on Classes > Add.
+		add_action( 'add_tag_form_pre', array( $this, 'hide_add_class_slug_field' ) );
 	}
 
 	/**
@@ -172,4 +175,26 @@ class Actions implements Loader {
 			delete_term_meta( $unit_id, 'ensemble-class' );
 		}
 	}
+
+	/**
+	 * Bit of a hack, but outputs some inline CSS at the top of the Classes > Add form to hide the slug field.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $taxonomy Taxonomy slug.
+	 */
+	function hide_add_class_slug_field( $taxonomy ) {
+		if ( $taxonomy !== ( new Setup )->get_taxonomy_slug() ) {
+			return;
+		}
+		?>
+		<style type="text/css">
+			/* Hide the Slug fields */
+			.term-slug-wrap {
+				display: none;
+			}
+		</style>
+		<?php
+	}
+
 }
