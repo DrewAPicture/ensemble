@@ -31,6 +31,9 @@ class Setup implements Loader {
 			load( new Admin\Menu );
 			load( new Admin\Actions );
 		}
+
+		load( new Directors\Setup );
+		load( new Staff\Setup );
 	}
 
 }
