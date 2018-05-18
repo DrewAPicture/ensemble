@@ -10,7 +10,7 @@
 namespace Ensemble\Components\People\Directors\Admin;
 
 use Ensemble\Components\People\Directors\Database;
-use Ensemble\Components\Units\Setup;
+use Ensemble\Components\Units\Setup as Units;
 use function Ensemble\{html};
 
 ?>
@@ -50,7 +50,7 @@ use function Ensemble\{html};
 					<div class="col">
 						<?php
 						$units = get_terms( array(
-							'taxonomy'   => ( new Setup )->get_taxonomy_slug(),
+							'taxonomy'   => ( new Units )->get_taxonomy_slug(),
 							'hide_empty' => false,
 							'fields'     => 'id=>name',
 							'number'     => 500,
