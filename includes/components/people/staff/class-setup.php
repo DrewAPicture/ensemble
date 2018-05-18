@@ -10,6 +10,7 @@
 namespace Ensemble\Components\People\Staff;
 
 use Ensemble\Core\Interfaces\Loader;
+use function Ensemble\{load};
 
 /**
  * Implements Staff functionality in Ensemble core.
@@ -26,7 +27,9 @@ class Setup implements Loader {
 	 * @since 1.0.0
 	 */
 	public function load() {
-		require_once __DIR__ . '/functions.php';
+		if ( is_admin() ) {
+			load( new Admin\Actions );
+		}
 	}
 
 }
