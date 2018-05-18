@@ -91,11 +91,12 @@ class Actions implements Loader {
 		) );
 
 		$args = array(
-			'id'              => 'unit-class',
-			'label'           => __( 'Classification', 'ensemble' ),
-			'class'           => array( 'form-control' ),
-			'options'         => $classes,
-			'show_option_all' => false,
+			'id'               => 'unit-class',
+			'label'            => __( 'Classification', 'ensemble' ),
+			'class'            => array( 'form-control' ),
+			'options'          => $classes,
+			'show_option_all'  => false,
+			'show_option_none' => false,
 		);
 
 		if ( null !== $term ) {
