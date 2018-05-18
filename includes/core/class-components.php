@@ -31,6 +31,7 @@ class Components implements Interfaces\Loader {
 		load( new Component\Seasons\Setup );
 		load( new Component\Units\Setup );
 		load( new Component\Classes\Setup );
+		load( new Component\Integrations\Setup );
 	}
 
 }
