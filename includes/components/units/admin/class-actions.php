@@ -137,6 +137,7 @@ class Actions implements Loader {
 		$args = array(
 			'id'    => 'unit-city',
 			'label' => __( 'Home City', 'ensemble' ),
+			'class' => array( 'form-control', 'w-100' ),
 		);
 
 		if ( null !== $term ) {
