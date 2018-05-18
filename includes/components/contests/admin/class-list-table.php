@@ -10,6 +10,7 @@
 namespace Ensemble\Components\Contests\Admin;
 
 use Ensemble\Components\Venues;
+use Ensemble\Components\Seasons\Setup as Seasons;
 use Ensemble\Components\Contests\{Database, Object};
 use function Ensemble\Components\Contests\{get_status_label, get_type_label};
 
@@ -178,7 +179,7 @@ class List_Table extends \WP_List_Table {
 		$columns = array(
 			'name'       => __( 'Name', 'ensemble' ),
 			'venues'     => __( 'Venue(s)', 'ensemble' ),
-			'type'       => __( 'Type', 'ensemble' ),
+			'season'     => __( 'Season', 'ensemble' ),
 			'status'     => __( 'Status', 'ensemble' ),
 			'start_date' => __( 'Start Date', 'ensemble' ),
 		);
@@ -327,8 +328,15 @@ class List_Table extends \WP_List_Table {
 				$value = isset( $contest->status ) ? get_status_label( $contest->status ) : '';
 				break;
 
-			case 'type':
-				$value = isset( $contest->type ) ? get_type_label( $contest->type ) : '';
+			case 'season':
+				$season = wp_get_object_terms( $contest->id, ( new Seasons )->get_taxonomy_slug(), array(
+					'fields' => 'names',
+					'number' => 1,
+				) );
+
+				if ( ! is_wp_error( $season ) && ! empty( $season ) ) {
+					$value = reset( $season );
+				}
 				break;
 
 			default:
