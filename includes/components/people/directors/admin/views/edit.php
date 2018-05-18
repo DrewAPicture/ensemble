@@ -61,14 +61,8 @@ $director = get_userdata( $user_id );
 								'number'     => 500,
 							) );
 
-							$selected = get_terms( array(
-								'taxonomy'   => ( new Units )->get_taxonomy_slug(),
-								'hide_empty' => false,
-								'fields'     => 'term_id',
-								'object_ids' => $director->ID,
-							) );
+							$selected = wp_get_object_terms( $director->ID, 'ensemble_unit', array( 'fields' => 'ids' ) );
 
-							log_it( $selected );
 							html()->select( array(
 								'id'               => 'director-units',
 								'name'             => 'director-units[]',
