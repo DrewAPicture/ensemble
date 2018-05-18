@@ -61,10 +61,10 @@ abstract class User_Database implements Interfaces\User_Database {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $query_args Query arguments.
+	 * @param array $query_args Optional. Query arguments. Default empty.
 	 * @return int Number of results for the given query arguments.
 	 */
-	public function count( $query_args ) {
+	public function count( $query_args = array() ) {
 		return $this->query( $query_args, true );
 	}
 
