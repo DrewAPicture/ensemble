@@ -215,6 +215,10 @@ class Database extends Core\Database {
 			$errors->add( 'missing_venue_address', __( 'An address must be specified when adding a new venue.', 'ensemble' ), $data );
 		}
 
+		if ( ! empty( $data['date_added'] ) ) {
+			$data['date_added'] = create_date( $data['date_added'], 'UTC', true )->format( 'Y-m-d H:i:s' );
+		}
+
 		$error_codes = $errors->get_error_codes();
 
 		if ( ! empty( $error_codes ) ) {
