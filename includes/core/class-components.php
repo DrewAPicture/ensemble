@@ -25,14 +25,15 @@ class Components implements Interfaces\Loader {
 	 * @since 1.0.0
 	 */
 	public function load() {
-		load( new Component\Classes\Setup );
+		load( new Component\Venues\Setup );
+
 		load( new Component\Contests\Setup );
 
-		load( new Component\People\Directors\Setup );
-		load( new Component\People\Staff\Setup );
+		load( new Component\People\Setup );
 
 		load( new Component\Units\Setup );
-		load( new Component\Venues\Setup );
+
+		load( new Component\Classes\Setup );
 	}
 
 }
