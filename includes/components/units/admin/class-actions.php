@@ -59,8 +59,14 @@ class Actions implements Loader {
 				<?php $this->output_directors_field(); ?>
 			</div>
 			<?php
-			$this->output_city_field();
-			$this->output_directors_field();
+			/**
+			 * Fires inside the form-field container in the Units > Add form.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param Actions $this Units\Actions class instance.
+			 */
+			do_action( 'ensemble_units-add_unit_fields', $this );
 			?>
 		</div>
 		<?php
