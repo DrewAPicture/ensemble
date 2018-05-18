@@ -21,7 +21,7 @@ trait View_Loader {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $view View to load (if it exists).
+	 * @param string $view View to load (if it exists).
 	 */
 	public function load_view( $view ) {
 		if ( $path = $this->get_view_path( $view ) ) {
