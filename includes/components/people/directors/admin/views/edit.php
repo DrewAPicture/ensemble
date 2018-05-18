@@ -81,33 +81,33 @@ $director = get_userdata( $user_id );
 
 				<div class="pb-5">
 					<?php
-					wp_nonce_field( 'ensemble-update-contest-nonce', 'ensemble-update-contest-nonce' );
+					wp_nonce_field( 'ensemble-update-director-nonce', 'ensemble-update-director-nonce' );
 
-					// Contest ID (hidden).
+					// User ID (hidden).
 					html()->hidden( array(
-						'name'  => 'contest-id',
+						'name'  => 'user-id',
 						'value' => $director->id,
 					) );
 					?>
 					<div class="pb-5 d-flex justify-content-between">
 
 						<?php
-						// Update Contest button
+						// Update Unit Director button
 						html()->input( 'submit', array(
-							'name'  => 'ensemble-update-contest',
-							'value' => 'Update Contest',
+							'name'  => 'ensemble-update-director',
+							'value' => 'Update Unit Director',
 							'class' => array( 'btn-dark', 'btn', 'btn-primary' )
 						) );
 
-						$base_url = add_query_arg( 'page', 'ensemble-admin-contests', admin_url( 'admin.php' ) );
+						$base_url = add_query_arg( 'page', 'ensemble-admin-people-directors', admin_url( 'admin.php' ) );
 
 						// Delete link.
 						html()->button( array(
-							'url'   => add_query_arg( array( 'ensbl-view' => 'delete', 'contest_id' => $director->id ), $base_url ),
+							'url'   => add_query_arg( array( 'ensbl-view' => 'delete', 'user_id' => $director->ID ), $base_url ),
 							'class' => array( 'btn', 'btn-link', 'btn-link-delete', 'text-danger' ),
-							'value' => _x( 'Delete', 'contest', 'ensemble' ),
+							'value' => _x( 'Delete', 'director', 'ensemble' ),
 							'aria'  => array(
-								'label' => __( 'Delete contest', 'ensemble' ),
+								'label' => __( 'Delete Director', 'ensemble' ),
 							),
 						) );
 						?>
