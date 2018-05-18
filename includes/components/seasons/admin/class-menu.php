@@ -27,7 +27,7 @@ class Menu implements Loader {
 	 * @since 1.0.0
 	 */
 	public function load() {
-		add_action( 'admin_menu', array( $this, 'register_submenu' ), 30 );
+		add_action( 'admin_menu', array( $this, 'register_submenu' ), 25 );
 	}
 
 	/**
