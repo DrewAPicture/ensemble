@@ -153,6 +153,10 @@ li.select2-search {
 	padding: .75rem .75rem 0;
 }
 
+.bootstrap-iso .h1, .bootstrap-iso h1 {
+	font-size: 23px;
+}
+
 /** Units > Add overrides */
 .bootstrap-iso.w-95 {
 	width: 95% !important;
