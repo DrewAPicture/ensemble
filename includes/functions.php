@@ -63,6 +63,17 @@ namespace Ensemble {
 	}
 
 	/**
+	 * Retrieves the value of the ensbl-view $_REQUEST variable.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string View variable vlaue.
+	 */
+	function get_view_var() {
+		return isset( $_REQUEST['ensbl-view'] ) ? sanitize_key( $_REQUEST['ensbl-view' ] ) : 'overview';
+	}
+
+	/**
 	 * Retrieves an instance of the Contests database class.
 	 *
 	 * @since 1.0.0
