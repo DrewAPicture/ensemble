@@ -160,14 +160,28 @@ class Actions implements Loader {
 			return;
 		}
 
-		$redirect = add_query_arg( 'page', 'ensemble-admin-people-directors', admin_url( 'admin.php' ) );
-		$nonce    = $_REQUEST['ensemble-delete-director-nonce'] ?? false;
+		$nonce   = $_REQUEST['ensemble-delete-director-nonce'] ?? false;
+		$answer  = sanitize_key( $_REQUEST['director-delete'] ?? 'no' );
+		$user_id = absint( $_REQUEST['user-id'] ?? 0 );
 
-		if ( ! wp_verify_nonce( $nonce, 'ensemble-delete-director-nonce' ) ) {
+		$redirect = add_query_arg( 'page', 'ensemble-admin-people-directors', admin_url( 'admin.php' ) );
+
+		if ( ! wp_verify_nonce( $nonce, 'ensemble-delete-director-nonce' ) || 'no' === $answer || 0 === $user_id ) {
 			// TODO add notice handler for the different cases.
 			if ( wp_redirect( $redirect ) ) {
 				exit;
 			}
+		}
+
+		if ( 'yes' === $answer ) {
+			require_once ABSPATH . '/wp-admin/includes/user.php';
+
+			$deleted = \wp_delete_user( $user_id );
+		}
+
+		// TODO add notice handler for the different cases.
+		if ( wp_redirect( $redirect ) ) {
+			exit;
 		}
 	}
 
