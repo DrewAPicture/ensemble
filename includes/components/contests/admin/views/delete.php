@@ -13,7 +13,7 @@ use Ensemble\Components\Venues;
 use function Ensemble\Components\Contests\{get_contest, get_status_label};
 use function Ensemble\{html};
 
-$contest_id = $_REQUEST['contest_id'] ?? 0;
+$contest_id = absint( $_REQUEST['contest_id'] ?? 0 );
 $contest    = get_contest( $contest_id );
 ?>
 <h1 class="wp-heading-inline"><?php esc_html_e( 'Delete Contest', 'ensemble' ); ?></h1>

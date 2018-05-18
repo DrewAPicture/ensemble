@@ -97,7 +97,7 @@ class Actions implements Loader {
 			return;
 		}
 
-		$contest_id = $_REQUEST['contest-id'] ?? 0;
+		$contest_id = absint( $_REQUEST['contest-id'] ?? 0 );
 
 		$redirect = add_query_arg( array(
 			'page'       => 'ensemble-admin-contests',
@@ -150,8 +150,8 @@ class Actions implements Loader {
 		}
 
 		$nonce      = $_REQUEST['ensemble-delete-contest-nonce'] ?? false;
-		$answer     = $_REQUEST['contest-delete'] ?? 'no';
-		$contest_id = $_REQUEST['contest-id'] ?? 0;
+		$answer     = sanitize_key( $_REQUEST['contest-delete'] ?? 'no' );
+		$contest_id = absint( $_REQUEST['contest-id'] ?? 0 );
 
 		$redirect = add_query_arg( 'page', 'ensemble-admin-contests', admin_url( 'admin.php' ) );
 

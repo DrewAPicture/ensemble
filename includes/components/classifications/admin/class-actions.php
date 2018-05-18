@@ -170,10 +170,10 @@ class Actions implements Loader {
 	 * @param int $unit_id Unit term ID.
 	 */
 	public function save_unit_meta( $unit_id ) {
-		$class = $_REQUEST['unit-class'] ?? '';
+		$class = sanitize_text_field( $_REQUEST['unit-class'] ?? '' );
 
 		if ( ! empty( $class ) ) {
-			update_term_meta( $unit_id, 'ensemble-class', sanitize_text_field( $class ) );
+			update_term_meta( $unit_id, 'ensemble-class', $class );
 		} else {
 			delete_term_meta( $unit_id, 'ensemble-class' );
 		}

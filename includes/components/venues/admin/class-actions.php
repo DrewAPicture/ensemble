@@ -88,7 +88,7 @@ class Actions implements Loader {
 			return;
 		}
 
-		$venue_id = $_REQUEST['venue-id'] ?? 0;
+		$venue_id = absint( $_REQUEST['venue-id'] ?? 0 );
 
 		$redirect = add_query_arg( array(
 			'page'       => 'ensemble-admin-venues',
@@ -132,8 +132,8 @@ class Actions implements Loader {
 		}
 
 		$nonce    = $_REQUEST['ensemble-delete-venue-nonce'] ?? false;
-		$answer   = $_REQUEST['venue-delete'] ?? 'no';
-		$venue_id = $_REQUEST['venue-id'] ?? 0;
+		$answer   = sanitize_key( $_REQUEST['venue-delete'] ?? 'no' );
+		$venue_id = absint( $_REQUEST['venue-id'] ?? 0 );
 
 		$redirect = add_query_arg( 'page', 'ensemble-admin-venues', admin_url( 'admin.php' ) );
 

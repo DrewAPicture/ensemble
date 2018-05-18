@@ -13,7 +13,7 @@ use Ensemble\Components\Venues\Database as Venues;
 use function Ensemble\Components\Contests\{get_contest, get_allowed_statuses, get_allowed_types, get_type_label};
 use function Ensemble\{html};
 
-$contest_id = $_REQUEST['contest_id'] ?? 0;
+$contest_id = absint( $_REQUEST['contest_id'] ?? 0 );
 $contest    = get_contest( $contest_id );
 ?>
 <h1 class="wp-heading-inline"><?php esc_html_e( 'Edit Contest', 'ensemble' ); ?></h1>

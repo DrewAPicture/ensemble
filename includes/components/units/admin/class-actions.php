@@ -320,7 +320,7 @@ class Actions implements Loader {
 	 * @param int $unit_id Unit term ID.
 	 */
 	public function save_meta( $unit_id ) {
-		$city      = $_REQUEST['unit-city'] ?? '';
+		$city      = sanitize_text_field( $_REQUEST['unit-city'] ?? '' );
 		$directors = $_REQUEST['unit-directors'] ?? array();
 
 		if ( ! empty( $city ) ) {
@@ -330,6 +330,7 @@ class Actions implements Loader {
 		}
 
 		if ( ! empty( $directors ) ) {
+			$directors = array_map( 'absint', $directors );
 			$directors = implode( ',', $directors );
 
 			update_term_meta( $unit_id, 'ensemble-directors', $directors );

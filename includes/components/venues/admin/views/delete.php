@@ -12,7 +12,7 @@ namespace Ensemble\Components\Venues\Admin;
 use function Ensemble\Components\Venues\{get_type_label, get_status_label, get_venue};
 use function Ensemble\{html};
 
-$venue_id = $_REQUEST['venue_id'] ?? 0;
+$venue_id = absint( $_REQUEST['venue_id'] ?? 0 );
 $venue    = get_venue( $venue_id );
 ?>
 <h1 class="wp-heading-inline"><?php esc_html_e( 'Delete Venue', 'ensemble' ); ?></h1>
