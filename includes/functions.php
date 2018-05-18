@@ -140,3 +140,33 @@ function get_wp_timezone() {
 
 	return $timezone;
 }
+
+/**
+ * Retrieves a DateTime object, optionally with the WP timezone and offset applied.
+ *
+ * @since 1.0.0
+ *
+ * @param string $date_string Optional. Date string to generate the DateTime object for.
+ *                            Default 'now'.
+ * @param string $timezone    Optional. Timezone. Accepts 'wp' (WordPress timezone),
+ *                            or any other valid timezone string. Default UTC.
+ * @return \DateTime DateTime object.
+ */
+function date( $date_string = 'now', $timezone = 'UTC' ) {
+	$wp_time = false;
+
+	if ( 'wp' === $timezone ) {
+		$timezone = get_wp_timezone();
+		$wp_time  = true;
+	}
+
+	$datetime = new \DateTime( $date_string, new \DateTimeZone( $timezone ) );
+
+	if ( true === $wp_time ) {
+		$offset   = $datetime->getOffset();
+		$interval = \DateInterval::createFromDateString( "{$offset} seconds" );
+		$datetime->add( $interval );
+	}
+
+	return $datetime;
+}

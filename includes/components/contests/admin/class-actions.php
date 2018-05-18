@@ -194,5 +194,4 @@ class Actions implements Loader {
 		return __DIR__ . '/views/';
 	}
 
-
 }
