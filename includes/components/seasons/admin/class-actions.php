@@ -283,16 +283,19 @@ class Actions implements Loader {
 		$end_date   = sanitize_text_field( $_REQUEST['season-end-date'] ?? '' );
 
 		if ( ! empty( $start_date ) ) {
-			$start_date = create_date( $start_date, 'UTC', true )->format( 'Y-m-d 00:00:00' );
+			$start_date = create_date( $start_date, 'UTC', true )->format( 'Y-m-d H:i:s' );
+
 			update_term_meta( $term_id, 'ensemble-start-date', $start_date );
 		} else {
 			delete_term_meta( $term_id, 'ensemble-start-date' );
 		}
 
 		if ( ! empty( $end_date ) ) {
-			$end_date = create_date( $end_date, 'UTC', true )->format( 'Y-m-d 23:59:59' );
+			$end_date = create_date( $end_date, 'UTC', true )->format( 'Y-m-d H:i:s' );
+
 			update_term_meta( $term_id, 'ensemble-end-date', $end_date );
 		} else {
+
 			delete_term_meta( $term_id, 'ensemble-end-date' );
 		}
 	}

@@ -120,8 +120,8 @@ class Database extends Core\Database {
 			'type'       => 'standard',
 			'status'     => 'published',
 			'timezone'   => get_wp_timezone(),
-			'start_date' => $today->format( 'Y-m-d 00:00:00' ),
-			'end_date'   => $today->format( 'Y-m-d 23:59:59' ),
+			'start_date' => $today->format( 'Y-m-d H:i:s' ),
+			'end_date'   => $today->format( 'Y-m-d H:i:s' ),
 		);
 	}
 
@@ -233,11 +233,11 @@ class Database extends Core\Database {
 		}
 
 		if ( ! empty( $data['start_date'] ) ) {
-			$data['start_date'] = create_date( $data['start_date'], 'UTC', true )->format( 'Y-m-d 00:00:00' );
+			$data['start_date'] = create_date( $data['start_date'], 'UTC', true )->format( 'Y-m-d H:i:s' );
 		}
 
 		if ( ! empty( $data['end_date'] ) ) {
-			$data['end_date'] = create_date( $data['end_date'], 'UTC', true )->format( 'Y-m-d 23:59:59' );
+			$data['end_date'] = create_date( $data['end_date'], 'UTC', true )->format( 'Y-m-d H:i:s' );
 		}
 
 		$error_codes = $errors->get_error_codes();
@@ -272,11 +272,11 @@ class Database extends Core\Database {
 		}
 
 		if ( ! empty( $data['start_date'] ) ) {
-			$data['start_date'] = create_date( $data['start_date'], 'UTC', true )->format( 'Y-m-d 00:00:00' );
+			$data['start_date'] = create_date( $data['start_date'], 'UTC', true )->format( 'Y-m-d H:i:s' );
 		}
 
 		if ( ! empty( $data['end_date'] ) ) {
-			$data['end_date'] = create_date( $data['end_date'], 'UTC', true )->format( 'Y-m-d 23:59:59' );
+			$data['end_date'] = create_date( $data['end_date'], 'UTC', true )->format( 'Y-m-d H:i:s' );
 		}
 
 		return parent::update( $object_id, $data, $where );
