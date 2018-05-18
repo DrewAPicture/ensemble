@@ -68,7 +68,7 @@ class Setup implements Loader {
 			'query_var'             => true,
 			'rewrite'               => true,
 			'show_in_rest'          => true,
-			'rest_base'             => 'ensemble_class',
+			'rest_base'             => $this->get_taxonomy_slug(),
 			'rest_controller_class' => 'WP_REST_Terms_Controller',
 			'labels'                => array(
 				'name'                       => __( 'Competing Units', 'ensemble' ),
