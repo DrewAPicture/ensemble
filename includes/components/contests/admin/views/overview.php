@@ -19,7 +19,6 @@ $list_table->prepare_items();
 ?>
 <form id="ensemble-contests" method="get">
 	<?php
-	$list_table->search_box( __( 'Search', 'ensemble' ), 'ensemble-contests-search' );
 	$list_table->views();
 	$list_table->display();
 	?>
