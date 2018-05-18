@@ -22,10 +22,15 @@ jQuery( document ).ready( function( $ ) {
 
 	// Datepickers.
 	$( '.date' ).each( function () {
-		$( this ).datepicker( {
-			dateFormat: 'mm/dd/yy',
-			minDate: 0
-		} );
+		var $args = {
+			dateFormat: 'mm/dd/yy'
+		};
+
+		if ( ! $( this ).hasClass( 'allow-past-dates' ) ) {
+			$args.minDate = 0;
+		}
+
+		$( this ).datepicker( $args );
 	} );
 
 	$( '.next' ).on( 'click', function( event ) {
