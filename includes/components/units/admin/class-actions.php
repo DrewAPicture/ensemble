@@ -126,7 +126,6 @@ class Actions implements Loader {
 		$args = array(
 			'id'    => 'unit-city',
 			'label' => __( 'Home City', 'ensemble' ),
-			'class' => array( 'mb-3' ),
 		);
 
 		if ( null !== $term ) {
