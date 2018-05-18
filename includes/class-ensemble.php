@@ -122,11 +122,12 @@ final class Ensemble {
 	}
 
 	/**
-	 * Sets up sub-instances.
+	 * Setup the bulk of the plugin.
 	 *
 	 * @since 1.0.0
 	 */
 	private function setup() {
+		// Register the activation hook.
 		register_activation_hook( ENSEMBLE_PLUGIN_FILE, array( 'Ensemble\\Util\\Install', 'run' ) );
 
 		if ( ! get_option( 'ensemble_installed' ) ) {
