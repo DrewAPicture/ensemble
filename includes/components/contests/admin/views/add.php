@@ -15,7 +15,7 @@ use function Ensemble\Components\Contests\{get_allowed_types, get_allowed_status
 use function Ensemble\{html};
 
 ?>
-<h1 class="wp-heading-inline"><?php esc_html_e( 'Add Contest', 'ensemble' ); ?></h1>
+<h1 class="wp-heading-inline"><?php esc_html_e( 'Add a Contest', 'ensemble' ); ?></h1>
 
 <div class="row">
 	<div class="col-12 col-xl-8">
