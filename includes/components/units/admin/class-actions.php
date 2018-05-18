@@ -309,7 +309,7 @@ class Actions implements Loader {
 		$directors = $_REQUEST['unit-directors'] ?? array();
 
 		if ( ! empty( $city ) ) {
-			update_term_meta( $unit_id, 'ensemble-city', $city, true );
+			update_term_meta( $unit_id, 'ensemble-city', $city );
 		} else {
 			delete_term_meta( $unit_id, 'ensemble-city' );
 		}
