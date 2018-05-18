@@ -29,20 +29,20 @@ class Actions implements Loader {
 	 * @since 1.0.0
 	 */
 	public function load() {
-		// Units > Add and > Edit fields.
+		// Fields.
 		add_action( 'ensemble_unit_add_form_fields', array( $this, 'add_unit_fields'  ) );
 		add_action( 'ensemble_unit_edit_form',       array( $this, 'edit_unit_fields' ) );
 
-		// Units > Add List table columns.
+		// List table columns.
 		add_filter( 'manage_edit-ensemble_unit_columns',  array( $this, 'filter_unit_table_columns' ),   100 );
 		add_filter( 'manage_ensemble_unit_custom_column', array( $this, 'column_city'               ), 11, 3 );
 		add_filter( 'manage_ensemble_unit_custom_column', array( $this, 'column_directors'          ), 12, 3 );
 
-		// Save custom meta on add and edit.
+		// Save meta.
 		add_action( 'create_ensemble_unit', array( $this, 'save_meta' ) );
 		add_action( 'edit_ensemble_unit',   array( $this, 'save_meta' ) );
 
-		// Hide default fields on Units > Add (to allow 100% consistency with Bootstrapped fields).
+		// Hide core fields.
 		add_action( 'add_tag_form_pre', array( $this, 'hide_default_add_unit_fields' ) );
 	}
 

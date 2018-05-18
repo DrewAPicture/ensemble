@@ -28,22 +28,22 @@ class Actions implements Loader {
 	 * @since 1.0.0
 	 */
 	public function load() {
-		// Units > Add and > Edit fields.
+		// Fields.
 		add_action( 'ensemble_units-add_unit_fields',  array( $this, 'add_unit_class_field'  ) );
 		add_action( 'ensemble_units-edit_unit_fields', array( $this, 'edit_unit_class_field' ) );
 
-		// Units > Add List table columns.
+		// List table columns.
 		add_filter( 'ensemble_units-ensemble_unit_coloumns', array( $this, 'filter_unit_table_columns' )        );
 		add_filter( 'manage_ensemble_unit_custom_column',    array( $this, 'column_class'              ), 13, 3 );
 
-		// Save custom meta on add and edit.
+		// Save meta.
 		add_action( 'create_ensemble_unit', array( $this, 'save_unit_meta' ) );
 		add_action( 'edit_ensemble_unit',   array( $this, 'save_unit_meta' ) );
 
-		// Filter the Classifications list table columns.
+		// List table columns (classifications).
 		add_filter( 'manage_edit-ensemble_class_columns', array( $this, 'filter_class_table_columns' ), 100 );
 
-		// Hide (unimportant) slug field on Classifications > Add.
+		// Hide core fields.
 		add_action( 'add_tag_form_pre', array( $this, 'hide_add_class_slug_field' ) );
 	}
 
