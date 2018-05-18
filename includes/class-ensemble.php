@@ -81,7 +81,6 @@ final class Ensemble {
 	 * @since 1.0.0
 	 */
 	private function constants() {
-
 		// Base plugin file.
 		if ( ! defined( 'ENSEMBLE_PLUGIN_FILE' ) ) {
 			define( 'ENSEMBLE_PLUGIN_FILE', $this->file );
@@ -89,7 +88,7 @@ final class Ensemble {
 
 		// Plugin Folder URL.
 		if ( ! defined( 'ENSEMBLE_PLUGIN_URL' ) ) {
-			define( 'ENSEMBLE_PLUGIN_URL', plugin_dir_url( $this->file ) );
+			define( 'ENSEMBLE_PLUGIN_URL', plugin_dir_url( ENSEMBLE_PLUGIN_FILE ) );
 		}
 
 		// Plugin directory.
