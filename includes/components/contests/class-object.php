@@ -10,6 +10,7 @@
 namespace Ensemble\Components\Contests;
 
 use Ensemble\Core;
+use function Ensemble\{create_date};
 
 /**
  * Defines the structure of a single venue.
@@ -112,27 +113,29 @@ class Object extends Core\Object {
 	}
 
 	/**
-	 * Retrieves the contest start date, formatted with the given format.
+	 * Retrieves the contest start date in WP time, formatted with the given format.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string $format Optional. How to format the date. Default 'm/d/Y'.
+	 * @param string $format   Optional. How to format the date. Default 'm/d/Y'.
+	 * @param string $timezone Optional. Timezone to return the date in. Default 'wp'.
 	 * @return string Formatted start date.
 	 */
-	public function get_start_date( $format = 'm/d/Y' ) {
-		return date( $format, strtotime( $this->start_date ) );
+	public function get_start_date( $format = 'm/d/Y', $timezone = 'wp' ) {
+		return create_date( $this->start_date, $timezone )->format( $format );
 	}
 
 	/**
-	 * Retrieves the contest end date, formatted with the given format.
+	 * Retrieves the contest end date in WP time, formatted with the given format.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param string $format Optional. How to format the date. Default 'm/d/Y'.
+	 * @param string $timezone Optional. Timezone to return the date in. Default 'wp'.
 	 * @return string Formatted end date.
 	 */
-	public function get_end_date( $format = 'm/d/Y' ) {
-		return date( $format, strtotime( $this->end_date ) );
+	public function get_end_date( $format = 'm/d/Y', $timezone = 'wp' ) {
+		return create_date( $this->end_date, $timezone )->format( $format );
 	}
 
 }
