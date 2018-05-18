@@ -58,7 +58,7 @@ use function Ensemble\{html};
 
 						html()->select( array(
 							'id'               => 'director-units',
-							'name'             => 'contest-units[]',
+							'name'             => 'director-units[]',
 							'label'            => __( 'Competing Unit(s)', 'ensemble' ),
 							'class'            => array( 'form-control' ),
 							'multiple'         => true,
