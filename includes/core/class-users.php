@@ -46,17 +46,6 @@ class Users implements Loader {
 			'ensemble_add_units'        => false,
 			'ensemble_contact_circuit'  => true,
 		) );
-
-		$wp_roles->add_role( 'ensemble_staff', __( 'Circuit Staff', 'ensemble' ), array(
-			'ensemble_manage_units'      => true,
-			'ensemble_add_units'         => true,
-			'ensemble_view_units'        => true,
-			'ensemble_delete_units'      => true,
-			'ensemble_manage_directors'  => true,
-			'ensemble_add_directors'     => true,
-			'ensemble_view_directors'    => true,
-			'ensemble_contact_directors' => true,
-		) );
 	}
 
 	/**
