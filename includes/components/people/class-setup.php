@@ -27,13 +27,17 @@ class Setup implements Loader {
 	 * @since 1.0.0
 	 */
 	public function load() {
+		// Sub-components.
+		load( new Directors\Setup );
+		load( new Staff\Setup );
+
 		if ( is_admin() ) {
 			load( new Admin\Menu );
 			load( new Admin\Actions );
-		}
 
-		load( new Directors\Setup );
-		load( new Staff\Setup );
+			// Require after sub-components are loaded.
+			require_once __DIR__ . '/admin/functions.php';
+		}
 	}
 
 }
