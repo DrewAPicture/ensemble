@@ -41,6 +41,9 @@ class Actions implements Loader {
 		// Save custom meta on add and edit.
 		add_action( 'create_ensemble_unit', array( $this, 'save_meta' ) );
 		add_action( 'edit_ensemble_unit',   array( $this, 'save_meta' ) );
+
+		// Hide default fields on Units > Add (to allow 100% consistency with Bootstrapped fields).
+		add_action( 'add_tag_form_pre', array( $this, 'hide_default_add_unit_fields' ) );
 	}
 
 	/**
@@ -334,4 +337,28 @@ class Actions implements Loader {
 			delete_term_meta( $unit_id, 'ensemble-directors' );
 		}
 	}
+
+	/**
+	 * Bit of a hack, but outputs some inline CSS at the top of the Units > Add form to hide the default form fields.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $taxonomy Taxonomy slug.
+	 */
+	function hide_default_add_unit_fields( $taxonomy ) {
+		if ( $taxonomy !== ( new Setup )->get_taxonomy_slug() ) {
+			return;
+		}
+		?>
+		<style type="text/css">
+			/* Hide the Name, Slug, and Description fields */
+			.term-name-wrap,
+			.term-slug-wrap,
+			.term-description-wrap {
+				display: none;
+			}
+		</style>
+		<?php
+	}
+
 }
