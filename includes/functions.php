@@ -70,7 +70,19 @@ function html() {
  * @return string View variable vlaue.
  */
 function get_view_var() {
-	return isset( $_REQUEST['ensbl-view'] ) ? sanitize_key( $_REQUEST['ensbl-view' ] ) : 'overview';
+	return sanitize_key( $_REQUEST['ensbl-view'] ?? 'overview' );
+}
+
+/**
+ * Retrieves the sanitized slug for the current tab.
+ *
+ * @since 1.0.0
+ *
+ * @param string $default Optional. Tab default to use if the slug isn't set. Default empty string.
+ * @return string Current tab if set, otherwise the value of `$default`.
+ */
+function get_current_tab( $default = '' ) {
+	return sanitize_key( $_REQUEST['enble-tab'] ?? $default );
 }
 
 /**
