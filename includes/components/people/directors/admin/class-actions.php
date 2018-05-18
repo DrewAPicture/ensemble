@@ -31,7 +31,62 @@ class Actions implements Loader {
 	 * @since 1.0.0
 	 */
 	public function load() {
+		add_action( 'init', array( $this, 'add_director' ) );
+		add_action( 'init', array( $this, 'update_director' ) );
+		add_action( 'init', array( $this, 'delete_director' ) );
+
 		$this->register_tab_callbacks();
+	}
+
+	/**
+	 * Processes adding a new director.
+	 *
+	 * @since 1.0.0
+	 */
+	public function add_director() {
+		$valid_request = $_REQUEST['ensemble-add-director'] ?? false;
+
+		// Bail if the request doesn't even match.
+		if ( false === $valid_request ) {
+			return;
+		}
+
+		$redirect = add_query_arg( 'page', 'ensemble-admin-people-directors', admin_url( 'admin.php' ) );
+		$nonce    = $_REQUEST['ensemble-add-director-nonce'] ?? false;
+	}
+
+	/**
+	 * Processes updating a director.
+	 *
+	 * @since 1.0.0
+	 */
+	public function update_director() {
+		$valid_request = $_REQUEST['ensemble-update-director'] ?? false;
+
+		// Bail if the request doesn't even match.
+		if ( false === $valid_request ) {
+			return;
+		}
+
+		$redirect = add_query_arg( 'page', 'ensemble-admin-people-directors', admin_url( 'admin.php' ) );
+		$nonce    = $_REQUEST['ensemble-update-director-nonce'] ?? false;
+	}
+
+	/**
+	 * Processes deleting a director.
+	 *
+	 * @since 1.0.0
+	 */
+	public function delete_director() {
+		$valid_request = $_REQUEST['ensemble-delete-director'] ?? false;
+
+		// Bail if the request doesn't even match.
+		if ( false === $valid_request ) {
+			return;
+		}
+
+		$redirect = add_query_arg( 'page', 'ensemble-admin-people-directors', admin_url( 'admin.php' ) );
+		$nonce    = $_REQUEST['ensemble-delete-director-nonce'] ?? false;
 	}
 
 	/**
