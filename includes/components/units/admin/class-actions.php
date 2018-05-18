@@ -178,10 +178,10 @@ class Actions implements Loader {
 		);
 
 		if ( null !== $term ) {
-			$director_meta = get_term_meta( $term->term_id, 'ensemble-directors', true );
+			$directors = get_objects_in_term( $term->term_id, ( new Setup )->get_taxonomy_slug() );
 
-			if ( $director_meta ) {
-				$args['selected'] = wp_parse_id_list( explode( ',', $director_meta ) );
+			if ( ! empty( $directors ) ) {
+				$args['selected'] = $directors;
 			}
 
 			// If $term is available this is for the Units > Edit form where the label is output separately.
@@ -296,15 +296,16 @@ class Actions implements Loader {
 			return $value;
 		}
 
-		$directors_meta = get_term_meta( $unit_id, 'ensemble-directors', true );
+		$director_ids = get_objects_in_term( $unit_id, ( new Setup )->get_taxonomy_slug() );
 
-		if ( $directors_meta ) {
-			$ids = wp_parse_id_list( explode( ',', $directors_meta ) );
-
-			$directors = array_values( $this->get_directors_as_options( $ids ) );
+		if ( ! empty( $director_ids ) ) {
+			$directors = ( new Directors\Database )->query( array(
+				'include' => $director_ids,
+				'fields'  => array( 'display_name' ),
+			) );
 
 			if ( ! empty( $directors ) ) {
-				$value = implode( ', ', $directors );
+				$value = implode( ', ', wp_list_pluck( $directors, 'display_name' ) );
 			}
 
 		}
@@ -331,9 +332,10 @@ class Actions implements Loader {
 
 		if ( ! empty( $directors ) ) {
 			$directors = array_map( 'absint', $directors );
-			$directors = implode( ',', $directors );
 
-			update_term_meta( $unit_id, 'ensemble-directors', $directors );
+			foreach ( $directors as $director ) {
+				wp_add_object_terms( $director, $unit_id, ( new Setup )->get_taxonomy_slug() );
+			}
 		} else {
 			delete_term_meta( $unit_id, 'ensemble-directors' );
 		}
