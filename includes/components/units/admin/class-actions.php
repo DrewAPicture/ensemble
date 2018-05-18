@@ -10,6 +10,7 @@
 namespace Ensemble\Components\Units\Admin;
 
 use Ensemble\Components\People\Directors;
+use Ensemble\Components\Units\Setup;
 use Ensemble\Core\Interfaces\Loader;
 use function Ensemble\html;
 
@@ -51,7 +52,17 @@ class Actions implements Loader {
 	 */
 	public function add_unit_fields() {
 		?>
-		<div class="form-field bootstrap-iso w-95 fs-13">
+		<div class="form-field bootstrap-iso fs-13">
+			<div class="form-group">
+				<?php
+				html()->text( array(
+					'id'    => 'tag-name', // mimicking core ID/name.
+					'label' => _x( 'Name', 'unit', 'ensemble' ),
+					'class' => array( 'form-control', 'w-100' ),
+					'desc'  => __( 'The name is how it appears on your site.', 'ensemble' ),
+				) );
+				?>
+			</div>
 			<div class="form-group">
 				<?php $this->output_city_field(); ?>
 			</div>
