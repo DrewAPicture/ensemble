@@ -150,9 +150,12 @@ function get_wp_timezone() {
  *                            Default 'now'.
  * @param string $timezone    Optional. Timezone. Accepts 'wp' (WordPress timezone),
  *                            or any other valid timezone string. Default UTC.
+ * @param bool   $wp_to_utc   Optional. Whether to subtract the equivalent of the WP
+ *                            offset from the DateTime object. `$timezone` must be UTC.
+ *                            Default false.
  * @return \DateTime DateTime object.
  */
-function create_date( $date_string = 'now', $timezone = 'UTC' ) {
+function create_date( $date_string = 'now', $timezone = 'UTC', $wp_to_utc = false ) {
 	$wp_time = false;
 
 	if ( 'wp' === $timezone ) {
@@ -162,9 +165,18 @@ function create_date( $date_string = 'now', $timezone = 'UTC' ) {
 
 	$datetime = new \DateTime( $date_string, new \DateTimeZone( $timezone ) );
 
-	if ( true === $wp_time ) {
+	// If converting from WP time to UTC, subtract the WP offset.
+	if ( false !== $wp_to_utc && 'UTC' === $timezone ) {
+		$offset   = get_option( 'gmt_offset', 0 ) * HOUR_IN_SECONDS;
+		$interval = \DateInterval::createFromDateString( "-{$offset} seconds" );
+
+		$datetime->add( $interval );
+
+	// Otherwise, if $datetime was instantiated as WP time, apply the offset so it matches.
+	} elseif ( true === $wp_time ) {
 		$offset   = $datetime->getOffset();
 		$interval = \DateInterval::createFromDateString( "{$offset} seconds" );
+
 		$datetime->add( $interval );
 	}
 
