@@ -85,8 +85,10 @@ function get_status_label( $status ) {
  */
 function get_allowed_types() {
 	$types = array(
-		'school' => __( 'School', 'ensemble' ),
 		'arena'  => __( 'Arena', 'ensemble' ),
+		'church' => __( 'Church', 'ensemble' ),
+		'center' => __( 'Community Center', 'ensemble' ),
+		'school' => __( 'School', 'ensemble' ),
 		'other'  => __( 'Other', 'ensemble' ),
 	);
 
