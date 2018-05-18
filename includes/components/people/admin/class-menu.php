@@ -10,7 +10,7 @@
 namespace Ensemble\Components\People\Admin;
 
 use Ensemble\Core\Interfaces\Menu_Router;
-use function Ensemble\{load_view};
+use function Ensemble\{load_view, get_view_var};
 
 /**
  * Sets up the People menu.
@@ -52,9 +52,7 @@ class Menu implements Menu_Router {
 	 * @since 1.0.0
 	 */
 	public function route_request() {
-		$view = isset( $_REQUEST['ensbl-view'] ) ? sanitize_key( $_REQUEST['ensbl-view' ] ) : 'overview';
-
-		load_view( new Actions, $view );
+		load_view( new Actions, get_view_var() );
 	}
 
 }

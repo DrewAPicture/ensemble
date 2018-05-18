@@ -11,7 +11,7 @@ namespace Ensemble\Components\Venues\Admin;
 
 use Ensemble\Components\Venues\Database;
 use Ensemble\Core\Interfaces\Menu_Router;
-use function Ensemble\{load_view};
+use function Ensemble\{load_view, get_view_var};
 
 /**
  * Sets up the Venues menu.
@@ -53,7 +53,7 @@ class Menu implements Menu_Router {
 	 * @since 1.0.0
 	 */
 	public function route_request() {
-		$view = isset( $_REQUEST['ensbl-view'] ) ? sanitize_key( $_REQUEST['ensbl-view' ] ) : 'overview';
+		$view = get_view_var();
 
 		// If 'overview' is requested and there are no venues, take the user to the Add Venue screen instead.
 		if ( 'overview' === $view ) {
