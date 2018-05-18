@@ -28,7 +28,7 @@ class Menu implements Menu_Router {
 	 * @since 1.0.0
 	 */
 	public function load() {
-		add_action( 'admin_menu', array( $this, 'register_submenu' ) );
+		add_action( 'admin_menu', array( $this, 'register_submenu' ), 20 );
 	}
 
 	/**
