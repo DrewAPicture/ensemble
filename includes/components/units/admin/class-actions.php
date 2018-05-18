@@ -155,7 +155,7 @@ class Actions implements Loader {
 			'id'               => 'unit-directors',
 			'name'             => 'unit-directors[]',
 			'label'            => __( 'Director(s)', 'ensemble' ),
-			'class'            => array( 'form-control' ),
+			'class'            => array( 'form-control', 'form-control-sm' ),
 			'multiple'         => true,
 			'options'          => $this->get_directors_as_options(),
 			'show_option_all'  => false,
