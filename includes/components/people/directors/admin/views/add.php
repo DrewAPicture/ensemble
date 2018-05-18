@@ -79,7 +79,7 @@ use function Ensemble\{html};
 				// Add Director button
 				html()->input( 'submit', array(
 					'name'  => 'ensemble-add-director',
-					'value' => 'Add Director',
+					'value' => __( 'Add Unit Director', 'ensemble' ),
 					'class' => array( 'btn-dark', 'btn', 'btn-primary' )
 				) );
 				?>
