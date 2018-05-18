@@ -97,22 +97,4 @@ class Setup implements Loader {
 		) );
 	}
 
-	/**
-	 * Ensures the Ensemble > Classes menu is highlighted when viewing the Classes admin screen.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $parent_file Menu parent file/slug.
-	 * @return string (Maybe) modified parent file.
-	 */
-	public function set_menu_highlight( $parent_file ) {
-		$current_screen = get_current_screen();
-
-		if ( isset( $current_screen->taxonomy ) && 'ensemble_class' === $current_screen->taxonomy ) {
-			$parent_file = 'ensemble-admin';
-		}
-
-		return $parent_file;
-	}
-
 }
