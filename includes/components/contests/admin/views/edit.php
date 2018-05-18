@@ -18,6 +18,9 @@ $contest_id = absint( $_REQUEST['contest_id'] ?? 0 );
 $contest    = get_contest( $contest_id );
 ?>
 <h1 class="wp-heading-inline"><?php esc_html_e( 'Edit Contest', 'ensemble' ); ?></h1>
+<a href="<?php echo esc_url( add_query_arg( array( 'ensbl-view' => 'overview' ) ) ); ?>" class="page-title-action" role="button">
+	<?php esc_html_e( 'Return to All Contests', 'ensemble' ); ?>
+</a>
 
 <div class="row">
 	<div class="col-12 col-xl-8">
