@@ -88,7 +88,20 @@ li.select2-search {
 	font-size: 23px;
 }
 
+.bootstrap-iso .nav-tabs .nav-link.active {
+	background-color: white !important;
+	border: 0;
+}
+
+.bootstrap-iso .btn.text-left {
+	text-align: left;
+}
+
 /** Units > Add overrides */
+.bootstrap-iso .w-15 {
+	width: 15% !important;
+}
+
 .bootstrap-iso.w-95 {
 	width: 95% !important;
 }
