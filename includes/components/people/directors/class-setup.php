@@ -27,8 +27,6 @@ class Setup implements Loader {
 	 * @since 1.0.0
 	 */
 	public function load() {
-		require_once __DIR__ . '/functions.php';
-
 		if ( is_admin() ) {
 			load( new Admin\Actions );
 		}
