@@ -39,8 +39,8 @@ class Actions implements Loader {
 		add_filter( 'manage_ensemble_unit_custom_column', array( $this, 'column_directors'          ), 12, 3 );
 
 		// Save meta.
-		add_action( 'create_ensemble_unit', array( $this, 'save_meta' ) );
-		add_action( 'edit_ensemble_unit',   array( $this, 'save_meta' ) );
+		add_action( 'create_ensemble_unit', array( $this, 'save_fields' ) );
+		add_action( 'edit_ensemble_unit',   array( $this, 'save_fields' ) );
 
 		// Hide core fields.
 		add_action( 'add_tag_form_pre', array( $this, 'hide_default_add_unit_fields' ) );
@@ -319,7 +319,7 @@ class Actions implements Loader {
 	 *
 	 * @param int $unit_id Unit term ID.
 	 */
-	public function save_meta( $unit_id ) {
+	public function save_fields( $unit_id ) {
 		$city      = sanitize_text_field( $_REQUEST['unit-city'] ?? '' );
 		$directors = $_REQUEST['unit-directors'] ?? array();
 
