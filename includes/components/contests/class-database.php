@@ -232,6 +232,14 @@ class Database extends Core\Database {
 			$data['venues'] = implode( ',', $data['venues'] );
 		}
 
+		if ( ! empty( $data['start_date'] ) ) {
+			$data['start_date'] = date( 'Y-m-d 00:00:00', strtotime( $data['start_date'] ) );
+		}
+
+		if ( ! empty( $data['end_date'] ) ) {
+			$data['end_date'] = date( 'Y-m-d 23:59:59', strtotime( $data['end_date'] ) );
+		}
+
 		$error_codes = $errors->get_error_codes();
 
 		if ( ! empty( $error_codes ) ) {
