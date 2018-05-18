@@ -27,7 +27,7 @@ class Components implements Interfaces\Loader {
 	public function load() {
 		load( new Component\Venues\Setup );
 		load( new Component\Contests\Setup );
-		load( new Component\People\Setup );
+		load( new Component\People\Directors\Setup );
 		load( new Component\Seasons\Setup );
 		load( new Component\Units\Setup );
 		load( new Component\Classifications\Setup );
