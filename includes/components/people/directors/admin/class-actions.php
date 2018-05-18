@@ -53,6 +53,13 @@ class Actions implements Loader {
 
 		$redirect = add_query_arg( 'page', 'ensemble-admin-people-directors', admin_url( 'admin.php' ) );
 		$nonce    = $_REQUEST['ensemble-add-director-nonce'] ?? false;
+
+		if ( ! wp_verify_nonce( $nonce, 'ensemble-add-director-nonce' ) ) {
+			// TODO add notice handler for the different cases.
+			if ( wp_redirect( $redirect ) ) {
+				exit;
+			}
+		}
 	}
 
 	/**
@@ -70,6 +77,14 @@ class Actions implements Loader {
 
 		$redirect = add_query_arg( 'page', 'ensemble-admin-people-directors', admin_url( 'admin.php' ) );
 		$nonce    = $_REQUEST['ensemble-update-director-nonce'] ?? false;
+
+
+		if ( ! wp_verify_nonce( $nonce, 'ensemble-update-director-nonce' ) ) {
+			// TODO add notice handler for the different cases.
+			if ( wp_redirect( $redirect ) ) {
+				exit;
+			}
+		}
 	}
 
 	/**
@@ -87,6 +102,13 @@ class Actions implements Loader {
 
 		$redirect = add_query_arg( 'page', 'ensemble-admin-people-directors', admin_url( 'admin.php' ) );
 		$nonce    = $_REQUEST['ensemble-delete-director-nonce'] ?? false;
+
+		if ( ! wp_verify_nonce( $nonce, 'ensemble-delete-director-nonce' ) ) {
+			// TODO add notice handler for the different cases.
+			if ( wp_redirect( $redirect ) ) {
+				exit;
+			}
+		}
 	}
 
 	/**
