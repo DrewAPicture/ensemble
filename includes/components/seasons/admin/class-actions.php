@@ -28,166 +28,175 @@ class Actions implements Loader {
 	 * @since 1.0.0
 	 */
 	public function load() {
-		// Units > Add and > Edit fields.
-		add_action( 'ensemble_units-add_unit_fields',  array( $this, 'add_unit_class_field'  ) );
-		add_action( 'ensemble_units-edit_unit_fields', array( $this, 'edit_unit_class_field' ) );
+		// Fields.
+		add_action( 'ensemble_season_add_form_fields', array( $this, 'add_season_fields'  ) );
+		add_action( 'ensemble_season_edit_form',       array( $this, 'edit_season_fields' ) );
 
-		// Units > Add List table columns.
-		add_filter( 'ensemble_units-ensemble_unit_coloumns', array( $this, 'filter_unit_table_columns' )        );
-		add_filter( 'manage_ensemble_unit_custom_column',    array( $this, 'column_class'              ), 13, 3 );
+		// List table column.
+		add_filter( 'manage_edit-ensemble_season_columns', array( $this, 'filter_season_table_columns' ), 100 );
 
-		// Save custom meta on add and edit.
-		add_action( 'create_ensemble_unit', array( $this, 'save_unit_meta' ) );
-		add_action( 'edit_ensemble_unit',   array( $this, 'save_unit_meta' ) );
+		// Custom column callbacks.
+		add_filter( 'manage_ensemble_season_custom_column', array( $this, 'column_start_date' ), 11, 3 );
+		add_filter( 'manage_ensemble_season_custom_column', array( $this, 'column_end_date'   ), 12, 3 );
 
-		// Filter the Classes list table columns.
-		add_filter( 'manage_edit-ensemble_class_columns', array( $this, 'filter_class_table_columns' ), 100 );
+		// Save meta.
+		add_action( 'create_ensemble_season', array( $this, 'save_season_meta' ) );
+		add_action( 'edit_ensemble_season',   array( $this, 'save_season_meta' ) );
 
-		// Hide (unimportant) slug field on Classes > Add.
-		add_action( 'add_tag_form_pre', array( $this, 'hide_add_class_slug_field' ) );
+		// Hide core fields.
+		add_action( 'add_tag_form_pre', array( $this, 'hide_add_season_fields' ) );
 	}
 
 	/**
-	 * Inserts a 'Classification' field into the Add Unit form.
+	 * Inserts custom fields markup into the Add Season form.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param string $taxonomy Taxonomy.
 	 */
-	public function add_unit_class_field() {
+	public function add_season_fields() {
 		?>
-		<div class="form-group">
-			<?php $this->output_class_field(); ?>
+		<div class="form-field bootstrap-iso fs-13">
+			<div class="form-group">
+				<?php
+				html()->text( array(
+					'id'    => 'tag-name', // mimicking core ID/name.
+					'label' => _x( 'Name', 'season', 'ensemble' ),
+					'class' => array( 'form-control', 'w-100' ),
+					'desc'  => __( 'The name is how it appears on your site.', 'ensemble' ),
+				) );
+				?>
+			</div>
+			<div class="form-group">
+				<?php $this->output_start_date_field(); ?>
+			</div>
+			<div class="form-group">
+				<?php $this->output_end_date_field(); ?>
+			</div>
+			<?php
+			/**
+			 * Fires inside the form-field container in the Seasons > Add form.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param Actions $this Seasons\Actions class instance.
+			 */
+			do_action( 'ensemble_seasons-add_season_fields', $this );
+			?>
 		</div>
 		<?php
 	}
 
 	/**
-	 * Inserts a 'Classification' field in the Edit Unit form.
+	 * Inserts custom fields into the Edit Season form.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param \WP_Term $term Unit term object.
+	 * @param \WP_Term $term Season term object.
 	 */
-	public function edit_unit_class_field( $term ) {
+	public function edit_season_fields( $term ) {
 		?>
-		<tr class="form-field">
-			<th scope="row">
-				<label for="ensemble-city"><?php esc_html_e( 'Classification', 'ensemble' ); ?></label>
-			</th>
-			<td>
-				<?php $this->output_class_field( $term ); ?>
-			</td>
-		</tr>
+		<table class="form-table bootstrap-iso">
+			<tbody>
+			<tr class="form-field">
+				<th scope="row">
+					<label for="ensemble-start-date"><?php echo esc_html_x( 'Start Date', 'season', 'ensemble' ); ?></label>
+				</th>
+				<td>
+					<?php $this->output_start_date_field( $term ); ?>
+				</td>
+			</tr>
+			<tr class="form-field">
+				<th scope="row">
+					<label for="ensemble-end-date"><?php echo esc_html_x( 'End Date', 'season', 'ensemble' ); ?></label>
+				</th>
+				<td>
+					<?php $this->output_end_date_field( $term ); ?>
+				</td>
+			</tr>
+
+			<?php
+			/**
+			 * Fires inside the form-table container in the Seasons > Edit form.
+			 *
+			 * @since 1.0.0
+			 *
+			 * @param \WP_Term $term Season term object.
+			 */
+			do_action( 'ensemble_seasons-edit_season_fields', $term );
+			?>
+			</tbody>
+		</table>
 		<?php
 	}
 
 	/**
-	 * Private helper to output the markup for the 'Classification' field for units.
+	 * Private helper to output the markup for the 'Start Date' field.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param null|\WP_Term $term Optional. Term object. Default null (ignored).
 	 */
-	private function output_class_field( $term = null ) {
-		$classes = get_terms( array(
-			'taxonomy'   => ( new Setup )->get_taxonomy_slug(),
-			'hide_empty' => false,
-			'fields'   => 'id=>name',
-		) );
-
+	private function output_start_date_field( $term = null ) {
 		$args = array(
-			'id'               => 'unit-class',
-			'label'            => __( 'Classification', 'ensemble' ),
-			'class'            => array( 'form-control' ),
-			'options'          => $classes,
-			'show_option_all'  => false,
-			'show_option_none' => false,
+			'id'    => 'season-start-date',
+			'label' => _x( 'Start Date', 'season', 'ensemble' ),
+			'class' => array( 'form-control', 'w-100', 'date', 'allow-past-dates' ),
 		);
 
 		if ( null !== $term ) {
-			$class_meta = get_term_meta( $term->term_id, 'ensemble-class', true );
+			$start_date = get_term_meta( $term->term_id, 'ensemble-start-date', true );
 
-			if ( $class_meta ) {
-				$args['selected'] = $class_meta;
+			if ( $start_date ) {
+				$args['value'] = date( 'm/d/Y', strtotime( $start_date ) );
 			}
 
-			// If $term is available this is for the Units > Edit form where the label is output separately.
+			// If $term is available this is for the Seasons > Edit form where the label is output separately.
 			unset( $args['label'] );
 		}
 
 		// Output the element.
-		html()->select( $args );
+		html()->text( $args );
 	}
 
 	/**
-	 * Filters the columns in the Competing Units list table.
+	 * Private helper to output the markup for the 'End Date' field.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $columns List table columns.
-	 * @return array Modified columns array.
+	 * @param null|\WP_Term $term Optional. Term object. Default null (ignored).
 	 */
-	public function filter_unit_table_columns( $columns ) {
-		$columns['class'] = _x( 'Class', 'classification', 'ensemble' );
+	private function output_end_date_field( $term = null ) {
+		$args = array(
+			'id'    => 'season-end-date',
+			'label' => _x( 'End Date', 'season', 'ensemble' ),
+			'class' => array( 'form-control', 'w-100', 'date', 'allow-past-dates' ),
+		);
 
-		return $columns;
-	}
+		if ( null !== $term ) {
+			$end_date = get_term_meta( $term->term_id, 'ensemble-end-date', true );
 
-	/**
-	 * Renders the contents of a single 'Class' column row in the Units list table.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $string      Blank string.
-	 * @param string $column_name Name of the column.
-	 * @param int    $term_id     Term ID.
-	 * @return string Markup for the column row.
-	 */
-	public function column_class( $value, $column_name, $unit_id ) {
-		if ( 'class' !== $column_name ) {
-			return $value;
-		}
-
-		$class_meta = get_term_meta( $unit_id, 'ensemble-class', true );
-
-		if ( $class_meta ) {
-			$class = get_term_by( 'id', $class_meta, ( new Setup )->get_taxonomy_slug() );
-
-			if ( $class ) {
-				$value = $class->name;
+			if ( $end_date ) {
+				$args['value'] = date( 'm/d/Y', strtotime( $end_date ) );
 			}
+
+			// If $term is available this is for the Seasons > Edit form where the label is output separately.
+			unset( $args['label'] );
 		}
 
-		return $value;
+		// Output the element.
+		html()->text( $args );
 	}
 
 	/**
-	 * Handles saving custom term meta fields when adding and editing units.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param int $unit_id Unit term ID.
-	 */
-	public function save_unit_meta( $unit_id ) {
-		$class = $_REQUEST['unit-class'] ?? '';
-
-		if ( ! empty( $class ) ) {
-			update_term_meta( $unit_id, 'ensemble-class', $class );
-		} else {
-			delete_term_meta( $unit_id, 'ensemble-class' );
-		}
-	}
-
-	/**
-	 * Filters the columns in the Classes list table.
+	 * Filters the columns in the Seasons list table.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param array $columns List table columns.
 	 * @return array Modified columns array.
 	 */
-	public function filter_class_table_columns( $columns ) {
+	public function filter_season_table_columns( $columns ) {
 		global $hook_suffix;
 
 		// For some reason core is evaluating this filter on term.php. Nip that in the bud.
@@ -196,13 +205,14 @@ class Actions implements Loader {
 		}
 
 		$new_columns = array(
-			'cb'          => $columns['cb'],
-			'name'        => $columns['name'],
-			'description' => $columns['description'],
+			'cb'         => $columns['cb'],
+			'name'       => $columns['name'],
+			'start_date' => _x( 'Start Date', 'seasons', 'ensemble' ),
+			'end_date'   => _x( 'End Date', 'seasons', 'ensemble' ),
 		);
 
 		/**
-		 * Filters the list of Classes list table columns directly after the component has modified
+		 * Filters the list of Seasons list table columns directly after the component has modified
 		 * the original list.
 		 *
 		 * @since 1.0.0
@@ -210,9 +220,80 @@ class Actions implements Loader {
 		 * @param array $new_columns Class-defined columns and keys.
 		 * @param array $columns     Original list table columns supplied to the parent callback.
 		 */
-		return apply_filters( 'ensemble_classess-ensemble_class_coloumns', $new_columns, $columns );
+		return apply_filters( 'ensemble_seasons-ensemble_class_coloumns', $new_columns, $columns );
 	}
 
+	/**
+	 * Renders the contents of a single 'Start Date' column row in the Seasons list table.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $string      Blank string.
+	 * @param string $column_name Name of the column.
+	 * @param int    $term_id     Term ID.
+	 * @return string Markup for the column row.
+	 */
+	public function column_start_date( $value, $column_name, $term_id ) {
+		if ( 'start_date' !== $column_name ) {
+			return $value;
+		}
+
+		$start_date = get_term_meta( $term_id, 'ensemble-start-date', true );
+
+		if ( $start_date ) {
+			$value = date( 'm/d/Y', strtotime( $start_date ) );
+		}
+
+		return $value;
+	}
+
+	/**
+	 * Renders the contents of a single 'End Date' column row in the Seasons list table.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $string      Blank string.
+	 * @param string $column_name Name of the column.
+	 * @param int    $term_id     Term ID.
+	 * @return string Markup for the column row.
+	 */
+	public function column_end_date( $value, $column_name, $term_id ) {
+		if ( 'end_date' !== $column_name ) {
+			return $value;
+		}
+
+		$end_date = get_term_meta( $term_id, 'ensemble-end-date', true );
+
+		if ( $end_date ) {
+			$value = date( 'm/d/Y', strtotime( $end_date ) );
+		}
+
+		return $value;
+	}
+
+	/**
+	 * Handles saving custom term meta fields when adding and editing seasons.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param int $term_id Term ID.
+	 */
+	public function save_season_meta( $term_id ) {
+		$start_date = $_REQUEST['season-start-date'] ?? '';
+		$end_date   = $_REQUEST['season-end-date'] ?? '';
+
+		if ( ! empty( $start_date ) ) {
+			update_term_meta( $term_id, 'ensemble-start-date', $start_date );
+		} else {
+			delete_term_meta( $term_id, 'ensemble-start-date' );
+		}
+
+		if ( ! empty( $end_date ) ) {
+			update_term_meta( $term_id, 'ensemble-end-date', $end_date );
+		} else {
+			delete_term_meta( $term_id, 'ensemble-end-date' );
+		}
+	}
 
 	/**
 	 * Bit of a hack, but outputs some inline CSS at the top of the Seasons > Add form to hide the slug field.
@@ -221,14 +302,16 @@ class Actions implements Loader {
 	 *
 	 * @param string $taxonomy Taxonomy slug.
 	 */
-	function hide_add_class_slug_field( $taxonomy ) {
+	function hide_add_season_fields( $taxonomy ) {
 		if ( $taxonomy !== ( new Setup )->get_taxonomy_slug() ) {
 			return;
 		}
 		?>
 		<style type="text/css">
 			/* Hide the Slug fields */
-			.term-slug-wrap {
+			.term-name-wrap,
+			.term-slug-wrap,
+			.term-description-wrap {
 				display: none;
 			}
 		</style>
