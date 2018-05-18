@@ -48,12 +48,12 @@ class List_Table extends \WP_List_Table {
 	public $published_count;
 
 	/**
-	 *  Number of items with the 'draft' status found.
+	 *  Number of items with the 'private' status found.
 	 *
 	 * @since 1.0.0
 	 * @var   int
 	 */
-	public $draft_count;
+	public $private_count;
 
 	/**
 	 * Total item count for the current query.
@@ -111,12 +111,12 @@ class List_Table extends \WP_List_Table {
 			'search' => $search,
 		) );
 
-		$this->draft_count = ( new Database )->count( array(
-			'status' => 'draft',
+		$this->private_count = ( new Database )->count( array(
+			'status' => 'private',
 			'search' => $search,
 		) );
 
-		$this->total_count = $this->published_count + $this->draft_count;
+		$this->total_count = $this->published_count + $this->private_count;
 	}
 
 	/**
@@ -132,7 +132,7 @@ class List_Table extends \WP_List_Table {
 		$current         = isset( $_GET['status'] ) ? $_GET['status'] : '';
 		$total_count     = '&nbsp;<span class="count">(' . $this->total_count     . ')</span>';
 		$published_count = '&nbsp;<span class="count">(' . $this->published_count . ')</span>';
-		$draft_count     = '&nbsp;<span class="count">(' . $this->draft_count     . ')</span>';
+		$private_count   = '&nbsp;<span class="count">(' . $this->private_count     . ')</span>';
 
 		$views = array(
 			'all' => sprintf( '<a href="%1$s"%2$s>%3$s</a>',
@@ -147,10 +147,10 @@ class List_Table extends \WP_List_Table {
 				get_status_label( 'published' ) . $published_count
 			),
 
-			'draft' => sprintf( '<a href="%1$s"%2$s>%3$s</a>',
-				esc_url( add_query_arg( 'status', 'draft', $base ) ),
-				$current === 'draft' ? ' class="current"' : '',
-				get_status_label( 'draft' ) . $draft_count
+			'private' => sprintf( '<a href="%1$s"%2$s>%3$s</a>',
+				esc_url( add_query_arg( 'status', 'private', $base ) ),
+				$current === 'private' ? ' class="current"' : '',
+				get_status_label( 'private' ) . $private_count
 			),
 		);
 
@@ -275,8 +275,8 @@ class List_Table extends \WP_List_Table {
 			case 'published':
 				$total_items = $this->published_count;
 				break;
-			case 'draft':
-				$total_items = $this->draft_count;
+			case 'private':
+				$total_items = $this->private_count;
 				break;
 			case 'any':
 			default:

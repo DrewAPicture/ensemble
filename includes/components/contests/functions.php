@@ -38,7 +38,7 @@ function get_contest( $contest ) {
  */
 function get_allowed_statuses() {
 	$statuses = array(
-		'draft'     => __( 'Draft', 'ensemble' ),
+		'private'   => __( 'Private', 'ensemble' ),
 		'published' => __( 'Published', 'ensemble' ),
 	);
 
@@ -64,7 +64,7 @@ function get_status_label( $status ) {
 	$statuses = get_allowed_statuses();
 
 	if ( ! array_key_exists( $status, $statuses ) ) {
-		$status = 'draft';
+		$status = 'private';
 	}
 
 	if ( ! empty( $statuses[ $status ] ) ) {
