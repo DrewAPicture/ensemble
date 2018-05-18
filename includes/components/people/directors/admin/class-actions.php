@@ -42,7 +42,7 @@ class Actions implements Loader {
 	 * @return array Registered director views.
 	 */
 	public function get_views() {
-		return array( 'tab' );
+		return array( 'overview', 'add', 'tab' );
 	}
 
 	/**
