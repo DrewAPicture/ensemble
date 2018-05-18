@@ -30,7 +30,7 @@ class Components implements Interfaces\Loader {
 		load( new Component\People\Setup );
 		load( new Component\Seasons\Setup );
 		load( new Component\Units\Setup );
-		load( new Component\Classes\Setup );
+		load( new Component\Classifications\Setup );
 		load( new Component\Integrations\Setup );
 	}
 
