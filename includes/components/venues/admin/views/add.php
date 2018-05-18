@@ -14,6 +14,9 @@ use function Ensemble\Components\Venues\{get_allowed_statuses, get_allowed_types
 use function Ensemble\{html};
 ?>
 <h1 class="wp-heading-inline"><?php esc_html_e( 'Add a Venue', 'ensemble' ); ?></h1>
+<a href="<?php echo esc_url( add_query_arg( array( 'ensbl-view' => 'overview' ) ) ); ?>" class="page-title-action" role="button">
+	<?php esc_html_e( 'Return to All Venues', 'ensemble' ); ?>
+</a>
 
 <div class="row">
 	<div class="col-12 col-xl-8">
