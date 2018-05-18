@@ -219,12 +219,13 @@ class List_Table extends \WP_List_Table {
 	 * @return array Query results.
 	 */
 	public function get_data() {
-		$page    = isset( $_REQUEST['paged'] )    ? absint( $_GET['paged'] )                  : 1;
-		$status  = isset( $_REQUEST['status'] )   ? sanitize_key( $_REQUEST['status'] )       : '';
-		$search  = isset( $_REQUEST['s'] )        ? sanitize_text_field( $_REQUEST['s'] )     : '';
-		$order   = isset( $_REQUEST['order'] )    ? sanitize_text_field( $_REQUEST['order'] ) : 'DESC';
-		$orderby = isset( $_REQUEST['orderby'] )  ? sanitize_key( $_REQUEST['orderby'] )      : 'start_date';
-		$venue   = isset( $_REQUEST['venue_id'] ) ? absint( $_REQUEST['venue_id'] )           : '';
+		$page    = absint( $_REQUEST['paged'] ?? 1 );
+		$status  = sanitize_key( $_REQUEST['status'] ?? '' );
+		$search  = sanitize_text_field( $_REQUEST['s'] ?? '' );
+		$order   = sanitize_text_field( $_REQUEST['order'] ?? 'DESC' );
+		$orderby = sanitize_key( $_REQUEST['orderby'] ?? 'start_date' );
+		$venue   = absint( $_REQUEST['venue_id'] ?? 0 );
+		$season  = absint( $_REQUEST['season_id'] ?? 0 );
 
 		$per_page = $this->get_items_per_page( 'ensemble_contests_per_page', $this->per_page );
 
@@ -239,6 +240,14 @@ class List_Table extends \WP_List_Table {
 
 		if ( ! empty( $venue ) ) {
 			$args['venues'] = array( $venue );
+		}
+
+		if ( ! empty( $season ) ) {
+			$contest_ids = get_objects_in_term( $season, ( new Seasons )->get_taxonomy_slug() );
+
+			if ( ! empty( $contest_ids ) && ! is_wp_error( $contest_ids ) ) {
+				$args['id'] = $contest_ids;
+			}
 		}
 
 		$contests = ( new Database )->query( $args );
