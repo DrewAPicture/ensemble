@@ -11,7 +11,7 @@ namespace Ensemble\Components\Contests\Admin;
 
 use Ensemble\Components\Contests\Database;
 use Ensemble\Core\Interfaces\Menu_Router;
-use function Ensemble\{load_view, get_view_var};
+use function Ensemble\{load_view, get_current_view};
 
 /**
  * Sets up the Contests menu.
@@ -53,7 +53,7 @@ class Menu implements Menu_Router {
 	 * @since 1.0.0
 	 */
 	public function route_request() {
-		$view = get_view_var();
+		$view = get_current_view();
 
 		// If 'overview' is requested and there are no contests, take the user to the Add Contest screen instead.
 		if ( 'overview' === $view ) {

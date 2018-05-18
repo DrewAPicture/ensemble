@@ -69,7 +69,7 @@ function html() {
  *
  * @return string View variable vlaue.
  */
-function get_view_var() {
+function get_current_view() {
 	return sanitize_key( $_REQUEST['ensbl-view'] ?? 'overview' );
 }
 

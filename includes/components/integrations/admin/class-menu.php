@@ -10,8 +10,7 @@
 namespace Ensemble\Components\Integrations\Admin;
 
 use Ensemble\Core\Interfaces\Menu_Router;
-use function Ensemble\get_view_var;
-use function Ensemble\{load_view};
+use function Ensemble\{load_view, get_current_view};
 
 /**
  * Sets up the Integrations menu.
@@ -53,7 +52,7 @@ class Menu implements Menu_Router {
 	 * @since 1.0.0
 	 */
 	public function route_request() {
-		load_view( new Actions, get_view_var() );
+		load_view( new Actions, get_current_view() );
 	}
 
 }
