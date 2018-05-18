@@ -122,7 +122,7 @@ use function Ensemble\{html};
 								'id'               => 'contest-type',
 								'label'            => __( 'Type', 'ensemble' ),
 								'class'            => array( 'form-control' ),
-								'selected'         => 'regular',
+								'selected'         => 'standard',
 								'options'          => $types,
 								'show_option_all'  => false,
 								'show_option_none' => false,
