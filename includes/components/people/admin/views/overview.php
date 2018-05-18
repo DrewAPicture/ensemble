@@ -9,7 +9,7 @@
  */
 namespace Ensemble\Components\People\Admin;
 
-use function Ensemble\{load_view, get_current_tab};
+use function Ensemble\{get_current_tab};
 ?>
 <div class="bootstrap-iso">
 	<h1 class="wp-heading-inline"><?php esc_html_e( 'People', 'ensemble' ); ?></h1>
