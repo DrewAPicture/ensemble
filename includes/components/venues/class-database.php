@@ -112,7 +112,7 @@ class Database extends Core\Database {
 		return array(
 			'type'       => 'school',
 			'status'     => 'active',
-			'date_added' => $this->get_date_object()->format( 'Y-m-d H:i:s' ),
+			'date_added' => \Ensemble\date()->format( 'Y-m-d H:i:s' ),
 		);
 	}
 

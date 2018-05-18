@@ -759,20 +759,4 @@ abstract class Database implements Interfaces\Database {
 		return $last_changed;
 	}
 
-	/**
-	 * Builds and retrieves a DateTime object based on the WP timezone.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $timezone Optional. Timezone to use to generate the date object. Default UTC.
-	 * @return \DateTime DateTime object.
-	 */
-	public function get_date_object( $timezone = null ) {
-		if ( null === $timezone ) {
-			$timezone = 'UTC';
-		}
-
-		return new \DateTime( 'now', new \DateTimeZone( $timezone ) );
-	}
-
 }
