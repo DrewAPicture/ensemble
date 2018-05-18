@@ -139,7 +139,6 @@ final class Ensemble {
 			load( new Core\Admin\Settings );
 		}
 
-		load( new Core\Ajax_Actions );
 		load( new Core\Assets );
 		load( new Core\Components );
 		load( new Core\Requests );
