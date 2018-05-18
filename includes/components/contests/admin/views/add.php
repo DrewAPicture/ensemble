@@ -11,6 +11,7 @@ namespace Ensemble\Components\Contests\Admin;
 
 use Ensemble\Components\Contests\Database;
 use Ensemble\Components\Venues\Database as Venues;
+use Ensemble\Components\Seasons\Setup as Seasons;
 use function Ensemble\Components\Contests\{get_allowed_types, get_allowed_statuses};
 use function Ensemble\{html};
 
@@ -38,6 +39,77 @@ use function Ensemble\{html};
 					?>
 				</div>
 
+				<div class="form-row form-group">
+					<div class="col">
+						<?php
+						$venues = ( new Venues )->query( array(
+							'fields' => array( 'id', 'name' ),
+							'number' => 500,
+						) );
+
+						if ( ! empty( $venues ) ) :
+							foreach ( $venues as $venue ) {
+								$options[ $venue->id ] = $venue->name;
+							}
+						else :
+							$options = array();
+						endif;
+						html()->select( array(
+							'id'               => 'contest-venues',
+							'name'             => 'contest-venues[]',
+							'label'            => __( 'Venue(s)', 'ensemble' ),
+							'class'            => array( 'form-control' ),
+							'multiple'         => true,
+							'options'          => $options,
+							'show_option_all'  => false,
+							'show_option_none' => false,
+						) );
+						?>
+					</div>
+					<div class="col">
+						<?php
+						$seasons = get_terms( array(
+							'taxonomy'   => ( new Seasons )->get_taxonomy_slug(),
+							'hide_empty' => false,
+							'fields'     => 'id=>name',
+							'number'     => 250,
+						) );
+
+						// Season.
+						html()->select( array(
+							'id'              => 'contest-season',
+							'label'           => _x( 'Season', 'contest', 'ensemble' ),
+							'options'         => $seasons,
+							'show_option_all' => false,
+						) );
+						?>
+					</div>
+				</div>
+			</div>
+
+			<div class="card mb-3 md-md-5 pt-4">
+				<div class="form-row form-group">
+					<div class="col">
+						<?php
+						html()->text( array(
+							'id'    => 'contest-start-date',
+							'label' => __( 'Start Date', 'ensemble' ),
+							'class' => array( 'form-control', 'date', 'allow-past-dates' ),
+						) );
+						?>
+					</div>
+					<div class="col">
+						<?php
+						html()->text( array(
+							'id'    => 'contest-end-date',
+							'label' => __( 'End Date', 'ensemble' ),
+							'class' => array( 'form-control', 'date', 'allow-past-dates' ),
+							'desc'  => __( 'Leave blank to default to the same date as Start Date.', 'ensemble' ),
+						) );
+						?>
+					</div>
+				</div>
+
 				<div class="form-group">
 					<?php
 					html()->editor( array(
@@ -47,57 +119,6 @@ use function Ensemble\{html};
 						'class'   => array( 'form-control' ),
 					) );
 					?>
-				</div>
-			</div>
-
-			<div class="card mb-3 md-md-5 pt-4">
-				<div class="form-group">
-					<?php
-					$venues = ( new Venues )->query( array(
-						'fields' => array( 'id', 'name' ),
-						'number' => 500,
-					) );
-
-					if ( ! empty( $venues ) ) :
-						foreach ( $venues as $venue ) {
-							$options[ $venue->id ] = $venue->name;
-						}
-					else :
-						$options = array();
-					endif;
-					html()->select( array(
-						'id'               => 'contest-venues',
-						'name'             => 'contest-venues[]',
-						'label'            => __( 'Venue(s)', 'ensemble' ),
-						'class'            => array( 'form-control' ),
-						'multiple'         => true,
-						'options'          => $options,
-						'show_option_all'  => false,
-						'show_option_none' => false,
-					) );
-					?>
-				</div>
-
-				<div class="form-row form-group">
-					<div class="col">
-						<?php
-						html()->text( array(
-							'id'    => 'contest-start-date',
-							'label' => __( 'Start Date', 'ensemble' ),
-							'class' => array( 'form-control', 'date' ),
-						) );
-						?>
-					</div>
-					<div class="col">
-						<?php
-						html()->text( array(
-							'id'    => 'contest-end-date',
-							'label' => __( 'End Date', 'ensemble' ),
-							'class' => array( 'form-control', 'date' ),
-							'desc'  => __( 'Leave blank to default to the same date as Start Date.', 'ensemble' ),
-						) );
-						?>
-					</div>
 				</div>
 			</div>
 

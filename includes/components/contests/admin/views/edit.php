@@ -10,6 +10,7 @@
 namespace Ensemble\Components\Contests\Admin;
 
 use Ensemble\Components\Venues\Database as Venues;
+use Ensemble\Components\Seasons\Setup as Seasons;
 use function Ensemble\Components\Contests\{get_contest, get_allowed_statuses, get_allowed_types, get_type_label};
 use function Ensemble\{html};
 
@@ -42,6 +43,91 @@ $contest    = get_contest( $contest_id );
 						?>
 					</div>
 
+					<div class="form-row form-group">
+						<div class="col">
+							<?php
+							$venues = ( new Venues )->query( array(
+								'fields' => array( 'id', 'name' ),
+								'number' => 500,
+							) );
+
+							if ( ! empty( $venues ) ) :
+								foreach ( $venues as $venue ) {
+									$options[ $venue->id ] = $venue->name;
+								}
+							else :
+								$options = array();
+							endif;
+
+							html()->select( array(
+								'id'               => 'contest-venues',
+								'name'             => 'contest-venues[]',
+								'label'            => __( 'Venue(s)', 'ensemble' ),
+								'class'            => array( 'form-control' ),
+								'multiple'         => true,
+								'selected'         => explode( ',', $contest->venues ),
+								'options'          => $options,
+								'show_option_all'  => false,
+								'show_option_none' => false,
+							) );
+							?>
+						</div>
+
+						<div class="col">
+							<?php
+							$seasons = get_terms( array(
+								'taxonomy'   => ( new Seasons )->get_taxonomy_slug(),
+								'hide_empty' => false,
+								'fields'     => 'id=>name',
+								'number'     => 250,
+							) );
+
+							$current_season = wp_get_object_terms( $contest->id, ( new Seasons )->get_taxonomy_slug(), array( 'fields' => 'ids' ) );
+
+							if ( ! empty( $current_season ) ) {
+								$selected = reset( $current_season );
+							} else {
+								$selected = 0;
+							}
+
+							// Season.
+							html()->select( array(
+								'id'              => 'contest-season',
+								'label'           => _x( 'Season', 'contest', 'ensemble' ),
+								'selected'        => $selected,
+								'options'         => $seasons,
+								'show_option_all' => false,
+							) );
+							?>
+						</div>
+					</div>
+				</div>
+
+				<div class="card mb-3 md-md-5 pt-4">
+					<div class="form-row form-group">
+						<div class="col">
+							<?php
+							html()->text( array(
+								'id'    => 'contest-start-date',
+								'label' => __( 'Start Date', 'ensemble' ),
+								'class' => array( 'form-control', 'date', 'allow-past-dates' ),
+								'value' => $contest->get_start_date(),
+							) );
+							?>
+						</div>
+						<div class="col">
+							<?php
+							html()->text( array(
+								'id'    => 'contest-end-date',
+								'label' => __( 'End Date', 'ensemble' ),
+								'class' => array( 'form-control', 'date', 'allow-past-dates' ),
+								'value' => $contest->get_end_date(),
+								'desc'  => __( 'Leave blank to default to the same date as Start Date.', 'ensemble' ),
+							) );
+							?>
+						</div>
+					</div>
+
 					<div class="form-group">
 						<?php
 						html()->editor( array(
@@ -52,61 +138,6 @@ $contest    = get_contest( $contest_id );
 							'value'   => $contest->description,
 						) );
 						?>
-					</div>
-				</div>
-
-				<div class="card mb-3 md-md-5 pt-4">
-					<div class="form-group">
-						<?php
-						$venues = ( new Venues )->query( array(
-							'fields' => array( 'id', 'name' ),
-							'number' => 500,
-						) );
-
-						if ( ! empty( $venues ) ) :
-							foreach ( $venues as $venue ) {
-								$options[ $venue->id ] = $venue->name;
-							}
-						else :
-							$options = array();
-						endif;
-
-						html()->select( array(
-							'id'               => 'contest-venues',
-							'name'             => 'contest-venues[]',
-							'label'            => __( 'Venue(s)', 'ensemble' ),
-							'class'            => array( 'form-control' ),
-							'multiple'         => true,
-							'selected'         => explode( ',', $contest->venues ),
-							'options'          => $options,
-							'show_option_all'  => false,
-							'show_option_none' => false,
-						) );
-						?>
-					</div>
-
-					<div class="form-row form-group">
-						<div class="col">
-							<?php
-							html()->text( array(
-								'id'    => 'contest-start-date',
-								'label' => __( 'Start Date', 'ensemble' ),
-								'class' => array( 'form-control', 'date' ),
-								'value' => $contest->get_start_date(),
-							) );
-							?>
-						</div>
-						<div class="col">
-							<?php
-							html()->text( array(
-								'id'    => 'contest-end-date',
-								'label' => __( 'End Date', 'ensemble' ),
-								'class' => array( 'form-control', 'date' ),
-								'value' => $contest->get_end_date(),
-								'desc'  => __( 'Leave blank to default to the same date as Start Date.', 'ensemble' ),
-							) );
-							?>
-						</div>
 					</div>
 				</div>
 
