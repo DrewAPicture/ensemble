@@ -12,5 +12,5 @@ namespace Ensemble\Core;
 use function Ensemble\{load_view};
 ?>
 <div class="bootstrap-iso">
-	Something goes here.
+	Directors: Something goes here.
 </div>
