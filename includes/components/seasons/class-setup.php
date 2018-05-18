@@ -81,7 +81,7 @@ class Setup implements Loader {
 				'edit_item'                  => __( 'Edit Season', 'ensemble' ),
 				'update_item'                => __( 'Update Season', 'ensemble' ),
 				'view_item'                  => __( 'View Season', 'ensemble' ),
-				'add_new_item'               => __( 'New Season', 'ensemble' ),
+				'add_new_item'               => __( 'Add a New Season', 'ensemble' ),
 				'new_item_name'              => __( 'New Season', 'ensemble' ),
 				'separate_items_with_commas' => __( 'Separate Seasons with commas', 'ensemble' ),
 				'add_or_remove_items'        => __( 'Add or remove Seasons', 'ensemble' ),
