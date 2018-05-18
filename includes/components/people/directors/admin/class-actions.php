@@ -10,7 +10,7 @@
 namespace Ensemble\Components\People\Directors\Admin;
 
 use Ensemble\Core\Interfaces\Loader;
-use Ensemble\Core\Traits\View_Loader;
+use Ensemble\Core\Traits\{View_Loader, Tab_Loader};
 
 /**
  * Sets up logic for performing director-related actions.
@@ -19,10 +19,11 @@ use Ensemble\Core\Traits\View_Loader;
  *
  * @see Loader
  * @see View_Loader
+ * @see Tab_Loader
  */
 class Actions implements Loader {
 
-	use View_Loader;
+	use View_Loader, Tab_Loader;
 
 	/**
 	 * Registers hook callbacks for director actions.
@@ -30,8 +31,7 @@ class Actions implements Loader {
 	 * @since 1.0.0
 	 */
 	public function load() {
-		add_filter( 'ensemble_people-get_tabs',                             array( $this, 'register_tab'        ),    11 );
-		add_action( "ensemble_people-{$this->get_tab_slug()}_tab_contents", array( $this, 'output_tab_contents' ), 10, 2 );
+		$this->register_tab_callbacks();
 	}
 
 	/**
@@ -57,6 +57,18 @@ class Actions implements Loader {
 	}
 
 	/**
+	 * Retrieves the identifier for the component whose tabs API
+	 * this component is hooking into.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string Tab component identifier.
+	 */
+	public function get_tab_component() {
+		return 'ensemble_people';
+	}
+
+	/**
 	 * Retrieves the tab slug.
 	 *
 	 * @since 1.0.0
@@ -67,12 +79,22 @@ class Actions implements Loader {
 		return 'directors';
 	}
 
-	public function register_tab( $tabs ) {
-		$tabs[ $this->get_tab_slug() ] = __( 'Unit Directors', 'ensemble' );
-
-		return $tabs;
+	/**
+	 * Retrieves the tab label.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string Tab label.
+	 */
+	public function get_tab_label() {
+		return __( 'Unit Directors', 'ensemble' );
 	}
 
+	/**
+	 * Outputs the contents of the tab.
+	 *
+	 * @since 1.0.0
+	 */
 	public function output_tab_contents() {
 		$this->load_view( 'tab' );
 	}
