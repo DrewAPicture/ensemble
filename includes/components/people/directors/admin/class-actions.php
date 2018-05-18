@@ -176,6 +176,7 @@ class Actions implements Loader {
 		if ( 'yes' === $answer ) {
 			require_once ABSPATH . '/wp-admin/includes/user.php';
 
+			// If this is multisite, the user is only removed from the current site.
 			$deleted = \wp_delete_user( $user_id );
 		}
 
