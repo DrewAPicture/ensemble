@@ -70,11 +70,7 @@ class Actions implements Loader {
 			'external'    => empty( $_REQUEST['contest-external'] ) ? '' : sanitize_text_field( $_REQUEST['contest-external'] ),
 		);
 
-		if ( ! empty( $_REQUEST['contest-venues'] ) ) {
-			$data['venues'] = array_map( 'absint', $_REQUEST['contest-venues'] );
-		} else {
-			$data['venues'] = array();
-		}
+		$data['venues'] = array_map( 'absint', $_REQUEST['contest-venues'] ?? array() );
 
 		$added = ( new Database )->insert( $data );
 
