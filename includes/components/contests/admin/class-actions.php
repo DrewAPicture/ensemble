@@ -10,9 +10,10 @@
 namespace Ensemble\Components\Contests\Admin;
 
 use Ensemble\Components\Contests\Database;
-use function Ensemble\Components\Contests\get_allowed_types;
+use Ensemble\Components\Seasons\Setup as Seasons;
 use Ensemble\Core\Interfaces\Loader;
 use Ensemble\Core\Traits\View_Loader;
+use function Ensemble\Components\Contests\get_allowed_types;
 
 /**
  * Sets up logic for performing CRUD actions on contests.
@@ -52,6 +53,7 @@ class Actions implements Loader {
 
 		$redirect = add_query_arg( 'page', 'ensemble-admin-contests', admin_url( 'admin.php' ) );
 		$nonce    = $_REQUEST['ensemble-add-contest-nonce'] ?? false;
+		$season   = absint( $_REQUEST['contest-season'] ?? 0 );
 
 		if ( ! wp_verify_nonce( $nonce, 'ensemble-add-contest-nonce' ) ) {
 			// TODO add notice handler for the different cases.
@@ -73,6 +75,10 @@ class Actions implements Loader {
 		$data['venues'] = array_map( 'absint', $_REQUEST['contest-venues'] ?? array() );
 
 		$added = ( new Database )->insert( $data );
+
+		if ( $added && ! empty( $season ) ) {
+			wp_set_object_terms( $added, $season, ( new Seasons )->get_taxonomy_slug() );
+		}
 
 		// TODO add notice handler for the different cases.
 		if ( wp_redirect( $redirect ) ) {
