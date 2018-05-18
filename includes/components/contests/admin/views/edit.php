@@ -92,7 +92,7 @@ $contest    = get_contest( $contest_id );
 								'id'    => 'contest-start-date',
 								'label' => __( 'Start Date', 'ensemble' ),
 								'class' => array( 'form-control', 'date' ),
-								'value' => $contest->start_date,
+								'value' => $contest->get_start_date(),
 							) );
 							?>
 						</div>
@@ -102,7 +102,7 @@ $contest    = get_contest( $contest_id );
 								'id'    => 'contest-end-date',
 								'label' => __( 'End Date', 'ensemble' ),
 								'class' => array( 'form-control', 'date' ),
-								'value' => $contest->end_date,
+								'value' => $contest->get_end_date(),
 								'desc'  => __( 'Leave blank to default to the same date as Start Date.', 'ensemble' ),
 							) );
 							?>
