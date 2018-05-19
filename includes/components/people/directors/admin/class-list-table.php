@@ -185,26 +185,26 @@ class List_Table extends \WP_List_Table {
 	 * @return array Query results.
 	 */
 	public function get_data() {
-		$page    = isset( $_REQUEST['paged'] )    ? absint( $_GET['paged'] )                  : 1;
-		$status  = isset( $_REQUEST['status'] )   ? sanitize_key( $_REQUEST['status'] )       : '';
-		$search  = isset( $_REQUEST['s'] )        ? sanitize_text_field( $_REQUEST['s'] )     : '';
-		$order   = isset( $_REQUEST['order'] )    ? sanitize_text_field( $_REQUEST['order'] ) : 'DESC';
-		$orderby = isset( $_REQUEST['orderby'] )  ? sanitize_key( $_REQUEST['orderby'] )      : 'start_date';
-		$venue   = isset( $_REQUEST['venue_id'] ) ? absint( $_REQUEST['venue_id'] )           : '';
+		$page    = absint( $_REQUEST['paged'] ?? 1 );
+		$order   = sanitize_text_field( $_REQUEST['order'] ?? 'DESC' );
+		$orderby = sanitize_key( $_REQUEST['orderby'] ?? 'login' );
+		$unit_id = absint( $_REQUEST['unit_id'] ?? 0 );
 
 		$per_page = $this->get_items_per_page( 'ensemble_directors_per_page', $this->per_page );
 
 		$args = array(
 			'number'  => $per_page,
 			'offset'  => $per_page * ( $page - 1 ),
-			'status'  => $status,
-			'search'  => $search,
 			'orderby' => $orderby,
 			'order'   => $order,
 		);
 
-		if ( ! empty( $venue ) ) {
-			$args['venues'] = array( $venue );
+		if ( ! empty( $unit_id ) ) {
+			$directors = get_objects_in_term( $unit_id, ( new Setup )->get_taxonomy_slug() );
+
+			if ( ! empty( $directors ) ) {
+				$args['include'] = wp_parse_id_list( $directors );
+			}
 		}
 
 		$directors = ( new Database )->query( $args );
