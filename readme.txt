@@ -57,6 +57,7 @@ A: You\'re welcome to submit an issue on the [Github repository](https://github.
 3. Adding a new season.
 4. Assigning units to a new director.
 5. Adding a new unit.
+6. Contests overview.
 
 == Changelog ==
 = 1.0.0 =

@@ -64,6 +64,7 @@ Integrations will be coming soon in the form of sister theme for the front-end a
 ![Adding a new season](https://cl.ly/1F3c3f2r1t3r/Screen%20Shot%202018-05-19%20at%201.36.30%20AM.png)
 ![Assigning units to a new director](https://cl.ly/0F0920461E28/Screen%20Shot%202018-05-19%20at%201.50.46%20AM.png)
 ![Adding a new unit](https://cl.ly/3X0J1A2a0t0i/Screen%20Shot%202018-05-19%20at%201.50.01%20AM.png)
+![Contests overview](https://cl.ly/0Z3w1s1v0m2E/Screen%20Shot%202018-05-19%20at%201.10.19%20PM.png)
 
 ## Changelog
 
