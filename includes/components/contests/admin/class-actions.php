@@ -56,7 +56,8 @@ class Actions implements Loader {
 		$season   = absint( $_REQUEST['contest-season'] ?? 0 );
 
 		if ( ! wp_verify_nonce( $nonce, 'ensemble-add-contest-nonce' ) ) {
-			// TODO add notice handler for the different cases.
+			$redirect = add_query_arg( 'notice-contest-forbidden', 1, $redirect );
+
 			if ( wp_redirect( $redirect ) ) {
 				exit;
 			}
@@ -76,11 +77,16 @@ class Actions implements Loader {
 
 		$added = ( new Database )->insert( $data );
 
-		if ( $added && ! empty( $season ) ) {
-			wp_set_object_terms( $added, $season, ( new Seasons )->get_taxonomy_slug() );
+		if ( $added ) {
+			if ( ! empty( $season ) ) {
+				wp_set_object_terms( $added, $season, ( new Seasons )->get_taxonomy_slug() );
+			}
+
+			$redirect = add_query_arg( 'notice-contest-added', 1, $redirect );
+		} else {
+			$redirect = add_query_arg( 'notice-contest-added-error', 1, $redirect );
 		}
 
-		// TODO add notice handler for the different cases.
 		if ( wp_redirect( $redirect ) ) {
 			exit;
 		}
@@ -111,7 +117,8 @@ class Actions implements Loader {
 		$season = absint( $_REQUEST['contest-season'] ?? 0 );
 
 		if ( ! wp_verify_nonce( $nonce, 'ensemble-update-contest-nonce' ) || 0 === $contest_id ) {
-			// TODO add notice handler for the different cases.
+			$redirect = add_query_arg( 'notice-contest-forbidden', 1, $redirect );
+
 			if ( wp_redirect( $redirect ) ) {
 				exit;
 			}
@@ -136,11 +143,16 @@ class Actions implements Loader {
 
 		$updated = ( new Database )->update( $contest_id, $data );
 
-		IF ( $updated && ! empty( $season ) ) {
-			wp_set_object_terms( $contest_id, $season, ( new Seasons )->get_taxonomy_slug() );
+		if ( $updated ) {
+			if ( ! empty( $season ) ) {
+				wp_set_object_terms( $contest_id, $season, ( new Seasons )->get_taxonomy_slug() );
+			}
+
+			$redirect = add_query_arg( 'notice-contest-updated', 1, $redirect );
+		} else {
+			$redirect = add_query_arg( 'notice-contest-updated-error', 1, $redirect );
 		}
 
-		// TODO add notice handler for the different cases.
 		if ( wp_redirect( $redirect ) ) {
 			exit;
 		}
@@ -166,7 +178,8 @@ class Actions implements Loader {
 		$redirect = add_query_arg( 'page', 'ensemble-admin-contests', admin_url( 'admin.php' ) );
 
 		if ( ! wp_verify_nonce( $nonce, 'ensemble-delete-contest-nonce' ) || 'no' === $answer || 0 === $contest_id ) {
-			// TODO add notice handler for the different cases.
+			$redirect = add_query_arg( 'notice-contest-forbidden', 1, $redirect );
+
 			if ( wp_redirect( $redirect ) ) {
 				exit;
 			}
@@ -175,10 +188,17 @@ class Actions implements Loader {
 		if ( 'yes' === $answer ) {
 			$deleted = ( new Database )->delete( $contest_id );
 
-			// TODO add notice handler for the different cases.
-			if ( wp_redirect( $redirect ) ) {
-				exit;
+			if ( $deleted ) {
+				$redirect = add_query_arg( 'notice-contest-deleted', 1, $redirect );
+			} else {
+				$redirect = add_query_arg( 'notice-contest-deleted-error', 1, $redirect );
 			}
+		} else {
+			$redirect = add_query_arg( 'notice-contest-deleted-no-change', 1, $redirect );
+		}
+
+		if ( wp_redirect( $redirect ) ) {
+			exit;
 		}
 	}
 
