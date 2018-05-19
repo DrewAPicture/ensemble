@@ -148,11 +148,9 @@ class List_Table extends \WP_List_Table {
 	 */
 	public function get_columns() {
 		$columns = array(
-			'name'       => __( 'Name', 'ensemble' ),
-			'venues'     => __( 'Venue(s)', 'ensemble' ),
-			'type'       => __( 'Type', 'ensemble' ),
-			'status'     => __( 'Status', 'ensemble' ),
-			'start_date' => __( 'Start Date', 'ensemble' ),
+			'name'            => __( 'Name', 'ensemble' ),
+			'units'           => __( 'Competing Unit(s)', 'ensemble' ),
+			'user_registered' => __( 'Date Created', 'ensemble' ),
 		);
 
 		/**
@@ -175,10 +173,7 @@ class List_Table extends \WP_List_Table {
 	 */
 	public function get_sortable_columns() {
 		return array(
-			'name'       => array( 'name',       false ),
-			'type'       => array( 'type',       false ),
-			'status'     => array( 'status',     false ),
-			'start_date' => array( 'start_date', false ),
+			'name'  => array( 'name', false ),
 		);
 	}
 
