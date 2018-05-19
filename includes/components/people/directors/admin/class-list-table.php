@@ -254,38 +254,50 @@ class List_Table extends \WP_List_Table {
 	 * @return string The column value.
 	 */
 	public function column_default( $director, $column_name ) {
-		$base_url = add_query_arg( 'page', 'ensemble-admin-directors', admin_url( 'admin.php' ) );
+		$base_url = add_query_arg( 'page', 'ensemble-admin-people-directors', admin_url( 'admin.php' ) );
+
+		$value = '';
 
 		switch( $column_name ){
 
 			case 'name':
 				if ( current_user_can( 'manage_options' ) ) {
 					$value = sprintf( '<a href="%1$s" aria-label="%2$s">%3$s</a>',
-						esc_url( add_query_arg( array( 'ensbl-view' => 'edit', 'director_id' => $director->id ), $base_url ) ),
-						sprintf( _x( 'Edit %s', 'ensemble' ), $director->name ),
-						$director->name
+						esc_url( add_query_arg( array( 'ensbl-view' => 'edit', 'user_id' => $director->ID ), $base_url ) ),
+						sprintf( _x( 'Edit %s', 'ensemble' ), $director->display_name ),
+						$director->display_name
 					);
 				} else {
-					$value = $director->name;
+					$value = $director->display_name;
 				}
 
 				break;
 
-			case 'start_date':
-				$value = $director->get_start_date();
+			case 'units':
+				$units = wp_get_object_terms( $director->ID, 'ensemble_unit', array( 'fields' => 'id=>name' ) );
+
+				$unit_links = array();
+
+				if ( ! empty( $units ) ) {
+					foreach ( $units as $ID => $label ) {
+						$unit_links[] = sprintf( '<a href="%1$s" aria-label="%2$s">%3$s</a>',
+							esc_url( add_query_arg( array( 'unit_id' => $ID ), $base_url ) ),
+							/* translators: Unit name */
+							sprintf( __( 'View directors for the %s unit', 'ensemble' ), $label ),
+							esc_html( $label )
+						);
+					}
+
+					if ( ! empty( $unit_links ) ) {
+						$value = implode( ', ', $unit_links );
+					}
+				}
 				break;
 
-			case 'status':
-				$value = isset( $director->status ) ? get_status_label( $director->status ) : '';
+			case 'user_registered':
+				$value = create_date( $director->user_registered, 'wp' )->format( 'F j, Y g:i a' );
 				break;
 
-			case 'type':
-				$value = isset( $director->type ) ? get_type_label( $director->type ) : '';
-				break;
-
-			default:
-				$value = $director->$column_name ?? '';
-				break;
 		}
 
 		/**
