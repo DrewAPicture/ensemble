@@ -70,6 +70,12 @@ class Setup implements Loader {
 			'show_in_rest'          => true,
 			'rest_base'             => $this->get_taxonomy_slug(),
 			'rest_controller_class' => 'WP_REST_Terms_Controller',
+			'capabilities'          => array(
+				'manage_terms'  => 'manage_classifications',
+				'edit_terms'    => 'edit_classifications',
+				'delete_terms'  => 'delete_classifications',
+				'assign_terms'  => 'assign_classifications',
+			),
 			'labels'                => array(
 				'name'                       => __( 'Classifications', 'ensemble' ),
 				'singular_name'              => _x( 'Classification', 'taxonomy general name', 'ensemble' ),
