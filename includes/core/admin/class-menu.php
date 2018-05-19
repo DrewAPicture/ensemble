@@ -30,7 +30,6 @@ class Menu implements Menu_Router {
 	 */
 	public function load() {
 		add_action( 'admin_menu', array( $this, 'register_menu'          )     );
-		add_action( 'admin_menu', array( $this, 'register_settings_menu' ), 45 );
 	}
 
 	/**
@@ -46,22 +45,6 @@ class Menu implements Menu_Router {
 			'ensemble-admin',
 			array( $this, 'route_request' ),
 			'dashicons-universal-access-alt'
-		);
-	}
-
-	/**
-	 * Registers the Settings submenu.
-	 *
-	 * @since 1.0.0
-	 */
-	public function register_settings_menu() {
-		add_submenu_page(
-			'ensemble-admin',
-			__( 'Settings', 'ensemble' ),
-			__( 'Settings', 'ensemble' ),
-			'manage_options',
-			'ensemble-admin-settings',
-			array( $this, 'route_request' )
 		);
 	}
 
