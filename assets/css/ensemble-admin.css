@@ -97,6 +97,11 @@ li.select2-search {
 	text-align: left;
 }
 
+.notice p {
+	margin: 0.5em 0 !important;
+	padding: 2px !important;
+}
+
 /** Units > Add overrides */
 .bootstrap-iso .w-15 {
 	width: 15% !important;
