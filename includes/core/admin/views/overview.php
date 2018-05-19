@@ -143,7 +143,7 @@ use function Ensemble\load_view;
 
 						<div class="card-body">
 							<p class="card-text">
-								<?php esc_html_e( 'People management is important too &emdash; this first version of Ensemble has a Unit Director component baked in from the start.', 'ensemble' ); ?>
+								<?php esc_html_e( 'People management is important too – this first version of Ensemble has a Unit Director component baked in from the start.', 'ensemble' ); ?>
 							</p>
 
 							<?php if ( $can_manage_ensemble ) : ?>
@@ -221,7 +221,7 @@ use function Ensemble\load_view;
 						<span class="dashicons dashicons-editor-expand card-img-top justify-content-center"></span>
 						<div class="card-body">
 							<p class="card-text">
-								<?php esc_html_e( 'Coming Soon: Integrations in the form of sister theme for the front-end and support for popular calendar & eCommerce solutions.', 'ensemble' ); ?>
+								<?php esc_html_e( 'Coming Soon: Integrations in the form of a sister theme for the front-end and support for popular calendar & eCommerce solutions.', 'ensemble' ); ?>
 							</p>
 							<div class="d-flex justify-content-center align-items-center">
 								<div class="btn-group">
