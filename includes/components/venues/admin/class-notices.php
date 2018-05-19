@@ -41,7 +41,7 @@ class Notices implements Loader {
 		$registry = $this->get_registry();
 
 		$registry->register_notice( 'notice-venue-added', array(
-			'message' => __( 'A venue was successfully created.', 'ensemble' ),
+			'message' => __( 'The venue was successfully created.', 'ensemble' ),
 		) );
 
 		$registry->register_notice( 'notice-venue-added-error', array(
