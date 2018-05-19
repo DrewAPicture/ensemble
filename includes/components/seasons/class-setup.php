@@ -70,12 +70,6 @@ class Setup implements Loader {
 			'show_in_rest'           => true,
 			'rest_base'              => $this->get_taxonomy_slug(),
 			'rest_controller_season' => 'WP_REST_Terms_Controller',
-			'capabilities'           => array(
-				'manage_terms'  => 'manage_seasons',
-				'edit_terms'    => 'edit_seasons',
-				'delete_terms'  => 'delete_seasons',
-				'assign_terms'  => 'assign_seasons',
-			),
 			'labels'                 => array(
 				'name'                       => __( 'Seasons', 'ensemble' ),
 				'singular_name'              => _x( 'Season', 'taxonomy general name', 'ensemble' ),
