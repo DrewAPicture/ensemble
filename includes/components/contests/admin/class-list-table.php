@@ -314,6 +314,8 @@ class List_Table extends \WP_List_Table {
 	public function column_default( $contest, $column_name ) {
 		$base_url = add_query_arg( 'page', 'ensemble-admin-contests', admin_url( 'admin.php' ) );
 
+		$value = '';
+
 		switch( $column_name ){
 
 			case 'name':
