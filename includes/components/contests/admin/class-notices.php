@@ -40,6 +40,39 @@ class Notices implements Loader {
 	 */
 	public function register_notices() {
 		$registry = $this->get_registry();
+
+		$registry->register_notice( 'notice-contest-added', array(
+			'message' => __( 'A contest was successfully created.', 'ensemble' ),
+		) );
+
+		$registry->register_notice( 'notice-contest-added-error', array(
+			'message' => __( 'There was an error adding the contest. Please try again.', 'ensemble' ),
+			'type'    => 'warning',
+		) );
+
+		$registry->register_notice( 'notice-contest-forbidden', array(
+			'message' => __( 'Sorry, you are not allowed to do that.', 'ensemble' ),
+			'type'    => 'info',
+		) );
+
+		$registry->register_notice( 'notice-contest-updated', array(
+			'message' => __( 'The contest was successfully updated.', 'ensemble' ),
+		) );
+
+		$registry->register_notice( 'notice-contest-updated-error', array(
+			'message' => __( 'The contest could not be updated. Please try again.', 'ensemble' ),
+			'type'    => 'warning',
+		) );
+
+
+		$registry->register_notice( 'notice-contest-deleted', array(
+			'message' => __( 'The contest was successfully deleted.', 'ensemble' ),
+		) );
+
+		$registry->register_notice( 'notice-contest-deleted-error', array(
+			'message' => __( 'The contest could not be deleted. Please try again.', 'ensemble' ),
+			'type'    => 'warning',
+		) );
 	}
 
 }
