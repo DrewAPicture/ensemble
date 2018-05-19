@@ -27,6 +27,10 @@ use function Ensemble\load_view;
 	 * @since 1.0.0
 	 */
 	do_action( 'ensemble_admin_notices' );
+
+	$can_manage_ensemble = current_user_can( 'manage_ensemble' );
+	$can_manage_contests = current_user_can( 'manage_contests' );
+	$can_manage_venues   = current_user_can( 'manage_venues' );
 	?>
 
 	<div class="text-center py-5">
@@ -37,24 +41,29 @@ use function Ensemble\load_view;
 					<p class="lead text-muted">
 						<?php esc_html_e( 'Ensemble is a game-changing solution for running a color guard or other alternative sports circuit using WordPress. Finally, all of the data you need in one place, and it&#8217;s all tied together: venues, contests, seasons, units, unit directors, and more.', 'ensemble' ); ?>
  					</p>
-					<a href="<?php echo esc_url( add_query_arg( 'page', 'ensemble-admin-venues', admin_url( 'admin.php' ) ) ); ?>" class="btn btn-info mr-2 mt-2 mb-2">
-						<?php
-						if ( 0 === ( new Venues\Database )->count() ) :
-							esc_html_e( 'Create Your First Venue', 'ensemble' );
-						else :
-							esc_html_e( 'Manage Venues', 'ensemble' );
-						endif;
-						?>
-					</a>
-					<a href="<?php echo esc_url( add_query_arg( 'page', 'ensemble-admin-venues', admin_url( 'admin.php' ) ) ); ?>" class="btn btn-secondary m-2">
-						<?php
-						if ( 0 === ( new Contests\Database )->count() ) :
-							esc_html_e( 'Create Your First Contest', 'ensemble' );
-						else :
-							esc_html_e( 'Manage Contests', 'ensemble' );
-						endif;
-						?>
-					</a>
+					<?php if ( $can_manage_venues ) : ?>
+						<a href="<?php echo esc_url( add_query_arg( 'page', 'ensemble-admin-venues', admin_url( 'admin.php' ) ) ); ?>" class="btn btn-info mr-2 mt-2 mb-2">
+							<?php
+							if ( 0 === ( new Venues\Database )->count() ) :
+								esc_html_e( 'Create Your First Venue', 'ensemble' );
+							else :
+								esc_html_e( 'Manage Venues', 'ensemble' );
+							endif;
+							?>
+						</a>
+					<?php endif; // manage_venues ?>
+
+					<?php if ( $can_manage_contests ) : ?>
+						<a href="<?php echo esc_url( add_query_arg( 'page', 'ensemble-admin-venues', admin_url( 'admin.php' ) ) ); ?>" class="btn btn-secondary m-2">
+							<?php
+							if ( 0 === ( new Contests\Database )->count() ) :
+								esc_html_e( 'Create Your First Contest', 'ensemble' );
+							else :
+								esc_html_e( 'Manage Contests', 'ensemble' );
+							endif;
+							?>
+						</a>
+					<?php endif; // manage_contests ?>
 				</div>
 			</div>
 		</div>
@@ -65,100 +74,145 @@ use function Ensemble\load_view;
 				<div class="col-md-4 p-3">
 					<div class="card box-shadow">
 						<?php $contests_url = add_query_arg( 'page', 'ensemble-admin-contests', admin_url( 'admin.php' ) ); ?>
-						<a href="<?php echo esc_url( $contests_url ); ?>">
+
+						<?php if ( $can_manage_contests ) : ?>
+							<a href="<?php echo esc_url( $contests_url ); ?>">
+								<span class="dashicons dashicons-awards card-img-top justify-content-center"></span>
+							</a>
+						<?php else : ?>
 							<span class="dashicons dashicons-awards card-img-top justify-content-center"></span>
-						</a>
+						<?php endif; // manage_contests ?>
+
 						<div class="card-body">
 							<p class="card-text">
 								<?php esc_html_e( 'Contests are central to how Ensemble works. They&#8217;re tied to venues and seasons, which are in-turn tied to everything else.', 'ensemble' ); ?>
 							</p>
-							<div class="d-flex justify-content-center align-items-center">
-								<div class="btn-group">
-									<a href="<?php echo esc_url( $contests_url ); ?>" role="button" class="btn btn-sm btn-outline-info">
-										<?php esc_html_e( 'Contests', 'ensemble' ); ?>
-									</a>
+
+							<?php if ( $can_manage_contests ) : ?>
+								<div class="d-flex justify-content-center align-items-center">
+									<div class="btn-group">
+										<a href="<?php echo esc_url( $contests_url ); ?>" role="button" class="btn btn-sm btn-outline-info">
+											<?php esc_html_e( 'Contests', 'ensemble' ); ?>
+										</a>
+									</div>
 								</div>
-							</div>
+							<?php endif; // manage_contests ?>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-4 p-3">
 					<div class="card box-shadow">
 						<?php $venues_url = add_query_arg( 'page', 'ensemble-admin-venues', admin_url( 'admin.php' ) ); ?>
-						<a href="<?php echo esc_url( $venues_url ); ?>" aria-label="<?php esc_attr_e( 'Manage Venues', 'ensemble' ); ?>">
+
+						<?php if ( $can_manage_venues ) : ?>
+							<a href="<?php echo esc_url( $venues_url ); ?>" aria-label="<?php esc_attr_e( 'Manage Venues', 'ensemble' ); ?>">
+								<span class="dashicons dashicons-location-alt card-img-top justify-content-center"></span>
+							</a>
+						<?php else : ?>
 							<span class="dashicons dashicons-location-alt card-img-top justify-content-center"></span>
-						</a>
+						<?php endif; // manage_venues ?>
+
 						<div class="card-body">
 							<p class="card-text">
 								<?php esc_html_e( 'Being able to manage canonical venue data is what ultiamtely allows for so much work to be done once instead of once every season.', 'ensemble' ); ?>
 							</p>
-							<div class="d-flex justify-content-center align-items-center">
-								<div class="btn-group">
-									<a href="<?php echo esc_url( $venues_url ); ?>" role="button" class="btn btn-sm btn-outline-info">
-										<?php esc_html_e( 'Venues', 'ensemble' ); ?>
-									</a>
+
+							<?php if ( $can_manage_venues ) : ?>
+								<div class="d-flex justify-content-center align-items-center">
+									<div class="btn-group">
+										<a href="<?php echo esc_url( $venues_url ); ?>" role="button" class="btn btn-sm btn-outline-info">
+											<?php esc_html_e( 'Venues', 'ensemble' ); ?>
+										</a>
+									</div>
 								</div>
-							</div>
+							<?php endif; // manage_venues ?>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-4 p-3">
 					<div class="card box-shadow">
 						<?php $director_url = add_query_arg( 'page', 'ensemble-admin-people-directors', admin_url( 'admin.php' ) ); ?>
-						<a href="<?php echo esc_url( $director_url ); ?>" aria-label="<?php esc_attr_e( 'Manage Unit Directors', 'ensemble' ); ?>">
+
+						<?php if ( $can_manage_ensemble ) : ?>
+							<a href="<?php echo esc_url( $director_url ); ?>" aria-label="<?php esc_attr_e( 'Manage Unit Directors', 'ensemble' ); ?>">
+								<span class="dashicons dashicons-admin-users card-img-top justify-content-center"></span>
+							</a>
+						<?php else : ?>
 							<span class="dashicons dashicons-admin-users card-img-top justify-content-center"></span>
-						</a>
+						<?php endif; // manage_ensemble ?>
+
 						<div class="card-body">
 							<p class="card-text">
 								<?php esc_html_e( 'People management is important too &emdash; this first version of Ensemble has a Unit Director component baked in from the start.', 'ensemble' ); ?>
 							</p>
-							<div class="d-flex justify-content-center align-items-center">
-								<div class="btn-group">
-									<a href="<?php echo esc_url( $director_url ); ?>" role="button" class="btn btn-sm btn-outline-info">
-										<?php esc_html_e( 'Unit Directors', 'ensemble' ); ?>
-									</a>
+
+							<?php if ( $can_manage_ensemble ) : ?>
+								<div class="d-flex justify-content-center align-items-center">
+									<div class="btn-group">
+										<a href="<?php echo esc_url( $director_url ); ?>" role="button" class="btn btn-sm btn-outline-info">
+											<?php esc_html_e( 'Unit Directors', 'ensemble' ); ?>
+										</a>
+									</div>
 								</div>
-							</div>
+							<?php endif; // manage_ensemble ?>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-4 p-3">
 					<div class="card box-shadow">
 						<?php $season_url = add_query_arg( 'taxonomy', 'ensemble_season', admin_url( 'edit-tags.php' ) ); ?>
-						<a href="<?php echo esc_url( $season_url ); ?>" aria-label="<?php esc_attr_e( 'Manage Unit Directors', 'ensemble' ); ?>">
+
+						<?php if ( $can_manage_ensemble ) : ?>
+							<a href="<?php echo esc_url( $season_url ); ?>" aria-label="<?php esc_attr_e( 'Manage Unit Directors', 'ensemble' ); ?>">
+								<span class="dashicons dashicons-calendar-alt card-img-top justify-content-center"></span>
+							</a>
+						<?php else : ?>
 							<span class="dashicons dashicons-calendar-alt card-img-top justify-content-center"></span>
-						</a>
+						<?php endif; // manage_ensemble ?>
+
 						<div class="card-body">
 							<p class="card-text">
 								<?php esc_html_e( 'Season creation with start and end dates means no more confusion about which contests are current and which have already passed.', 'ensemble' ); ?>
 							</p>
-							<div class="d-flex justify-content-center align-items-center">
-								<div class="btn-group">
-									<a href="<?php echo esc_url( $season_url ); ?>" role="button" class="btn btn-sm btn-outline-info">
-										<?php esc_html_e( 'Seasons', 'ensemble' ); ?>
-									</a>
+
+							<?php if ( $can_manage_ensemble ) : ?>
+								<div class="d-flex justify-content-center align-items-center">
+									<div class="btn-group">
+										<a href="<?php echo esc_url( $season_url ); ?>" role="button" class="btn btn-sm btn-outline-info">
+											<?php esc_html_e( 'Seasons', 'ensemble' ); ?>
+										</a>
+									</div>
 								</div>
-							</div>
+							<?php endif; // manage_ensemble ?>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-4 p-3">
 					<div class="card box-shadow">
 						<?php $units_url = add_query_arg( 'taxonomy', 'ensemble_unit', admin_url( 'edit-tags.php' ) ); ?>
-						<a href="<?php echo esc_url( $units_url ); ?>" aria-label="<?php esc_attr_e( 'Manage Unit Directors', 'ensemble' ); ?>">
+
+						<?php if ( $can_manage_ensemble ) : ?>
+							<a href="<?php echo esc_url( $units_url ); ?>" aria-label="<?php esc_attr_e( 'Manage Unit Directors', 'ensemble' ); ?>">
+								<span class="dashicons dashicons-groups card-img-top justify-content-center"></span>
+							</a>
+						<?php else : ?>
 							<span class="dashicons dashicons-groups card-img-top justify-content-center"></span>
-						</a>
+						<?php endif; // manage_ensemble ?>
+
 						<div class="card-body">
 							<p class="card-text">
 								<?php esc_html_e( 'Competing units are the heart and soul of any sports activity, and Ensemble has designed them to be super easy to tie in to everything.', 'ensemble' ); ?>
 							</p>
-							<div class="d-flex justify-content-center align-items-center">
-								<div class="btn-group">
-									<a href="<?php echo esc_url( $units_url ); ?>" role="button" class="btn btn-sm btn-outline-info">
-										<?php esc_html_e( 'Competing Units', 'ensemble' ); ?>
-									</a>
+
+							<?php if ( $can_manage_ensemble ) : ?>
+								<div class="d-flex justify-content-center align-items-center">
+									<div class="btn-group">
+										<a href="<?php echo esc_url( $units_url ); ?>" role="button" class="btn btn-sm btn-outline-info">
+											<?php esc_html_e( 'Competing Units', 'ensemble' ); ?>
+										</a>
+									</div>
 								</div>
-							</div>
+							<?php endif; // manage_ensemble ?>
 						</div>
 					</div>
 				</div>

@@ -41,7 +41,7 @@ class Menu implements Menu_Router {
 			'ensemble-admin',
 			__( 'Venues Overview', 'ensemble' ),
 			__( 'Venues', 'ensemble' ),
-			'manage_options',
+			'manage_venues',
 			'ensemble-admin-venues',
 			array( $this, 'route_request' )
 		);

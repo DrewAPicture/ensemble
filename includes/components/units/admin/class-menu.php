@@ -40,7 +40,7 @@ class Menu implements Loader {
 			'ensemble-admin',
 			__( 'Units', 'ensemble' ),
 			__( 'Units', 'ensemble' ),
-			'manage_options',
+			'manage_ensemble',
 			'edit-tags.php?taxonomy=ensemble_unit'
 		);
 	}

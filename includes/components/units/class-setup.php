@@ -59,7 +59,7 @@ class Setup implements Loader {
 	 */
 	public function register_taxonomy() {
 		// Competing Units taxonomy.
-		register_taxonomy( 'ensemble_unit', array(), array(
+		register_taxonomy( $this->get_taxonomy_slug(), array(), array(
 			'hierarchical'          => false,
 			'public'                => true,
 			'show_in_nav_menus'     => true,

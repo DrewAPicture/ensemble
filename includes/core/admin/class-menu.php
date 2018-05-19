@@ -29,7 +29,7 @@ class Menu implements Menu_Router {
 	 * @since 1.0.0
 	 */
 	public function load() {
-		add_action( 'admin_menu', array( $this, 'register_menu'          )     );
+		add_action( 'admin_menu', array( $this, 'register_menu' ) );
 	}
 
 	/**
@@ -41,7 +41,7 @@ class Menu implements Menu_Router {
 		add_menu_page(
 			__( 'Ensemble', 'ensemble' ),
 			__( 'Ensemble', 'ensemble' ),
-			'manage_options',
+			'manage_ensemble',
 			'ensemble-admin',
 			array( $this, 'route_request' ),
 			'dashicons-universal-access-alt'

@@ -41,7 +41,7 @@ class Menu implements Menu_Router {
 			'ensemble-admin',
 			__( 'Contests Overview', 'ensemble' ),
 			__( 'Contests', 'ensemble' ),
-			'manage_options',
+			'manage_contests',
 			'ensemble-admin-contests',
 			array( $this, 'route_request' )
 		);
