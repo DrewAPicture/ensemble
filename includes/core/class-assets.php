@@ -45,19 +45,17 @@ class Assets implements Interfaces\Loader {
 	 * @param string $hook_suffix The current admin page.
 	 */
 	public function admin_assets( $hook_suffix ) {
-		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '.min' : '';
-
 		// Stylesheets.
 		wp_register_style( 'ensbl-jquery-ui-css', ENSEMBLE_PLUGIN_URL . '/assets/css/vendor/jquery-ui-fresh.min.css', array(), $this->get_asset_version( '/assets/css/vendor/jquery-ui-fresh.min.css' ) );
 		wp_register_style( 'ensbl-selectWoo-css', ENSEMBLE_PLUGIN_URL . '/assets/css/vendor/selectWoo.min.css', array(), $this->get_asset_version( '/assets/css/vendor/selectWoo.min.css' ) );
 		wp_register_style( 'ensbl-select2-bootstrap-css', ENSEMBLE_PLUGIN_URL . '/assets/css/vendor/select2-bootstrap.min.css', array(), $this->get_asset_version( '/assets/css/vendor/select2-bootstrap.min.css' ) );
-		wp_register_style( 'ensbl-bootstrap-css', ENSEMBLE_PLUGIN_URL . '/assets/css/vendor/bootstrap' . $suffix . '.css', array( 'ensbl-select2-bootstrap-css' ), $this->get_asset_version( '/assets/css/vendor/bootstrap' . $suffix . '.css' ) );
+		wp_register_style( 'ensbl-bootstrap-css', ENSEMBLE_PLUGIN_URL . '/assets/css/vendor/bootstrap.min.css', array( 'ensbl-select2-bootstrap-css' ), $this->get_asset_version( '/assets/css/vendor/bootstrap.min.css' ) );
 		wp_register_style( 'ensbl-admin-css', ENSEMBLE_PLUGIN_URL . '/assets/css/ensemble-admin.css', array( 'ensbl-bootstrap-css', 'ensbl-selectWoo-css', 'ensbl-jquery-ui-css' ), $this->get_asset_version( '/assets/css/ensemble-admin.css' ) );
 
 		// Scripts.
-		wp_register_script( 'ensbl-bootstrap', ENSEMBLE_PLUGIN_URL . '/assets/js/vendor/bootstrap' . $suffix . '.js', array( 'jquery' ), $this->get_asset_version( '/assets/js/vendor/bootstrap' . $suffix . '.js' ) );
-		wp_register_script( 'ensbl-parsley', ENSEMBLE_PLUGIN_URL . '/assets/js/vendor/parsley.js', array( 'jquery', 'ensbl-bootstrap' ), $this->get_asset_version( '/assets/js/vendor/parsley.js' ) );
-		wp_register_script( 'ensbl-selectWoo', ENSEMBLE_PLUGIN_URL . '/assets/js/vendor/selectWoo.js', array( 'jquery' ), $this->get_asset_version( '/assets/js/vendor/selectWoo.js' ) );
+		wp_register_script( 'ensbl-bootstrap', ENSEMBLE_PLUGIN_URL . '/assets/js/vendor/bootstrap.min.js', array( 'jquery' ), $this->get_asset_version( '/assets/js/vendor/bootstrap.min.js' ) );
+		wp_register_script( 'ensbl-parsley', ENSEMBLE_PLUGIN_URL . '/assets/js/vendor/parsley.min.js', array( 'jquery', 'ensbl-bootstrap' ), $this->get_asset_version( '/assets/js/vendor/parsley.min.js' ) );
+		wp_register_script( 'ensbl-selectWoo', ENSEMBLE_PLUGIN_URL . '/assets/js/vendor/selectWoo.min.js', array( 'jquery' ), $this->get_asset_version( '/assets/js/vendor/selectWoo.min.js' ) );
 		wp_register_script( 'ensbl-admin', ENSEMBLE_PLUGIN_URL . '/assets/js/ensemble-admin.js', array( 'ensbl-parsley', 'ensbl-selectWoo', 'jquery-ui-datepicker' ), $this->get_asset_version( '/assets/js/ensemble-admin.js' ) );
 
 		$special_screens = array( 'edit-tags.php', 'term.php' );
