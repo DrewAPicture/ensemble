@@ -186,7 +186,7 @@ class Actions implements Loader {
 	 * @return array Registered venue views.
 	 */
 	public function get_views() {
-		return array( 'overview', 'add', 'add-wizard', 'edit', 'delete' );
+		return array( 'overview', 'add', 'edit', 'delete' );
 	}
 
 	/**
