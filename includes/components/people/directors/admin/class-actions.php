@@ -56,7 +56,8 @@ class Actions implements Loader {
 		$nonce    = $_REQUEST['ensemble-add-director-nonce'] ?? false;
 
 		if ( ! wp_verify_nonce( $nonce, 'ensemble-add-director-nonce' ) ) {
-			// TODO add notice handler for the different cases.
+			$redirect = add_query_arg( 'notice-director-forbidden', 1, $redirect );
+
 			if ( wp_redirect( $redirect ) ) {
 				exit;
 			}
@@ -74,12 +75,16 @@ class Actions implements Loader {
 			'role'         => 'ensemble_director',
 		) );
 
-		if ( ! is_wp_error( $user_id ) && ! empty( $units ) ) {
-			// Assign the units to this new director.
-			wp_set_object_terms( $user_id, $units, ( new Units )->get_taxonomy_slug() );
+		if ( ! is_wp_error( $user_id ) ) {
+			if ( ! empty( $units ) ) {
+				// Assign the units to this new director.
+				wp_set_object_terms( $user_id, $units, ( new Units )->get_taxonomy_slug() );
+			}
+			$redirect = add_query_arg( 'notice-director-added', 1, $redirect );
+		} else {
+			$redirect = add_query_arg( 'notice-director-added-error', 1, $redirect );
 		}
 
-		// TODO add notice handler for the different cases.
 		if ( wp_redirect( $redirect ) ) {
 			exit;
 		}
@@ -109,6 +114,8 @@ class Actions implements Loader {
 		$nonce = $_REQUEST['ensemble-update-director-nonce'] ?? false;
 
 		if ( ! wp_verify_nonce( $nonce, 'ensemble-update-director-nonce' ) || 0 === $user_id ) {
+			$redirect = add_query_arg( 'notice-director-forbidden', 1, $redirect );
+
 			if ( wp_redirect( $redirect ) ) {
 				exit;
 			}
@@ -121,7 +128,6 @@ class Actions implements Loader {
 
 		$current_units  = wp_get_object_terms( $user_id, $units_tax_slug, array( 'fields' => 'ids' ) );
 		$incoming_units = array_map( 'absint', $_REQUEST['director-units'] ?? array() );
-
 
 		$user_id = wp_update_user( array(
 			'ID'           => $user_id,
@@ -139,9 +145,12 @@ class Actions implements Loader {
 				wp_remove_object_terms( $user_id, $current_units, $units_tax_slug );
 
 			}
+
+			$redirect = add_query_arg( 'notice-director-updated', 1, $redirect );
+		} else {
+			$redirect = add_query_arg( 'notice-director-updated-error', 1, $redirect );
 		}
 
-		// TODO add notice handler for the different cases.
 		if ( wp_redirect( $redirect ) ) {
 			exit;
 		}
@@ -167,7 +176,8 @@ class Actions implements Loader {
 		$redirect = add_query_arg( 'page', 'ensemble-admin-people-directors', admin_url( 'admin.php' ) );
 
 		if ( ! wp_verify_nonce( $nonce, 'ensemble-delete-director-nonce' ) || 'no' === $answer || 0 === $user_id ) {
-			// TODO add notice handler for the different cases.
+			$redirect = add_query_arg( 'notice-director-forbidden', 1, $redirect );
+
 			if ( wp_redirect( $redirect ) ) {
 				exit;
 			}
@@ -178,9 +188,16 @@ class Actions implements Loader {
 
 			// If this is multisite, the user is only removed from the current site.
 			$deleted = \wp_delete_user( $user_id );
+
+			if ( $deleted ) {
+				$redirect = add_query_arg( 'notice-director-deleted', 1, $redirect );
+			} else {
+				$redirect = add_query_arg( 'notice-director-deleted-error', 1, $redirect );
+			}
+		} else {
+			$redirect = add_query_arg( 'notice-director-deleted-no-change', 1, $redirect );
 		}
 
-		// TODO add notice handler for the different cases.
 		if ( wp_redirect( $redirect ) ) {
 			exit;
 		}
