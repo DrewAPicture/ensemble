@@ -156,6 +156,19 @@ function get_wp_timezone() {
 }
 
 /**
+ * Retrieves the GMT offset based on the WordPress timezone.
+ *
+ * @since 1.0.0
+ *
+ * @see get_wp_timezone()
+ *
+ * @return int GMT offset in seconds, as derived from get_wp_timezone().
+ */
+function get_wp_offset() {
+	return ( new \DateTime( null, new \DateTimeZone( get_wp_timezone() ) ) )->getOffset();
+}
+
+/**
  * Retrieves a DateTime object, optionally with the WP timezone and offset applied.
  *
  * @since 1.0.0
