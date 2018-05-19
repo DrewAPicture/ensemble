@@ -102,6 +102,10 @@ li.select2-search {
 	padding: 2px !important;
 }
 
+hr.wp-header-end {
+	margin: 0 !important;
+}
+
 /** Units > Add overrides */
 .bootstrap-iso .w-15 {
 	width: 15% !important;
