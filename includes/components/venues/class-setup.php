@@ -33,6 +33,7 @@ class Setup implements Loader {
 
 		if ( is_admin() ) {
 			load( new Admin\Menu );
+			load( new Admin\Notices );
 			load( new Admin\Actions );
 		}
 	}
