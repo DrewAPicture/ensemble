@@ -42,7 +42,7 @@ class Notices implements Loader {
 		$registry = $this->get_registry();
 
 		$registry->register_notice( 'notice-contest-added', array(
-			'message' => __( 'A contest was successfully created.', 'ensemble' ),
+			'message' => __( 'The contest was successfully created.', 'ensemble' ),
 		) );
 
 		$registry->register_notice( 'notice-contest-added-error', array(
@@ -72,6 +72,10 @@ class Notices implements Loader {
 		$registry->register_notice( 'notice-contest-deleted-error', array(
 			'message' => __( 'The contest could not be deleted. Please try again.', 'ensemble' ),
 			'type'    => 'warning',
+		) );
+
+		$registry->register_notice( 'notice-contest-deleted-no-change', array(
+			'message' => __( 'No changes were made to the contest.', 'ensemble' ),
 		) );
 	}
 
