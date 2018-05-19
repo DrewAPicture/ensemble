@@ -56,6 +56,7 @@ class Users implements Loader {
 	public function add_caps() {
 		$wp_roles = wp_roles();
 
+		$wp_roles->add_cap( 'administrator', 'manage_ensemble' );
 		$wp_roles->add_cap( 'administrator', 'manage_contests' );
 		$wp_roles->add_cap( 'administrator', 'manage_venues' );
 	}
