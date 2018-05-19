@@ -28,7 +28,7 @@ use function Ensemble\load_view;
 do_action( 'ensemble_admin_notices' );
 ?>
 
-<div class="bootstrap-iso container" id="myWizard">
+<div class="bootstrap-iso">
 
 	<hr>
 
@@ -38,7 +38,7 @@ do_action( 'ensemble_admin_notices' );
 		</div>
 	</div>
 
-	<div class="container">
+	<div class="navbar pl-0 ensemble-wizard">
 		<ul class="nav nav-pills" role="tablist">
 			<li class="nav-item btn btn-light mr-2">
 				<a href="#step1" data-toggle="tab" role="tab" data-step="1">1. Add a Venue</a>
