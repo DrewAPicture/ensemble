@@ -34,7 +34,7 @@ do_action( 'ensemble_admin_notices' );
 			</div>
 		<?php endif; ?>
 
-		<form method="post">
+		<form method="post" data-parsley-validate>
 			<div class="card mb-3 md-md-5 pt-4">
 				<div class="form-group">
 					<?php
@@ -43,6 +43,10 @@ do_action( 'ensemble_admin_notices' );
 						'id'    => 'venue-name',
 						'label' => __( 'Name', 'ensemble' ),
 						'class' => array( 'form-control' ),
+						'data'  => array(
+							'parsley-required'         => true,
+							'parsley-required-message' => __( 'A venue name is required.', 'ensemble' ),
+						),
 					) );
 					?>
 				</div>
@@ -97,6 +101,10 @@ do_action( 'ensemble_admin_notices' );
 						'id'    => 'venue-address',
 						'label' => __( 'Address', 'ensemble' ),
 						'class' => array( 'form-control', 'form-textarea' ),
+						'data'  => array(
+							'parsley-required'         => true,
+							'parsley-required-message' => __( 'A venue address is required.', 'ensemble' ),
+						),
 					) );
 					?>
 				</div>

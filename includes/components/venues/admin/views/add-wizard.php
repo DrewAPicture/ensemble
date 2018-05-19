@@ -21,7 +21,7 @@ use function Ensemble\{html};
 			<?php esc_html_e( 'Getting started is super simple, just choose a name, enter an address, and assign a venue type.', 'ensemble' ); ?>
 		</div>
 
-		<form method="post">
+		<form method="post" data-parsley-validate>
 			<div class="card mb-3 md-md-5 pt-4">
 				<div class="form-group">
 					<?php
@@ -30,6 +30,10 @@ use function Ensemble\{html};
 						'id'    => 'venue-name',
 						'label' => __( 'Name', 'ensemble' ),
 						'class' => array( 'form-control' ),
+						'data'  => array(
+							'parsley-required'         => true,
+							'parsley-required-message' => __( 'A venue name is required.', 'ensemble' ),
+						),
 					) );
 					?>
 				</div>
@@ -84,6 +88,10 @@ use function Ensemble\{html};
 						'id'    => 'venue-address',
 						'label' => __( 'Address', 'ensemble' ),
 						'class' => array( 'form-control', 'form-textarea' ),
+						'data'  => array(
+							'parsley-required'         => true,
+							'parsley-required-message' => __( 'A venue address is required.', 'ensemble' ),
+						),
 					) );
 					?>
 				</div>
