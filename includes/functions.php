@@ -194,14 +194,14 @@ function create_date( $date_string = 'now', $timezone = 'UTC', $wp_to_utc = fals
 
 	// If converting from WP time to UTC, subtract the WP offset.
 	if ( false !== $wp_to_utc && 'UTC' === $timezone ) {
-		$offset   = get_option( 'gmt_offset', 0 ) * HOUR_IN_SECONDS;
-		$interval = \DateInterval::createFromDateString( "-{$offset} seconds" );
+		$offset   = absint( get_wp_offset() );
+		$interval = \DateInterval::createFromDateString( "{$offset} seconds" );
 
 		$datetime->add( $interval );
 
 	// Otherwise, if $datetime was instantiated as WP time, apply the offset so it matches.
 	} elseif ( true === $wp_time ) {
-		$offset   = $datetime->getOffset();
+		$offset   = get_wp_offset();
 		$interval = \DateInterval::createFromDateString( "{$offset} seconds" );
 
 		$datetime->add( $interval );
