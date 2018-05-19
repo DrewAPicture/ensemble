@@ -106,6 +106,16 @@ hr.wp-header-end {
 	margin: 0 !important;
 }
 
+.ensemble-wizard a,
+.ensemble-wizard a:hover,
+.ensemble-wizard a:active {
+	color: #efefef;
+}
+
+.ensemble-wizard a:hover {
+	text-decoration: none;
+}
+
 /** Units > Add overrides */
 .bootstrap-iso .w-15 {
 	width: 15% !important;
