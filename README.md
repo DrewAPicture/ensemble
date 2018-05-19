@@ -58,7 +58,7 @@ It's possible your site doesn't meet the minimum requirements. Check the Plugins
 
 **Where can I request a feature or report a bug?**
 
-Issues & Pull Requests are [open](https://github.com/DrewAPicture/ensemble/issues)!
+Issues & pull requests are open!
 
 ## Screenshots
 
@@ -74,7 +74,3 @@ Issues & Pull Requests are [open](https://github.com/DrewAPicture/ensemble/issue
 ### 1.0.0
 
 * First release.
-
-#### Contribute to Ensemble
-
-Pull requests are welcome!
