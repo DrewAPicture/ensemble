@@ -116,6 +116,25 @@ hr.wp-header-end {
 	text-decoration: none;
 }
 
+.ensemble-welcome .dashicons {
+	font-size: 200px;
+	height: 200px;
+	margin-top: 15px;
+}
+
+.ensemble-welcome p {
+	font-size: 16px;
+}
+
+.ensemble-welcome a {
+	color: #444;
+}
+
+.ensemble-welcome a:hover,
+.ensemble-welcome a:active {
+	color: ##17a2b8;
+}
+
 /** Units > Add overrides */
 .bootstrap-iso .w-15 {
 	width: 15% !important;
