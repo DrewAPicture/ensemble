@@ -29,6 +29,7 @@ class Setup implements Loader {
 	public function load() {
 		if ( is_admin() ) {
 			load( new Admin\Menu );
+			load( new Admin\Notices );
 			load( new Admin\Actions );
 		}
 	}
