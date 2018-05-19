@@ -54,7 +54,7 @@ Integrations will be coming soon in the form of sister theme for the front-end a
 * Q: I activated the plugin, but I don't see a menu anywhere, what gives?
 * A: It's possible your site doesn't meet the minimum requirements. Check the Plugins screen to see if any partial activation warnings are listed.
 
-* Q: Where can I request a feature or report a but?
+* Q: Where can I request a feature or report a bug?
 * A: You\'re welcome to submit an issue on the [Github repository](https://github.com/DrewAPicture/ensemble/issues).
 
 ## Screenshots
