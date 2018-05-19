@@ -48,14 +48,17 @@ Integrations will be coming soon in the form of sister theme for the front-end a
 
 ## Frequently Asked Questions
 
-* Q: Where is the front end of this thing?
-* A: A sister theme is currently in development, which will bring Ensemble to the front end soon.
+**Where is the front end of this thing?**
 
-* Q: I activated the plugin, but I don't see a menu anywhere, what gives?
-* A: It's possible your site doesn't meet the minimum requirements. Check the Plugins screen to see if any partial activation warnings are listed.
+A sister theme is currently in development, which will bring Ensemble to the front end soon.
 
-* Q: Where can I request a feature or report a bug?
-* A: You\'re welcome to submit an issue on the [Github repository](https://github.com/DrewAPicture/ensemble/issues).
+**I activated the plugin, but I don't see a menu anywhere, what gives?**
+
+It's possible your site doesn't meet the minimum requirements. Check the Plugins screen to see if any partial activation warnings are listed.
+
+**Where can I request a feature or report a bug?**
+
+Issues & Pull Requests are [open](https://github.com/DrewAPicture/ensemble/issues)!
 
 ## Screenshots
 
