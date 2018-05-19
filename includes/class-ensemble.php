@@ -9,7 +9,7 @@
  */
 
 use Ensemble\{Admin, Core, Util};
-use function Ensemble\{load};
+use function Ensemble\{load, print_notice};
 
 /**
  * Sets up the Ensemble plugin.
@@ -134,6 +134,8 @@ final class Ensemble {
 			load( new Util\Install );
 		}
 
+		add_action( 'admin_notices', array( $this, 'show_notices' ) );
+
 		if ( is_admin() ) {
 			load( new Core\Admin\Menu );
 			load( new Core\Admin\Settings );
@@ -143,6 +145,19 @@ final class Ensemble {
 		load( new Core\Components );
 		load( new Core\Requests );
 		load( new Core\Users );
+	}
+
+	/**
+	 * Outputs general dashboard notices.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string The notice to show.
+	 */
+	public function show_notices() {
+		foreach ( $_REQUEST as $key => $value ) {
+			print_notice( sanitize_key( $key ) );
+		}
 	}
 
 	/**
