@@ -39,22 +39,6 @@ class List_Table extends \WP_List_Table {
 	public $total_count;
 
 	/**
-	 * Number of items with the 'published' status found.
-	 *
-	 * @since 1.0.0
-	 * @var   int
-	 */
-	public $published_count;
-
-	/**
-	 *  Number of items with the 'draft' status found.
-	 *
-	 * @since 1.0.0
-	 * @var   int
-	 */
-	public $draft_count;
-
-	/**
 	 * Total item count for the current query.
 	 *
 	 * Used for the pagination controls with non-status filtered results.
