@@ -114,30 +114,14 @@ class List_Table extends \WP_List_Table {
 	 * @return array All available views.
 	 */
 	public function get_views() {
-		$base = add_query_arg( 'page', 'ensemble-admin-directors', admin_url( 'admin.php' ) );
+		$base = add_query_arg( 'page', 'ensemble-admin-people-directors', admin_url( 'admin.php' ) );
 
-		$current         = isset( $_GET['status'] ) ? $_GET['status'] : '';
-		$total_count     = '&nbsp;<span class="count">(' . $this->total_count     . ')</span>';
-		$published_count = '&nbsp;<span class="count">(' . $this->published_count . ')</span>';
-		$draft_count     = '&nbsp;<span class="count">(' . $this->draft_count     . ')</span>';
+		$total_count = '&nbsp;<span class="count">(' . $this->total_count . ')</span>';
 
 		$views = array(
-			'all' => sprintf( '<a href="%1$s"%2$s>%3$s</a>',
+			'all' => sprintf( '<a href="%1$s" class="current">%2$s</a>',
 				esc_url( remove_query_arg( 'status', $base ) ),
-				$current === 'all' || $current == '' ? ' class="current"' : '',
-				esc_html__( 'All', 'ensemble') . $total_count
-			),
-
-			'published' => sprintf( '<a href="%1$s"%2$s>%3$s</a>',
-				esc_url( add_query_arg( 'status', 'published', $base ) ),
-				$current === 'published' ? ' class="current"' : '',
-				get_status_label( 'published' ) . $published_count
-			),
-
-			'draft' => sprintf( '<a href="%1$s"%2$s>%3$s</a>',
-				esc_url( add_query_arg( 'status', 'draft', $base ) ),
-				$current === 'draft' ? ' class="current"' : '',
-				get_status_label( 'draft' ) . $draft_count
+				esc_html_x( 'All', 'directors', 'ensemble') . $total_count
 			),
 		);
 
