@@ -16,6 +16,9 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Utility class to check requirements before bootstrapping Ensemble.
  *
+ * This class incorporates work originating from the EDD_Requirements_Check class, which is
+ * bundled with the Easy Digital Downloads plugin, (c) 2018, Sandhills Development, LLC.
+ *
  * @since 1.0.0
  */
 final class Ensemble_Check_Requirements {
