@@ -26,7 +26,28 @@ class Users implements Loader {
 	 * @since 1.0.0
 	 */
 	public function load() {
+		add_filter( 'map_meta_cap', array( $this, 'map_meta_caps' ), 10, 4 );
+	}
 
+	/**
+	 * Maps meta capabilities to primitive ones.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array  $caps    The user's actual capabilities.
+	 * @param string $cap     Capability name.
+	 * @param int    $user_id The user ID.
+	 * @param array  $args    Adds the context to the cap. Typically the object ID.
+	 * @return array (Maybe) modified capabilities.
+	 */
+	public function map_meta_caps( $caps, $cap, $user_id, $args ) {
+		switch( $cap ) {
+			case 'manage_ensemble':
+				$caps[] = 'manage_options';
+				break;
+		}
+
+		return $caps;
 	}
 
 	/**
