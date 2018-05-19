@@ -1,6 +1,7 @@
 === Ensemble ===
 Contributors: DrewAPicture
 Tags: color guard, sports, teams, percussion, circuit
+Donate link: https://wordpressfoundation.org/donate/
 Requires at least: 4.9.6
 Tested up to: 5.0
 Requires PHP: 7.0
@@ -61,3 +62,7 @@ A: You\'re welcome to submit an issue on the [Github repository](https://github.
 = 1.0.0 =
 
 * First release.
+
+== Upgrade Notice ==
+
+* Nothing to see here (yet!)
