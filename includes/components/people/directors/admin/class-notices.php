@@ -41,7 +41,7 @@ class Notices implements Loader {
 		$registry = $this->get_registry();
 
 		$registry->register_notice( 'notice-director-added', array(
-			'message' => __( 'The unit director was successfully created.', 'ensemble' ),
+			'message' => __( 'A unit director was successfully created.', 'ensemble' ),
 		) );
 
 		$registry->register_notice( 'notice-director-added-error', array(
