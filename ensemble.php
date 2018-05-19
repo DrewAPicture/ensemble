@@ -56,7 +56,7 @@ final class Ensemble_Check_Requirements {
 
 		// WordPress.
 		'wp' => array(
-			'minimum' => '4.9.0',
+			'minimum' => '4.9.6',
 			'name'    => 'WordPress',
 			'exists'  => true,
 			'current' => false,
