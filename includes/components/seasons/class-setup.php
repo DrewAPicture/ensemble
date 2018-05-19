@@ -70,7 +70,7 @@ class Setup implements Loader {
 			'show_in_rest'           => true,
 			'rest_base'              => $this->get_taxonomy_slug(),
 			'rest_controller_season' => 'WP_REST_Terms_Controller',
-			'labels'            => array(
+			'labels'                 => array(
 				'name'                       => __( 'Seasons', 'ensemble' ),
 				'singular_name'              => _x( 'Season', 'taxonomy general name', 'ensemble' ),
 				'search_items'               => __( 'Search Seasons', 'ensemble' ),
