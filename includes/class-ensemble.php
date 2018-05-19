@@ -135,7 +135,7 @@ final class Ensemble {
 		}
 
 		if ( is_admin() ) {
-			add_action( 'admin_notices', array( $this, 'show_notices' ) );
+			add_action( 'ensemble_admin_notices', array( $this, 'show_notices' ) );
 
 			load( new Core\Admin\Menu );
 			load( new Core\Admin\Settings );

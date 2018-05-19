@@ -15,6 +15,19 @@ use function Ensemble\load_view;
 ?>
 <h1 class="wp-heading-inline"><?php esc_html_e( 'Ensemble', 'ensemble' ); ?></h1>
 
+<?php
+/**
+ * Fires in the head of custom Ensemble views to display admin notices.
+ *
+ * This would be the preferred method for showing notices vs using the
+ * standard 'admin_notices' hook because of the wonky placement above
+ * the header.
+ *
+ * @since 1.0.0
+ */
+do_action( 'ensemble_admin_notices' );
+?>
+
 <div class="bootstrap-iso container" id="myWizard">
 
 	<hr>

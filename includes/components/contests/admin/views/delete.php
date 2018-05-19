@@ -18,7 +18,10 @@ $contest    = get_contest( $contest_id );
 ?>
 <h1 class="wp-heading-inline"><?php esc_html_e( 'Delete Contest', 'ensemble' ); ?></h1>
 
-<?php do_action( 'admin_notices' ); ?>
+<?php
+/** This action is documented in includes/core/admin/views/overview.php */
+do_action( 'ensemble_admin_notices' );
+?>
 
 <div class="row">
 	<div class="col-12 col-xl-8">

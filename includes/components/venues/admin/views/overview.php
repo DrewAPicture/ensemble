@@ -14,7 +14,10 @@ namespace Ensemble\Components\Venues\Admin;
 	<?php esc_html_e( 'Add New', 'ensemble' ); ?>
 </a>
 
-<?php do_action( 'admin_notices' ); ?>
+<?php
+/** This action is documented in includes/core/admin/views/overview.php */
+do_action( 'ensemble_admin_notices' );
+?>
 
 <?php
 $list_table = new List_Table();
