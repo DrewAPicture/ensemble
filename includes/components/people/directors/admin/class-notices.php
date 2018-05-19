@@ -41,11 +41,11 @@ class Notices implements Loader {
 		$registry = $this->get_registry();
 
 		$registry->register_notice( 'notice-director-added', array(
-			'message' => __( 'A director was successfully created.', 'ensemble' ),
+			'message' => __( 'The unit director was successfully created.', 'ensemble' ),
 		) );
 
 		$registry->register_notice( 'notice-director-added-error', array(
-			'message' => __( 'There was an error adding the director. Please try again.', 'ensemble' ),
+			'message' => __( 'There was an error adding the unit director. Please try again.', 'ensemble' ),
 			'type'    => 'warning',
 		) );
 
@@ -55,21 +55,20 @@ class Notices implements Loader {
 		) );
 
 		$registry->register_notice( 'notice-director-updated', array(
-			'message' => __( 'The director was successfully updated.', 'ensemble' ),
+			'message' => __( 'The unit director was successfully updated.', 'ensemble' ),
 		) );
 
 		$registry->register_notice( 'notice-director-updated-error', array(
-			'message' => __( 'The director could not be updated. Please try again.', 'ensemble' ),
+			'message' => __( 'The unit director could not be updated. Please try again.', 'ensemble' ),
 			'type'    => 'warning',
 		) );
 
-
 		$registry->register_notice( 'notice-director-deleted', array(
-			'message' => __( 'The director was successfully deleted.', 'ensemble' ),
+			'message' => __( 'The unit director was successfully deleted.', 'ensemble' ),
 		) );
 
 		$registry->register_notice( 'notice-director-deleted-error', array(
-			'message' => __( 'The director could not be deleted. Please try again.', 'ensemble' ),
+			'message' => __( 'The unit director could not be deleted. Please try again.', 'ensemble' ),
 			'type'    => 'warning',
 		) );
 	}
