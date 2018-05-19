@@ -336,17 +336,17 @@ class List_Table extends \WP_List_Table {
 		}
 
 		$actions  = array();
-		$base_url = add_query_arg( 'page', 'ensemble-admin-directors', admin_url( 'admin.php' ) );
+		$base_url = add_query_arg( 'page', 'ensemble-admin-people-directors', admin_url( 'admin.php' ) );
 
 		$actions['edit'] = sprintf( '<a href="%1$s" aria-label="%2$s">%3$s</a>',
-			esc_url( add_query_arg( array( 'ensbl-view' => 'edit', 'director_id' => $director->id ), $base_url ) ),
-			sprintf( _x( 'Edit %s', 'ensemble' ), $director->name ),
+			esc_url( add_query_arg( array( 'ensbl-view' => 'edit', 'user_id' => $director->ID ), $base_url ) ),
+			sprintf( _x( 'Edit %s', 'ensemble' ), $director->display_name ),
 			_x( 'Edit', 'director', 'ensemble' )
 		);
 
 		$actions['delete'] = sprintf( '<a href="%1$s" aria-label="%2$s">%3$s</a>',
-			esc_url( add_query_arg( array( 'ensbl-view' => 'delete', 'director_id' => $director->id ), $base_url ) ),
-			sprintf( _x( 'Delete %s', 'ensemble' ), $director->name ),
+			esc_url( add_query_arg( array( 'ensbl-view' => 'delete', 'user_id' => $director->ID ), $base_url ) ),
+			sprintf( _x( 'Delete %s', 'ensemble' ), $director->display_name ),
 			_x( 'Delete', 'director', 'ensemble' )
 		);
 
