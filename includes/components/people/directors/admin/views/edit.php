@@ -38,7 +38,7 @@ do_action( 'ensemble_admin_notices' );
 
 		<?php else : ?>
 
-			<form method="post">
+			<form method="post" data-parsley-validate>
 				<div class="card mb-3 md-md-5 pt-4">
 					<div class="form-group">
 						<?php
@@ -47,6 +47,10 @@ do_action( 'ensemble_admin_notices' );
 							'label' => __( 'Name', 'ensemble' ),
 							'class' => array( 'form-control' ),
 							'value' => $director->display_name,
+							'data'  => array(
+								'parsley-required'         => true,
+								'parsley-required-message' => __( 'A name is required.', 'ensemble' ),
+							),
 						) );
 						?>
 					</div>
@@ -59,6 +63,10 @@ do_action( 'ensemble_admin_notices' );
 								'label' => __( 'Email', 'ensemble' ),
 								'class' => array( 'form-control' ),
 								'value' => $director->user_email,
+								'data'  => array(
+									'parsley-required'         => true,
+									'parsley-required-message' => __( 'An email address is required.', 'ensemble' ),
+								),
 							) );
 							?>
 						</div>
