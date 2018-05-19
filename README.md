@@ -59,7 +59,7 @@ Integrations will be coming soon in the form of sister theme for the front-end a
 
 ## Screenshots
 
-![Welcome screen](https://cl.ly/0b3v0m0e0F1b/Screen%20Shot%202018-05-19%20at%201.56.30%20AM.png)
+![Welcome screen](https://cl.ly/3Y103B2n380Y/Screen%20Shot%202018-05-19%20at%2012.57.33%20PM.png)
 ![Venue management](https://cl.ly/1G3B2h2O1I1P/Screen%20Shot%202018-05-19%20at%201.32.37%20AM.png)
 ![Adding a new season](https://cl.ly/1F3c3f2r1t3r/Screen%20Shot%202018-05-19%20at%201.36.30%20AM.png)
 ![Assigning units to a new director](https://cl.ly/0F0920461E28/Screen%20Shot%202018-05-19%20at%201.50.46%20AM.png)
