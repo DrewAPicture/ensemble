@@ -20,6 +20,8 @@ $venue    = get_venue( $venue_id );
 	<?php esc_html_e( 'Return to All Venues', 'ensemble' ); ?>
 </a>
 
+<hr class="wp-header-end" />
+
 <?php
 /** This action is documented in includes/core/admin/views/overview.php */
 do_action( 'ensemble_admin_notices' );

@@ -14,6 +14,8 @@ namespace Ensemble\Components\People\Directors\Admin;
 	<?php esc_html_e( 'Add New', 'ensemble' ); ?>
 </a>
 
+<hr class="wp-header-end" />
+
 <?php
 /** This action is documented in includes/core/admin/views/overview.php */
 do_action( 'ensemble_admin_notices' );

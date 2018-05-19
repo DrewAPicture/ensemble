@@ -17,6 +17,12 @@ $venue    = get_venue( $venue_id );
 ?>
 <h1 class="wp-heading-inline"><?php esc_html_e( 'Delete Venue', 'ensemble' ); ?></h1>
 
+<a href="<?php echo esc_url( add_query_arg( array( 'ensbl-view' => 'overview' ) ) ); ?>" class="page-title-action" role="button">
+	<?php esc_html_e( 'Return to All Venues', 'ensemble' ); ?>
+</a>
+
+<hr class="wp-header-end" />
+
 <?php
 /** This action is documented in includes/core/admin/views/overview.php */
 do_action( 'ensemble_admin_notices' );

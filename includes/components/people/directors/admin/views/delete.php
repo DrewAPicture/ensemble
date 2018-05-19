@@ -17,6 +17,12 @@ $user_id  = absint( $_REQUEST['user_id'] ?? 0 );
 $director = get_userdata( $user_id );
 ?>
 <h1 class="wp-heading-inline"><?php esc_html_e( 'Delete Unit Director', 'ensemble' ); ?></h1>
+<a href="<?php echo esc_url( add_query_arg( array( 'ensbl-view' => 'overview' ) ) ); ?>" class="page-title-action" role="button">
+	<?php esc_html_e( 'Return to All Directors', 'ensemble' ); ?>
+</a>
+
+<hr class="wp-header-end" />
+
 
 <?php
 /** This action is documented in includes/core/admin/views/overview.php */

@@ -20,6 +20,8 @@ $director = get_userdata( $user_id );
 	<?php esc_html_e( 'Return to All Directors', 'ensemble' ); ?>
 </a>
 
+<hr class="wp-header-end" />
+
 <?php
 /** This action is documented in includes/core/admin/views/overview.php */
 do_action( 'ensemble_admin_notices' );
