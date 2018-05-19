@@ -16,6 +16,11 @@ $user_id  = absint( $_REQUEST['user_id'] ?? 0 );
 $director = get_userdata( $user_id );
 ?>
 <h1 class="wp-heading-inline"><?php esc_html_e( 'Edit Unit Director', 'ensemble' ); ?></h1>
+<a href="<?php echo esc_url( add_query_arg( array( 'ensbl-view' => 'overview' ) ) ); ?>" class="page-title-action" role="button">
+	<?php esc_html_e( 'Return to All Directors', 'ensemble' ); ?>
+</a>
+
+<?php do_action( 'admin_notices' ); ?>
 
 <div class="row">
 	<div class="col-12 col-xl-8">

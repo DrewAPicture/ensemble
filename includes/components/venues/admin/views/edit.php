@@ -20,6 +20,8 @@ $venue    = get_venue( $venue_id );
 	<?php esc_html_e( 'Return to All Venues', 'ensemble' ); ?>
 </a>
 
+<?php do_action( 'admin_notices' ); ?>
+
 <div class="row">
 	<div class="col-12 col-xl-8">
 

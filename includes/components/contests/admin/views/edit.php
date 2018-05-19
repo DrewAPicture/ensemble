@@ -22,6 +22,8 @@ $contest    = get_contest( $contest_id );
 	<?php esc_html_e( 'Return to All Contests', 'ensemble' ); ?>
 </a>
 
+<?php do_action( 'admin_notices' ); ?>
+
 <div class="row">
 	<div class="col-12 col-xl-8">
 

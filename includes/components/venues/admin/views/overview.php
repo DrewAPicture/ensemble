@@ -13,6 +13,9 @@ namespace Ensemble\Components\Venues\Admin;
 <a href="<?php echo esc_url( add_query_arg( array( 'ensbl-view' => 'add' ) ) ); ?>" class="page-title-action" role="button">
 	<?php esc_html_e( 'Add New', 'ensemble' ); ?>
 </a>
+
+<?php do_action( 'admin_notices' ); ?>
+
 <?php
 $list_table = new List_Table();
 $list_table->prepare_items();

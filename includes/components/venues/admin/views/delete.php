@@ -17,6 +17,8 @@ $venue    = get_venue( $venue_id );
 ?>
 <h1 class="wp-heading-inline"><?php esc_html_e( 'Delete Venue', 'ensemble' ); ?></h1>
 
+<?php do_action( 'admin_notices' ); ?>
+
 <div class="row">
 	<div class="col-12 col-xl-8">
 		<form id="ensemble-delete-venue" method="post">
