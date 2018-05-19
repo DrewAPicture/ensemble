@@ -142,8 +142,6 @@ final class Ensemble {
 		load( new Core\Assets );
 		load( new Core\Components );
 		load( new Core\Requests );
-		load( new Core\Rewrite_Rules );
-		load( new Core\Template_Loader );
 		load( new Core\Users );
 	}
 
