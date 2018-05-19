@@ -19,12 +19,9 @@ use function Ensemble\{html};
 
 <div class="row">
 	<div class="col-12 col-xl-8">
-		<?php if ( 0 === ( new Database )->count() ) : ?>
-			<div class="alert alert-info" role="alert">
-				<h5><?php esc_html_e( 'Howdy!', 'ensemble' ); ?></h5>
-				<?php esc_html_e( 'It looks like you&#8217;re adding your first contest. To get started, just choose a name and venue, and tell us when you want your contest to start and end. If you haven&#8217;t created any venues yet, not to worry, you can always come back and set one later, ', 'ensemble' ); ?>
-			</div>
-		<?php endif; ?>
+		<div class="alert alert-info" role="alert">
+			<?php esc_html_e( 'To add a contest, just choose a name and venue, and tell us when you want your contest to start and end. You can even use the venue you created in the first step of this guide.', 'ensemble' ); ?>
+		</div>
 
 		<form method="post">
 			<div class="card mb-3 md-md-5 pt-4">
