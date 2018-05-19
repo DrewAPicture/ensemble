@@ -39,5 +39,38 @@ class Notices implements Loader {
 	 */
 	public function register_notices() {
 		$registry = $this->get_registry();
+
+		$registry->register_notice( 'notice-venue-added', array(
+			'message' => __( 'A venue was successfully created.', 'ensemble' ),
+		) );
+
+		$registry->register_notice( 'notice-venue-added-error', array(
+			'message' => __( 'There was an error adding the venue. Please try again.', 'ensemble' ),
+			'type'    => 'warning',
+		) );
+
+		$registry->register_notice( 'notice-venue-forbidden', array(
+			'message' => __( 'Sorry, you are not allowed to do that.', 'ensemble' ),
+			'type'    => 'info',
+		) );
+
+		$registry->register_notice( 'notice-venue-updated', array(
+			'message' => __( 'The venue was successfully updated.', 'ensemble' ),
+		) );
+
+		$registry->register_notice( 'notice-venue-updated-error', array(
+			'message' => __( 'The venue could not be updated. Please try again.', 'ensemble' ),
+			'type'    => 'warning',
+		) );
+
+
+		$registry->register_notice( 'notice-venue-deleted', array(
+			'message' => __( 'The venue was successfully deleted.', 'ensemble' ),
+		) );
+
+		$registry->register_notice( 'notice-venue-deleted-error', array(
+			'message' => __( 'The venue could not be deleted. Please try again.', 'ensemble' ),
+			'type'    => 'warning',
+		) );
 	}
 }
