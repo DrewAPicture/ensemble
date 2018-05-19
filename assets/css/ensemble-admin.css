@@ -128,3 +128,27 @@ hr.wp-header-end {
 .bootstrap-iso.fs-13 label {
 	font-size: 13px;
 }
+
+/** parsley.js error styling */
+.parsley-required {
+	width: 100%;
+	margin-top: 0.5rem;
+	color: #dc3545;
+}
+
+.parsley-errors-list {
+	list-style-type: none;
+	padding: 0;
+	opacity: 0;
+	transition: all .3s ease-in;
+}
+
+.parsley-errors-list.filled {
+	opacity: 1;
+}
+
+input.parsley-error,
+select.parsley-error,
+textarea.parsley-error {
+	border: 1px solid #dc3545;
+}
