@@ -10,10 +10,8 @@
 namespace Ensemble\Components\People\Directors\Admin;
 
 use Ensemble\Components\People\Directors\{Database, Object};
-
-if ( ! class_exists( '\WP_Users_List_Table' ) ) {
-	require_once ABSPATH . 'wp-admin/includes/class-wp-users-list-table.php';
-}
+use Ensemble\Components\Units\Setup;
+use function Ensemble\create_date;
 
 /**
  * Implements a list table for directors.
@@ -22,7 +20,7 @@ if ( ! class_exists( '\WP_Users_List_Table' ) ) {
  *
  * @see \WP_List_Table
  */
-class List_Table extends \WP_Users_List_Table {
+class List_Table extends \WP_List_Table {
 
 	/**
 	 * Represents the default number of directors to show per page.
