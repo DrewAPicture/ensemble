@@ -10,11 +10,9 @@
 namespace Ensemble;
 
 use Ensemble\Core\Admin\Notices;
-use Ensemble\Core\Admin\Notices_Registry;
 use Ensemble\Core\Interfaces;
 use Ensemble\Core\Traits;
 use Ensemble\Components;
-use Ensemble\Util\Registry;
 
 /**
  * Short-hand helper to initialize an aspect of the bootstrap.
