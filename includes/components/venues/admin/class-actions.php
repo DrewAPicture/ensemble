@@ -54,7 +54,8 @@ class Actions implements Loader {
 		$nonce    = $_REQUEST['ensemble-add-venue-nonce'] ?? false;
 
 		if ( ! wp_verify_nonce( $nonce, 'ensemble-add-venue-nonce' ) ) {
-			// TODO add notice handler for the different cases.
+			$redirect = add_query_arg( 'notice-venue-forbidden', 1, $redirect );
+
 			if ( wp_redirect( $redirect ) ) {
 				exit;
 			}
@@ -69,7 +70,12 @@ class Actions implements Loader {
 
 		$added = ( new Database )->insert( $data );
 
-		// TODO add notice handler for the different cases.
+		if ( $added ) {
+			$redirect = add_query_arg( 'notice-venue-added', 1, $redirect );
+		} else {
+			$redirect = add_query_arg( 'notice-venue-added-error', 1, $redirect );
+		}
+
 		if ( wp_redirect( $redirect ) ) {
 			exit;
 		}
@@ -99,7 +105,11 @@ class Actions implements Loader {
 		$nonce = $_REQUEST['ensemble-update-venue-nonce'] ?? false;
 
 		if ( ! wp_verify_nonce( $nonce, 'ensemble-update-venue-nonce' ) || 0 === $venue_id ) {
-			return;
+			$redirect = add_query_arg( 'notice-venue-forbidden', 1, $redirect );
+
+			if ( wp_redirect( $redirect ) ) {
+				exit;
+			}
 		}
 
 		$data = array(
@@ -111,7 +121,12 @@ class Actions implements Loader {
 
 		$updated = ( new Database )->update( $venue_id, $data );
 
-		// TODO add notice handler for the different cases.
+		if ( $updated ) {
+			$redirect = add_query_arg( 'notice-venue-updated', 1, $redirect );
+		} else {
+			$redirect = add_query_arg( 'notice-venue-updated-error', 1, $redirect );
+		}
+
 		if ( wp_redirect( $redirect ) ) {
 			exit;
 		}
@@ -138,7 +153,8 @@ class Actions implements Loader {
 		$redirect = add_query_arg( 'page', 'ensemble-admin-venues', admin_url( 'admin.php' ) );
 
 		if ( ! wp_verify_nonce( $nonce, 'ensemble-delete-venue-nonce' ) || 'no' === $answer || 0 === $venue_id ) {
-			// TODO add notice handler for the different cases.
+			$redirect = add_query_arg( 'notice-venue-forbidden', 1, $redirect );
+
 			if ( wp_redirect( $redirect ) ) {
 				exit;
 			}
@@ -147,10 +163,17 @@ class Actions implements Loader {
 		if ( 'yes' === $answer ) {
 			$deleted = ( new Database )->delete( $venue_id );
 
-			// TODO add notice handler for the different cases.
-			if ( wp_redirect( $redirect ) ) {
-				exit;
+			if ( $deleted ) {
+				$redirect = add_query_arg( 'notice-venue-deleted', 1, $redirect );
+			} else {
+				$redirect = add_query_arg( 'notice-venue-deleted-error', 1, $redirect );
 			}
+		} else {
+			$redirect = add_query_arg( 'notice-venue-deleted-no-change', 1, $redirect );
+		}
+
+		if ( wp_redirect( $redirect ) ) {
+			exit;
 		}
 
 	}
