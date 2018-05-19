@@ -9,8 +9,9 @@
  */
 namespace Ensemble\Components\People\Directors;
 
-use function Ensemble\Components\Units\{get_unit};
 use Ensemble\Core;
+use function Ensemble\Components\Units\{get_unit};
+use function Ensemble\create_date;
 
 /**
  * Defines a Staff Member object model.
@@ -48,6 +49,17 @@ class Object extends Core\User_Object {
 
 			return is_wp_error( $tt_ids ) ? false : true;
 		}
+	}
+
+	/**
+	 * Retrieves the director registration date, formatted and converted into 'WP' time from UTC.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return string Formatted date.
+	 */
+	public function user_registered( $format = 'F j, Y g:i a' ) {
+		return create_date( $this->user_registered, 'wp' )->format( $format );
 	}
 
 }
