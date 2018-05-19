@@ -23,7 +23,7 @@ use function Ensemble\{html};
 			<?php esc_html_e( 'To add a contest, just choose a name and venue, and tell us when you want your contest to start and end. You can even use the venue you created in the first step of this guide.', 'ensemble' ); ?>
 		</div>
 
-		<form method="post">
+		<form method="post" data-parsley-validate>
 			<div class="card mb-3 md-md-5 pt-4">
 				<div class="form-group">
 					<?php
@@ -31,6 +31,10 @@ use function Ensemble\{html};
 						'id'    => 'contest-name',
 						'label' => __( 'Name', 'ensemble' ),
 						'class' => array( 'form-control' ),
+						'data'  => array(
+							'parsley-required'         => true,
+							'parsley-required-message' => __( 'A contest name is required.', 'ensemble' ),
+						),
 					) );
 					?>
 				</div>
@@ -69,6 +73,10 @@ use function Ensemble\{html};
 							'id'    => 'contest-start-date',
 							'label' => __( 'Start Date', 'ensemble' ),
 							'class' => array( 'form-control', 'date' ),
+							'data'  => array(
+								'parsley-required'         => true,
+								'parsley-required-message' => __( 'A start date is required.', 'ensemble' ),
+							),
 						) );
 						?>
 					</div>
