@@ -94,7 +94,7 @@ class List_Table extends \WP_List_Table {
 
 		parent::__construct( $args );
 
-		$this->calculate_counts();
+		$this->calculate_count();
 	}
 
 	/**
@@ -102,20 +102,8 @@ class List_Table extends \WP_List_Table {
 	 *
 	 * @since 1.0.0
 	 */
-	public function calculate_counts() {
-		$search = isset( $_GET['s'] ) ? $_GET['s'] : '';
-
-		$this->published_count = ( new Database )->count( array(
-			'status' => 'published',
-			'search' => $search,
-		) );
-
-		$this->draft_count = ( new Database )->count( array(
-			'status' => 'draft',
-			'search' => $search,
-		) );
-
-		$this->total_count = $this->published_count + $this->draft_count;
+	public function calculate_count() {
+		$this->total_count = ( new Database )->count();
 	}
 
 	/**
