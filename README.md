@@ -47,14 +47,15 @@ Season creation with start and end dates means no more confusion about which con
 Integrations will be coming soon in the form of sister theme for the front-end and support for popular calendar & eCommerce solutions.
 
 ## Frequently Asked Questions
-Q: Where is the front end of this thing?
-A: A sister theme is currently in development, which will bring Ensemble to the front end soon.
 
-Q: I activated the plugin, but I don't see a menu anywhere, what gives?
-A: It's possible your site doesn't meet the minimum requirements. Check the Plugins screen to see if any partial activation warnings are listed.
+* Q: Where is the front end of this thing?
+* A: A sister theme is currently in development, which will bring Ensemble to the front end soon.
 
-Q: Where can I request a feature or report a but?
-A: You\'re welcome to submit an issue on the [Github repository](https://github.com/DrewAPicture/ensemble/issues).
+* Q: I activated the plugin, but I don't see a menu anywhere, what gives?
+* A: It's possible your site doesn't meet the minimum requirements. Check the Plugins screen to see if any partial activation warnings are listed.
+
+* Q: Where can I request a feature or report a but?
+* A: You\'re welcome to submit an issue on the [Github repository](https://github.com/DrewAPicture/ensemble/issues).
 
 ## Screenshots
 
