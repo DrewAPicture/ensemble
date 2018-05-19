@@ -12,7 +12,7 @@ jQuery( document ).ready( function( $ ) {
 	// selectWoo instances for selects.
 	$( 'select' ).each( function () {
 		// Skip it for list table bulk actions selects.
-		if ( ! $( this ).parent().hasClass( 'bulkactions' ) ) {
+		if ( ! $( this ).parent().hasClass( 'bulkactions' ) && ! $( this ).parent().hasClass( 'actions' ) ) {
 			$( this ).selectWoo({
 				width: '100%',
 				theme: 'bootstrap'
