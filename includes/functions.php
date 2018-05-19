@@ -9,9 +9,12 @@
  */
 namespace Ensemble;
 
+use Ensemble\Core\Admin\Notices;
+use Ensemble\Core\Admin\Notices_Registry;
 use Ensemble\Core\Interfaces;
 use Ensemble\Core\Traits;
 use Ensemble\Components;
+use Ensemble\Util\Registry;
 
 /**
  * Short-hand helper to initialize an aspect of the bootstrap.
@@ -194,4 +197,16 @@ function create_date( $date_string = 'now', $timezone = 'UTC', $wp_to_utc = fals
 	}
 
 	return $datetime;
+}
+
+/**
+ * Prints a given registered notice, if it exists.
+ *
+ * @since 1.0.0
+ *
+ * @param string $notice_id Notice ID.
+ * @param array  $atts      Optional. Any attributes needed to display the notice. Default empty array.
+ */
+function print_notice( $notice_id, $atts = array() ) {
+	echo ( new Notices )->build_notice( $notice_id );
 }
