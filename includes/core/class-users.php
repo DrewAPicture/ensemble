@@ -61,16 +61,4 @@ class Users implements Loader {
 	}
 
 
-	/**
-	 * Remove Ensemble capabilities (called during uninstall).
-	 *
-	 * @since 1.0.0
-	 */
-	public function remove_caps() {
-		$wp_roles = wp_roles();
-
-		$wp_roles->remove_cap( 'administrator', 'manage_contests' );
-		$wp_roles->remove_cap( 'administrator', 'manage_venues' );
-	}
-
 }
