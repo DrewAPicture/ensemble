@@ -231,26 +231,11 @@ class List_Table extends \WP_List_Table {
 
 		$this->_column_headers = array( $columns, $hidden, $sortable );
 
-		$data = $this->get_data();
-
 		$current_page = $this->get_pagenum();
 
-		$status = isset( $_GET['status'] ) ? $_GET['status'] : 'any';
+		$this->items = $this->get_data();
 
-		switch( $status ) {
-			case 'published':
-				$total_items = $this->published_count;
-				break;
-			case 'draft':
-				$total_items = $this->draft_count;
-				break;
-			case 'any':
-			default:
-				$total_items = $this->current_count;
-				break;
-		}
-
-		$this->items = $data;
+		$total_items = count( $this->items );
 
 		$this->set_pagination_args( array(
 			'total_items' => $total_items,
