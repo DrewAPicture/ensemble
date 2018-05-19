@@ -36,32 +36,15 @@ class Notices {
 			return $output;
 		}
 
-		$notice  = $this->add_special_classes( $notice );
-		$classes = implode( ' ', $notice['class'] );
-
 		$message = $notice['message'];
 
-		$output = sprintf( '<div id="%1$s-notice" class="%2$s">%3$s</div>',
+		$output = sprintf( '<div id="%1$s-notice" class="notice notice-%2$s is-dismissible"><p>%3$s</p></div>',
 			esc_attr( $notice_id ),
-			esc_attr( $classes ),
+			esc_attr( $notice['type'] ),
 			$message
 		);
 
 		return $output;
-	}
-
-	/**
-	 * Helper method to add the type class to a notice for output.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param array $notice Notice attributes.
-	 * @return array Modified notice attributes.
-	 */
-	public function add_special_classes( $notice ) {
-		$notice['class'][] = "alert-{$notice['type']}";
-
-		return $notice;
 	}
 
 }

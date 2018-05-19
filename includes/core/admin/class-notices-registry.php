@@ -75,9 +75,8 @@ class Notices_Registry extends Registry {
 	 *
 	 *     @type string|callable $message Notice message or a callback to retrieve it.
 	 *                                    possibilities.
-	 *     @type string          $type    Notice type. Accepts 'success', 'info', 'warning', or 'danger'.
+	 *     @type string          $type    Notice type. Accepts 'success', 'error', 'info', or 'warning'.
 	 *                                    Default 'success'.
-	 *     @type string|array    $class   Class or array of classes to associate with the notice.
 	 * }
 	 * @return true|\WP_Error True on successful registration, otherwise a WP_Error object.
 	 */
@@ -85,22 +84,18 @@ class Notices_Registry extends Registry {
 		$defaults = array(
 			'message'   => '',
 			'type'      => 'success',
-			'class'     => array( 'alert', 'mt-2', 'mt-md-0', 'mb-2', 'mb-md-5' ),
 		);
 
 		$notice_args = array_merge( $defaults, $notice_args );
 
-		if ( ! in_array( $notice_args['type'], array( 'success', 'info', 'warning', 'danger' ), true ) ) {
+		if ( ! in_array( $notice_args['type'], array( 'success', 'error', 'info', 'warning' ), true ) ) {
 			$notice_args['type'] = 'success';
 		}
 
-		if ( ! is_array( $notice_args['class'] ) ) {
-			$notice_args['class'] = array( $notice_args['class'] );
-		}
-
-		$notice_args['class'] = array_map( 'sanitize_html_class', $notice_args['class'] );
-
-		return $this->add_item( $notice_id, $notice_args );
+		return $this->add_item( $notice_id, array(
+			'message' => $notice_args['message'],
+			'type'    => $notice_args['type']
+		) );
 	}
 
 }
