@@ -10,7 +10,7 @@
 namespace Ensemble\Components\Contests;
 
 use Ensemble\Core;
-use function Ensemble\{get_wp_timezone, create_date};
+use Ensemble\Util\Date;
 
 /**
  * Contests table database class.
@@ -114,14 +114,11 @@ class Database extends Core\Database {
 	 * @since 1.0.0
 	 */
 	public function get_column_defaults() {
-		$today = create_date();
-
 		return array(
 			'type'       => 'standard',
 			'status'     => 'published',
-			'timezone'   => get_wp_timezone(),
-			'start_date' => $today->format( 'Y-m-d H:i:s' ),
-			'end_date'   => $today->format( 'Y-m-d H:i:s' ),
+			'timezone'   => Date::get_wp_timezone(),
+			'start_date' => Date::create()->format( 'Y-m-d H:i:s' ),
 		);
 	}
 
@@ -233,11 +230,11 @@ class Database extends Core\Database {
 		}
 
 		if ( ! empty( $data['start_date'] ) ) {
-			$data['start_date'] = create_date( $data['start_date'], 'UTC', true )->format( 'Y-m-d H:i:s' );
+			$data['start_date'] = Date::create( $data['start_date'], 'UTC', true )->format( 'Y-m-d H:i:s' );
 		}
 
 		if ( ! empty( $data['end_date'] ) ) {
-			$data['end_date'] = create_date( $data['end_date'], 'UTC', true )->format( 'Y-m-d H:i:s' );
+			$data['end_date'] = Date::create( $data['end_date'], 'UTC', true )->format( 'Y-m-d H:i:s' );
 		}
 
 		$error_codes = $errors->get_error_codes();
@@ -272,11 +269,11 @@ class Database extends Core\Database {
 		}
 
 		if ( ! empty( $data['start_date'] ) ) {
-			$data['start_date'] = create_date( $data['start_date'], 'UTC', true )->format( 'Y-m-d H:i:s' );
+			$data['start_date'] = Date::create( $data['start_date'], 'UTC', true )->format( 'Y-m-d H:i:s' );
 		}
 
 		if ( ! empty( $data['end_date'] ) ) {
-			$data['end_date'] = create_date( $data['end_date'], 'UTC', true )->format( 'Y-m-d H:i:s' );
+			$data['end_date'] = Date::create( $data['end_date'], 'UTC', true )->format( 'Y-m-d H:i:s' );
 		}
 
 		return parent::update( $object_id, $data, $where );

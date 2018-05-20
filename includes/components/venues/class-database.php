@@ -10,7 +10,7 @@
 namespace Ensemble\Components\Venues;
 
 use Ensemble\Core;
-use function Ensemble\{create_date};
+use Ensemble\Util\Date;
 
 /**
  * Venue table database class.
@@ -113,7 +113,7 @@ class Database extends Core\Database {
 		return array(
 			'type'       => 'school',
 			'status'     => 'active',
-			'date_added' =>  create_date()->format( 'Y-m-d H:i:s' ),
+			'date_added' =>  Date::create()->format( 'Y-m-d H:i:s' ),
 		);
 	}
 
@@ -216,7 +216,7 @@ class Database extends Core\Database {
 		}
 
 		if ( ! empty( $data['date_added'] ) ) {
-			$data['date_added'] = create_date( $data['date_added'], 'UTC', true )->format( 'Y-m-d H:i:s' );
+			$data['date_added'] = Date::create( $data['date_added'], 'UTC', true )->format( 'Y-m-d H:i:s' );
 		}
 
 		$error_codes = $errors->get_error_codes();
@@ -241,7 +241,7 @@ class Database extends Core\Database {
 	 */
 	public function update( $object_id, $data = array(), $where = '' ) {
 		if ( ! empty( $data['date_added'] ) ) {
-			$data['date_added'] = create_date( $data['date_added'], 'UTC', true )->format( 'Y-m-d H:i:s' );
+			$data['date_added'] = Date::create( $data['date_added'], 'UTC', true )->format( 'Y-m-d H:i:s' );
 		}
 
 		return parent::update( $object_id, $data, $where );

@@ -10,8 +10,8 @@
 namespace Ensemble\Components\People\Directors;
 
 use Ensemble\Core;
+use Ensemble\Util\Date;
 use function Ensemble\Components\Units\{get_unit};
-use function Ensemble\create_date;
 
 /**
  * Defines a Staff Member object model.
@@ -59,7 +59,7 @@ class Object extends Core\User_Object {
 	 * @return string Formatted date.
 	 */
 	public function user_registered( $format = 'F j, Y g:i a' ) {
-		return create_date( $this->user_registered, 'wp' )->format( $format );
+		return Date::create( $this->user_registered, 'wp' )->format( $format );
 	}
 
 }

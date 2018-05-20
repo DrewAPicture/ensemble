@@ -10,7 +10,7 @@
 namespace Ensemble\Components\People\Directors\Admin;
 
 use Ensemble\Components\People\Directors;
-use function Ensemble\create_date;
+use Ensemble\Util\Date;
 use function Ensemble\{html};
 
 $user_id  = absint( $_REQUEST['user_id'] ?? 0 );
@@ -66,7 +66,7 @@ do_action( 'ensemble_admin_notices' );
 									}
 									?>
 								</td>
-								<td><?php echo create_date( $director->user_registered, 'wp' )->format( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ) ); ?></td>
+								<td><?php echo Date::create( $director->user_registered, 'wp' )->format( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ) ); ?></td>
 							</tr>
 							</tbody>
 						</table>
