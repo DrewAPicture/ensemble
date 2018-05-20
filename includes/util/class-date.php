@@ -59,6 +59,18 @@ class Date extends \DateTime {
 	}
 
 	/**
+	 * Short-hand helper to avoid the need to create a 'now' UTC date just to format it.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $format Any valid PHP date format string.
+	 * @return string Formatted date string.
+	 */
+	public static function format( $format ) {
+		return self::create()->format( $format );
+	}
+
+	/**
 	 * Attempts to derive a timezone string from the WordPress settings.
 	 *
 	 * @since 1.0.0
