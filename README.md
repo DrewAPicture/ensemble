@@ -48,29 +48,29 @@ Integrations will be coming soon in the form of sister theme for the front-end a
 
 ## Frequently Asked Questions
 
-* Q: Where is the front end of this thing?
-* A: A sister theme is currently in development, which will bring Ensemble to the front end soon.
+**Where is the front end of this thing?**
 
-* Q: I activated the plugin, but I don't see a menu anywhere, what gives?
-* A: It's possible your site doesn't meet the minimum requirements. Check the Plugins screen to see if any partial activation warnings are listed.
+A sister theme is currently in development, which will bring Ensemble to the front end soon.
 
-* Q: Where can I request a feature or report a but?
-* A: You\'re welcome to submit an issue on the [Github repository](https://github.com/DrewAPicture/ensemble/issues).
+**I activated the plugin, but I don't see a menu anywhere, what gives?**
+
+It's possible your site doesn't meet the minimum requirements. Check the Plugins screen to see if any partial activation warnings are listed.
+
+**Where can I request a feature or report a bug?**
+
+Issues & pull requests are open!
 
 ## Screenshots
 
-![Welcome screen](https://cl.ly/0b3v0m0e0F1b/Screen%20Shot%202018-05-19%20at%201.56.30%20AM.png)
+![Welcome screen](https://cl.ly/3Y103B2n380Y/Screen%20Shot%202018-05-19%20at%2012.57.33%20PM.png)
 ![Venue management](https://cl.ly/1G3B2h2O1I1P/Screen%20Shot%202018-05-19%20at%201.32.37%20AM.png)
 ![Adding a new season](https://cl.ly/1F3c3f2r1t3r/Screen%20Shot%202018-05-19%20at%201.36.30%20AM.png)
 ![Assigning units to a new director](https://cl.ly/0F0920461E28/Screen%20Shot%202018-05-19%20at%201.50.46%20AM.png)
 ![Adding a new unit](https://cl.ly/3X0J1A2a0t0i/Screen%20Shot%202018-05-19%20at%201.50.01%20AM.png)
+![Contests overview](https://cl.ly/0Z3w1s1v0m2E/Screen%20Shot%202018-05-19%20at%201.10.19%20PM.png)
 
 ## Changelog
 
 ### 1.0.0
 
 * First release.
-
-#### Contribute to Ensemble
-
-Pull requests are welcome!

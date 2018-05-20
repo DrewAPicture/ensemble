@@ -11,7 +11,7 @@ namespace Ensemble\Components\People\Directors\Admin;
 
 use Ensemble\Components\People\Directors\{Database, Object};
 use Ensemble\Components\Units\Setup;
-use function Ensemble\create_date;
+use Ensemble\Util\Date;
 
 /**
  * Implements a list table for directors.
@@ -279,7 +279,7 @@ class List_Table extends \WP_List_Table {
 				break;
 
 			case 'user_registered':
-				$value = create_date( $director->user_registered, 'wp' )->format( 'F j, Y g:i a' );
+				$value = Date::create( $director->user_registered, 'wp' )->format( 'F j, Y g:i a' );
 				break;
 
 		}

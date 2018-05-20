@@ -10,7 +10,7 @@
 namespace Ensemble\Components\Contests;
 
 use Ensemble\Core;
-use function Ensemble\{create_date};
+use Ensemble\Util\Date;
 
 /**
  * Defines the structure of a single venue.
@@ -122,7 +122,7 @@ class Object extends Core\Object {
 	 * @return string Formatted start date.
 	 */
 	public function get_start_date( $format = 'm/d/Y', $timezone = 'wp' ) {
-		return create_date( $this->start_date, $timezone )->format( $format );
+		return Date::create( $this->start_date, $timezone )->format( $format );
 	}
 
 	/**
@@ -135,7 +135,7 @@ class Object extends Core\Object {
 	 * @return string Formatted end date.
 	 */
 	public function get_end_date( $format = 'm/d/Y', $timezone = 'wp' ) {
-		return create_date( $this->end_date, $timezone )->format( $format );
+		return Date::create( $this->end_date, $timezone )->format( $format );
 	}
 
 }

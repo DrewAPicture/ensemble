@@ -48,7 +48,7 @@ A: A sister theme is currently in development, which will bring Ensemble to the 
 Q: I activated the plugin, but I don't see a menu anywhere, what gives?
 A: It's possible your site doesn't meet the minimum requirements. Check the Plugins screen to see if any partial activation warnings are listed.
 
-Q: Where can I request a feature or report a but?
+Q: Where can I request a feature or report a bug?
 A: You\'re welcome to submit an issue on the [Github repository](https://github.com/DrewAPicture/ensemble/issues).
 
 == Screenshots ==
@@ -57,6 +57,7 @@ A: You\'re welcome to submit an issue on the [Github repository](https://github.
 3. Adding a new season.
 4. Assigning units to a new director.
 5. Adding a new unit.
+6. Contests overview.
 
 == Changelog ==
 = 1.0.0 =
