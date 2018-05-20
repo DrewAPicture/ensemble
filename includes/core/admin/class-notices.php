@@ -23,10 +23,12 @@ class Notices {
 	/**
 	 * Builds a given notice's output, if it exists..
 	 *
-	 * @since
-	 * @param $notice_id
+	 * @since 1.0.0
+	 *
+	 * @param string $notice_id Notice ID.
+	 * @return string Notice HTML markup.
 	 */
-	public function build_notice( $notice_id ) {
+	public static function build_notice( $notice_id ) {
 		$output = '';
 
 		$registry = Notices_Registry::instance();
