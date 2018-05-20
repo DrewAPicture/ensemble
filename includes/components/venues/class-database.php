@@ -113,7 +113,7 @@ class Database extends Core\Database {
 		return array(
 			'type'       => 'school',
 			'status'     => 'active',
-			'date_added' =>  Date::create()->format( 'Y-m-d H:i:s' ),
+			'date_added' =>  Date::format( 'Y-m-d H:i:s' ),
 		);
 	}
 
