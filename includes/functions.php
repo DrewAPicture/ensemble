@@ -125,5 +125,5 @@ function clean_item_cache( $object ) {
  * @param array  $atts      Optional. Any attributes needed to display the notice. Default empty array.
  */
 function print_notice( $notice_id, $atts = array() ) {
-	echo ( new Notices )->build_notice( $notice_id );
+	echo Notices::build_notice( $notice_id );
 }
