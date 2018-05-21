@@ -279,7 +279,7 @@ class List_Table extends \WP_List_Table {
 				break;
 
 			case 'user_registered':
-				$value = Date::create( $director->user_registered, 'wp' )->format( 'F j, Y g:i a' );
+				$value = Date::UTC_to_WP( $director->user_registered, 'F j, Y g:i a' );
 				break;
 
 		}

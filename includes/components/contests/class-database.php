@@ -230,11 +230,11 @@ class Database extends Core\Database {
 		}
 
 		if ( ! empty( $data['start_date'] ) ) {
-			$data['start_date'] = Date::create( $data['start_date'], 'UTC', true )->format( 'Y-m-d H:i:s' );
+			$data['start_date'] = Date::WP_to_UTC( $data['start_date'] );
 		}
 
 		if ( ! empty( $data['end_date'] ) ) {
-			$data['end_date'] = Date::create( $data['end_date'], 'UTC', true )->format( 'Y-m-d H:i:s' );
+			$data['end_date'] = Date::WP_to_UTC( $data['end_date'] );
 		}
 
 		$error_codes = $errors->get_error_codes();
@@ -269,11 +269,11 @@ class Database extends Core\Database {
 		}
 
 		if ( ! empty( $data['start_date'] ) ) {
-			$data['start_date'] = Date::create( $data['start_date'], 'UTC', true )->format( 'Y-m-d H:i:s' );
+			$data['start_date'] = Date::WP_to_UTC( $data['start_date'] );
 		}
 
 		if ( ! empty( $data['end_date'] ) ) {
-			$data['end_date'] = Date::create( $data['end_date'], 'UTC', true )->format( 'Y-m-d H:i:s' );
+			$data['end_date'] = Date::WP_to_UTC( $data['end_date'] );
 		}
 
 		return parent::update( $object_id, $data, $where );

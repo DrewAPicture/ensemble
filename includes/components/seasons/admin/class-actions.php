@@ -150,7 +150,7 @@ class Actions implements Loader {
 			$start_date = get_term_meta( $term->term_id, 'ensemble-start-date', true );
 
 			if ( $start_date ) {
-				$args['value'] = Date::create( $start_date, 'wp' )->format( 'm/d/Y' );
+				$args['value'] = Date::UTC_to_WP( $start_date, 'm/d/Y' );
 			}
 
 			// If $term is available this is for the Seasons > Edit form where the label is output separately.
@@ -179,7 +179,7 @@ class Actions implements Loader {
 			$end_date = get_term_meta( $term->term_id, 'ensemble-end-date', true );
 
 			if ( $end_date ) {
-				$args['value'] = Date::create( $end_date, 'wp' )->format( 'm/d/Y' );
+				$args['value'] = Date::UTC_to_WP( $end_date, 'm/d/Y' );
 			}
 
 			// If $term is available this is for the Seasons > Edit form where the label is output separately.
@@ -244,7 +244,7 @@ class Actions implements Loader {
 		$start_date = get_term_meta( $term_id, 'ensemble-start-date', true );
 
 		if ( $start_date ) {
-			$value = Date::create( $start_date, 'wp' )->format( 'm/d/Y' );
+			$value = Date::UTC_to_WP( $start_date, 'm/d/Y' );
 		}
 
 		return $value;
@@ -268,7 +268,7 @@ class Actions implements Loader {
 		$end_date = get_term_meta( $term_id, 'ensemble-end-date', true );
 
 		if ( $end_date ) {
-			$value = Date::create( $end_date, 'wp' )->format( 'm/d/Y' );
+			$value = Date::UTC_to_WP( $end_date, 'm/d/Y' );
 		}
 
 		return $value;
@@ -322,7 +322,7 @@ class Actions implements Loader {
 		$end_date   = sanitize_text_field( $_REQUEST['season-end-date'] ?? '' );
 
 		if ( ! empty( $start_date ) ) {
-			$start_date = Date::create( $start_date, 'UTC', true )->format( 'Y-m-d H:i:s' );
+			$start_date = Date::WP_to_UTC( $start_date );
 
 			update_term_meta( $term_id, 'ensemble-start-date', $start_date );
 		} else {
@@ -330,7 +330,7 @@ class Actions implements Loader {
 		}
 
 		if ( ! empty( $end_date ) ) {
-			$end_date = Date::create( $end_date, 'UTC', true )->format( 'Y-m-d H:i:s' );
+			$end_date = Date::WP_to_UTC( $end_date );
 
 			update_term_meta( $term_id, 'ensemble-end-date', $end_date );
 		} else {

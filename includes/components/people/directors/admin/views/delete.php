@@ -66,7 +66,7 @@ do_action( 'ensemble_admin_notices' );
 									}
 									?>
 								</td>
-								<td><?php echo Date::create( $director->user_registered, 'wp' )->format( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ) ); ?></td>
+								<td><?php echo Date::UTC_to_WP( $director->user_registered, get_option( 'date_format' ) . ' ' . get_option( 'time_format' ) ); ?></td>
 							</tr>
 							</tbody>
 						</table>

@@ -216,7 +216,7 @@ class Database extends Core\Database {
 		}
 
 		if ( ! empty( $data['date_added'] ) ) {
-			$data['date_added'] = Date::create( $data['date_added'], 'UTC', true )->format( 'Y-m-d H:i:s' );
+			$data['date_added'] = Date::WP_to_UTC( $data['date_added'] );
 		}
 
 		$error_codes = $errors->get_error_codes();
@@ -241,7 +241,7 @@ class Database extends Core\Database {
 	 */
 	public function update( $object_id, $data = array(), $where = '' ) {
 		if ( ! empty( $data['date_added'] ) ) {
-			$data['date_added'] = Date::create( $data['date_added'], 'UTC', true )->format( 'Y-m-d H:i:s' );
+			$data['date_added'] = Date::WP_to_UTC( $data['date_added'] );
 		}
 
 		return parent::update( $object_id, $data, $where );

@@ -117,12 +117,11 @@ class Object extends Core\Object {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string $format   Optional. How to format the date. Default 'm/d/Y'.
-	 * @param string $timezone Optional. Timezone to return the date in. Default 'wp'.
+	 * @param string $format Optional. How to format the date. Default 'm/d/Y'.
 	 * @return string Formatted start date.
 	 */
-	public function get_start_date( $format = 'm/d/Y', $timezone = 'wp' ) {
-		return Date::create( $this->start_date, $timezone )->format( $format );
+	public function get_start_date( $format = 'm/d/Y' ) {
+		return Date::UTC_to_WP( $this->start_date, $format );
 	}
 
 	/**
@@ -131,11 +130,10 @@ class Object extends Core\Object {
 	 * @since 1.0.0
 	 *
 	 * @param string $format Optional. How to format the date. Default 'm/d/Y'.
-	 * @param string $timezone Optional. Timezone to return the date in. Default 'wp'.
 	 * @return string Formatted end date.
 	 */
-	public function get_end_date( $format = 'm/d/Y', $timezone = 'wp' ) {
-		return Date::create( $this->end_date, $timezone )->format( $format );
+	public function get_end_date( $format = 'm/d/Y' ) {
+		return Date::UTC_to_WP( $this->end_date, $format );
 	}
 
 }

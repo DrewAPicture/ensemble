@@ -59,7 +59,7 @@ class Object extends Core\User_Object {
 	 * @return string Formatted date.
 	 */
 	public function user_registered( $format = 'F j, Y g:i a' ) {
-		return Date::create( $this->user_registered, 'wp' )->format( $format );
+		return Date::UTC_to_WP( $this->user_registered, $format );
 	}
 
 }
