@@ -66,7 +66,7 @@ class Date extends \DateTime {
 	 * @param string $format Any valid PHP date format string.
 	 * @return string Formatted date string.
 	 */
-	public static function get_format( $format ) {
+	public static function UTC( $format ) {
 		return self::create()->format( $format );
 	}
 
