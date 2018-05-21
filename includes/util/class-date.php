@@ -71,6 +71,32 @@ class Date extends \DateTime {
 	}
 
 	/**
+	 * Short-hand helper to convert a given date string from WP time to UTC time in a given format.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $date_string Date string.
+	 * @param string $format      Optional. Date format. Default 'Y-m-d H:i:s'.
+	 * @return string Formatted date string in UTC time (no offset).
+	 */
+	public static function WP_to_UTC( $date_string, $format = 'Y-m-d H:i:s' ) {
+		return self::create( $date_string, 'UTC', true )->format( $format );
+	}
+
+	/**
+	 * Short-hand helper to convert a given date string from UTC time to WP time in a given format.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $date_string Date string.
+	 * @param string $format      Optional. Date format. Default 'Y-m-d H:i:s'.
+	 * @return string Formatted date string in WP time.
+	 */
+	public static function UTC_to_WP( $date_string, $format = 'Y-m-d H:i:s' ) {
+		return self::create( $date_string, 'wp' )->format( $format );
+	}
+
+	/**
 	 * Attempts to derive a timezone string from the WordPress settings.
 	 *
 	 * @since 1.0.0
