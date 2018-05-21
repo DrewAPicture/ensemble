@@ -118,7 +118,7 @@ class Database extends Core\Database {
 			'type'       => 'standard',
 			'status'     => 'published',
 			'timezone'   => Date::get_wp_timezone(),
-			'start_date' => Date::format( 'Y-m-d H:i:s' ),
+			'start_date' => Date::get_format( 'Y-m-d H:i:s' ),
 		);
 	}
 
