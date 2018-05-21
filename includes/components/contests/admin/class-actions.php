@@ -67,7 +67,7 @@ class Actions implements Loader {
 			'name'        => empty( $_REQUEST['contest-name'] ) ? '' : sanitize_text_field( $_REQUEST['contest-name'] ),
 			'description' => empty( $_REQUEST['contest-desc'] ) ? '' : wp_kses_post( $_REQUEST['contest-desc'] ),
 			'start_date'  => empty( $_REQUEST['contest-start-date'] ) ? '' : sanitize_text_field( $_REQUEST['contest-start-date'] ),
-			'start_date'  => empty( $_REQUEST['contest-end-date'] ) ? '' : sanitize_text_field( $_REQUEST['contest-end-date'] ),
+			'end_date'    => empty( $_REQUEST['contest-end-date'] ) ? '' : sanitize_text_field( $_REQUEST['contest-end-date'] ),
 			'type'        => empty( $_REQUEST['contest-type'] ) ? '' : sanitize_key( $_REQUEST['contest-type'] ),
 			'status'      => empty( $_REQUEST['contest-status'] ) ? '' : sanitize_key( $_REQUEST['contest-status'] ),
 			'external'    => empty( $_REQUEST['contest-external'] ) ? '' : sanitize_text_field( $_REQUEST['contest-external'] ),
