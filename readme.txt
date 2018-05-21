@@ -5,7 +5,7 @@ Donate link: https://wordpressfoundation.org/donate/
 Requires at least: 4.9.6
 Tested up to: 5.0
 Requires PHP: 7.0
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2
 
 Easily manage the data for a color guard circuit (or similar sport/activity organization) with WordPress.
@@ -60,6 +60,15 @@ A: You\'re welcome to submit an issue on the [Github repository](https://github.
 6. Contests overview.
 
 == Changelog ==
+= 1.0.1 =
+
+Minor bug fixes:
+
+* Added missing translator notes for strings with specifiers in `Ensemble_Check_Requirements`
+* Updated the default venue type to School, reordered the choices more logically
+* Fixed some typos in the welcome message shown when adding the first Unit Director
+* Added logic to remove all created terms and term meta on plugin uninstall
+
 = 1.0.0 =
 
 * First release.

@@ -9,7 +9,7 @@
 * Requires at least: 4.9.6
 * Tested up to: 5.0
 * Requires PHP: 7.0
-* Stable tag: 1.0.0
+* Stable tag: 1.0.1
 * License: GPLv2
 
 Easily manage the data for a color guard circuit (or similar sport/activity organization) with WordPress.
