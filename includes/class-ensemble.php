@@ -40,7 +40,7 @@ final class Ensemble {
 	 * @since 1.0.0
 	 * @var   string
 	 */
-	private $version = '1.0.0';
+	private $version = '1.0.1';
 
 	/**
 	 * Creates an Ensemble instance.
