@@ -133,7 +133,11 @@ class Object extends Core\Object {
 	 * @return string Formatted end date.
 	 */
 	public function get_end_date( $format = 'm/d/Y' ) {
-		return Date::UTC_to_WP( $this->end_date, $format );
+		if ( ! empty( $this->end_date ) ) {
+			$date = Date::UTC_to_WP( $this->end_date, $format );
+		} else {
+			return '';
+		}
 	}
 
 }
