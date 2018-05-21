@@ -31,7 +31,7 @@ do_action( 'ensemble_admin_notices' );
 		<?php if ( 0 === ( new Database )->count() ) : ?>
 			<div class="alert alert-info" role="alert">
 				<h5><?php esc_html_e( 'Howdy!', 'ensemble' ); ?></h5>
-				<?php esc_html_e( 'It looks like you&#8217;re adding your first unit director. To get started, just choose a username, enter an email, select a unit and that&#8217;s it. If you haven&#8217;t created any units yet, not to worry, you can always come back and it later, ', 'ensemble' ); ?>
+				<?php esc_html_e( 'It looks like you&#8217;re adding your first unit director. To get started, just choose a username, enter an email, select a unit and that&#8217;s it. If you haven&#8217;t created any units yet, not to worry, you can always come back and set them later.', 'ensemble' ); ?>
 			</div>
 		<?php endif; ?>
 
