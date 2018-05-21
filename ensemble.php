@@ -176,6 +176,7 @@ final class Ensemble_Check_Requirements {
 	 * @return string Unmet requirements description text.
 	 */
 	private function unmet_requirements_description_text() {
+		/* translators: 1: Name of requirement, 2: required version number, 3: currently installed version number */
 		return esc_html__( 'Requires %s (%s), but (%s) is installed.', 'ensemble' );
 	}
 
@@ -187,6 +188,7 @@ final class Ensemble_Check_Requirements {
 	 * @return string Unmet missing requirements text.
 	 */
 	private function unmet_requirements_missing_text() {
+		/* translators: 1: name of requirement, 2: required version number */
 		return esc_html__( 'Requires %s (%s), but it appears to be missing.', 'ensemble' );
 	}
 
