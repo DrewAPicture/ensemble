@@ -47,3 +47,6 @@ interface Component_Model {
 	public static function get_cache_key( $object_id );
 
 }
+
+// Alias for the interface pre-1.0.2, which fixed PHP 7.2+ compatibility. Derp.
+class_alias( 'Ensemble\Core\Interfaces\Component_Model', 'Ensemble\Core\Interfaces\Object' );

@@ -92,3 +92,6 @@ class Model extends Core\Model {
 	}
 
 }
+
+// Alias for the class pre-1.0.2, which fixed PHP 7.2+ compatibility. Derp.
+class_alias( 'Ensemble\Components\Venues\Model', 'Ensemble\Components\Venues\Object' );
