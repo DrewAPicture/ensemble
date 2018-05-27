@@ -21,7 +21,7 @@ class Tests extends UnitTestCase {
 	 *
 	 * @var \Ensemble\Components\Venues\Setup
 	 */
-	protected static $setUp;
+	protected static $setup;
 
 	/**
 	 * User fixture.
@@ -41,7 +41,7 @@ class Tests extends UnitTestCase {
 	 * Sets up fixtures before the test class has loaded.
 	 */
 	public static function wpSetUpBeforeClass() {
-		self::$setUp   = new Setup();
+		self::$setup   = new Setup();
 		self::$user_id = self::ensemble()->user->create( array(
 			'role' => 'administrator'
 		) );
@@ -56,14 +56,14 @@ class Tests extends UnitTestCase {
 	 * @covers ::map_meta_caps()
 	 */
 	public function test_map_meta_caps_cb_with_add_venue_cap_should_require_manage_venues() {
-		$this->assertContains( 'manage_venues', self::$setUp->map_meta_caps( array(), 'add_venue', 0, array() ) );
+		$this->assertContains( 'manage_venues', self::$setup->map_meta_caps( array(), 'add_venue', 0, array() ) );
 	}
 
 	/**
 	 * @covers ::map_meta_caps()
 	 */
 	public function test_map_meta_caps_cb_with_edit_venue_cap_and_invalid_venue_should_trigger_do_not_allow() {
-		$mapped = self::$setUp->map_meta_caps( array(), 'edit_venue', self::$user_id, array( 999 ) );
+		$mapped = self::$setup->map_meta_caps( array(), 'edit_venue', self::$user_id, array( 999 ) );
 
 		$this->assertContains( 'do_not_allow', $mapped );
 	}
@@ -72,7 +72,7 @@ class Tests extends UnitTestCase {
 	 * @covers ::map_meta_caps()
 	 */
 	public function test_map_meta_caps_cb_with_edit_venue_and_valid_venue_should_require_manage_venues() {
-		$mapped = self::$setUp->map_meta_caps( array(), 'edit_venue', self::$user_id, array( self::$venues[0] ) );
+		$mapped = self::$setup->map_meta_caps( array(), 'edit_venue', self::$user_id, array( self::$venues[0] ) );
 
 		$this->assertContains( 'manage_venues', $mapped );
 	}
@@ -81,7 +81,7 @@ class Tests extends UnitTestCase {
 	 * @covers ::map_meta_caps()
 	 */
 	public function test_map_meta_caps_cb_with_delete_venue_cap_and_invalid_venue_should_trigger_do_not_allow() {
-		$mapped = self::$setUp->map_meta_caps( array(), 'delete_venue', self::$user_id, array( 999 ) );
+		$mapped = self::$setup->map_meta_caps( array(), 'delete_venue', self::$user_id, array( 999 ) );
 
 		$this->assertContains( 'do_not_allow', $mapped );
 	}
@@ -90,7 +90,7 @@ class Tests extends UnitTestCase {
 	 * @covers ::map_meta_caps()
 	 */
 	public function test_map_meta_caps_cb_with_delete_venue_and_valid_venue_should_require_manage_venues() {
-		$mapped = self::$setUp->map_meta_caps( array(), 'delete_venue', self::$user_id, array( self::$venues[0] ) );
+		$mapped = self::$setup->map_meta_caps( array(), 'delete_venue', self::$user_id, array( self::$venues[0] ) );
 
 		$this->assertContains( 'manage_venues', $mapped );
 	}
