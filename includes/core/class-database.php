@@ -317,7 +317,8 @@ abstract class Database implements Interfaces\Database {
 	 * @since 1.0.0
 	 *
 	 * @param int $object_id Object ID.
-	 * @return Object|\WP_Error Core object or WP_Error if there was a problem.
+	 *
+	 * @return Base_Object|\WP_Error Core object or WP_Error if there was a problem.
 	 */
 	public function get( $object_id ) {
 		$object = $GLOBALS['wpdb']->get_row(
@@ -603,8 +604,9 @@ abstract class Database implements Interfaces\Database {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Object|int $instance Instance or object ID.
-	 * @return Object|\WP_Error Object instance, otherwise WP_Error object if there was a problem.
+	 * @param Base_Object|int $instance Instance or object ID.
+	 *
+	 * @return Base_Object|\WP_Error Base_Object instance, otherwise WP_Error object if there was a problem.
 	 */
 	public function get_core_object( $instance ) {
 		$object_class = $this->get_query_object_type();

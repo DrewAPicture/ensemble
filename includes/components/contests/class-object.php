@@ -17,9 +17,9 @@ use Ensemble\Util\Date;
  *
  * @since 1.0.0
  *
- * @see \Ensemble\Core\Object
+ * @see \Ensemble\Core\Base_Object
  */
-class Object extends Core\Object {
+class Object extends Core\Base_Object {
 
 	/**
 	 * Contest ID.
