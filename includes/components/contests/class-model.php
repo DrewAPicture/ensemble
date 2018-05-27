@@ -1,6 +1,6 @@
 <?php
 /**
- * Defines an object construct for a single Venue
+ * Defines an object construct for a single contest
  *
  * @package   Ensemble\Components\Contests
  * @copyright Copyright (c) 2018, Drew Jaynes
@@ -13,13 +13,13 @@ use Ensemble\Core;
 use Ensemble\Util\Date;
 
 /**
- * Defines the structure of a single venue.
+ * Defines the structure of a single contest.
  *
  * @since 1.0.0
  *
- * @see \Ensemble\Core\Object
+ * @see \Ensemble\Core\Model
  */
-class Object extends Core\Object {
+class Model extends Core\Model {
 
 	/**
 	 * Contest ID.
@@ -141,3 +141,6 @@ class Object extends Core\Object {
 	}
 
 }
+
+// Alias for the class pre-1.0.2, which fixed PHP 7.2+ compatibility. Derp.
+class_alias( 'Ensemble\Components\Contests\Model', 'Ensemble\Components\Contests\Object' );

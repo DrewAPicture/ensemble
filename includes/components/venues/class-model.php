@@ -16,9 +16,9 @@ use Ensemble\Core;
  *
  * @since 1.0.0
  *
- * @see \Ensemble\Core\Object
+ * @see \Ensemble\Core\Model
  */
-class Object extends Core\Object {
+class Model extends Core\Model {
 
 	/**
 	 * Venue ID.
@@ -92,3 +92,6 @@ class Object extends Core\Object {
 	}
 
 }
+
+// Alias for the class pre-1.0.2, which fixed PHP 7.2+ compatibility. Derp.
+class_alias( 'Ensemble\Components\Venues\Model', 'Ensemble\Components\Venues\Object' );

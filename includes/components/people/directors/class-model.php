@@ -14,13 +14,13 @@ use Ensemble\Util\Date;
 use function Ensemble\Components\Units\{get_unit};
 
 /**
- * Defines a Staff Member object model.
+ * Defines a director object model.
  *
  * @since 1.0.0
  *
- * @see \Ensemble\Components\User_Object
+ * @see \Ensemble\Components\User_Model
  */
-class Object extends Core\User_Object {
+class Model extends Core\User_Model {
 
 	/**
 	 * Retrieves a Database instance corresponding to this object.
@@ -63,3 +63,6 @@ class Object extends Core\User_Object {
 	}
 
 }
+
+// Alias for the class pre-1.0.2, which fixed PHP 7.2+ compatibility. Derp.
+class_alias( 'Ensemble\Components\People\Directors\Model', 'Ensemble\Components\People\Directors\Object' );

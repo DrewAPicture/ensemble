@@ -15,7 +15,7 @@ namespace Ensemble\Core;
  * @since 1.0.0
  * @abstract
  */
-abstract class Object implements Interfaces\Object {
+abstract class Model implements Interfaces\Component_Model {
 
 	/**
 	 * Whether the object members have been populated.
@@ -81,10 +81,11 @@ abstract class Object implements Interfaces\Object {
 	 * @since  1.0.0
 	 * @static
 	 *
-	 * @see Object::get_instance()
+	 * @see Model::get_instance()
 	 * @see clean_item_cache()
 	 *
 	 * @param int $object_id Object ID.
+	 *
 	 * @return string Cache key for the object type and ID.
 	 */
 	public static function get_cache_key( $object_id ) {
@@ -195,3 +196,6 @@ abstract class Object implements Interfaces\Object {
 	}
 
 }
+
+// Alias for the class pre-1.0.2, which fixed PHP 7.2+ compatibility. Derp.
+class_alias( 'Ensemble\Core\Model', 'Ensemble\Core\Object' );

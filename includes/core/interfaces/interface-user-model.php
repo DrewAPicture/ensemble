@@ -14,6 +14,9 @@ namespace Ensemble\Core\Interfaces;
  *
  * @since 1.0.0
  */
-interface User_Object {
+interface User_Model {
 
 }
+
+// Alias for the interface pre-1.0.2, which fixed PHP 7.2+ compatibility. Derp.
+class_alias( 'Ensemble\Core\Interfaces\User_Model', 'Ensemble\Core\Interfaces\User_Object' );

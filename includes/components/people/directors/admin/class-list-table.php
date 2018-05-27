@@ -9,7 +9,7 @@
  */
 namespace Ensemble\Components\People\Directors\Admin;
 
-use Ensemble\Components\People\Directors\{Database, Object};
+use Ensemble\Components\People\Directors\{Database, Model};
 use Ensemble\Components\Units\Setup;
 use Ensemble\Util\Date;
 
@@ -233,8 +233,9 @@ class List_Table extends \WP_List_Table {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Object $director     The current director object.
+	 * @param Model  $director     The current director object.
 	 * @param string $column_name The name of the column.
+	 *
 	 * @return string The column value.
 	 */
 	public function column_default( $director, $column_name ) {
@@ -290,7 +291,7 @@ class List_Table extends \WP_List_Table {
 		 * @since 1.0.0
 		 *
 		 * @param string $value   The column data.
-		 * @param Object $director The current director object.
+		 * @param Model  $director The current director object.
 		 */
 		return apply_filters( 'ensemble_directors_table_' . $column_name, $value, $director );
 	}
@@ -309,9 +310,10 @@ class List_Table extends \WP_List_Table {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Object $director     Current director object.
+	 * @param Model  $director     Current director object.
 	 * @param string $column_name Current column name.
 	 * @param string $primary     Primary column name.
+	 *
 	 * @return string Row actions output for directors.
 	 */
 	protected function handle_row_actions( $director, $column_name, $primary ) {
@@ -340,7 +342,7 @@ class List_Table extends \WP_List_Table {
 		 * @since 1.0.0
 		 *
 		 * @param string[] $actions An array of row action links.
-		 * @param Object   $director The current director object.
+		 * @param Model    $director The current director object.
 		 */
 		$actions = apply_filters( 'ensemble_directors_row_actions', $actions, $director );
 
