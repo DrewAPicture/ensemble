@@ -19,7 +19,7 @@ use Ensemble\Util\Date;
  *
  * @see \Ensemble\Core\Base_Object
  */
-class Object extends Core\Base_Object {
+class Contest_Object extends Core\Base_Object {
 
 	/**
 	 * Contest ID.

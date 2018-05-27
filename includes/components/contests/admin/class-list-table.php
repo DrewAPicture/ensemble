@@ -11,7 +11,7 @@ namespace Ensemble\Components\Contests\Admin;
 
 use Ensemble\Components\Venues;
 use Ensemble\Components\Seasons\Setup as Seasons;
-use Ensemble\Components\Contests\{Database, Object};
+use Ensemble\Components\Contests\{Database, Contest_Object};
 use function Ensemble\Components\Contests\{get_status_label, get_type_label};
 
 /**
@@ -307,8 +307,9 @@ class List_Table extends \WP_List_Table {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Object $contest     The current contest object.
-	 * @param string $column_name The name of the column.
+	 * @param Contest_Object $contest     The current contest object.
+	 * @param string         $column_name The name of the column.
+	 *
 	 * @return string The column value.
 	 */
 	public function column_default( $contest, $column_name ) {
@@ -360,8 +361,8 @@ class List_Table extends \WP_List_Table {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param string $value   The column data.
-		 * @param Object $contest The current contest object.
+		 * @param string         $value   The column data.
+		 * @param Contest_Object $contest The current contest object.
 		 */
 		return apply_filters( 'ensemble_contests_table_' . $column_name, $value, $contest );
 	}
@@ -371,7 +372,8 @@ class List_Table extends \WP_List_Table {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Object $contest Current contest object.
+	 * @param Contest_Object $contest Current contest object.
+	 *
 	 * @return string Value of the Venue(s) column.
 	 */
 	public function column_venues( $contest ) {
@@ -420,9 +422,10 @@ class List_Table extends \WP_List_Table {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Object $contest     Current contest object.
-	 * @param string $column_name Current column name.
-	 * @param string $primary     Primary column name.
+	 * @param Contest_Object $contest     Current contest object.
+	 * @param string         $column_name Current column name.
+	 * @param string         $primary     Primary column name.
+	 *
 	 * @return string Row actions output for contests.
 	 */
 	protected function handle_row_actions( $contest, $column_name, $primary ) {
@@ -450,8 +453,8 @@ class List_Table extends \WP_List_Table {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param string[] $actions An array of row action links.
-		 * @param Object   $contest The current contest object.
+		 * @param string[]       $actions An array of row action links.
+		 * @param Contest_Object $contest The current contest object.
 		 */
 		$actions = apply_filters( 'ensemble_contests_row_actions', $actions, $contest );
 

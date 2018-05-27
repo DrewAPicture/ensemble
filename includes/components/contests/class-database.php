@@ -20,7 +20,7 @@ use Ensemble\Util\Date;
  * @see \Ensemble\Core\Database
  *
  * @method Meta_Database    meta()
- * @method Object|\WP_Error get_core_object( int|Object $contest )
+ * @method Contest_Object|\WP_Error get_core_object( int|Contest_Object $contest )
  */
 class Database extends Core\Database {
 
@@ -63,7 +63,7 @@ class Database extends Core\Database {
 	 * @return string Query object type.
 	 */
 	public function get_query_object_type() {
-		return __NAMESPACE__ . '\\Object';
+		return __NAMESPACE__ . '\\Contest_Object';
 	}
 
 	/**
