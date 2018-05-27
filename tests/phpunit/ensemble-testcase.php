@@ -1,6 +1,8 @@
 <?php
 namespace Ensemble\Tests;
 
+use Ensemble\Components\Contests\Database;
+
 require_once dirname( __FILE__ ) . '/factory.php';
 
 /**
@@ -61,14 +63,13 @@ class UnitTestCase extends \WP_UnitTestCase {
 	protected static function _delete_all_data() {
 		global $wpdb;
 
-//		foreach ( array(
-//			ensemble()->contests->table_name,
-//			ensemble()->staff->table_name,
-//			ensemble()->teams->table_name,
-//			ensemble()->venues->table_name
-//		) as $table ) {
-//			$wpdb->query( "DELETE FROM {$table}" );
-//		}
+		$tables = [
+			( new Database )->get_table_name()
+		];
+
+		foreach ( $tables as $table ) {
+			$wpdb->query( "DELETE FROM {$table}" );
+		}
 	}
 
 	/**
