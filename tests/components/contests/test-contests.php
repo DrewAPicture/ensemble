@@ -10,6 +10,7 @@ use Ensemble\Tests\UnitTestCase;
  *
  * @coversDefaultClass \Ensemble\Components\Contests\Setup
  *
+ * @group components
  * @group contests
  * @group setup
  */
