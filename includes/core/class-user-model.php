@@ -1,6 +1,6 @@
 <?php
 /**
- * Objects: User Object
+ * Objects: User Object middleware
  *
  * @package   Ensemble\Components
  * @copyright Copyright (c) 2018, Drew Jaynes
@@ -17,6 +17,6 @@ use Ensemble\Core\Interfaces;
  * @since 1.0.0
  * @abstract
  */
-abstract class User_Object extends \WP_User implements Interfaces\User_Model {
+abstract class User_Model extends \WP_User implements Interfaces\User_Model {
 
 }

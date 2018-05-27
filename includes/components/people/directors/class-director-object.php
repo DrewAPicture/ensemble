@@ -20,7 +20,7 @@ use function Ensemble\Components\Units\{get_unit};
  *
  * @see \Ensemble\Components\User_Model
  */
-class Director_Object extends Core\User_Object {
+class Director_Object extends Core\User_Model {
 
 	/**
 	 * Retrieves a Database instance corresponding to this object.
