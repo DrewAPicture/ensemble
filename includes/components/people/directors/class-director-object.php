@@ -18,7 +18,7 @@ use function Ensemble\Components\Units\{get_unit};
  *
  * @since 1.0.0
  *
- * @see \Ensemble\Components\User_Object
+ * @see \Ensemble\Components\User_Model
  */
 class Director_Object extends Core\User_Object {
 

@@ -17,6 +17,6 @@ use Ensemble\Core\Interfaces;
  * @since 1.0.0
  * @abstract
  */
-abstract class User_Object extends \WP_User implements Interfaces\User_Object {
+abstract class User_Object extends \WP_User implements Interfaces\User_Model {
 
 }
