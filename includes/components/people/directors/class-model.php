@@ -14,7 +14,7 @@ use Ensemble\Util\Date;
 use function Ensemble\Components\Units\{get_unit};
 
 /**
- * Defines a Staff Member object model.
+ * Defines a director object model.
  *
  * @since 1.0.0
  *
