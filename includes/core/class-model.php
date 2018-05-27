@@ -15,7 +15,7 @@ namespace Ensemble\Core;
  * @since 1.0.0
  * @abstract
  */
-abstract class Base_Object implements Interfaces\Custom_Object {
+abstract class Model implements Interfaces\Custom_Object {
 
 	/**
 	 * Whether the object members have been populated.
@@ -81,7 +81,7 @@ abstract class Base_Object implements Interfaces\Custom_Object {
 	 * @since  1.0.0
 	 * @static
 	 *
-	 * @see Base_Object::get_instance()
+	 * @see Model::get_instance()
 	 * @see clean_item_cache()
 	 *
 	 * @param int $object_id Object ID.
