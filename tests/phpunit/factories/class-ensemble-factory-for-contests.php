@@ -11,6 +11,14 @@ use function Ensemble\Components\Contests\get_contest;
  */
 class Contest extends \WP_UnitTest_Factory_For_Thing {
 
+	public function __construct( $factory, array $default_generation_definitions = array() ) {
+		parent::__construct( $factory, $default_generation_definitions );
+
+		$this->default_generation_definitions = array(
+			'name' => new \WP_UnitTest_Generator_Sequence( 'Test Contest: %s' ),
+		);
+	}
+
 	/**
 	 * Wraps the parent method for IDE type hinting purposes.
 	 *
@@ -29,10 +37,11 @@ class Contest extends \WP_UnitTest_Factory_For_Thing {
 	 * @return int|\WP_Error Contest ID or WP_Error if there was a problem.
 	 */
 	function create_object( $args ) {
-		return ( new Database )->insert( array(
-			'name'   => 'Test Contest: ' . rand_str( 6 ),
-			'venues' => array( 1, 2 ),
-		) );
+		if ( empty( $args['venues'] ) ) {
+			$args['venues'] = array( 1, 2 );
+		}
+
+		return ( new Database )->insert( $args );
 	}
 
 	/**
