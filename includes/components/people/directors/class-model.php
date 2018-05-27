@@ -63,6 +63,3 @@ class Model extends Core\User_Model {
 	}
 
 }
-
-// Alias for the class pre-1.0.2, which fixed PHP 7.2+ compatibility. Derp.
-class_alias( 'Ensemble\Components\People\Directors\Model', 'Ensemble\Components\People\Directors\Object' );

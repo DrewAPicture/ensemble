@@ -20,6 +20,3 @@ use Ensemble\Core\Interfaces;
 abstract class User_Model extends \WP_User implements Interfaces\User_Model {
 
 }
-
-// Alias for the class pre-1.0.2, which fixed PHP 7.2+ compatibility. Derp.
-class_alias( 'Ensemble\Core\User_Model', 'Ensemble\Core\User_Object' );
