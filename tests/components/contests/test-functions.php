@@ -14,9 +14,7 @@ class Functions_Tests extends UnitTestCase {
 	 * @covers \Ensemble\Components\Contests\get_contest
 	 */
 	public function test_get_contest_with_invalid_id_should_return_WP_Error() {
-		$contest = get_contest( null );
-
-		$this->assertWPError( $contest );
+		$this->assertWPError( get_contest( null ) );
 	}
 
 	/**
@@ -26,6 +24,15 @@ class Functions_Tests extends UnitTestCase {
 		$contest = get_contest( null );
 
 		$this->assertContains( 'get_instance_invalid_id', $contest->get_error_codes() );
+	}
+
+	/**
+	 * @covers \Ensemble\Components\Contests\get_contest
+	 */
+	public function test_get_contest_with_valid_id_should_return_Model() {
+		$contest_id = $this->factory->contest->create();
+
+		$this->assertInstanceOf( '\\Ensemble\\Components\\Contests\\Model', get_contest( $contest_id ) );
 	}
 
 	/**
