@@ -1,3 +1,5 @@
+[![WordPress Tested](https://img.shields.io/wordpress/v/ensemble.svg?style=flat-square)](https://wordpress.org/plugins/ensemble/)
+[![License](https://img.shields.io/badge/license-GPL_v2%2B-blue.svg?style=flat-square)](http://opensource.org/licenses/GPL-2.0)
 [![Build Status](https://img.shields.io/travis/rust-lang/rust.svg)](https://travis-ci.org/DrewAPicture/ensemble)
 [![GitHub issues](https://img.shields.io/github/issues/DrewAPicture/ensemble.svg)](https://github.com/DrewAPicture/ensemble/issues)
 [![GitHub pull requests](https://img.shields.io/github/issues-pr/DrewAPicture/ensemble.svg)](https://github.com/DrewAPicture/ensemble/pulls)
