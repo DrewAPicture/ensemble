@@ -67,7 +67,8 @@ class UnitTestCase extends \WP_UnitTestCase {
 		global $wpdb;
 
 		$tables = [
-			( new Database )->get_table_name()
+			( new Contests_Database )->get_table_name(),
+			( new Venues_Database )->get_table_name()
 		];
 
 		foreach ( $tables as $table ) {
