@@ -1,14 +1,14 @@
 <?php
-namespace Ensemble\Components\Contests;
+namespace Ensemble\Components\Venues;
 
 use Ensemble\Tests\UnitTestCase;
 
 /**
- * Contests object tests.
+ * Venues model tests.
  *
  * @since 1.0.0
  */
-class Object_Tests extends UnitTestCase {
+class Model_Tests extends UnitTestCase {
 
 	function test_sample() {
 		// replace this with some actual testing code
