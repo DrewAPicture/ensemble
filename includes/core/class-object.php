@@ -15,7 +15,7 @@ namespace Ensemble\Core;
  * @since 1.0.0
  * @abstract
  */
-abstract class Object implements Interfaces\Object {
+abstract class Object implements Interfaces\Custom_Object {
 
 	/**
 	 * Whether the object members have been populated.
