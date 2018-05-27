@@ -22,6 +22,6 @@ class Factory extends \WP_UnitTest_Factory {
 		parent::__construct();
 
 		$this->contest = new Factory\Contest( $this );
-//		$this->venue   = new Factory\Venue( $this );
+		$this->venue   = new Factory\Venue( $this );
 	}
 }
