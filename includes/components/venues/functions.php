@@ -14,8 +14,8 @@ namespace Ensemble\Components\Venues;
  *
  * @since 1.0.0
  *
- * @param int|Object $venue Venue ID or object.
- * @return \Ensemble\Components\Venues\Object|\WP_Error Venue object if found, otherwise a WP_Error object.
+ * @param int|Model $venue Venue ID or object.
+ * @return Model|\WP_Error Venue object if found, otherwise a WP_Error object.
  */
 function get_venue( $venue ) {
 	if ( is_object( $venue ) && isset( $venue->id ) ) {

@@ -1,6 +1,6 @@
 <?php
 /**
- * Objects: User Object
+ * Objects: User Object middleware
  *
  * @package   Ensemble\Components
  * @copyright Copyright (c) 2018, Drew Jaynes
@@ -17,6 +17,9 @@ use Ensemble\Core\Interfaces;
  * @since 1.0.0
  * @abstract
  */
-abstract class User_Object extends \WP_User implements Interfaces\User_Object {
+abstract class User_Model extends \WP_User implements Interfaces\User_Model {
 
 }
+
+// Alias for the class pre-1.0.2, which fixed PHP 7.2+ compatibility. Derp.
+class_alias( 'Ensemble\Core\User_Model', 'Ensemble\Core\User_Object' );
