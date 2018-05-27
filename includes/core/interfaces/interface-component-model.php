@@ -14,7 +14,7 @@ namespace Ensemble\Core\Interfaces;
  *
  * @since 1.0.0
  */
-interface Custom_Object {
+interface Component_Model {
 
 	/**
 	 * Retrieves the object ID.
