@@ -11,7 +11,7 @@ namespace Ensemble\Components\Contests\Admin;
 
 use Ensemble\Components\Venues;
 use Ensemble\Components\Seasons\Setup as Seasons;
-use Ensemble\Components\Contests\{Database, Contest_Object};
+use Ensemble\Components\Contests\{Database, Model};
 use function Ensemble\Components\Contests\{get_status_label, get_type_label};
 
 /**
@@ -307,8 +307,8 @@ class List_Table extends \WP_List_Table {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Contest_Object $contest     The current contest object.
-	 * @param string         $column_name The name of the column.
+	 * @param Model  $contest     The current contest object.
+	 * @param string $column_name The name of the column.
 	 *
 	 * @return string The column value.
 	 */
@@ -361,8 +361,8 @@ class List_Table extends \WP_List_Table {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param string         $value   The column data.
-		 * @param Contest_Object $contest The current contest object.
+		 * @param string $value   The column data.
+		 * @param Model  $contest The current contest object.
 		 */
 		return apply_filters( 'ensemble_contests_table_' . $column_name, $value, $contest );
 	}
@@ -372,7 +372,7 @@ class List_Table extends \WP_List_Table {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Contest_Object $contest Current contest object.
+	 * @param Model $contest Current contest object.
 	 *
 	 * @return string Value of the Venue(s) column.
 	 */
@@ -422,9 +422,9 @@ class List_Table extends \WP_List_Table {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Contest_Object $contest     Current contest object.
-	 * @param string         $column_name Current column name.
-	 * @param string         $primary     Primary column name.
+	 * @param Model  $contest     Current contest object.
+	 * @param string $column_name Current column name.
+	 * @param string $primary     Primary column name.
 	 *
 	 * @return string Row actions output for contests.
 	 */
@@ -453,8 +453,8 @@ class List_Table extends \WP_List_Table {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param string[]       $actions An array of row action links.
-		 * @param Contest_Object $contest The current contest object.
+		 * @param string[] $actions An array of row action links.
+		 * @param Model    $contest The current contest object.
 		 */
 		$actions = apply_filters( 'ensemble_contests_row_actions', $actions, $contest );
 

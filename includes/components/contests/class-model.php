@@ -19,7 +19,7 @@ use Ensemble\Util\Date;
  *
  * @see \Ensemble\Core\Model
  */
-class Contest_Object extends Core\Model {
+class Model extends Core\Model {
 
 	/**
 	 * Contest ID.

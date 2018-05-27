@@ -14,8 +14,8 @@ namespace Ensemble\Components\Contests;
  *
  * @since 1.0.0
  *
- * @param int|Contest_Object $contest Contest ID or object.
- * @return Contest_Object|\WP_Error Contest object if found, otherwise a WP_Error object.
+ * @param int|Model $contest Contest ID or object.
+ * @return Model|\WP_Error Contest object if found, otherwise a WP_Error object.
  */
 function get_contest( $contest ) {
 	if ( is_object( $contest ) && isset( $contest->id ) ) {
