@@ -20,7 +20,7 @@ use Ensemble\Util\Date;
  * @see \Ensemble\Core\Database
  *
  * @method Meta_Database    meta()
- * @method Venue_Object|\WP_Error get_core_object( int|Venue_Object $venue )
+ * @method Model|\WP_Error get_core_object( int|Model $venue )
  */
 class Database extends Core\Database {
 
