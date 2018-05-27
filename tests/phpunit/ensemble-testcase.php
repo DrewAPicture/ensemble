@@ -1,7 +1,8 @@
 <?php
 namespace Ensemble\Tests;
 
-use Ensemble\Components\Contests\Database;
+use Ensemble\Components\Contests\Database as Contests_Database;
+use Ensemble\Components\Venues\Database as Venues_Database;
 
 require_once dirname( __FILE__ ) . '/factory.php';
 
