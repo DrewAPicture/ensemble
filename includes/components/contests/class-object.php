@@ -1,6 +1,6 @@
 <?php
 /**
- * Defines an object construct for a single Venue
+ * Defines an object construct for a single contest
  *
  * @package   Ensemble\Components\Contests
  * @copyright Copyright (c) 2018, Drew Jaynes
@@ -13,7 +13,7 @@ use Ensemble\Core;
 use Ensemble\Util\Date;
 
 /**
- * Defines the structure of a single venue.
+ * Defines the structure of a single contest.
  *
  * @since 1.0.0
  *
