@@ -9,7 +9,7 @@
  */
 namespace Ensemble\Components\Venues\Admin;
 
-use Ensemble\Components\Venues\{Database, Object};
+use Ensemble\Components\Venues\{Database, Venue_Object};
 use function Ensemble\Components\Venues\{get_status_label, get_type_label};
 
 /**
@@ -290,8 +290,9 @@ class List_Table extends \WP_List_Table {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Object $venue     The current venue object.
-	 * @param string $column_name The name of the column.
+	 * @param Venue_Object $venue     The current venue object.
+	 * @param string       $column_name The name of the column.
+	 *
 	 * @return string The column value.
 	 */
 	public function column_default( $venue, $column_name ) {
@@ -332,8 +333,8 @@ class List_Table extends \WP_List_Table {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param string $value   The column data.
-		 * @param Object $venue The current venue object.
+		 * @param string       $value   The column data.
+		 * @param Venue_Object $venue The current venue object.
 		 */
 		return apply_filters( 'ensemble_venues_table_' . $column_name, $value, $venue );
 	}
@@ -352,9 +353,10 @@ class List_Table extends \WP_List_Table {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Object $venue       Current venue object.
-	 * @param string $column_name Current column name.
-	 * @param string $primary     Primary column name.
+	 * @param Venue_Object $venue       Current venue object.
+	 * @param string       $column_name Current column name.
+	 * @param string       $primary     Primary column name.
+	 *
 	 * @return string Row actions output for venues.
 	 */
 	protected function handle_row_actions( $venue, $column_name, $primary ) {
@@ -382,8 +384,8 @@ class List_Table extends \WP_List_Table {
 		 *
 		 * @since 1.0.0
 		 *
-		 * @param string[] $actions An array of row action links.
-		 * @param Object   $venue   The current venue object.
+		 * @param string[]     $actions An array of row action links.
+		 * @param Venue_Object $venue   The current venue object.
 		 */
 		$actions = apply_filters( 'ensemble_venues_row_actions', $actions, $venue );
 

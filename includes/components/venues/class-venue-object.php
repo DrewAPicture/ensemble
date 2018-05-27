@@ -18,7 +18,7 @@ use Ensemble\Core;
  *
  * @see \Ensemble\Core\Base_Object
  */
-class Object extends Core\Base_Object {
+class Venue_Object extends Core\Base_Object {
 
 	/**
 	 * Venue ID.
