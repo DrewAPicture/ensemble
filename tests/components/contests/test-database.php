@@ -168,7 +168,7 @@ class Database_Tests extends UnitTestCase {
 	 * @covers ::query()
 	 * @group query
 	 */
-	public function test_query_with_multiple_valid_ds_should_return_only_those_results_inside_number_constraint() {
+	public function test_query_with_multiple_valid_ids_should_return_only_those_results_inside_number_constraint() {
 		$results = self::$db->query( array(
 			'fields' => 'ids',
 			'id'     => self::$contests
