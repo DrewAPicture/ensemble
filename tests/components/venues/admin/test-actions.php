@@ -51,7 +51,7 @@ class Actions_Tests extends UnitTestCase {
 	/**
 	 * @covers \Ensemble\Components\Venues\Admin\Actions
 	 */
-	public function test_should_use_the_View_Loader_trait() {
+	public function test_Actions_should_use_the_View_Loader_trait() {
 		$traits = class_uses( self::$actions );
 
 		$this->assertArrayHasKey( 'Ensemble\\Core\\Traits\\View_Loader', $traits );
