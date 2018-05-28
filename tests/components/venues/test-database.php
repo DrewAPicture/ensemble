@@ -101,5 +101,68 @@ class Database_Tests extends UnitTestCase {
 		$this->assertEqualSetsWithIndex( $expected, $actual );
 	}
 
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
+	public function test_query_with_count_true_should_return_only_a_count() {
+		$result = self::$db->query( array(), true );
+
+		$this->assertTrue( is_numeric( $result ) );
+	}
+
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
+	public function test_query_with_defaults_should_return_no_greater_than_20_results() {
+		$results = self::$db->query();
+		$count   = count( $results );
+
+
+		$this->assertTrue( $count > 0 && $count <= 20 );
+	}
+
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
+	public function test_query_with_single_invalid_id_should_not_affect_results() {
+		$results = self::$db->query( array(
+			'fields' => 'ids',
+			'id'     => 9999
+		) );
+
+		$this->assertEqualSets( self::$venues, $results );
+	}
+
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
+	public function test_query_with_single_valid_id_should_only_return_that_venue() {
+		$results = self::$db->query( array(
+			'fields' => 'ids',
+			'id'     => self::$venues[0],
+		) );
+
+		$this->assertEqualSets( array( self::$venues[0] ), $results );
+	}
+
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
+	public function test_query_with_multiple_valid_ids_should_only_return_those_venues() {
+		$venues = $this->factory->venue->create_many( 2 );
+
+		$results = self::$db->query( array(
+			'fields' => 'ids',
+			'id'     => $venues,
+		) );
+
+		$this->assertEqualSets( $venues, $results );
+	}
+
 }
 
