@@ -141,7 +141,7 @@ class Database extends Core\Database {
 	 *                                     the contest:venue relationship). Default empty array.
 	 *     @type string|string[] $type     Type or array of types to query contests by. Default empty.
 	 *     @type string|string[] $status   Status or array of statuses to query contests by. Default empty.
-	 *     @type int|array       $exclude  ID or array of contest IDs to explicitly exclude.
+	 *     @type int|int[]       $exclude  Contest ID or array of IDs to explicitly exclude. Default empty array.
 	 *     @type bool            $external Whether the contest contains an external URL or not.
 	 *                                     Accepts true, false, or empty (ignored) Default empty.
 	 * }
