@@ -152,6 +152,7 @@ class Database extends Core\Database {
 			'type'       => '',
 			'exclude'    => array(),
 			'status'     => '',
+			'external'   => '',
 		);
 
 		$args = wp_parse_args( $query_args, $defaults );
