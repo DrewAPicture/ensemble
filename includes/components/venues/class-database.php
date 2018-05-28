@@ -124,19 +124,16 @@ class Database extends Core\Database {
 	 * @since 1.0.2 Added array support for querying by 'name', 'type', and 'status'.
 	 *
 	 * @param array $query_args {
-	 *     Optional. Arguments for querying venues. Default empty array.
+	 *     Optional. Arguments for querying venues. See parse_global_args() for available
+	 *     global custom query arguments. Default empty array.
 	 *
-	 *     @type int|array    $id      Venue ID or array of venue IDs to retrieve.
-	 *     @type int          $number  Number of venues to query for. Default 20.
-	 *     @type int          $offset  Number of venues to offset the query for. Default 0.
-	 *     @type int|array    $exclude Venue ID or array of IDs to explicitly exclude.
-	 *     @type string       $status  Venue type. Default empty (all).
-	 *     @type string       $status  Venue status. Default empty (all).
-	 *     @type string       $order   How to order returned venue results. Accepts 'ASC' or 'DESC'.
-	 *                                 Default 'DESC'.
-	 *     @type string       $orderby Venues table column to order results by. Default 'id'.
-	 *     @type string|array $fields  Specific fields to retrieve. Accepts 'ids', a single venue field, or an
-	 *                                 array of fields. Default '*' (all).
+	 *     @type int|int[]       $id      Venue ID or array of venue IDs to retrieve.
+	 *     @type string|string[] $name    Name or array of names to query venues by. Default empty.
+	 *     @type string|string[] $address Address or array of addresses to query venues by. Default empty.
+	 *     @type int|int[]       $exclude ID or array of venue IDs to exclude from the query.
+	 *                                    Default empty array.
+	 *     @type string|string[] $type    Venue type or array of types to query by. Default empty (all).
+	 *     @type string|string[] $status  Status or array of statuses to query by. Default empty (all).
 	 * }
 	 * @param bool  $count Optional. Whether to return only the total number of results found. Default false.
 	 * @return array|int Array of venue objects (if found), integer if `$count` is true.
