@@ -364,5 +364,132 @@ class Database_Tests extends UnitTestCase {
 		$this->assertNotContains( $contest, $results );
 	}
 
+	/**
+	 * @covers ::insert()
+	 */
+	public function test_insert_success_should_return_newly_inserted_contest_id() {
+		$result = self::$db->insert( array(
+			'name'   => 'Foo',
+			'venues' => array( 1, 2 ),
+		) );
+
+		$this->assertTrue( is_numeric( $result ) );
+	}
+
+	/**
+	 * @covers ::insert()
+	 */
+	public function test_insert_successful_should_not_return_a_WP_Error() {
+		$result = self::$db->insert( array(
+			'name'   => 'Foo',
+			'venues' => array( 1, 2 ),
+		) );
+
+		$this->assertNotWPError( $result );
+	}
+
+	/**
+	 * @covers ::insert()
+	 */
+	public function test_insert_with_missing_name_should_return_WP_Error() {
+		$result = self::$db->insert( array(
+			'venues' => array( 1, 2 ),
+		) );
+
+		$this->assertWPError( $result );
+	}
+
+	/**
+	 * @covers ::insert()
+	 */
+	public function test_insert_with_missing_name_should_return_WP_Error_including_code_missing_contest_name() {
+		$result = self::$db->insert( array(
+			'venues' => array( 1, 2 ),
+		) );
+
+		$this->assertContains( 'missing_contest_name', $result->get_error_codes() );
+	}
+
+	/**
+	 * @covers ::insert()
+	 */
+	public function test_insert_with_missing_venues_should_return_WP_Error() {
+		$result = self::$db->insert( array(
+			'name' => 'Foo',
+		) );
+
+		$this->assertWPError( $result );
+	}
+
+	/**
+	 * @covers ::insert()
+	 */
+	public function test_insert_with_missing_venues_should_return_WP_Error_including_code_missing_contest_venues() {
+		$result = self::$db->insert( array(
+			'name' => 'Foo',
+		) );
+
+		$this->assertContains( 'missing_contest_venues', $result->get_error_codes() );
+	}
+
+	/**
+	 * @covers ::insert()
+	 */
+	public function test_insert_with_start_date_should_convert_date_from_WP_to_UTC() {
+		$start_date = date( 'Y-m-d H:i' );
+
+		$expected = $this->strip_seconds_from_date( Date::WP_to_UTC( $start_date ) );
+
+		$result = self::$db->insert( array(
+			'name'       => 'Foo',
+			'venues'     => array( 1 ),
+			'start_date' => $start_date,
+		) );
+
+		$stored_date = $this->strip_seconds_from_date( get_contest( $result )->start_date );
+
+		$this->assertSame( $expected, $stored_date );
+	}
+
+	/**
+	 * @covers ::insert()
+	 */
+	public function test_insert_with_end_date_should_convert_date_from_WP_to_UTC() {
+		$end_date = date( 'Y-m-d H:i' );
+
+		$expected = $this->strip_seconds_from_date( Date::WP_to_UTC( $end_date ) );
+
+		$result = self::$db->insert( array(
+			'name'     => 'Foo',
+			'venues'   => array( 1 ),
+			'end_date' => $end_date,
+		) );
+
+		$stored_date = $this->strip_seconds_from_date( get_contest( $result )->end_date );
+
+		$this->assertSame( $expected, $stored_date );
+	}
+
+	/**
+	 * @covers ::insert()
+	 */
+	public function test_insert_with_no_end_date_should_store_zeroed_time() {
+		$result = self::$db->insert( array(
+			'name'   => 'Foo',
+			'venues' => array( 1 ),
+		) );
+
+		$this->assertSame( '0000-00-00 00:00:00', get_contest( $result )->end_date );
+	}
+
+	/**
+	 * @covers ::insert()
+	 */
+	public function test_insert_failure_should_return_a_WP_Error() {
+		$result = self::$db->insert( array() );
+
+		$this->assertWPError( $result );
+	}
+
 }
 
