@@ -491,5 +491,83 @@ class Database_Tests extends UnitTestCase {
 		$this->assertWPError( $result );
 	}
 
+	/**
+	 * @covers ::update()
+	 */
+	public function test_update_with_invalid_contest_id_should_return_WP_Error() {
+		$result = self::$db->update( 9999 );
+
+		$this->assertWPError( $result );
+	}
+
+	/**
+	 * @covers ::update()
+	 */
+	public function test_update_with_invalid_contest_id_should_return_WP_Error_including_code_invalid_object() {
+		$result = self::$db->update( 9999 );
+
+		$this->assertContains( 'invalid_object', $result->get_error_codes() );
+	}
+
+	/**
+	 * @covers ::update()
+	 */
+	public function test_update_successful_should_return_true() {
+		$this->assertTrue( self::$db->update( self::$contests[0] ) );
+	}
+
+	/**
+	 * @covers ::update()
+	 */
+	public function test_update_with_new_venues_should_update_venues() {
+		$contest = $this->factory->contest->create();
+		$venues  = array( 5, 4, 3 );
+
+		self::$db->update( $contest, array(
+			'venues' => $venues,
+		) );
+
+		$expected = implode( ',', $venues );
+		$stored   = get_contest( $contest )->venues;
+
+		$this->assertSame( $expected, $stored );
+	}
+
+	/**
+	 * @covers ::update()
+	 */
+	public function test_update_with_new_start_date_should_convert_it_from_WP_to_UTC() {
+		$contest = $this->factory->contest->create();
+
+		$start_date = date( 'Y-m-d H:i:s', time() - WEEK_IN_SECONDS );
+
+		self::$db->update( $contest, array(
+			'start_date' => $start_date,
+		) );
+
+		$expected    = $this->strip_seconds_from_date( Date::WP_to_UTC( $start_date ) );
+		$stored_date = $this->strip_seconds_from_date( get_contest( $contest )->start_date );
+
+		$this->assertSame( $expected, $stored_date );
+	}
+
+	/**
+	 * @covers ::update()
+	 */
+	public function test_update_with_new_end_date_should_convert_it_from_WP_to_UTC() {
+		$contest = $this->factory->contest->create();
+
+		$end_date = date( 'Y-m-d H:i:s', time() + WEEK_IN_SECONDS );
+
+		self::$db->update( $contest, array(
+			'end_date' => $end_date,
+		) );
+
+		$expected    = $this->strip_seconds_from_date( Date::WP_to_UTC( $end_date ) );
+		$stored_date = $this->strip_seconds_from_date( get_contest( $contest )->end_date );
+
+		$this->assertSame( $expected, $stored_date );
+	}
+
 }
 
