@@ -133,11 +133,13 @@ class Model extends Core\Model {
 	 * @return string Formatted end date.
 	 */
 	public function get_end_date( $format = 'm/d/Y' ) {
-		if ( ! empty( $this->end_date ) ) {
+		if ( '0000-00-00 00:00:00' !== $this->end_date ) {
 			$date = Date::UTC_to_WP( $this->end_date, $format );
 		} else {
-			return '';
+			$date = '';
 		}
+
+		return $date;
 	}
 
 }

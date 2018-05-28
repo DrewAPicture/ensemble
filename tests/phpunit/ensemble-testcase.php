@@ -1,7 +1,12 @@
 <?php
 namespace Ensemble\Tests;
 
-require_once dirname( __FILE__ ) . '/factory.php';
+use Ensemble\Components\Contests\Database as Contests_Database;
+use Ensemble\Components\Venues\Database as Venues_Database;
+
+require_once dirname( __FILE__ ) . '/factories/class-ensemble-factory-for-contests.php';
+require_once dirname( __FILE__ ) . '/factories/class-ensemble-factory-for-venues.php';
+require_once dirname( __FILE__ ) . '/factories/class-ensemble-factory.php';
 
 /**
  * Defines a basic fixture to run multiple tests.
@@ -51,6 +56,17 @@ class UnitTestCase extends \WP_UnitTestCase {
 	}
 
 	/**
+	 * Helper to strip seconds from a given date in case the test is slow
+	 * and the seconds don't line up.
+	 *
+	 * @param string $date Date string.
+	 * @return string Modified date string in Y-m-d H:i format (no seconds).
+	 */
+	public function strip_seconds_from_date( $date ) {
+		return date( 'Y-m-d H:i', strtotime( $date ) );
+	}
+
+	/**
 	 * Deletes all data from defined tables.
 	 *
 	 * @access protected
@@ -61,14 +77,14 @@ class UnitTestCase extends \WP_UnitTestCase {
 	protected static function _delete_all_data() {
 		global $wpdb;
 
-//		foreach ( array(
-//			ensemble()->contests->table_name,
-//			ensemble()->staff->table_name,
-//			ensemble()->teams->table_name,
-//			ensemble()->venues->table_name
-//		) as $table ) {
-//			$wpdb->query( "DELETE FROM {$table}" );
-//		}
+		$tables = [
+			( new Contests_Database )->get_table_name(),
+			( new Venues_Database )->get_table_name()
+		];
+
+		foreach ( $tables as $table ) {
+			$wpdb->query( "DELETE FROM {$table}" );
+		}
 	}
 
 	/**
