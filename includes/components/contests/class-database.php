@@ -205,7 +205,7 @@ class Database extends Core\Database {
 			if ( true === $args['external'] ) {
 				$claws->where( 'external' )->doesnt_equal( '' );
 			} elseif ( false === $args['external'] ) {
-				$claws->where( 'external' )->not_exists();
+				$claws->where( 'external' )->equals( '' );
 			}
 		}
 
