@@ -454,5 +454,46 @@ class Database_Tests extends UnitTestCase {
 		$this->assertSame( $expected, $actual );
 	}
 
+	/**
+	 * @covers ::update()
+	 */
+	public function test_update_with_invalid_id_should_return_WP_Error() {
+		$result = self::$db->update( 9999 );
+
+		$this->assertWPError( $result );
+	}
+
+	/**
+	 * @covers ::update()
+	 */
+	public function test_update_with_invalid_id_should_return_WP_Error_including_code_invalid_object() {
+		$result = self::$db->update( 9999 );
+
+		$this->assertContains( 'invalid_object', $result->get_error_codes() );
+	}
+
+	/**
+	 * @covers ::update()
+	 */
+	public function test_update_with_valid_id_should_return_true() {
+		$this->assertTrue( self::$db->update( self::$venues[0] ) );
+	}
+
+	/**
+	 * @covers ::update()
+	 */
+	public function test_update_with_new_date_added_should_convert_it_from_WP_to_UTC() {
+		$venue = $this->factory->venue->create();
+
+		$date_added = date( 'Y-m-d H:i:s' );
+
+		self::$db->update( $venue, array(
+			'date_added' => $date_added
+		) );
+
+		$expected = Date::WP_to_UTC( $date_added );
+
+		$this->assertSame( $expected, get_venue( $venue )->date_added );
+	}
 }
 
