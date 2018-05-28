@@ -37,7 +37,7 @@ class Database_Tests extends UnitTestCase {
 	public static function wpSetUpBeforeClass() {
 		self::$db = ( new Database );
 
-		self::$contests[] = self::ensemble()->contest->create_many( 2 );
+		self::$contests = self::ensemble()->contest->create_many( 2 );
 	}
 
 	/**
