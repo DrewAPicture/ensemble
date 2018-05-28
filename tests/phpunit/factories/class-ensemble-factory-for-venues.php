@@ -11,6 +11,15 @@ use function Ensemble\Components\Venues\get_venue;
  */
 class Venue extends \WP_UnitTest_Factory_For_Thing {
 
+	public function __construct( $factory, array $default_generation_definitions = array() ) {
+		parent::__construct( $factory, $default_generation_definitions );
+
+		$this->default_generation_definitions = array(
+			'name'    => new \WP_UnitTest_Generator_Sequence( 'Test Venue: %s' ),
+			'address' => new \WP_UnitTest_Generator_Sequence( '%s Somewhere, CO 80131' ),
+		);
+	}
+
 	/**
 	 * Wraps the parent method for IDE type hinting purposes.
 	 *
@@ -29,10 +38,7 @@ class Venue extends \WP_UnitTest_Factory_For_Thing {
 	 * @return int|\WP_Error Venue ID or WP_Error if there was a problem.
 	 */
 	function create_object( $args ) {
-		return ( new Database )->insert( array(
-			'name'    => 'Test Venue: ' . rand_str( 6 ),
-			'address' => '12345 Mockingbird Lane, Somewhere, CO 87654',
-		) );
+		return ( new Database )->insert( $args );
 	}
 
 	/**
