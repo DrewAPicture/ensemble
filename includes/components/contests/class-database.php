@@ -157,8 +157,6 @@ class Database extends Core\Database {
 			'type'       => '',
 			'exclude'    => array(),
 			'status'     => '',
-			'start_date' => '',
-			'end_date'   => '',
 		);
 
 		$args = wp_parse_args( $query_args, $defaults );
