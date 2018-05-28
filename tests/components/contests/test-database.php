@@ -2,6 +2,7 @@
 namespace Ensemble\Components\Contests;
 
 use Ensemble\Tests\UnitTestCase;
+use Ensemble\Util\Date;
 
 /**
  * Contests database tests.
@@ -70,7 +71,7 @@ class Database_Tests extends UnitTestCase {
 	/**
 	 * @covers ::get_columns()
 	 */
-	public function test_get_columns_should_return_colummns_and_types() {
+	public function test_get_columns_should_return_columns_and_types() {
 		$expected = array(
 			'id'          => '%d',
 			'name'        => '%s',
@@ -88,37 +89,23 @@ class Database_Tests extends UnitTestCase {
 	}
 
 	/**
-	 * @covers ::get_columns()
-	 *
-	 * @dataProvider _get_columns_formats_dp
-	 * @param string $column Column key
-	 * @param string $format Format specifier
+	 * @covers ::get_column_defaults()
 	 */
-	public function test_get_columns_formats( $column, $format ) {
-		$columns = self::$db->get_columns();
-
-		$this->assertTrue( $columns[ $column ] === $format );
-	}
-
-	/**
-	 * Data provider for test_get_columns_formats()
-	 *
-	 * @return array Data.
-	 */
-	public function _get_columns_formats_dp() {
-		return array(
-			array( 'id', '%d' ),
-			array( 'name', '%s' ),
-			array( 'description', '%s' ),
-			array( 'venues', '%s' ),
-			array( 'type', '%s' ),
-			array( 'external', '%s' ),
-			array( 'status', '%s' ),
-			array( 'timezone', '%s' ),
-			array( 'start_date', '%s' ),
-			array( 'end_date', '%s' ),
+	public function test_get_column_defaults_should_return_column_defaults() {
+		$expected = array(
+			'type'       => 'standard',
+			'status'     => 'published',
+			'timezone'   => Date::get_wp_timezone(),
+			'start_date' => Date::UTC( 'Y-m-d H:i' ),
 		);
+
+		$actual = self::$db->get_column_defaults();
+
+		$actual['start_date'] = $this->strip_seconds_from_date( $actual['start_date'] );
+
+		$this->assertEqualSetsWithIndex( $expected, $actual );
 	}
+
 
 }
 
