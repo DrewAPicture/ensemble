@@ -201,7 +201,7 @@ class Database_Tests extends UnitTestCase {
 	 * @covers ::query()
 	 * @group query
 	 */
-	public function test_query_with_valid_type_should_return_only_results_of_that_type() {
+	public function test_query_with_single_valid_type_should_return_only_results_of_that_type() {
 		$results = self::$db->query( array(
 			'fields' => 'type',
 			'type'   => 'standard',
@@ -209,5 +209,70 @@ class Database_Tests extends UnitTestCase {
 
 		$this->assertEqualSets( array( 'standard' ), array_unique( $results ) );
 	}
+
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
+	public function test_query_with_multiple_valid_types_should_return_only_results_of_those_types() {
+		$contest = $this->factory->contest->create( array(
+			'type' => 'preview',
+		) );
+
+		$results = self::$db->query( array(
+			'fields' => 'type',
+			'type'   => array( 'standard', 'preview' ),
+		) );
+
+		$this->assertEqualSets( array( 'standard', 'preview' ), array_unique( $results ) );
+	}
+
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
+	public function test_query_with_invalid_status_should_not_take_the_status_into_account() {
+		$results = self::$db->query( array(
+			'fields' => 'status',
+			'status' => 'foo',
+		) );
+
+		$this->assertNotContains( 'foo', $results );
+	}
+
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
+	public function test_query_with_single_valid_status_should_return_only_results_with_that_status() {
+		$contest = $this->factory->contest->create( array(
+			'status' => 'private',
+		) );
+
+		$results = self::$db->query( array(
+			'fields' => 'status',
+			'status' => 'private',
+		) );
+
+		$this->assertEqualSets( array( 'private' ), array_unique( $results ) );
+	}
+
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
+	public function test_query_with_multiple_valid_statuses_should_return_only_resuults_with_those_statuses() {
+		$contest = $this->factory->contest->create( array(
+			'status' => 'private',
+		) );
+
+		$results = self::$db->query( array(
+			'fields' => 'status',
+			'status' => array( 'published', 'private' ),
+		) );
+
+		$this->assertEqualSets( array( 'published', 'private' ), array_unique( $results ) );
+	}
+
 }
 
