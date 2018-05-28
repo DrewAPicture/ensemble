@@ -274,5 +274,46 @@ class Database_Tests extends UnitTestCase {
 		$this->assertEqualSets( array( 'published', 'private' ), array_unique( $results ) );
 	}
 
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
+	public function test_query_with_single_invalid_exclude_id_should_not_affect_results() {
+		$results = self::$db->query( array(
+			'fields'  => 'ids',
+			'exclude' => 9999
+		) );
+
+		$this->assertEqualSets( self::$contests, $results );
+	}
+
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
+	public function test_query_with_single_valid_exclude_id_should_exclude_that_id() {
+		$results = self::$db->query( array(
+			'fields'  => 'ids',
+			'exclude' => self::$contests[1],
+		) );
+
+		$this->assertEqualSets( array( self::$contests[0] ), $results );
+	}
+
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
+	public function test_query_with_multiple_valid_exclude_ids_should_exclude_those_ids() {
+		$contest = $this->factory->contest->create();
+
+		$results = self::$db->query( array(
+			'fields' => 'ids',
+			'exclude' => $contest,
+		) );
+
+		$this->assertEqualSets( self::$contests, $results );
+	}
+
 }
 
