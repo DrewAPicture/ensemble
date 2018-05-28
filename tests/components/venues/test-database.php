@@ -425,5 +425,34 @@ class Database_Tests extends UnitTestCase {
 		$this->assertContains( 'missing_venue_address', $result->get_error_codes() );
 	}
 
+	/**
+	 * @covers ::insert()
+	 */
+	public function test_insert_with_date_added_should_convert_it_from_WP_to_UTC() {
+		$date_added = date( 'Y-m-d H:i' );
+
+		$result = self::$db->insert( array(
+			'name'       => 'Foo',
+			'address'    => 'Bar',
+			'date_added' => $date_added,
+		) );
+
+		$expected = Date::WP_to_UTC( $date_added );
+
+		$this->assertSame( $expected, get_venue( $result )->date_added );
+	}
+
+	/**
+	 * @covers ::insert()
+	 */
+	public function test_insert_without_date_added_should_default_to_current_time_in_UTC() {
+		$venue = $this->factory->venue->create();
+
+		$expected = Date::UTC( 'Y-m-d H:i' );
+		$actual   = $this->strip_seconds_from_date( get_venue( $venue )->date_added );
+
+		$this->assertSame( $expected, $actual );
+	}
+
 }
 
