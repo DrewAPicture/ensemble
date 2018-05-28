@@ -53,5 +53,72 @@ class Database_Tests extends UnitTestCase {
 		$this->assertSame( __NAMESPACE__ . '\\Model', self::$db->get_query_object_type() );
 	}
 
+	/**
+	 * @covers ::get_table_suffix()
+	 */
+	public function test_get_table_suffix_should_return_ensemble_contests() {
+		$this->assertSame( 'ensemble_contests', self::$db->get_table_suffix() );
+	}
+
+	/**
+	 * @covers ::get_version()
+	 */
+	public function test_get_version_should_return_the_current_db_version() {
+		$this->assertSame( '1.0', self::$db->get_version() );
+	}
+
+	/**
+	 * @covers ::get_columns()
+	 */
+	public function test_get_columns_should_return_colummns_and_types() {
+		$expected = array(
+			'id'          => '%d',
+			'name'        => '%s',
+			'description' => '%s',
+			'venues'      => '%s',
+			'type'        => '%s',
+			'external'    => '%s',
+			'status'      => '%s',
+			'timezone'    => '%s',
+			'start_date'  => '%s',
+			'end_date'    => '%s',
+		);
+
+		$this->assertEqualSetsWithIndex( $expected, self::$db->get_columns() );
+	}
+
+	/**
+	 * @covers ::get_columns()
+	 *
+	 * @dataProvider _get_columns_formats_dp
+	 * @param string $column Column key
+	 * @param string $format Format specifier
+	 */
+	public function test_get_columns_formats( $column, $format ) {
+		$columns = self::$db->get_columns();
+
+		$this->assertTrue( $columns[ $column ] === $format );
+	}
+
+	/**
+	 * Data provider for test_get_columns_formats()
+	 *
+	 * @return array Data.
+	 */
+	public function _get_columns_formats_dp() {
+		return array(
+			array( 'id', '%d' ),
+			array( 'name', '%s' ),
+			array( 'description', '%s' ),
+			array( 'venues', '%s' ),
+			array( 'type', '%s' ),
+			array( 'external', '%s' ),
+			array( 'status', '%s' ),
+			array( 'timezone', '%s' ),
+			array( 'start_date', '%s' ),
+			array( 'end_date', '%s' ),
+		);
+	}
+
 }
 
