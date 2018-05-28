@@ -246,12 +246,16 @@ class Database_Tests extends UnitTestCase {
 	 * @group query
 	 */
 	public function test_query_with_single_valid_type_should_only_return_matching_venues_if_they_exist() {
+		$venue = $this->factory->venue->create( array(
+			'type' => 'arena',
+		) );
+
 		$results = self::$db->query( array(
-			'fields' => 'type',
+			'fields' => 'ids',
 			'type'   => 'arena',
 		) );
 
-		$this->assertEqualSets( array( 'arena' ), array_unique( $results ) );
+		$this->assertEqualSets( array( $venue ), $results );
 	}
 
 	/**
