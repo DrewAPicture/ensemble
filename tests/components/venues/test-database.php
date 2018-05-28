@@ -127,19 +127,6 @@ class Database_Tests extends UnitTestCase {
 	 * @covers ::query()
 	 * @group query
 	 */
-	public function test_query_with_single_invalid_id_should_not_affect_results() {
-		$results = self::$db->query( array(
-			'fields' => 'ids',
-			'id'     => 9999
-		) );
-
-		$this->assertEqualSets( self::$venues, $results );
-	}
-
-	/**
-	 * @covers ::query()
-	 * @group query
-	 */
 	public function test_query_with_single_valid_id_should_only_return_that_venue() {
 		$results = self::$db->query( array(
 			'fields' => 'ids',
@@ -162,6 +149,179 @@ class Database_Tests extends UnitTestCase {
 		) );
 
 		$this->assertEqualSets( $venues, $results );
+	}
+
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
+	public function test_query_with_single_name_should_only_return_matching_venues_if_they_exist() {
+		$venue = $this->factory->venue->create( array(
+			'name' => 'Foo'
+		) );
+
+		$results = self::$db->query( array(
+			'fields' => 'ids',
+			'name'   => 'Foo',
+		) );
+
+		$this->assertEqualSets( array( $venue ), $results );
+	}
+
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
+	public function test_query_with_multiple_names_should_only_return_matching_venues_if_they_exist() {
+		$venue1 = $this->factory->venue->create( array(
+			'name' => 'Foo'
+		) );
+
+		$venue2 = $this->factory->venue->create( array(
+			'name' => 'Bar'
+		) );
+
+		$results = self::$db->query( array(
+			'fields' => 'ids',
+			'name'   => array( 'Foo', 'Bar' ),
+		) );
+
+		$this->assertEqualSets( array( $venue1, $venue2 ), $results );
+	}
+
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
+	public function test_query_with_single_address_should_only_return_matching_venues_if_they_exist() {
+		$venue = $this->factory->venue->create( array(
+			'address' => '12345 Mockingbird Lane',
+		) );
+
+		$results = self::$db->query( array(
+			'fields'  => 'ids',
+			'address' => '12345 Mockingbird Lane'
+		) );
+
+		$this->assertEqualSets( array( $venue ), $results );
+	}
+
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
+	public function test_query_with_multiple_addresses_should_only_return_matching_venues_if_they_exist() {
+		$venue1 = $this->factory->venue->create( array(
+			'address' => '12345 Mockingbird Lane',
+		) );
+
+		$venue2 = $this->factory->venue->create( array(
+			'address' => '54321 Mockingbird Lane',
+		) );
+
+		$results = self::$db->query( array(
+			'fields'  => 'ids',
+			'address' => array( '12345 Mockingbird Lane', '54321 Mockingbird Lane' ),
+		) );
+
+		$this->assertEqualSets( array( $venue1, $venue2 ), $results );
+	}
+
+
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
+	public function test_query_with_single_invalid_type_should_not_affect_results() {
+		$results = self::$db->query( array(
+			'fields' => 'type',
+			'type'   => 'foo',
+		) );
+
+		$this->assertNotContains( 'foo', $results );
+	}
+
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
+	public function test_query_with_single_valid_type_should_only_return_matching_venues_if_they_exist() {
+		$results = self::$db->query( array(
+			'fields' => 'type',
+			'type'   => 'arena',
+		) );
+
+		$this->assertEqualSets( array( 'arena' ), array_unique( $results ) );
+	}
+
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
+	public function test_query_with_multiple_valid_types_should_only_return_matching_venues_if_they_exist() {
+		$venue1 = $this->factory->venue->create( array(
+			'type' => 'center',
+		) );
+
+		$venue2 = $this->factory->venue->create( array(
+			'type' => 'other',
+		) );
+
+		$results = self::$db->query( array(
+			'fields' => 'ids',
+			'type'   => array( 'other', 'center' ),
+		) );
+
+		$this->assertEqualSets( array( $venue1, $venue2 ), $results );
+	}
+
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
+	public function test_query_with_single_invalid_status_should_not_affect_results() {
+		$results = self::$db->query( array(
+			'fields' => 'ids',
+			'status' => 'foo',
+		) );
+
+		$this->assertEqualSets( self::$venues, $results );
+	}
+
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
+	public function test_query_with_single_valid_status_should_only_return_matching_venues_if_they_exist() {
+		$venue = $this->factory->venue->create( array(
+			'status' => 'inactive',
+		) );
+
+		$results = self::$db->query( array(
+			'fields' => 'ids',
+			'status' => 'inactive',
+		) );
+
+		$this->assertEqualSets( array( $venue ), $results );
+	}
+
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
+	public function test_query_with_multiple_valid_statuses_should_only_return_matching_venues_if_they_exist() {
+		$venue = $this->factory->venue->create( array(
+			'status' => 'inactive',
+		) );
+
+		$results = self::$db->query( array(
+			'fields' => 'ids',
+			'status' => array( 'active', 'inactive' ),
+		) );
+
+		$expected = array_merge( array( $venue ), self::$venues );
+
+		$this->assertEqualSets( $expected, $results );
 	}
 
 }
