@@ -178,13 +178,21 @@ class Database extends Core\Database {
 		}
 
 		// Type.
-		if ( ! empty( $args['type'] ) && array_key_exists( $args['type'], get_allowed_types() ) ) {
-			$claws->where( 'type' )->in( $args['type'] );
+		if ( ! empty( $args['type'] ) ) {
+			$args['type'] = $this->validate_with_whitelist( $args['type'], get_allowed_types() );
+
+			if ( ! empty( $args['type'] ) ) {
+				$claws->where( 'type' )->in( $args['type'] );
+			}
 		}
 
 		// Status.
-		if ( ! empty( $args['status'] ) && array_key_exists( $args['status'], get_allowed_statuses() ) ) {
-			$claws->where( 'status' )->in( $args['status'] );
+		if ( ! empty( $args['status'] ) ) {
+			$args['status'] = $this->validate_with_whitelist( $args['status'], get_allowed_statuses() );
+
+			if ( ! empty( $args['status'] ) ) {
+				$claws->where( 'status' )->in( $args['status'] );
+			}
 		}
 
 		// Exclude.
