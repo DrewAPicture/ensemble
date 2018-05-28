@@ -684,8 +684,8 @@ abstract class Database implements Interfaces\Database {
 	 *                                     Default 'DESC'.
 	 *     @type string          $orderby  Field to order results by. Accepts any component model field.
 	 *                                     Default 'id'.
-	 *     @type string|string[] $fields   Field or array of fields to query for. Accepts any
-	 *                                     valid component Model field or 'ids'. Default empty (all).
+	 *     @type string|string[] $fields   Specific component model fields to retrieve. Accepts 'ids',
+	 *                                     a single model field, or an array of fields. Default empty (all).
 	 *     @type callable        $callback Callback to run against results. Default empty (`$fields`
 	 *                                     determines default callback).
 	 * }
