@@ -108,6 +108,7 @@ class Database_Tests extends UnitTestCase {
 
 	/**
 	 * @covers ::query()
+	 * @group query
 	 */
 	public function test_query_with_default_args_should_return_up_to_20_results() {
 		$results = self::$db->query();
@@ -118,6 +119,7 @@ class Database_Tests extends UnitTestCase {
 
 	/**
 	 * @covers ::query()
+	 * @group query
 	 */
 	public function test_query_with_default_args_should_orderby_id() {
 		$results = self::$db->query( array(
@@ -129,6 +131,7 @@ class Database_Tests extends UnitTestCase {
 
 	/**
 	 * @covers ::query()
+	 * @group query
 	 */
 	public function test_query_with_default_args_should_order_descending() {
 		$results = self::$db->query( array(
@@ -140,6 +143,7 @@ class Database_Tests extends UnitTestCase {
 
 	/**
 	 * @covers ::query()
+	 * @group query
 	 */
 	public function test_query_with_valid_id_should_return_only_that_record() {
 		$results = self::$db->query( array(
@@ -150,5 +154,60 @@ class Database_Tests extends UnitTestCase {
 		$this->assertEqualSets( array( self::$contests[0] ), $results );
 	}
 
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
+	public function test_query_with_multiple_valid_ds_should_return_only_those_results_inside_number_constraint() {
+		$results = self::$db->query( array(
+			'fields' => 'ids',
+			'id'     => self::$contests
+		) );
+
+		$this->assertEqualSets( self::$contests, $results );
+	}
+
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
+	public function test_query_with_name_should_return_results_with_exact_matches_only() {
+		$contest = $this->factory->contest->create( array(
+			'name' => 'FooContest',
+		) );
+
+		$results = self::$db->query( array(
+			'fields' => 'name',
+			'name'   => 'FooContest'
+		) );
+
+		$this->assertEqualSets( array( 'FooContest' ), $results );
+	}
+
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
+	public function test_query_with_invalid_type_should_not_take_the_type_into_account() {
+		$results = self::$db->query( array(
+			'fields' => 'type',
+			'type'   => 'foo',
+		) );
+
+		$this->assertNotContains( 'foo', $results );
+	}
+
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
+	public function test_query_with_valid_type_should_return_only_results_of_that_type() {
+		$results = self::$db->query( array(
+			'fields' => 'type',
+			'type'   => 'standard',
+		) );
+
+		$this->assertEqualSets( array( 'standard' ), array_unique( $results ) );
+	}
 }
 
