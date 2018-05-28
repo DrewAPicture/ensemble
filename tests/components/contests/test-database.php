@@ -110,6 +110,16 @@ class Database_Tests extends UnitTestCase {
 	 * @covers ::query()
 	 * @group query
 	 */
+	public function test_query_with_count_true_should_return_only_a_count() {
+		$result = self::$db->query( array(), true );
+
+		$this->assertSame( 2, $result );
+	}
+
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
 	public function test_query_with_default_args_should_return_up_to_20_results() {
 		$results = self::$db->query();
 		$count   = count( $results );
