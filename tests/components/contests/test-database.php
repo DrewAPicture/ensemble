@@ -106,6 +106,49 @@ class Database_Tests extends UnitTestCase {
 		$this->assertEqualSetsWithIndex( $expected, $actual );
 	}
 
+	/**
+	 * @covers ::query()
+	 */
+	public function test_query_with_default_args_should_return_up_to_20_results() {
+		$results = self::$db->query();
+		$count   = count( $results );
+
+		$this->assertTrue( $count <= 20 && $count >= 1 );
+	}
+
+	/**
+	 * @covers ::query()
+	 */
+	public function test_query_with_default_args_should_orderby_id() {
+		$results = self::$db->query( array(
+			'fields' => 'ids',
+		) );
+
+		$this->assertEqualSets( self::$contests, $results );
+	}
+
+	/**
+	 * @covers ::query()
+	 */
+	public function test_query_with_default_args_should_order_descending() {
+		$results = self::$db->query( array(
+			'fields' => 'ids',
+		) );
+
+		$this->assertEqualSets( self::$contests, $results );
+	}
+
+	/**
+	 * @covers ::query()
+	 */
+	public function test_query_with_valid_id_should_return_only_that_record() {
+		$results = self::$db->query( array(
+			'fields' => 'ids',
+			'id'     => self::$contests[0]
+		) );
+
+		$this->assertEqualSets( array( self::$contests[0] ), $results );
+	}
 
 }
 
