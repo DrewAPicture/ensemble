@@ -132,20 +132,15 @@ class Database extends Core\Database {
 	 *     Optional. Arguments for querying contests. See parse_global_args() for available
 	 *     global custom query arguments. Default empty array.
 	 *
-	 *     @type int|int[]       $id      ID or array of contest IDs to retrieve. Default 0.
-	 *     @type string|string[] $name    Name or array of contest names to query by. Default empty.
-	 *     @type int|int[]       $venues  Venue ID or array of venue IDs to query contests by (based on
-	 *                                    the contest:venue relationship). Default empty array.
-	 *     @type string|string[] $type    Type or array of types to query contests by. Default empty.
-	 *     @type string|string[] $status  Status or array of statuses to query contests by. Default empty.
-	 *     @type int          $number  Number of contests to query for. Default 20.
-	 *     @type int          $offset  Number of contests to offset the query for. Default 0.
-	 *     @type int|array    $exclude Contest ID or array of IDs to explicitly exclude.
-	 *     @type string       $order   How to order returned contest results. Accepts 'ASC' or 'DESC'.
-	 *                                 Default 'DESC'.
-	 *     @type string       $orderby Contests table column to order results by. Default 'id'.
-	 *     @type string|array $fields  Specific fields to retrieve. Accepts 'ids', a single contest field, or an
-	 *                                 array of fields. Default '*' (all).
+	 *     @type int|int[]       $id       ID or array of contest IDs to retrieve. Default 0.
+	 *     @type string|string[] $name     Name or array of contest names to query by. Default empty.
+	 *     @type int|int[]       $venues   Venue ID or array of venue IDs to query contests by (based on
+	 *                                     the contest:venue relationship). Default empty array.
+	 *     @type string|string[] $type     Type or array of types to query contests by. Default empty.
+	 *     @type string|string[] $status   Status or array of statuses to query contests by. Default empty.
+	 *     @type int|array       $exclude  ID or array of contest IDs to explicitly exclude.
+	 *     @type bool            $external Whether the contest contains an external URL or not.
+	 *                                     Accepts true, false, or empty (ignored) Default empty.
 	 * }
 	 * @param bool  $count Optional. Whether to return only the total number of results found. Default false.
 	 * @return array|int Array of contest objects (if found), integer if `$count` is true.
@@ -194,8 +189,12 @@ class Database extends Core\Database {
 		}
 
 		// (is) External.
-		if ( ! empty( $args['external'] ) ) {
-			$claws->where( 'external' )->exists( $args['external'] );
+		if ( '' !== $args['external'] ) {
+			if ( true === $args['external'] ) {
+				$claws->where( 'external' )->doesnt_equal( '' );
+			} elseif ( false === $args['external'] ) {
+				$claws->where( 'external' )->not_exists();
+			}
 		}
 
 		// Clauses.
