@@ -215,6 +215,11 @@ abstract class Database implements Interfaces\Database {
 		// Initialise column format array
 		$column_formats = $this->get_columns();
 
+		// Nothing to update, just return success.
+		if ( empty( $data ) ) {
+			return true;
+		}
+
 		// Force fields to lowercase.
 		$data = array_change_key_case( $data );
 
