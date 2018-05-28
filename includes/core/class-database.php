@@ -673,8 +673,23 @@ abstract class Database implements Interfaces\Database {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $args Query arguments.
-	 * @return array Parsed arguments
+	 * @param array $args {
+	 *     Arguments available too all custom queries.
+	 *
+	 *     @type int             $number   Number of results to query for. If less than 1, will default
+	 *                                     to 99999 (effectively all). Default 20.
+	 *     @type int             $offset   Positive number of items to offset results by. Default 0.
+	 *     @type string          $order    How to order results. Accepts 'DESC' (descending)
+	 *                                     or 'ASC' (ascending) in uppercase or lowercase.
+	 *                                     Default 'DESC'.
+	 *     @type string          $orderby  Field to order results by. Accepts any component model field.
+	 *                                     Default 'id'.
+	 *     @type string|string[] $fields   Field or array of fields to query for. Accepts any
+	 *                                     valid component Model field or 'ids'. Default empty (all).
+	 *     @type callable        $callback Callback to run against results. Default empty (`$fields`
+	 *                                     determines default callback).
+	 * }
+	 * @return array Parsed arguments including global arguments.
 	 */
 	public function parse_global_args( $args ) {
 		$defaults = array(
