@@ -305,14 +305,63 @@ class Database_Tests extends UnitTestCase {
 	 * @group query
 	 */
 	public function test_query_with_multiple_valid_exclude_ids_should_exclude_those_ids() {
-		$contest = $this->factory->contest->create();
+		$contests = $this->factory->contest->create_many( 2 );
 
 		$results = self::$db->query( array(
 			'fields' => 'ids',
-			'exclude' => $contest,
+			'exclude' => $contests,
+		) );
+
+		// Does not contain the newly-created and excluded contests.
+		$this->assertEqualSets( self::$contests, $results );
+	}
+
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
+	public function test_query_with_non_empty_non_bool_external_should_not_affect_results() {
+		$results = self::$db->query( array(
+			'fields'   => 'ids',
+			'external' => 'foo',
 		) );
 
 		$this->assertEqualSets( self::$contests, $results );
+	}
+
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
+	public function test_query_with_external_true_should_only_retrieve_contests_with_external_urls() {
+		$contest = $this->factory->contest->create( array(
+			'external' => WP_TESTS_DOMAIN,
+		) );
+
+		$results = self::$db->query( array(
+			'fields'   => 'ids',
+			'external' => true,
+		) );
+
+		$this->assertEqualSets( array( $contest ), $results );
+	}
+
+	/**
+	 * @covers ::query()
+	 * @group query
+	 */
+	public function test_query_with_external_false_should_only_retrieve_contests_with_no_external_urls() {
+		$contest = $this->factory->contest->create( array(
+			'external' => WP_TESTS_DOMAIN,
+		) );
+
+		$results = self::$db->query( array(
+			'fields'   => 'ids',
+			'external' => false,
+		) );
+
+		// Does not contain the newly-created contest with an external URL.
+		$this->assertNotContains( $contest, $results );
 	}
 
 }
