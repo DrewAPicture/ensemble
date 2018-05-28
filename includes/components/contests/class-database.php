@@ -175,7 +175,7 @@ class Database extends Core\Database {
 		}
 
 		// Type.
-		if ( ! empty( $args['type'] ) ) {
+		if ( ! empty( $args['type'] ) && array_key_exists( $args['type'], get_allowed_types() ) ) {
 			$claws->where( 'type' )->equals( $args['type'] );
 		}
 
