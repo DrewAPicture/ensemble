@@ -126,15 +126,21 @@ class Database extends Core\Database {
 	 * Queries for contests.
 	 *
 	 * @since 1.0.0
+	 * @since 1.0.2 Added array support for querying by 'name', 'type', and 'status'.
 	 *
 	 * @param array $query_args {
-	 *     Optional. Arguments for querying contests. Default empty array.
+	 *     Optional. Arguments for querying contests. See parse_global_args() for available
+	 *     global custom query arguments. Default empty array.
 	 *
-	 *     @type int|array    $id      Contest ID or array of contest IDs to retrieve.
+	 *     @type int|int[]       $id      ID or array of contest IDs to retrieve. Default 0.
+	 *     @type string|string[] $name    Name or array of contest names to query by. Default empty.
+	 *     @type int|int[]       $venues  Venue ID or array of venue IDs to query contests by (based on
+	 *                                    the contest:venue relationship). Default empty array.
+	 *     @type string|string[] $type    Type or array of types to query contests by. Default empty.
+	 *     @type string|string[] $status  Status or array of statuses to query contests by. Default empty.
 	 *     @type int          $number  Number of contests to query for. Default 20.
 	 *     @type int          $offset  Number of contests to offset the query for. Default 0.
 	 *     @type int|array    $exclude Contest ID or array of IDs to explicitly exclude.
-	 *     @type string       $status  Contest status. Accepts 'published' or 'private'. Default empty (all).
 	 *     @type string       $order   How to order returned contest results. Accepts 'ASC' or 'DESC'.
 	 *                                 Default 'DESC'.
 	 *     @type string       $orderby Contests table column to order results by. Default 'id'.
@@ -166,7 +172,7 @@ class Database extends Core\Database {
 
 		// Name.
 		if ( ! empty( $args['name'] ) ) {
-			$claws->where( 'name' )->equals( $args['name'] );
+			$claws->where( 'name' )->in( $args['name'] );
 		}
 
 		// Venues.
@@ -176,12 +182,12 @@ class Database extends Core\Database {
 
 		// Type.
 		if ( ! empty( $args['type'] ) && array_key_exists( $args['type'], get_allowed_types() ) ) {
-			$claws->where( 'type' )->equals( $args['type'] );
+			$claws->where( 'type' )->in( $args['type'] );
 		}
 
 		// Status.
-		if ( ! empty( $args['status'] ) ) {
-			$claws->where( 'status' )->equals( $args['status'] );
+		if ( ! empty( $args['status'] ) && array_key_exists( $args['status'], get_allowed_statuses() ) ) {
+			$claws->where( 'status' )->in( $args['status'] );
 		}
 
 		// Exclude.
