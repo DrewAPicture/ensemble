@@ -121,6 +121,7 @@ class Database extends Core\Database {
 	 * Queries for venues.
 	 *
 	 * @since 1.0.0
+	 * @since 1.0.2 Added array support for querying by 'name', 'type', and 'status'.
 	 *
 	 * @param array $query_args {
 	 *     Optional. Arguments for querying venues. Default empty array.
@@ -159,12 +160,12 @@ class Database extends Core\Database {
 
 		// Name.
 		if ( ! empty( $args['name'] ) ) {
-			$claws->where( 'name' )->equals( $args['name'] );
+			$claws->where( 'name' )->in( $args['name'] );
 		}
 
 		// Address.
 		if ( ! empty( $args['address'] ) ) {
-			$claws->where( 'address' )->equals( $args['address'] );
+			$claws->where( 'address' )->in( $args['address'] );
 		}
 
 		// Exclude.
@@ -174,12 +175,12 @@ class Database extends Core\Database {
 
 		// Type.
 		if ( ! empty( $args['type'] ) ) {
-			$claws->where( 'type' )->equals( $args['type'] );
+			$claws->where( 'type' )->in( $args['type'] );
 		}
 
 		// Status.
 		if ( ! empty( $args['status'] ) ) {
-			$claws->where( 'status' )->equals( $args['status'] );
+			$claws->where( 'status' )->in( $args['status'] );
 		}
 
 		// Clauses.
