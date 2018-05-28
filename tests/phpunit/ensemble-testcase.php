@@ -56,6 +56,17 @@ class UnitTestCase extends \WP_UnitTestCase {
 	}
 
 	/**
+	 * Helper to strip seconds from a given date in case the test is slow
+	 * and the seconds don't line up.
+	 *
+	 * @param string $date Date string.
+	 * @return string Modified date string in Y-m-d H:i format (no seconds).
+	 */
+	public function strip_seconds_from_date( $date ) {
+		return date( 'Y-m-d H:i', strtotime( $date ) );
+	}
+
+	/**
 	 * Deletes all data from defined tables.
 	 *
 	 * @access protected
