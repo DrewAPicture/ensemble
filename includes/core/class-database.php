@@ -776,4 +776,36 @@ abstract class Database implements Interfaces\Database {
 		return $last_changed;
 	}
 
+	/**
+	 * Validates an argument against a given whitelist.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string|string[]|int[] $items     Item or array of items.
+	 * @param array                 $whitelist Numerically indexed or keyed whitelist to validate against.
+	 *
+	 * @return array Array of valid items against the whitelist (if any), otherwise an empty array.
+	 */
+	public function validate_with_whitelist( $items, $whitelist ) {
+		if ( ! is_array( $items ) ) {
+			$items = (array) $items;
+		}
+
+		if ( wp_is_numeric_array( $whitelist ) ) {
+			foreach ( $items as $index => $item ) {
+				if ( ! in_array( $item, $whitelist, true ) ) {
+					unset( $items[ $index ] );
+				}
+			}
+		} else {
+			foreach ( $items as $index => $item ) {
+				if ( ! array_key_exists( $item, $whitelist ) ) {
+					unset( $items[ $index ] );
+				}
+			}
+		}
+
+		return $items;
+	}
+
 }
