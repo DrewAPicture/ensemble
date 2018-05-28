@@ -369,5 +369,61 @@ class Database_Tests extends UnitTestCase {
 		$this->assertEqualSets( $expected, $results );
 	}
 
+	/**
+	 * @covers ::insert()
+	 */
+	public function test_insert_successful_should_return_the_newly_created_venue_id() {
+		$venue = self::$db->insert( array(
+			'name'    => 'Foo',
+			'address' => 'Bar',
+		) );
+
+		$this->assertTrue( is_numeric( $venue ) );
+	}
+
+	/**
+	 * @covers ::insert()
+	 */
+	public function test_insert_without_name_should_return_WP_Error() {
+		$result = self::$db->insert( array(
+			'address' => 'Foo',
+		) );
+
+		$this->assertWPError( $result );
+	}
+
+	/**
+	 * @covers ::insert()
+	 */
+	public function test_insert_without_name_should_return_WP_Error_including_code_missing_venue_name() {
+		$result = self::$db->insert( array(
+			'address' => 'Foo',
+		) );
+
+		$this->assertContains( 'missing_venue_name', $result->get_error_codes() );
+	}
+
+	/**
+	 * @covers ::insert()
+	 */
+	public function test_insert_without_address_should_return_WP_Error() {
+		$result = self::$db->insert( array(
+			'name' => 'Foo',
+		) );
+
+		$this->assertWPError( $result );
+	}
+
+	/**
+	 * @covers ::insert()
+	 */
+	public function test_insert_without_address_should_return_WP_Error_including_code_missing_venue_address() {
+		$result = self::$db->insert( array(
+			'name' => 'Foo',
+		) );
+
+		$this->assertContains( 'missing_venue_address', $result->get_error_codes() );
+	}
+
 }
 
