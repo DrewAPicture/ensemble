@@ -10,5 +10,8 @@
         }
     ],
     "minimum-stability": "stable",
-    "require": {}
+    "require": {},
+    "require-dev": {
+        "brianium/paratest": "^2.0"
+    }
 }
