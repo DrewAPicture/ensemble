@@ -9,17 +9,22 @@
  */
 namespace Ensemble\Core;
 
+use Ensemble\Core\Traits\Testable_Abstract;
 use function Ensemble\{clean_item_cache, get_wp_timezone};
 
 /**
  * Core database abstraction layer.
  *
  * @since 1.0.0
+ * @since 1.0.2 Now uses the Testable_Abstract trait
  * @abstract
  *
  * @see Interfaces\Database
+ * @see Testable_Abstract
  */
 abstract class Database implements Interfaces\Database {
+
+	use Testable_Abstract;
 
 	/**
 	 * Primary key.
