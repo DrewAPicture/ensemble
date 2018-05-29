@@ -110,5 +110,15 @@ class Assets_Tests extends UnitTestCase {
 		);
 	}
 
+	/**
+	 * @covers ::get_asset_version()
+	 */
+	public function test_get_asset_version_should_return_filemtime_for_the_file_path() {
+		$expected = filemtime( ENSEMBLE_PLUGIN_DIR . 'ensemble.php' );
+		$actual   = self::$assets->get_asset_version( 'ensemble.php' );
+
+		$this->assertSame( $expected, $actual );
+	}
+
 }
 
