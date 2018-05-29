@@ -1,0 +1,14 @@
+{
+    "name": "drewapicture/ensemble",
+    "description": "Easily manage the data for a color guard circuit (or similar sport/activity organization) with WordPress.",
+    "type": "wordpress-plugin",
+    "license": "GPLv2",
+    "authors": [
+        {
+            "name": "DrewAPicture",
+            "email": "info@drewapicture.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
