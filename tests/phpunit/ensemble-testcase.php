@@ -4,10 +4,6 @@ namespace Ensemble\Tests;
 use Ensemble\Components\Contests\Database as Contests_Database;
 use Ensemble\Components\Venues\Database as Venues_Database;
 
-require_once dirname( __FILE__ ) . '/factories/class-ensemble-factory-for-contests.php';
-require_once dirname( __FILE__ ) . '/factories/class-ensemble-factory-for-venues.php';
-require_once dirname( __FILE__ ) . '/factories/class-ensemble-factory.php';
-
 /**
  * Defines a basic fixture to run multiple tests.
  *
@@ -19,6 +15,14 @@ require_once dirname( __FILE__ ) . '/factories/class-ensemble-factory.php';
  */
 class UnitTestCase extends \WP_UnitTestCase {
 
+	/**
+	 * Intercepts calls to the factory property and injects the custom middleware.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $name Property name.
+	 * @return \Ensemble\Tests\Factory Custom factory middleware.
+	 */
 	function __get( $name ) {
 		if ( 'factory' === $name ) {
 			return self::ensemble();
@@ -28,8 +32,7 @@ class UnitTestCase extends \WP_UnitTestCase {
 	/**
 	 * Retrieves a factory instance for ensemble tests.
 	 *
-	 * @access protected
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 * @static
 	 *
 	 * @return Factory|null
@@ -45,8 +48,7 @@ class UnitTestCase extends \WP_UnitTestCase {
 	/**
 	 * Defines operations to run after tearing down the test class.
 	 *
-	 * @access public
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 * @static
 	 */
 	public static function tearDownAfterClass() {
@@ -59,6 +61,8 @@ class UnitTestCase extends \WP_UnitTestCase {
 	 * Helper to strip seconds from a given date in case the test is slow
 	 * and the seconds don't line up.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param string $date Date string.
 	 * @return string Modified date string in Y-m-d H:i format (no seconds).
 	 */
@@ -69,8 +73,7 @@ class UnitTestCase extends \WP_UnitTestCase {
 	/**
 	 * Deletes all data from defined tables.
 	 *
-	 * @access protected
-	 * @since  1.0.0
+	 * @since 1.0.0
 	 *
 	 * @global \wpdb $wpdb WordPress database abstraction layer.
 	 */
@@ -89,6 +92,8 @@ class UnitTestCase extends \WP_UnitTestCase {
 
 	/**
 	 * Helper to flush the $wp_roles global.
+	 *
+	 * @since 1.0.0
 	 */
 	public static function _flush_roles() {
 		/*
@@ -96,7 +101,9 @@ class UnitTestCase extends \WP_UnitTestCase {
 		 * this will flush everything and reload it from the db
 		 */
 		unset( $GLOBALS['wp_user_roles'] );
+
 		global $wp_roles;
+
 		if ( is_object( $wp_roles ) ) {
 			$wp_roles->_init();
 		}
