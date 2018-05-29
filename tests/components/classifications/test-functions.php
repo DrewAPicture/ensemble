@@ -4,7 +4,7 @@ namespace Ensemble\Components\Classifications;
 use Ensemble\Tests\UnitTestCase;
 
 /**
- * Contests functions tests.
+ * Classifications component functions tests.
  *
  * @since 1.0.0
  *
@@ -35,7 +35,7 @@ class Functions_Tests extends UnitTestCase {
 	 */
 	public function test_get_classification_with_valid_id_should_return_WP_Term() {
 		$classification_id = $this->factory->term->create( array(
-			'taxonomy' => 'ensemble_class'
+			'taxonomy' => ( new Setup )->get_taxonomy_slug(),
 		) );
 
 		$this->assertInstanceOf( '\\WP_Term', get_classification( $classification_id ) );
