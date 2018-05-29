@@ -16,7 +16,7 @@ use Ensemble\Tests\UnitTestCase;
 class Assets_Tests extends UnitTestCase {
 
 	/**
-	 * Classifications component setup fixture.
+	 * Assets fixture.
 	 *
 	 * @var \Ensemble\Core\Assets
 	 */
@@ -29,7 +29,6 @@ class Assets_Tests extends UnitTestCase {
 		self::$assets = new Assets;
 		self::$assets->admin_assets( 'page_ensemble-admin' );
 	}
-
 
 	/**
 	 * @covers ::admin_assets()
