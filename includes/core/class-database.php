@@ -54,8 +54,16 @@ abstract class Database implements Interfaces\Database {
 	 * Sets up the database class.
 	 *
 	 * @since 1.0.0
+	 * @since 1.0.2 Introduced an optional `$test_args` parameter used for testing purposes
+	 *              via use of the Testable_Abstract trait.
+	 *
+	 * @param null $test_args For unit testing purposes only -- unused for normal business.
 	 */
-	public function __construct() {
+	public function __construct( $test_args = null ) {
+		if ( null !== $test_args ) {
+			$this->set_overrides( $test_args );
+		}
+
 		$this->set_table_name();
 
 		$this->version = $this->get_version();
