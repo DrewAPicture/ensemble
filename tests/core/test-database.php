@@ -55,16 +55,23 @@ class Database_Tests extends UnitTestCase {
 	 * @covers ::get_primary_key()
 	 */
 	public function test_get_primary_key_should_get_the_primary_key() {
-		$this->assertSame( 'id', $this->mock_DB()->get_primary_key() );
+		$this->assertSame( 'id', self::$db->get_primary_key() );
 	}
 
 	/**
-	 * Mocks a copy of the Ensemble\Core\Database class.
-	 *
-	 * @return \Ensemble\Core\Database
+	 * @covers ::get_table_name()
 	 */
-	protected function mock_DB() {
-		return $this->getMockForAbstractClass( 'Ensemble\\Core\\Database' );
+	public function test_get_table_name_should_return_table_name_set_from_table_suffix() {
+		// Mocked table name.
+		if ( defined( 'ENSEMBLE_NETWORK_WIDE' ) && ENSEMBLE_NETWORK_WIDE ) {
+			$expected = 'ensemble_mock';
+		} else {
+			$expected = $GLOBALS['wpdb']->prefix . 'ensemble_mock';
+		}
+
+		$this->assertSame( $expected, self::$db->get_table_name() );
+
 	}
+
 }
 
