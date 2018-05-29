@@ -4,10 +4,6 @@ namespace Ensemble\Tests;
 use Ensemble\Components\Contests\Database as Contests_Database;
 use Ensemble\Components\Venues\Database as Venues_Database;
 
-require_once dirname( __FILE__ ) . '/factories/class-ensemble-factory-for-contests.php';
-require_once dirname( __FILE__ ) . '/factories/class-ensemble-factory-for-venues.php';
-require_once dirname( __FILE__ ) . '/factories/class-ensemble-factory.php';
-
 /**
  * Defines a basic fixture to run multiple tests.
  *
