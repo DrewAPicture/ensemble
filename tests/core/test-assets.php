@@ -74,5 +74,41 @@ class Assets_Tests extends UnitTestCase {
 		);
 	}
 
+	/**
+	 * @covers ::admin_assets()
+	 *
+	 * @dataProvider _test_special_admin_scripts
+	 */
+	public function test_special_admin_scripts( $script, $script_is ) {
+		$this->assertTrue( wp_script_is( $script, $script_is ) );
+	}
+
+	/**
+	 * Data provider for test_special_admin_scripts()
+	 */
+	public function _test_special_admin_scripts() {
+		return array(
+			array( 'ensbl-admin', 'enqueued' )
+		);
+	}
+
+	/**
+	 * @covers ::admin_assets()
+	 *
+	 * @dataProvider _test_special_admin_styles
+	 */
+	public function test_special_admin_styles( $style, $style_is ) {
+		$this->assertTrue( wp_style_is( $style, $style_is ) );
+	}
+
+	/**
+	 * Data provider for test_special_admin_styles()
+	 */
+	public function _test_special_admin_styles() {
+		return array(
+			array( 'ensbl-admin-css', 'enqueued' )
+		);
+	}
+
 }
 
