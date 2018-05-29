@@ -64,9 +64,9 @@ class Database_Tests extends UnitTestCase {
 	public function test_get_table_name_should_return_table_name_set_from_table_suffix() {
 		// Mocked table name.
 		if ( defined( 'ENSEMBLE_NETWORK_WIDE' ) && ENSEMBLE_NETWORK_WIDE ) {
-			$expected = 'ensemble_mock';
+			$expected = 'ensemble_contests';
 		} else {
-			$expected = $GLOBALS['wpdb']->prefix . 'ensemble_mock';
+			$expected = $GLOBALS['wpdb']->prefix . 'ensemble_contests';
 		}
 
 		$this->assertSame( $expected, self::$db->get_table_name() );
