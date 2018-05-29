@@ -33,21 +33,11 @@ class Database_Tests extends UnitTestCase {
 		 * Setting up abstract methods with return values from an actual subclass
 		 * allows the CRUD methods to be tested with real fixture data. Boom.
 		 */
-		self::$db = new class extends Database {
-			public function get_cache_group() { return 'contests'; }
-
-			public function get_query_object_type() { return 'Ensemble\\Components\\Contests\\Model'; }
-
-			public function get_table_suffix() { return 'ensemble_contests'; }
-
-			public function get_version() { return '1.0'; }
-
-			public function get_columns() { return array(); }
-
-			public function get_column_defaults() { return array(); }
-
-			public function query( $query_args = array(), $count = false ) { return true === $count ? 1 : array(); }
-		};
+		self::$db = self::get_db( array(
+			'cache_group'  => 'contests',
+			'object_type'  => 'Ensemble\\Components\\Contests\\Model',
+			'table_suffix' => 'ensemble_contests',
+		) );
 	}
 
 
