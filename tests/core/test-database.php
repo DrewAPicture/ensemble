@@ -99,10 +99,10 @@ class Database_Tests extends UnitTestCase {
 			'query_count'     => 1,
 		);
 
-		$test_args = wp_parse_args( $args, $defaults );
+		$overrides = wp_parse_args( $args, $defaults );
 
 		// $test_args passed through the constructor to Testable_Abstract::set_overrides().
-		$db_object = new class( $test_args ) extends Database {
+		$db_object = new class( $overrides ) extends Database {
 
 			public function get_cache_group() { return $this->test_args['cache_group']; }
 

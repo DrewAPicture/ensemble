@@ -31,7 +31,7 @@ trait Testable_Abstract {
 	 *
 	 * @param array $args Various arguments for overriding stuff in unit testing.
 	 */
-	public function set_overrides( $args = array() ) {
+	public function set_overrides( $args ) {
 		$this->test_args = $args;
 	}
 
