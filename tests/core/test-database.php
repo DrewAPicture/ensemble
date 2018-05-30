@@ -472,7 +472,42 @@ class Database_Tests extends UnitTestCase {
 
 		$this->assertTrue( is_numeric( $result ) );
 	}
-	
+
+	/**
+	 * @covers ::exists()
+	 */
+	public function test_exists_success_should_return_true() {
+		$object_id = $this->factory->contest->create();
+
+		$result = ( new Contests\Database )->exists( $object_id );
+
+		$this->assertTrue( $result );
+	}
+
+	/**
+	 * @covers ::exists()
+	 */
+	public function test_exists_with_invalid_id_type_should_return_false() {
+		// Attempting to query an invalid table will throw a wpdb warning. Suppress it.
+		$GLOBALS['wpdb']->suppress_errors = true;
+
+		$result = self::$db->exists( 'foo' );
+
+		$this->assertFalse( $result );
+	}
+
+	/**
+	 * @covers ::exists()
+	 */
+	public function test_exists_with_nonexistent_id_should_return_false() {
+		// Attempting to query an invalid table will throw a wpdb warning. Suppress it.
+		$GLOBALS['wpdb']->suppress_errors = true;
+
+		$result = self::$db->exists( 999 );
+
+		$this->assertFalse( $result );
+	}
+
 	/**
 	 * Builds a "mock" abstract Core\Database object.
 	 *
