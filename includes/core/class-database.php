@@ -466,7 +466,10 @@ abstract class Database implements Interfaces\Database {
 			$errors->add( 'invalid_column', $message );
 		}
 
-		// Log an error if the object ID is empty.
+		// Object ID must be positive integer.
+		$object_id = absint( $object_id );
+
+		// Log an error if the object ID evaluates to empty.
 		if ( empty( $object_id ) ) {
 			$message = sprintf( 'get_column() requires a valid object ID for \'%s\' queries.', $this->get_table_name() );
 
