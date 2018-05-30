@@ -405,8 +405,63 @@ class Database_Tests extends UnitTestCase {
 		$this->assertContains( 'delete_failure', $result->get_error_codes() );
 	}
 
-		// Cleanup.
-		$GLOBALS['wpdb']->suppress_errors = false;
+	/**
+	 * @covers ::get()
+	 */
+	public function test_get_success_should_return_an_stdClass_object() {
+		$object_id = $this->factory->contest->create();
+
+		$result = ( new Contests\Database )->get( $object_id );
+
+		$this->assertInstanceOf( 'stdClass', $result );
+	}
+
+	/**
+	 * @covers ::get()
+	 */
+	public function test_get_with_invalid_object_id_type_should_return_a_WP_Error() {
+		// Attempting to query an invalid table will throw a wpdb warning. Suppress it.
+		$GLOBALS['wpdb']->suppress_errors = true;
+
+		$result = self::$db->get( 'foo' );
+
+		$this->assertWPError( $result );
+	}
+
+	/**
+	 * @covers ::get()
+	 */
+	public function test_get_with_invalid_object_id_type_should_return_a_WP_Error_including_code_invalid_object() {
+		// Attempting to query an invalid table will throw a wpdb warning. Suppress it.
+		$GLOBALS['wpdb']->suppress_errors = true;
+
+		$result = self::$db->get( 'foo' );
+
+		$this->assertContains( 'invalid_object', $result->get_error_codes() );
+	}
+
+	/**
+	 * @covers ::get()
+	 */
+	public function test_get_fail_should_return_a_WP_Error() {
+		// Attempting to query an invalid table will throw a wpdb warning. Suppress it.
+		$GLOBALS['wpdb']->suppress_errors = true;
+
+		$result = self::$db->get( 9999 );
+
+		$this->assertWPError( $result );
+	}
+
+	/**
+	 * @covers ::get()
+	 */
+	public function test_get_fail_should_return_a_WP_Error_including_code_invalid_object() {
+		// Attempting to query an invalid table will throw a wpdb warning. Suppress it.
+		$GLOBALS['wpdb']->suppress_errors = true;
+
+		$result = self::$db->get( 9999 );
+
+		$this->assertContains( 'invalid_object', $result->get_error_codes() );
 	}
 
 	/**
