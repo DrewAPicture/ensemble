@@ -454,22 +454,22 @@ class Database_Tests extends UnitTestCase {
 
 		$overrides = wp_parse_args( $args, $defaults );
 
-		// $test_args passed through the constructor to Testable_Abstract::set_overrides().
+		// $overrides passed through the constructor to Testable_Abstract::set_overrides().
 		$db_object = new class( $overrides ) extends Database {
 
-			public function get_cache_group() { return $this->test_args['cache_group']; }
+			public function get_cache_group() { return $this->get_override( 'cache_group' ); }
 
-			public function get_query_object_type() { return $this->test_args['object_type']; }
+			public function get_query_object_type() { return $this->get_override( 'object_type' ); }
 
-			public function get_table_suffix() { return $this->test_args['table_suffix']; }
+			public function get_table_suffix() { return $this->get_override( 'table_suffix' ); }
 
-			public function get_version() { return $this->test_args['version']; }
+			public function get_version() { return $this->get_override( 'version' ); }
 
-			public function get_columns() { return $this->test_args['columns']; }
+			public function get_columns() { return $this->get_override( 'columns' ); }
 
-			public function get_column_defaults() { return $this->test_args['column_defaults']; }
+			public function get_column_defaults() { return $this->get_override( 'column_defaults' ); }
 
-			public function query( $query_args = array(), $count = false ) { return true === $count ? $this->test_args['query_count'] : $this->test_args['query_results']; }
+			public function query( $query_args = array(), $count = false ) { return true === $count ? $this->get_override( 'query_count' ) : $this->get_override( 'query_results' ); }
 		};
 
 		return $db_object;
