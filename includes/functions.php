@@ -84,7 +84,7 @@ function get_current_view( $default = 'overview' ) {
  * @return string Current tab if set, otherwise the value of `$default`.
  */
 function get_current_tab( $default = '' ) {
-	return sanitize_key( $_REQUEST['enble-tab'] ?? $default );
+	return sanitize_key( $_REQUEST['ensbl-tab'] ?? $default );
 }
 
 /**
