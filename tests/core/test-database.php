@@ -1,8 +1,9 @@
 <?php
 namespace Ensemble\Core;
 
+use Ensemble\Core\Traits\Testable_Abstract;
 use Ensemble\Tests\UnitTestCase;
-use \Ensemble\Components\Contests;
+use Ensemble\Components\Contests;
 
 /**
  * Core Database superclass tests.
@@ -420,6 +421,8 @@ class Database_Tests extends UnitTestCase {
 	 * subclass allows the CRUD methods to be tested with real fixture data. Boom.
 	 *
 	 * @since 1.0.2
+	 *
+	 * @see Testable_Abstract
 	 *
 	 * @param array $args {
 	 *     Optional. Arguments for overriding default abstract method returns.
