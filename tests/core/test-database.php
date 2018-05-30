@@ -51,13 +51,78 @@ class Database_Tests extends UnitTestCase {
 	public function test_get_table_name_should_return_table_name_set_from_table_suffix() {
 		// Mocked table name.
 		if ( defined( 'ENSEMBLE_NETWORK_WIDE' ) && ENSEMBLE_NETWORK_WIDE ) {
-			$expected = 'ensemble_contests';
+			$expected = 'ensemble_mocks';
 		} else {
-			$expected = $GLOBALS['wpdb']->prefix . 'ensemble_contests';
+			$expected = $GLOBALS['wpdb']->prefix . 'ensemble_mocks';
 		}
 
 		$this->assertSame( $expected, self::$db->get_table_name() );
 
+	}
+
+	/**
+	 * @covers ::insert()
+	 */
+	public function test_insert_failure_should_return_WP_Error() {
+		// Attempting to query an invalid table will throw a wpdb warning. Suppress it.
+		$GLOBALS['wpdb']->suppress_errors = true;
+
+		// Silence the _doing_it_wrong().
+		$this->setExpectedIncorrectUsage( 'wpdb::prepare' );
+
+		// Deliberately query an invalid table to trigger the WP_Error condition.
+		$result = self::get_db()->insert( array() );
+
+		// New instance with invalid defaults.
+		$this->assertWPError( $result );
+
+		// Cleanup.
+		$GLOBALS['wpdb']->suppress_errors = false;
+	}
+
+	/**
+	 * @covers ::insert()
+	 */
+	public function test_insert_failure_should_return_WP_Error_including_code_insert_failure() {
+		// Attempting to query an invalid table will throw a wpdb warning. Suppress it.
+		$GLOBALS['wpdb']->suppress_errors = true;
+
+		// Silence the _doing_it_wrong().
+		$this->setExpectedIncorrectUsage( 'wpdb::prepare' );
+
+		// Deliberately query an invalid table to trigger the WP_Error condition.
+		$result = self::get_db()->insert( array() );
+
+		$this->assertContains( 'insert_failure', $result->get_error_codes() );
+
+		// Cleanup.
+		$GLOBALS['wpdb']->suppress_errors = false;
+	}
+
+	/**
+	 * @covers ::insert()
+	 */
+	public function test_insert_success_should_return_an_id_of_a_newly_created_object() {
+		$result = ( new Contests\Database )->_insert( array(
+			'name'   => 'Foo',
+			'venues' => array( 1 ),
+		) );
+
+		$this->assertTrue( is_numeric( $result ) );
+	}
+
+	/**
+	 * @covers ::insert()
+	 */
+	public function test_insert_success_should_return_valid_id_of_the_newly_created_object() {
+		$id = ( new Contests\Database )->_insert( array(
+			'name'   => 'Foo',
+			'venues' => array( 1 ),
+		) );
+
+		$result = Contests\get_contest( $id );
+
+		$this->assertInstanceOf( 'Ensemble\\Components\\Contests\\Model', $result );
 	}
 
 	/**
