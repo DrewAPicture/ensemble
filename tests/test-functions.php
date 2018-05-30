@@ -7,6 +7,9 @@ use Ensemble\Tests\UnitTestCase;
  * Tests for functions directly under the Ensemble namespace.
  *
  * @since 1.0.0
+ *
+ * @group functions
+ * @group core
  */
 class Functions_Tests extends UnitTestCase {
 
