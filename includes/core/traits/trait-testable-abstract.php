@@ -1,6 +1,6 @@
 <?php
 /**
- * Sets up abstract method overrides for testing abstract classes
+ * Testable_Abstract trait used by core abstract classes
  *
  * @package   Ensemble\Core\Traits
  * @copyright Copyright (c) 2018, Drew Jaynes
@@ -10,8 +10,8 @@
 namespace Ensemble\Core\Traits;
 
 /**
- * Core trait used for making abstract classes easier to mock and therefore
- * more easily testable.
+ * Core trait that sets up a registry for supplying externally-defined overrides
+ * to tests for abstract class methods
  *
  * @since 1.0.2
  */
