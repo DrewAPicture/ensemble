@@ -9,12 +9,12 @@ namespace Ensemble\Tests;
 class Factory extends \WP_UnitTest_Factory {
 
 	/**
-	 * @var \AffWP\Tests\Factory\Contest
+	 * @var \Ensemble\Tests\Factory\Contest
 	 */
 	public $contest;
 
 	/**
-	 * @var \AffWP\Tests\Factory\Venue
+	 * @var \Ensemble\Tests\Factory\Venue
 	 */
 	public $venue;
 
