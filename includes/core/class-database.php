@@ -336,9 +336,12 @@ abstract class Database implements Interfaces\Database {
 	 *
 	 * @param int $object_id Object ID.
 	 *
-	 * @return Model|\WP_Error Core object or WP_Error if there was a problem.
+	 * @return stdClass|\WP_Error Core object or WP_Error if there was a problem.
 	 */
 	public function get( $object_id ) {
+		// Object ID must be positive integer.
+		$object_id = absint( $object_id );
+
 		$object = $GLOBALS['wpdb']->get_row(
 			$GLOBALS['wpdb']->prepare(
 				"SELECT * FROM $this->table_name WHERE $this->primary_key = %s LIMIT 1;", $object_id
