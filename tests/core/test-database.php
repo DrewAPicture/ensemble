@@ -465,6 +465,15 @@ class Database_Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers ::count()
+	 */
+	public function test_count_should_return_an_integer() {
+		$result = self::$db->count();
+
+		$this->assertTrue( is_numeric( $result ) );
+	}
+	
+	/**
 	 * Builds a "mock" abstract Core\Database object.
 	 *
 	 * If neeeed, setting up abstract methods with return values from an actual
