@@ -7,6 +7,11 @@ use Ensemble\Tests\UnitTestCase;
  * Core users bootstrap tests.
  *
  * @since 1.0.0
+ *
+ * @coversDefaultClass \Ensemble\Core\Users
+ *
+ * @group core
+ * @group users
  */
 class Users_Tests extends UnitTestCase {
 
