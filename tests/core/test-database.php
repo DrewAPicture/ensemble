@@ -28,12 +28,7 @@ class Database_Tests extends UnitTestCase {
 	 */
 	public static function wpSetUpBeforeClass() {
 
-		/*
-		 * Use an anonymous class instead of a phpunit mock, because PHP 7.
-		 *
-		 * Setting up abstract methods with return values from an actual subclass
-		 * allows the CRUD methods to be tested with real fixture data. Boom.
-		 */
+		// Use an anonymous class instead of a phpunit mock, because PHP 7.
 		self::$db = self::get_db();
 	}
 
@@ -366,7 +361,7 @@ class Database_Tests extends UnitTestCase {
 
 		/*
 		 * Instantiate a mocked version of Contests\Database with a fake table name
-		 * to trigger the update failure.
+		 * to trigger the delete failure.
 		 */
 		$db = self::get_db( array(
 			'cache_group'     => 'contests',
@@ -396,7 +391,7 @@ class Database_Tests extends UnitTestCase {
 
 		/*
 		 * Instantiate a mocked version of Contests\Database with a fake table name
-		 * to trigger the update failure.
+		 * to trigger the delete failure.
 		 */
 		$db = self::get_db( array(
 			'cache_group'     => 'contests',
@@ -420,6 +415,9 @@ class Database_Tests extends UnitTestCase {
 
 	/**
 	 * Builds a "mock" abstract Core\Database object.
+	 *
+	 * If neeeed, setting up abstract methods with return values from an actual
+	 * subclass allows the CRUD methods to be tested with real fixture data. Boom.
 	 *
 	 * @since 1.0.2
 	 *
