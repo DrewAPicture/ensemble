@@ -2,6 +2,7 @@
 namespace Ensemble\Core;
 
 use Ensemble\Tests\UnitTestCase;
+use \Ensemble\Components\Contests;
 
 /**
  * Core Database superclass tests.
@@ -33,11 +34,7 @@ class Database_Tests extends UnitTestCase {
 		 * Setting up abstract methods with return values from an actual subclass
 		 * allows the CRUD methods to be tested with real fixture data. Boom.
 		 */
-		self::$db = self::get_db( array(
-			'cache_group'  => 'contests',
-			'object_type'  => 'Ensemble\\Components\\Contests\\Model',
-			'table_suffix' => 'ensemble_contests',
-		) );
+		self::$db = self::get_db();
 	}
 
 
