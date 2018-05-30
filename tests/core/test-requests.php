@@ -8,7 +8,7 @@ use Ensemble\Tests\UnitTestCase;
  *
  * @since 1.0.0
  *
- * @coversDefaultClass \Ensemble\Core\Users
+ * @coversDefaultClass \Ensemble\Core\Requests
  *
  * @group core
  * @group requests
@@ -31,7 +31,7 @@ class Requests_Tests extends UnitTestCase {
 
 	/**
 	 * @dataProvider _test_whitelist_query_vars_dp
-	 * @covers
+	 * @covers ::whitelist_query_vars()
 	 */
 	public function test_whitelist_query_vars( $query_var ) {
 		$result = self::$requests->whitelist_query_vars( array() );
