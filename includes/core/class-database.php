@@ -394,6 +394,9 @@ abstract class Database implements Interfaces\Database {
 	 * @return bool True if the object exists, otherwise false.
 	 */
 	public function exists( $object_id ) {
+		// Object ID must be positive integer.
+		$object_id = absint( $object_id );
+
 		$result = $GLOBALS['wpdb']->query(
 			$GLOBALS['wpdb']->prepare(
 				"SELECT 1 FROM {$this->table_name} WHERE {$this->primary_key} = %d;", $object_id
