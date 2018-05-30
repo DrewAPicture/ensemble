@@ -33,6 +33,15 @@ class Database_Tests extends UnitTestCase {
 		self::$db = self::get_db();
 	}
 
+	/**
+	 * Runs after each test method.
+	 */
+	public function tearDown() {
+		// Restore wpdb->suppress_errors.
+		$GLOBALS['wpdb']->suppress_errors = false;
+
+		parent::tearDown();
+	}
 
 	/**
 	 * @covers ::get_primary_key()
@@ -71,9 +80,6 @@ class Database_Tests extends UnitTestCase {
 
 		// New instance with invalid defaults.
 		$this->assertWPError( $result );
-
-		// Cleanup.
-		$GLOBALS['wpdb']->suppress_errors = false;
 	}
 
 	/**
@@ -90,9 +96,6 @@ class Database_Tests extends UnitTestCase {
 		$result = self::get_db()->insert( array() );
 
 		$this->assertContains( 'insert_failure', $result->get_error_codes() );
-
-		// Cleanup.
-		$GLOBALS['wpdb']->suppress_errors = false;
 	}
 
 	/**
@@ -238,9 +241,6 @@ class Database_Tests extends UnitTestCase {
 		$result    = $db->update( $object_id, array( 'name' => 'Foo' ) );
 
 		$this->assertWPError( $result );
-
-		// Cleanup.
-		$GLOBALS['wpdb']->suppress_errors = false;
 	}
 
 	/**
@@ -268,9 +268,6 @@ class Database_Tests extends UnitTestCase {
 		$result    = $db->update( $object_id, array( 'name' => 'Foo' ) );
 
 		$this->assertContains( 'update_failure', $result->get_error_codes() );
-
-		// Cleanup.
-		$GLOBALS['wpdb']->suppress_errors = false;
 	}
 
 	/**
@@ -379,9 +376,6 @@ class Database_Tests extends UnitTestCase {
 		$result    = $db->delete( $object_id );
 
 		$this->assertWPError( $result );
-
-		// Cleanup.
-		$GLOBALS['wpdb']->suppress_errors = false;
 	}
 
 	/**
@@ -409,6 +403,7 @@ class Database_Tests extends UnitTestCase {
 		$result    = $db->delete( $object_id );
 
 		$this->assertContains( 'delete_failure', $result->get_error_codes() );
+	}
 
 		// Cleanup.
 		$GLOBALS['wpdb']->suppress_errors = false;
