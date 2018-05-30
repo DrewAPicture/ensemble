@@ -278,6 +278,147 @@ class Database_Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers ::delete()
+	 */
+	public function test_delete_success_should_return_true() {
+		$object_id = $this->factory->contest->create();
+
+		$result = ( new Contests\Database )->delete( $object_id );
+
+		$this->assertTrue( $result );
+	}
+
+	/**
+	 * @covers ::delete()
+	 */
+	public function test_delete_with_invalid_query_object_type_should_return_WP_Error() {
+		$result = self::$db->delete( 9999 );
+
+		$this->assertWPError( $result );
+	}
+
+	/**
+	 * @covers ::delete()
+	 */
+	public function test_delete_with_invalid_query_object_type_should_return_WP_Error_including_code_get_core_object_class() {
+		$result = self::$db->delete( 9999 );
+
+		$this->assertContains( 'get_core_object_class', $result->get_error_codes() );
+	}
+
+	/**
+	 * @covers ::delete()
+	 */
+	public function test_delete_with_invalid_id_type_should_return_WP_Error() {
+		$db = self::get_db( array(
+			'object_type' => 'Ensemble\\Components\\Contests\\Model',
+		) );
+
+		$result = $db->delete( 'foo' );
+
+		$this->assertWPError( $result );
+	}
+
+	/**
+	 * @covers ::delete()
+	 */
+	public function test_delete_with_invalid_id_type_should_return_WP_Error_including_code_get_instance_invalid_id() {
+		$db = self::get_db( array(
+			'object_type' => 'Ensemble\\Components\\Contests\\Model',
+		) );
+
+		$result = $db->delete( 'foo' );
+
+		$this->assertContains( 'get_instance_invalid_id', $result->get_error_codes() );
+	}
+
+	/**
+	 * @covers ::delete()
+	 */
+	public function test_delete_with_invalid_id_should_return_WP_Error() {
+		$db = self::get_db( array(
+			'object_type' => 'Ensemble\\Components\\Contests\\Model',
+		) );
+
+		$result = $db->delete( 9999 );
+
+		$this->assertWPError( $result );
+	}
+
+	/**
+	 * @covers ::delete()
+	 */
+	public function test_delete_with_invalid_id_should_return_WP_Error_including_code_invalid_object() {
+		$db = self::get_db( array(
+			'object_type' => 'Ensemble\\Components\\Contests\\Model',
+		) );
+
+		$result = $db->delete( 9999 );
+
+		$this->assertContains( 'invalid_object', $result->get_error_codes() );
+	}
+
+	/**
+	 * @covers ::delete()
+	 */
+	public function test_delete_fail_should_return_WP_Error() {
+		$contests = new Contests\Database;
+
+		/*
+		 * Instantiate a mocked version of Contests\Database with a fake table name
+		 * to trigger the update failure.
+		 */
+		$db = self::get_db( array(
+			'cache_group'     => 'contests',
+			'object_type'     => $contests->get_query_object_type(),
+			'table_suffix'    => 'fake',
+			'columns'         => $contests->get_columns(),
+			'column_defaults' => $contests->get_column_defaults(),
+		) );
+
+		// Attempting to query an invalid table will throw a wpdb warning. Suppress it.
+		$GLOBALS['wpdb']->suppress_errors = true;
+
+		$object_id = $this->factory->contest->create();
+		$result    = $db->delete( $object_id );
+
+		$this->assertWPError( $result );
+
+		// Cleanup.
+		$GLOBALS['wpdb']->suppress_errors = false;
+	}
+
+	/**
+	 * @covers ::delete()
+	 */
+	public function test_delete_fail_should_return_WP_Error_including_code_update_failure() {
+		$contests = new Contests\Database;
+
+		/*
+		 * Instantiate a mocked version of Contests\Database with a fake table name
+		 * to trigger the update failure.
+		 */
+		$db = self::get_db( array(
+			'cache_group'     => 'contests',
+			'object_type'     => $contests->get_query_object_type(),
+			'table_suffix'    => 'fake',
+			'columns'         => $contests->get_columns(),
+			'column_defaults' => $contests->get_column_defaults(),
+		) );
+
+		// Attempting to query an invalid table will throw a wpdb warning. Suppress it.
+		$GLOBALS['wpdb']->suppress_errors = true;
+
+		$object_id = $this->factory->contest->create();
+		$result    = $db->delete( $object_id );
+
+		$this->assertContains( 'delete_failure', $result->get_error_codes() );
+
+		// Cleanup.
+		$GLOBALS['wpdb']->suppress_errors = false;
+	}
+
+	/**
 	 * Builds a "mock" abstract Core\Database object.
 	 *
 	 * @since 1.0.2
