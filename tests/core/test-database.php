@@ -103,7 +103,7 @@ class Database_Tests extends UnitTestCase {
 	 * @covers ::insert()
 	 */
 	public function test_insert_success_should_return_an_id_of_a_newly_created_object() {
-		$result = ( new Contests\Database )->_insert( array(
+		$result = ( new Contests\Database )->insert( array(
 			'name'   => 'Foo',
 			'venues' => array( 1 ),
 		) );
@@ -115,7 +115,7 @@ class Database_Tests extends UnitTestCase {
 	 * @covers ::insert()
 	 */
 	public function test_insert_success_should_return_valid_id_of_the_newly_created_object() {
-		$id = ( new Contests\Database )->_insert( array(
+		$id = ( new Contests\Database )->insert( array(
 			'name'   => 'Foo',
 			'venues' => array( 1 ),
 		) );
