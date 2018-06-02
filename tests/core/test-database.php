@@ -527,49 +527,28 @@ class Database_Tests extends UnitTestCase {
 	/**
 	 * @covers ::get_by()
 	 */
-	public function test_get_by_with_invalid_object_id_type_should_return_WP_Error() {
-		$db = $this->get_db( array(
-			'columns' => array( 'foo' => '%s' ),
+	public function test_get_by_success_should_return_an_stdClass_object() {
+		$contest_id = $this->factory->contest->create( array(
+			'name'   => 'Foo Name',
 		) );
 
-		$this->assertWPError( $db->get_by( 'foo', 'bar' ) );
-	}
+		$contests = new Contests\Database;
 
-	/**
-	 * @covers ::get_by()
-	 */
-	public function test_get_by_with_invalid_object_id_type_should_return_WP_Error_including_code_missing_object_id() {
-		$db = $this->get_db( array(
-			'columns' => array( 'foo' => '%s' ),
+		/*
+		 * Instantiate a mocked version of Contests\Database with a fake table name
+		 * to trigger the delete failure.
+		 */
+		$db = self::get_db( array(
+			'cache_group'     => 'contests',
+			'object_type'     => $contests->get_query_object_type(),
+			'table_suffix'    => $contests->get_table_suffix(),
+			'columns'         => $contests->get_columns(),
+			'column_defaults' => $contests->get_column_defaults(),
 		) );
 
-		$result = $db->get_by( 'foo', 'bar' );
+		$result = $db->get_by( 'name', 'Foo Name' );
 
-		$this->assertContains( 'missing_object_id', $result->get_error_codes() );
-	}
-
-	/**
-	 * @covers ::get_by()
-	 */
-	public function test_get_by_with_invalid_object_id_should_return_WP_Error() {
-		$db = $this->get_db( array(
-			'columns' => array( 'foo' => '%s' ),
-		) );
-
-		$this->assertWPError( $db->get_by( 'foo', 0 ) );
-	}
-
-	/**
-	 * @covers ::get_by()
-	 */
-	public function test_get_by_with_invalid_object_id_should_return_WP_Error_including_code_missing_object_id() {
-		$db = $this->get_db( array(
-			'columns' => array( 'foo' => '%s' ),
-		) );
-
-		$result = $db->get_by( 'foo', 0 );
-
-		$this->assertContains( 'missing_object_id', $result->get_error_codes() );
+		$this->assertInstanceOf( 'stdClass', $result );
 	}
 
 	/**
