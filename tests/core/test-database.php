@@ -643,6 +643,81 @@ class Database_Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers ::get_column_by()
+	 */
+	public function test_get_column_by_with_invalid_column_where_should_return_WP_Error() {
+		$this->assertWPError( self::$db->get_column_by( 'foo', 'bar', 'baz' ) );
+	}
+
+	/**
+	 * @covers ::get_column_by()
+	 */
+	public function test_get_column_by_with_invalid_column_where_should_return_WP_Error_including_code_invalid_where_column() {
+		$result = self::$db->get_column_by( 'foo', 'bar', 'baz' );
+
+		$this->assertContains( 'invalid_where_column', $result->get_error_codes() );
+	}
+
+	/**
+	 * @covers ::get_column_by()
+	 */
+	public function test_get_column_by_with_empty_value_should_return_WP_Error() {
+		$this->assertWPError( self::$db->get_column_by( 'foo', 'bar', '' ) );
+	}
+
+	/**
+	 * @covers ::get_column_by()
+	 */
+	public function test_get_column_by_with_empty_value_should_return_WP_Error_including_code_missing_value() {
+		$result = self::$db->get_column_by( 'foo', 'bar', '' );
+
+		$this->assertContains( 'missing_value', $result->get_error_codes() );
+	}
+
+	/**
+	 * @covers ::get_column_by()
+	 */
+	public function test_get_column_by_with_invalid_column_should_return_WP_Error() {
+		$this->assertWPError( self::$db->get_column_by( 'foo', 'bar', 'baz' ) );
+	}
+
+	/**
+	 * @covers ::get_column_by()
+	 */
+	public function test_get_column_by_with_invalid_column_should_return_WP_Error_including_code_invalid_column() {
+		$result = self::$db->get_column_by( 'foo', 'bar', 'baz' );
+
+		$this->assertContains( 'invalid_column', $result->get_error_codes() );
+	}
+
+	/**
+	 * @covers ::get_column_by()
+	 */
+	public function test_get_column_by_success_should_return_a_result() {
+		$contest_id = $this->factory->contest->create( array(
+			'name'   => 'Foo Name',
+		) );
+
+		$contests = new Contests\Database;
+
+		/*
+		 * Instantiate a mocked version of Contests\Database with a fake table name
+		 * to trigger the delete failure.
+		 */
+		$db = self::get_db( array(
+			'cache_group'     => 'contests',
+			'object_type'     => $contests->get_query_object_type(),
+			'table_suffix'    => $contests->get_table_suffix(),
+			'columns'         => $contests->get_columns(),
+			'column_defaults' => $contests->get_column_defaults(),
+		) );
+
+		$result = $db->get_column_by( 'name', 'id', $contest_id );
+
+		$this->assertSame( 'Foo Name', $result );
+	}
+
+	/**
 	 * Builds a "mock" abstract Core\Database object.
 	 *
 	 * If needed, setting up abstract methods with return values from an actual
