@@ -41,7 +41,7 @@ abstract class User_Database implements Interfaces\User_Database {
 	 * @since 1.0.0
 	 *
 	 * @param int $user_id User ID.
-	 * @return \WP_User|\WP_Error User object or WP_Error if there was a problem.
+	 * @return \WP_User|false User object or false if there was a problem.
 	 */
 	public function get( $user_id ) {
 		return get_user_by( 'id', $user_id );
