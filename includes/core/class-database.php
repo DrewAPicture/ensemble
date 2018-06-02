@@ -407,15 +407,15 @@ abstract class Database implements Interfaces\Database {
 	}
 
 	/**
-	 * Retrieves a record based on column and object ID.
+	 * Retrieves a record based on column and value.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string     $column    Column name. See get_columns().
-	 * @param int|string $object_id Object ID.
+	 * @param string     $column Column name. See get_columns().
+	 * @param int|string $value  Column value.
 	 * @return object|\WP_Error Database query result object, otherwise a WP_Error object.
 	 */
-	public function get_by( $column, $object_id ) {
+	public function get_by( $column, $value ) {
 		$errors = new \WP_Error();
 
 		// Log an error if the column is invalid.
@@ -442,7 +442,7 @@ abstract class Database implements Interfaces\Database {
 		} else {
 			$result = $GLOBALS['wpdb']->get_row(
 				$GLOBALS['wpdb']->prepare(
-					"SELECT * FROM $this->table_name WHERE $column = '%s' LIMIT 1;", $object_id
+					"SELECT * FROM $this->table_name WHERE $column = '%s' LIMIT 1;", $value
 				)
 			);
 		}
