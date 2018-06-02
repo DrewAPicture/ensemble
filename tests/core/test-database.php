@@ -509,6 +509,70 @@ class Database_Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers ::get_by()
+	 */
+	public function test_get_by_with_invalid_column_should_return_WP_Error() {
+		$this->assertWPError( self::$db->get_by( 'foo', 1 ) );
+	}
+
+	/**
+	 * @covers ::get_by()
+	 */
+	public function test_get_by_with_invalid_column_should_return_WP_Error_including_code_invalid_column() {
+		$result = self::$db->get_by( 'foo', 1 );
+
+		$this->assertContains( 'invalid_column', $result->get_error_codes() );
+	}
+
+	/**
+	 * @covers ::get_by()
+	 */
+	public function test_get_by_with_invalid_object_id_type_should_return_WP_Error() {
+		$db = $this->get_db( array(
+			'columns' => array( 'foo' => '%s' ),
+		) );
+
+		$this->assertWPError( $db->get_by( 'foo', 'bar' ) );
+	}
+
+	/**
+	 * @covers ::get_by()
+	 */
+	public function test_get_by_with_invalid_object_id_type_should_return_WP_Error_including_code_missing_object_id() {
+		$db = $this->get_db( array(
+			'columns' => array( 'foo' => '%s' ),
+		) );
+
+		$result = $db->get_by( 'foo', 'bar' );
+
+		$this->assertContains( 'missing_object_id', $result->get_error_codes() );
+	}
+
+	/**
+	 * @covers ::get_by()
+	 */
+	public function test_get_by_with_invalid_object_id_should_return_WP_Error() {
+		$db = $this->get_db( array(
+			'columns' => array( 'foo' => '%s' ),
+		) );
+
+		$this->assertWPError( $db->get_by( 'foo', 0 ) );
+	}
+
+	/**
+	 * @covers ::get_by()
+	 */
+	public function test_get_by_with_invalid_object_id_should_return_WP_Error_including_code_missing_object_id() {
+		$db = $this->get_db( array(
+			'columns' => array( 'foo' => '%s' ),
+		) );
+
+		$result = $db->get_by( 'foo', 0 );
+
+		$this->assertContains( 'missing_object_id', $result->get_error_codes() );
+	}
+
+	/**
 	 * Builds a "mock" abstract Core\Database object.
 	 *
 	 * If needed, setting up abstract methods with return values from an actual
