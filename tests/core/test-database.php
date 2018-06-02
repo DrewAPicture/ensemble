@@ -854,6 +854,24 @@ class Database_Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers ::build_cache_key()
+	 */
+	public function test_build_cache_key_with_count_true_should_contain_count() {
+		$expected = 'ensemble_mocks_count_' . serialize( array() );
+
+		$this->assertSame( md5( $expected ), self::$db->build_cache_key( true, array() ) );
+	}
+
+	/**
+	 * @covers ::build_cache_key()
+	 */
+	public function test_build_cache_key_with_count_false_should_not_contain_count() {
+		$expected = 'ensemble_mocks_' . serialize( array() );
+
+		$this->assertSame( md5( $expected ), self::$db->build_cache_key( false, array() ) );
+	}
+
+	/**
 	 * Builds a "mock" abstract Core\Database object.
 	 *
 	 * If needed, setting up abstract methods with return values from an actual
