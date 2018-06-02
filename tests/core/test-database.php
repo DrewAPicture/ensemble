@@ -810,6 +810,31 @@ class Database_Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers ::parse_fields()
+	 */
+	public function test_parse_fields_should_strip_invalid_fields() {
+		/*
+		 * Instantiate a mocked version of Contests\Database.
+		 */
+		$db = self::get_db( array(
+			'columns' => array( 'name' => '%s', 'id' => '%d' ),
+		) );
+
+		$fields = array( 'foo', 'name', 'id' );
+
+		$expected = 'name, id';
+
+		$this->assertSame( $expected, $db->parse_fields( $fields ) );
+	}
+
+	/**
+	 * @covers ::parse_fields()
+	 */
+	public function test_parse_fields_empty_fields_should_return_wildcard() {
+		$this->assertSame( '*', self::$db->parse_fields( array() ) );
+	}
+
+	/**
 	 * Builds a "mock" abstract Core\Database object.
 	 *
 	 * If needed, setting up abstract methods with return values from an actual
