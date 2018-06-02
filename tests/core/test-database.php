@@ -737,6 +737,79 @@ class Database_Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers ::get_core_object()
+	 */
+	public function test_get_core_object_with_invalid_query_type_should_return_WP_Error() {
+		$this->assertWPError( self::$db->get_core_object( 999 ) );
+	}
+
+	/**
+	 * @covers ::get_core_object()
+	 */
+	public function test_get_core_object_with_invalid_query_type_should_return_WP_Error_including_code_get_core_object_class() {
+		$result = self::$db->get_core_object( 999 );
+
+		$this->assertContains( 'get_core_object_class', $result->get_error_codes() );
+	}
+
+	/**
+	 * @covers ::get_core_object()
+	 */
+	public function test_get_core_object_with_fully_qualified_object_should_return_that_object() {
+		/*
+		 * Instantiate a mocked version of Contests\Database.
+		 */
+		$db = self::get_db( array(
+			'object_type' => ( new Contests\Database )->get_query_object_type(),
+		) );
+
+		$expected = $this->factory->contest->create_and_get();
+
+		$this->assertSame( $expected, $db->get_core_object( $expected ) );
+	}
+
+	/**
+	 * @covers ::get_core_object()
+	 */
+	public function test_get_core_object_with_valid_id_should_return_that_object() {
+		$object_type = ( new Contests\Database )->get_query_object_type();
+
+		/*
+		 * Instantiate a mocked version of Contests\Database.
+		 */
+		$db = self::get_db( array(
+			'object_type' => $object_type,
+		) );
+
+		$contest_id = $this->factory->contest->create();
+
+		$this->assertInstanceOf( $object_type, $db->get_core_object( $contest_id ) );
+	}
+
+	/**
+	 * @covers ::get_core_object()
+	 */
+	public function test_get_core_object_with_stdClass_object_should_return_a_FQ_object() {
+		$object_type = ( new Contests\Database )->get_query_object_type();
+
+		/*
+		 * Instantiate a mocked version of Contests\Database.
+		 */
+		$db = self::get_db( array(
+			'object_type' => $object_type,
+		) );
+
+		$contest = $this->factory->contest->create_and_get();
+		$mock    = new \stdClass;
+
+		foreach ( get_object_vars( $contest ) as $name => $value ) {
+			$mock->{$name} = $value;
+		}
+
+		$this->assertInstanceOf( $object_type, $db->get_core_object( $mock ) );
+	}
+
+	/**
 	 * Builds a "mock" abstract Core\Database object.
 	 *
 	 * If needed, setting up abstract methods with return values from an actual
