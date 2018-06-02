@@ -535,8 +535,7 @@ class Database_Tests extends UnitTestCase {
 		$contests = new Contests\Database;
 
 		/*
-		 * Instantiate a mocked version of Contests\Database with a fake table name
-		 * to trigger the delete failure.
+		 * Instantiate a mocked version of Contests\Database.
 		 */
 		$db = self::get_db( array(
 			'cache_group'     => 'contests',
@@ -626,8 +625,7 @@ class Database_Tests extends UnitTestCase {
 		$contests = new Contests\Database;
 
 		/*
-		 * Instantiate a mocked version of Contests\Database with a fake table name
-		 * to trigger the delete failure.
+		 * Instantiate a mocked version of Contests\Database.
 		 */
 		$db = self::get_db( array(
 			'cache_group'     => 'contests',
@@ -701,8 +699,7 @@ class Database_Tests extends UnitTestCase {
 		$contests = new Contests\Database;
 
 		/*
-		 * Instantiate a mocked version of Contests\Database with a fake table name
-		 * to trigger the delete failure.
+		 * Instantiate a mocked version of Contests\Database.
 		 */
 		$db = self::get_db( array(
 			'cache_group'     => 'contests',
@@ -724,8 +721,7 @@ class Database_Tests extends UnitTestCase {
 		$contests = new Contests\Database;
 
 		/*
-		 * Instantiate a mocked version of Contests\Database with a fake table name
-		 * to trigger the delete failure.
+		 * Instantiate a mocked version of Contests\Database.
 		 */
 		$db = self::get_db( array(
 			'cache_group'     => 'contests',
