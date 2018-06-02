@@ -670,7 +670,6 @@ abstract class Database implements Interfaces\Database {
 			$fields = array( $fields );
 		}
 
-		$count     = count( $fields );
 		$whitelist = array_keys( $this->get_columns() );
 
 		foreach ( $fields as $index => $field ) {
