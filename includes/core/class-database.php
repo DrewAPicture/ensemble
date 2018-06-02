@@ -497,11 +497,11 @@ abstract class Database implements Interfaces\Database {
 	public function get_column_by( $column, $column_where, $column_value ) {
 		$errors = new \WP_Error();
 
-		// Log an error if the column to compare against is empty.
-		if ( empty( $column_where ) ) {
-			$message = sprintf( 'Missing column to match against for the WHERE clause in the \'%s\' query.', $this->get_table_name() );
+		// Log an error if the WHERE column to compare against is invalid.
+		if ( ! array_key_exists( $column_where, $this->get_columns() ) ) {
+			$message = sprintf( 'The \'%1$s\' column to match against for the WHERE clause is missing or invalid in the \'%s\' query.', $column_where, $this->get_table_name() );
 
-			$errors->add( 'missing_where_column', $message );
+			$errors->add( 'invalid_where_column', $message );
 		}
 
 		// Log an error if the column value is empty.
