@@ -86,5 +86,46 @@ class Model_Tests extends UnitTestCase {
 		$this->assertInstanceOf( 'Ensemble\\Core\\Model', $result );
 	}
 
+	/**
+	 * @covers ::get_cache_key()
+	 */
+	public function test_get_cache_key_should_return_the_table_suffix_and_object_id() {
+		$expected = md5( self::$model::db()->get_table_suffix() . ':' . self::$model_id );
+
+		$this->assertSame( $expected, self::$model::get_cache_key( self::$model_id ) );
+	}
+
+	/**
+	 * @covers ::to_array()
+	 */
+	public function test_to_array_should_return_an_array_of_public_object_vars() {
+		$result = self::$model->to_array();
+
+		$this->assertInternalType( 'array', $result );
+	}
+
+	/**
+	 * @covers ::populate_vars()
+	 */
+	public function test_populate_vars_with_object_and_populated_true_should_return_the_original_object() {
+		$this->assertSame( self::$model, self::$model::populate_vars( self::$model ) );
+	}
+
+	/**
+	 * @covers ::populate_vars()
+	 */
+	public function test_populate_vars_with_array_and_populated_true_should_return_the_original_array() {
+		$expected = self::$model->to_array();
+
+		$this->assertSame( $expected, self::$model::populate_vars( self::$model->to_array() ) );
+	}
+
+	/**
+	 * @covers ::sanitize_field()
+	 */
+	public function test_sanitize_field_should_return_sanitized_field_value() {
+		$this->assertSame( self::$model->get_ID(), self::$model::sanitize_field( 'id', self::$model->get_ID() ) );
+	}
+
 }
 
