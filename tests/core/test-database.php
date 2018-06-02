@@ -831,6 +831,29 @@ class Database_Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers ::parse_global_args()
+	 */
+	public function test_parse_global_args_defaults() {
+		/*
+		 * Instantiate a mocked version of Core\Database.
+		 */
+		$db = self::get_db( array(
+			'columns' => array( 'id' => '%d' ),
+		) );
+
+		$expected = array(
+			'number'   => 20,
+			'offset'   => 0,
+			'order'    => 'DESC',
+			'orderby'  => 'id',
+			'fields'   => '*',
+			'callback' => array( $db, 'get_core_object' ),
+		);
+
+		$this->assertEqualSets( $expected, $db->parse_global_args( array() ) );
+	}
+
+	/**
 	 * Builds a "mock" abstract Core\Database object.
 	 *
 	 * If needed, setting up abstract methods with return values from an actual
