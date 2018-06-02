@@ -552,6 +552,70 @@ class Database_Tests extends UnitTestCase {
 	}
 
 	/**
+	 * @covers ::get_column()
+	 */
+	public function test_get_column_with_invalid_column_should_return_a_WP_Error() {
+		$this->assertWPError( self::$db->get_column( 'foo', 1 ) );
+	}
+
+	/**
+	 * @covers ::get_column()
+	 */
+	public function test_get_column_with_invalid_column_should_return_a_WP_Error_including_code_invalid_column() {
+		$result = self::$db->get_column( 'foo', 1 );
+
+		$this->assertContains( 'invalid_column', $result->get_error_codes() );
+	}
+
+	/**
+	 * @covers ::get_column()
+	 */
+	public function test_get_column_with_an_invalid_object_id_type_should_return_a_WP_Error() {
+		$db = self::get_db( array(
+			'columns' => array( 'foo' => '%s' ),
+		) );
+
+		$this->assertWPError( $db->get_column( 'foo', 'bar' ) );
+	}
+
+	/**
+	 * @covers ::get_column()
+	 */
+	public function test_get_column_with_an_invalid_object_id_type_should_return_a_WP_Error_including_code_missing_object_id() {
+		$db = self::get_db( array(
+			'columns' => array( 'foo' => '%s' ),
+		) );
+
+		$result = $db->get_column( 'foo', 'bar' );
+
+		$this->assertContains( 'missing_object_id', $result->get_error_codes() );
+	}
+
+	/**
+	 * @covers ::get_column()
+	 */
+	public function test_get_column_with_an_invalid_object_id_should_return_a_WP_Error() {
+		$db = self::get_db( array(
+			'columns' => array( 'foo' => '%s' ),
+		) );
+
+		$this->assertWPError( $db->get_column( 'foo', 0 ) );
+	}
+
+	/**
+	 * @covers ::get_column()
+	 */
+	public function test_get_column_with_an_invalid_object_id_should_return_a_WP_Error_including_code_missing_object_id() {
+		$db = self::get_db( array(
+			'columns' => array( 'foo' => '%s' ),
+		) );
+
+		$result = $db->get_column( 'foo', 0 );
+
+		$this->assertContains( 'missing_object_id', $result->get_error_codes() );
+	}
+
+	/**
 	 * Builds a "mock" abstract Core\Database object.
 	 *
 	 * If needed, setting up abstract methods with return values from an actual
