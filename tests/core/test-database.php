@@ -820,11 +820,7 @@ class Database_Tests extends UnitTestCase {
 			'columns' => array( 'name' => '%s', 'id' => '%d' ),
 		) );
 
-		$fields = array( 'foo', 'name', 'id' );
-
-		$expected = 'name, id';
-
-		$this->assertSame( $expected, $db->parse_fields( $fields ) );
+		$this->assertSame( 'name, id', $db->parse_fields( array( 'foo', 'name', 'id' ) ) );
 	}
 
 	/**
