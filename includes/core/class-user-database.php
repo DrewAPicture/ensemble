@@ -10,6 +10,7 @@
 namespace Ensemble\Core;
 
 use Ensemble\Core\Interfaces;
+use Ensemble\Core\Traits\Testable_Abstract;
 
 /**
  * Core database abstraction layer.
@@ -19,13 +20,28 @@ use Ensemble\Core\Interfaces;
  */
 abstract class User_Database implements Interfaces\User_Database {
 
+	use Testable_Abstract;
+
+	/**
+	 * Sets up the User_Database superclass.
+	 *
+	 * @since 1.0.2
+	 *
+	 * @param null $overrides For unit testing purposes only -- unused for normal business.
+	 */
+	public function __construct( $overrides = null ) {
+		if ( null !== $overrides ) {
+			$this->set_overrides( $overrides );
+		}
+	}
+
 	/**
 	 * Retrieves a single core object.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param int $user_id User ID.
-	 * @return \WP_User|\WP_Error User object or WP_Error if there was a problem.
+	 * @return \WP_User|false User object or false if there was a problem.
 	 */
 	public function get( $user_id ) {
 		return get_user_by( 'id', $user_id );

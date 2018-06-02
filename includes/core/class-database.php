@@ -9,17 +9,22 @@
  */
 namespace Ensemble\Core;
 
+use Ensemble\Core\Traits\Testable_Abstract;
 use function Ensemble\{clean_item_cache, get_wp_timezone};
 
 /**
  * Core database abstraction layer.
  *
  * @since 1.0.0
+ * @since 1.0.2 Now uses the Testable_Abstract trait
  * @abstract
  *
  * @see Interfaces\Database
+ * @see Testable_Abstract
  */
 abstract class Database implements Interfaces\Database {
+
+	use Testable_Abstract;
 
 	/**
 	 * Primary key.
@@ -49,8 +54,16 @@ abstract class Database implements Interfaces\Database {
 	 * Sets up the database class.
 	 *
 	 * @since 1.0.0
+	 * @since 1.0.2 Introduced an optional `$overrides` parameter used for testing purposes
+	 *              via use of the Testable_Abstract trait.
+	 *
+	 * @param null $overrides For unit testing purposes only -- unused for normal business.
 	 */
-	public function __construct() {
+	public function __construct( $overrides = null ) {
+		if ( null !== $overrides ) {
+			$this->set_overrides( $overrides );
+		}
+
 		$this->set_table_name();
 
 		$this->version = $this->get_version();
@@ -323,9 +336,12 @@ abstract class Database implements Interfaces\Database {
 	 *
 	 * @param int $object_id Object ID.
 	 *
-	 * @return Model|\WP_Error Core object or WP_Error if there was a problem.
+	 * @return stdClass|\WP_Error Core object or WP_Error if there was a problem.
 	 */
 	public function get( $object_id ) {
+		// Object ID must be positive integer.
+		$object_id = absint( $object_id );
+
 		$object = $GLOBALS['wpdb']->get_row(
 			$GLOBALS['wpdb']->prepare(
 				"SELECT * FROM $this->table_name WHERE $this->primary_key = %s LIMIT 1;", $object_id
@@ -378,6 +394,9 @@ abstract class Database implements Interfaces\Database {
 	 * @return bool True if the object exists, otherwise false.
 	 */
 	public function exists( $object_id ) {
+		// Object ID must be positive integer.
+		$object_id = absint( $object_id );
+
 		$result = $GLOBALS['wpdb']->query(
 			$GLOBALS['wpdb']->prepare(
 				"SELECT 1 FROM {$this->table_name} WHERE {$this->primary_key} = %d;", $object_id
@@ -388,15 +407,15 @@ abstract class Database implements Interfaces\Database {
 	}
 
 	/**
-	 * Retrieves a record based on column and object ID.
+	 * Retrieves a record based on column and value.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string     $column    Column name. See get_columns().
-	 * @param int|string $object_id Object ID.
+	 * @param string     $column Column name. See get_columns().
+	 * @param int|string $value  Column value.
 	 * @return object|\WP_Error Database query result object, otherwise a WP_Error object.
 	 */
-	public function get_by( $column, $object_id ) {
+	public function get_by( $column, $value ) {
 		$errors = new \WP_Error();
 
 		// Log an error if the column is invalid.
@@ -406,13 +425,6 @@ abstract class Database implements Interfaces\Database {
 			$errors->add( 'invalid_column', $message );
 		}
 
-		// Log an error if the object ID is empty.
-		if ( empty( $object_id ) ) {
-			$message = sprintf( 'get_column() requires a valid object ID for %s queries.', $this->get_table_name() );
-
-			$errors->add( 'missing_object_id', $message );
-		}
-
 		$error_codes = $errors->get_error_codes();
 
 		if ( ! empty( $error_codes ) ) {
@@ -420,7 +432,7 @@ abstract class Database implements Interfaces\Database {
 		} else {
 			$result = $GLOBALS['wpdb']->get_row(
 				$GLOBALS['wpdb']->prepare(
-					"SELECT * FROM $this->table_name WHERE $column = '%s' LIMIT 1;", $object_id
+					"SELECT * FROM $this->table_name WHERE $column = '%s' LIMIT 1;", $value
 				)
 			);
 		}
@@ -447,7 +459,10 @@ abstract class Database implements Interfaces\Database {
 			$errors->add( 'invalid_column', $message );
 		}
 
-		// Log an error if the object ID is empty.
+		// Object ID must be positive integer.
+		$object_id = absint( $object_id );
+
+		// Log an error if the object ID evaluates to empty.
 		if ( empty( $object_id ) ) {
 			$message = sprintf( 'get_column() requires a valid object ID for \'%s\' queries.', $this->get_table_name() );
 
@@ -482,11 +497,11 @@ abstract class Database implements Interfaces\Database {
 	public function get_column_by( $column, $column_where, $column_value ) {
 		$errors = new \WP_Error();
 
-		// Log an error if the column to compare against is empty.
-		if ( empty( $column_where ) ) {
-			$message = sprintf( 'Missing column to match against for the WHERE clause in the \'%s\' query.', $this->get_table_name() );
+		// Log an error if the WHERE column to compare against is invalid.
+		if ( ! array_key_exists( $column_where, $this->get_columns() ) ) {
+			$message = sprintf( 'The \'%1$s\' column to match against for the WHERE clause is missing or invalid in the \'%s\' query.', $column_where, $this->get_table_name() );
 
-			$errors->add( 'missing_where_column', $message );
+			$errors->add( 'invalid_where_column', $message );
 		}
 
 		// Log an error if the column value is empty.
@@ -655,7 +670,6 @@ abstract class Database implements Interfaces\Database {
 			$fields = array( $fields );
 		}
 
-		$count     = count( $fields );
 		$whitelist = array_keys( $this->get_columns() );
 
 		foreach ( $fields as $index => $field ) {
