@@ -6,11 +6,6 @@
 
 # Ensemble
 
-* Stable: v1.0.1
-* Requires at least: WordPress 4.9.6
-* Requires at least: PHP 7.0
-* License: GPLv2
-
 <img src="http://mr.drewf.us/1T3805290e2a/icon_orange_200x-transp.png" align="left" />Ensemble is a game-changing solution for running a color guard or other alternative sports circuit using WordPress. Finally, all of the data you need in one place, and it’s all tied together: venues, contests, seasons, units, unit directors, and more.
 
 Note: Ensemble serves only as the data layer. There are a wide variety of rich connections between the data, which can be managed via the WordPress admin, but this plugin serves only to create an entry point for tying all of that data together.
@@ -18,6 +13,11 @@ Note: Ensemble serves only as the data layer. There are a wide variety of rich c
 A sister theme is in the works to bring all of this to the front end in the near future.
 
 Stable releases are available on WordPress.org: https://wordpress.org/plugins/ensemble/
+
+* Stable: v1.0.1
+* Requires at least: WordPress 4.9.6
+* Requires at least: PHP 7.0
+* License: GPLv2
 
 ### Contests
 
