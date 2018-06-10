@@ -12,14 +12,14 @@ namespace Ensemble\Components\Contests\Admin;
 use Ensemble\Components\Venues\Database as Venues;
 use Ensemble\Components\Seasons\Setup as Seasons;
 use function Ensemble\Components\Contests\{get_contest, get_allowed_statuses, get_allowed_types, get_type_label};
-use function Ensemble\{html};
+use function Ensemble\{html, clean_admin_url};
 
 $contest_id = absint( $_REQUEST['contest_id'] ?? 0 );
 $contest    = get_contest( $contest_id );
 ?>
 <h1 class="wp-heading-inline"><?php esc_html_e( 'Edit Contest', 'ensemble' ); ?></h1>
 
-<a href="<?php echo esc_url( add_query_arg( array( 'ensbl-view' => 'overview' ) ) ); ?>" class="page-title-action" role="button">
+<a href="<?php echo esc_url( add_query_arg( array( 'ensbl-view' => 'overview' ), clean_admin_url() ) ); ?>" class="page-title-action" role="button">
 	<?php esc_html_e( 'Return to All Contests', 'ensemble' ); ?>
 </a>
 
