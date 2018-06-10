@@ -10,14 +10,14 @@
 namespace Ensemble\Components\Venues\Admin;
 
 use function Ensemble\Components\Venues\{get_type_label, get_status_label, get_venue};
-use function Ensemble\{html};
+use function Ensemble\{html, clean_admin_url};
 
 $venue_id = absint( $_REQUEST['venue_id'] ?? 0 );
 $venue    = get_venue( $venue_id );
 ?>
 <h1 class="wp-heading-inline"><?php esc_html_e( 'Delete Venue', 'ensemble' ); ?></h1>
 
-<a href="<?php echo esc_url( add_query_arg( array( 'ensbl-view' => 'overview' ) ) ); ?>" class="page-title-action" role="button">
+<a href="<?php echo esc_url( add_query_arg( array( 'ensbl-view' => 'overview' ), clean_admin_url() ) ); ?>" class="page-title-action" role="button">
 	<?php esc_html_e( 'Return to All Venues', 'ensemble' ); ?>
 </a>
 

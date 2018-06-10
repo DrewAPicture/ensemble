@@ -9,6 +9,7 @@
  */
 namespace Ensemble\Core;
 
+use Ensemble\Core\Admin\Notices_Registry;
 use Ensemble\Core\Interfaces\Loader;
 
 /**
@@ -27,6 +28,7 @@ class Requests implements Loader {
 	 */
 	public function load() {
 		add_action( 'query_vars', array( $this, 'whitelist_query_vars' ) );
+		add_filter( 'removable_query_args', array( $this, 'clear_admin_query_args' ) );
 	}
 
 	/**
@@ -43,4 +45,29 @@ class Requests implements Loader {
 			'venue_id',
 		) );
 	}
+
+	/**
+	 * Handles clearing (dynamically removing) notice and other query args in Ensemble admin screens.
+	 *
+	 * In the case of notices, this serves to prevent notices unnecessarily persisting across screens.
+	 *
+	 * @since 1.0.2
+	 *
+	 * @param string $query_args Current query args.
+	 * @return string (Maybe) modified query args list.
+	 */
+	public function clear_admin_query_args( $query_args ) {
+		$registry = Notices_Registry::instance();
+
+		$potential_notices = preg_grep( '/^notice\-/', array_keys( $_REQUEST ) );
+
+		foreach ( $potential_notices as $notice_id ) {
+			if ( $registry->offsetExists( $notice_id ) ) {
+				$query_args[] = $notice_id;
+			}
+		}
+
+		return $query_args;
+	}
+
 }
