@@ -10,6 +10,7 @@
 namespace Ensemble;
 
 use Ensemble\Core\Admin\Notices;
+use Ensemble\Core\Admin\Notices_Registry;
 use Ensemble\Core\Interfaces;
 use Ensemble\Core\Traits;
 use Ensemble\Components;
@@ -126,4 +127,34 @@ function clean_item_cache( $object ) {
  */
 function print_notice( $notice_id, $atts = array() ) {
 	echo ( new Notices )->build_notice( $notice_id );
+}
+
+/**
+ * Cleans Ensemble notices query args from the current admin URL.
+ *
+ * @since 1.0.2
+ *
+ * @return string "Cleaned" admin URL if any notices were found and removed. Otherwise the current URL
+ *                if in the admin or an empty string if not.
+ */
+function clean_admin_url() {
+	if ( ! is_admin() ) {
+		return '';
+	}
+
+	$potential_notices = preg_grep( '/^notice\-/', array_keys( $_REQUEST ) );
+
+	$query_args = array();
+
+	if ( ! empty( $potential_notices ) ) {
+		$registry = Notices_Registry::instance();
+
+		foreach ( $potential_notices as $notice_id ) {
+			if ( $registry->offsetExists( $notice_id ) ) {
+				$query_args[] = $notice_id;
+			}
+		}
+	}
+
+	return remove_query_arg( $query_args );
 }
