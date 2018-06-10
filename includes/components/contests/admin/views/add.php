@@ -13,11 +13,11 @@ use Ensemble\Components\Contests\Database;
 use Ensemble\Components\Venues\Database as Venues;
 use Ensemble\Components\Seasons\Setup as Seasons;
 use function Ensemble\Components\Contests\{get_allowed_types, get_allowed_statuses};
-use function Ensemble\{html};
+use function Ensemble\{html, clean_admin_url};
 
 ?>
 <h1 class="wp-heading-inline"><?php esc_html_e( 'Add a Contest', 'ensemble' ); ?></h1>
-<a href="<?php echo esc_url( add_query_arg( array( 'ensbl-view' => 'overview' ) ) ); ?>" class="page-title-action" role="button">
+<a href="<?php echo esc_url( add_query_arg( array( 'ensbl-view' => 'overview' ), clean_admin_url() ) ); ?>" class="page-title-action" role="button">
 	<?php esc_html_e( 'Return to All Contests', 'ensemble' ); ?>
 </a>
 

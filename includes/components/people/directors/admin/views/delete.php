@@ -11,13 +11,13 @@ namespace Ensemble\Components\People\Directors\Admin;
 
 use Ensemble\Components\People\Directors;
 use Ensemble\Util\Date;
-use function Ensemble\{html};
+use function Ensemble\{html, clean_admin_url};
 
 $user_id  = absint( $_REQUEST['user_id'] ?? 0 );
 $director = get_userdata( $user_id );
 ?>
 <h1 class="wp-heading-inline"><?php esc_html_e( 'Delete Unit Director', 'ensemble' ); ?></h1>
-<a href="<?php echo esc_url( add_query_arg( array( 'ensbl-view' => 'overview' ) ) ); ?>" class="page-title-action" role="button">
+<a href="<?php echo esc_url( add_query_arg( array( 'ensbl-view' => 'overview' ), clean_admin_url() ) ); ?>" class="page-title-action" role="button">
 	<?php esc_html_e( 'Return to All Directors', 'ensemble' ); ?>
 </a>
 
