@@ -59,7 +59,7 @@ class Requests implements Loader {
 	public function clear_admin_query_args( $query_args ) {
 		$registry = Notices_Registry::instance();
 
-		$potential_notices = preg_grep( '/^notice\-/', array_keys( $_GET ) );
+		$potential_notices = preg_grep( '/^notice\-/', array_keys( $_REQUEST ) );
 
 		foreach ( $potential_notices as $notice_id ) {
 			if ( $registry->offsetExists( $notice_id ) ) {
