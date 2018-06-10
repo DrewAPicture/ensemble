@@ -11,8 +11,6 @@
  */
 namespace Ensemble\Core\Admin;
 
-use function Ensemble\{get_registry};
-
 /**
  * Implements logic for displaying a variety of notification types
  *
