@@ -330,6 +330,11 @@ class List_Table extends \WP_List_Table {
 					$value = $contest->name;
 				}
 
+				if ( ! empty( $contest->external ) ) {
+					$value .= ' &mdash; ';
+					$value .= '<span class="post-state">' . _x( 'External', 'contest URL', 'ensemble' ) . '</span>';
+				}
+
 				break;
 
 			case 'start_date':
