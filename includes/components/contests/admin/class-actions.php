@@ -77,7 +77,7 @@ class Actions implements Loader {
 
 		$added = ( new Database )->insert( $data );
 
-		if ( $added ) {
+		if ( ! is_wp_error( $added ) ) {
 			if ( ! empty( $season ) ) {
 				wp_set_object_terms( $added, $season, ( new Seasons )->get_taxonomy_slug() );
 			}
