@@ -175,7 +175,7 @@ do_action( 'ensemble_admin_notices' );
 							'id'               => 'contest-status',
 							'label'            => __( 'Status', 'ensemble' ),
 							'class'            => array( 'form-control' ),
-							'selected'         => 'draft',
+							'selected'         => 'published',
 							'options'          => get_allowed_statuses(),
 							'show_option_all'  => false,
 							'show_option_none' => false,
