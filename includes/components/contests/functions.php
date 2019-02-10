@@ -88,7 +88,9 @@ function get_allowed_types() {
 		'preview'  => __( 'Preview Clinic', 'ensemble' ),
 		'standard' => __( 'Standard', 'ensemble' ),
 		'special'  => __( 'Special Event', 'ensemble' ),
+		'regional' => __( 'Regional Competition', 'ensemble' ),
 		'state'    => __( 'State Championships', 'ensemble' ),
+		'world'    => __( 'World Championships', 'ensemble' ),
 		'camp'     => __( 'Summer Camp', 'ensemble' ),
 	);
 
