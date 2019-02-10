@@ -170,8 +170,8 @@ class List_Table extends \WP_List_Table {
 	 */
 	public function get_data() {
 		$page    = absint( $_REQUEST['paged'] ?? 1 );
-		$order   = sanitize_text_field( $_REQUEST['order'] ?? 'DESC' );
-		$orderby = sanitize_key( $_REQUEST['orderby'] ?? 'login' );
+		$order   = sanitize_text_field( $_REQUEST['order'] ?? 'ASC' );
+		$orderby = sanitize_key( $_REQUEST['orderby'] ?? 'display_name' );
 		$unit_id = absint( $_REQUEST['unit_id'] ?? 0 );
 
 		$per_page = $this->get_items_per_page( 'ensemble_directors_per_page', $this->per_page );
