@@ -219,7 +219,7 @@ class List_Table extends \WP_List_Table {
 
 		$this->items = $this->get_data();
 
-		$total_items = count( $this->items );
+		$total_items = $this->total_count;
 
 		$this->set_pagination_args( array(
 			'total_items' => $total_items,
