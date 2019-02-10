@@ -71,6 +71,7 @@ class Functions_Tests extends UnitTestCase {
 			'special'  => __( 'Special Event', 'ensemble' ),
 			'regional' => __( 'Regional Competition', 'ensemble' ),
 			'state'    => __( 'State Championships', 'ensemble' ),
+			'world'    => __( 'World Championships', 'ensemble' ),
 			'camp'     => __( 'Summer Camp', 'ensemble' ),
 		);
 
