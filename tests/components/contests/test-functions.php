@@ -69,6 +69,7 @@ class Functions_Tests extends UnitTestCase {
 			'preview'  => __( 'Preview Clinic', 'ensemble' ),
 			'standard' => __( 'Standard', 'ensemble' ),
 			'special'  => __( 'Special Event', 'ensemble' ),
+			'regional' => __( 'Regional Competition', 'ensemble' ),
 			'state'    => __( 'State Championships', 'ensemble' ),
 			'camp'     => __( 'Summer Camp', 'ensemble' ),
 		);
