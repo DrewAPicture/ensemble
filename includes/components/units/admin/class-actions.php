@@ -247,25 +247,38 @@ class Actions implements Loader {
 	 */
 	private function get_directors_as_options( $ids = array() ) {
 		$args = array(
-			'fields' => array( 'ID', 'display_name' ),
-			'number' => 500,
+			'fields'     => array( 'ID', 'display_name' ),
+			'number'     => 500,
+			'as_options' => true,
 		);
 
 		if ( ! empty( $ids ) ) {
 			$args['include'] = $ids;
 		}
 
-		$directors_results = ( new Directors\Database )->query( $args );
+		return ( new Directors\Database )->query( $args );
+	}
 
-		if ( ! empty( $directors_results ) ) {
-			foreach ( $directors_results as $director ) {
-				$directors[ $director->ID ] = $director->display_name;
-			}
-		} else {
-			$directors = array();
+	/**
+	 * Retrieves a list of instructor ID\name pairs for use as an options array.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $ids Optional. Specific array of instructor IDs to query for. Default empty array.
+	 * @return array Instructor ID\name pairs if any are found, otherwise an empty array.
+	 */
+	private function get_instructors_as_options( $ids = array() ) {
+		$args = array(
+			'fields'     => array( 'ID', 'display_name' ),
+			'number'     => 500,
+			'as_options' => true,
+		);
+
+		if ( ! empty( $ids ) ) {
+			$args['include'] = $ids;
 		}
 
-		return $directors;
+		return ( new Instructors\Database )->query( $args );
 	}
 
 	/**
