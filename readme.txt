@@ -3,9 +3,9 @@ Contributors: DrewAPicture
 Tags: color guard, sports, teams, percussion, circuit
 Donate link: https://wordpressfoundation.org/donate/
 Requires at least: 4.9.6
-Tested up to: 5.0.1
+Tested up to: 5.1.0
 Requires PHP: 7.0
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2
 
 Easily manage the data for a color guard circuit (or similar sport/activity organization) with WordPress.
@@ -60,6 +60,10 @@ A: You\'re welcome to submit an issue on the [Github repository](https://github.
 6. Contests overview.
 
 == Changelog ==
+
+= 1.1.1 =
+
+* Fix: Ensure existing users can be added as either an instructor, a director, or both
 
 = 1.1.0 =
 
