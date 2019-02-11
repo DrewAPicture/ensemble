@@ -9,7 +9,7 @@
  */
 namespace Ensemble\Components\Units\Admin;
 
-use Ensemble\Components\People\Directors;
+use Ensemble\Components\People\{Directors, Instructors};
 use Ensemble\Components\Units\Setup;
 use Ensemble\Core\Interfaces\Loader;
 use function Ensemble\html;
@@ -36,7 +36,7 @@ class Actions implements Loader {
 		// List table columns.
 		add_filter( 'manage_edit-ensemble_unit_columns',  array( $this, 'filter_unit_table_columns' ),   100 );
 		add_filter( 'manage_ensemble_unit_custom_column', array( $this, 'column_city'               ), 11, 3 );
-		add_filter( 'manage_ensemble_unit_custom_column', array( $this, 'column_directors'          ), 12, 3 );
+		add_filter( 'manage_ensemble_unit_custom_column', array( $this, 'column_staff'              ), 12, 3 );
 
 		// Save meta.
 		add_action( 'create_ensemble_unit', array( $this, 'save_fields' ) );
@@ -71,6 +71,9 @@ class Actions implements Loader {
 			</div>
 			<div class="form-group">
 				<?php $this->output_directors_field(); ?>
+			</div>
+			<div class="form-group">
+				<?php $this->output_instructors_field(); ?>
 			</div>
 			<?php
 			/**
@@ -111,6 +114,14 @@ class Actions implements Loader {
 				</th>
 				<td>
 					<?php $this->output_directors_field( $term ); ?>
+				</td>
+			</tr>
+			<tr class="form-field">
+				<th scope="row">
+					<label for="ensemble-instructors"><?php esc_html_e( 'Instructor(s)', 'ensemble' ); ?></label>
+				</th>
+				<td>
+					<?php $this->output_instructors_field( $term ); ?>?>
 				</td>
 			</tr>
 
@@ -193,6 +204,40 @@ class Actions implements Loader {
 	}
 
 	/**
+	 * Private helper to output the markup for the 'Instructor(s)' field.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param null|\WP_Term $term Optional. Term object. Default null (ignored).
+	 */
+	private function output_instructors_field( $term = null ) {
+		$args = array(
+			'id'               => 'unit-instructors',
+			'name'             => 'unit-instructors[]',
+			'label'            => __( 'Instructor(s)', 'ensemble' ),
+			'class'            => array( 'form-control', 'form-control-sm' ),
+			'multiple'         => true,
+			'options'          => $this->get_instructors_as_options(),
+			'show_option_all'  => false,
+			'show_option_none' => false,
+		);
+
+		if ( null !== $term ) {
+			$instructors = get_objects_in_term( $term->term_id, ( new Setup )->get_taxonomy_slug() );
+
+			if ( ! empty( $instructors ) ) {
+				$args['selected'] = $instructors;
+			}
+
+			// If $term is available this is for the Units > Edit form where the label is output separately.
+			unset( $args['label'] );
+		}
+
+		// Output the element.
+		html()->select( $args );
+	}
+
+	/**
 	 * Retrieves a list of director ID\name pairs for use as an options array.
 	 *
 	 * @since 1.0.0
@@ -202,25 +247,38 @@ class Actions implements Loader {
 	 */
 	private function get_directors_as_options( $ids = array() ) {
 		$args = array(
-			'fields' => array( 'ID', 'display_name' ),
-			'number' => 500,
+			'fields'     => array( 'ID', 'display_name' ),
+			'number'     => 500,
+			'as_options' => true,
 		);
 
 		if ( ! empty( $ids ) ) {
 			$args['include'] = $ids;
 		}
 
-		$directors_results = ( new Directors\Database )->query( $args );
+		return ( new Directors\Database )->query( $args );
+	}
 
-		if ( ! empty( $directors_results ) ) {
-			foreach ( $directors_results as $director ) {
-				$directors[ $director->ID ] = $director->display_name;
-			}
-		} else {
-			$directors = array();
+	/**
+	 * Retrieves a list of instructor ID\name pairs for use as an options array.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $ids Optional. Specific array of instructor IDs to query for. Default empty array.
+	 * @return array Instructor ID\name pairs if any are found, otherwise an empty array.
+	 */
+	private function get_instructors_as_options( $ids = array() ) {
+		$args = array(
+			'fields'     => array( 'ID', 'display_name' ),
+			'number'     => 500,
+			'as_options' => true,
+		);
+
+		if ( ! empty( $ids ) ) {
+			$args['include'] = $ids;
 		}
 
-		return $directors;
+		return ( new Instructors\Database )->query( $args );
 	}
 
 	/**
@@ -240,10 +298,10 @@ class Actions implements Loader {
 		}
 
 		$new_columns = array(
-			'cb'        => $columns['cb'],
-			'name'      => $columns['name'],
-			'city'      => _x( 'City', 'competing unit', 'ensemble' ),
-			'directors' => _x( 'Director(s)', 'competing unit', 'ensemble' ),
+			'cb'    => $columns['cb'],
+			'name'  => $columns['name'],
+			'city'  => _x( 'City', 'competing unit', 'ensemble' ),
+			'staff' => _x( 'Staff', 'competing unit', 'ensemble' ),
 		);
 
 		/**
@@ -291,23 +349,35 @@ class Actions implements Loader {
 	 * @param int    $term_id     Term ID.
 	 * @return string Markup for the column row.
 	 */
-	public function column_directors( $value, $column_name, $unit_id ) {
-		if ( 'directors' !== $column_name ) {
+	public function column_staff( $value, $column_name, $unit_id ) {
+		if ( 'staff' !== $column_name ) {
 			return $value;
 		}
 
-		$director_ids = get_objects_in_term( $unit_id, ( new Setup )->get_taxonomy_slug() );
+		$staff_ids = get_objects_in_term( $unit_id, ( new Setup )->get_taxonomy_slug() );
 
-		if ( ! empty( $director_ids ) ) {
+		$value = '';
+
+		if ( ! empty( $staff_ids ) ) {
 			$directors = ( new Directors\Database )->query( array(
-				'include' => $director_ids,
+				'include' => $staff_ids,
 				'fields'  => array( 'display_name' ),
 			) );
 
 			if ( ! empty( $directors ) ) {
-				$value = implode( ', ', wp_list_pluck( $directors, 'display_name' ) );
+				$value .= '<strong>' . __( 'Director(s):', 'ensemble' ) . '</strong><br />';
+				$value .= implode( ', ', wp_list_pluck( $directors, 'display_name' ) ) . '<br />';
 			}
 
+			$instructors = ( new Instructors\Database )->query( array(
+				'include' => $staff_ids,
+				'fields'  => array( 'display_name' ),
+			) );
+
+			if ( ! empty( $instructors ) ) {
+				$value .= '<strong>' . __( 'Instructor(s)', 'ensemble' ) . '</strong><br />';
+				$value .= implode( ', ', wp_list_pluck( $instructors, 'display_name' ) );
+			}
 		}
 
 		return $value;
@@ -321,8 +391,9 @@ class Actions implements Loader {
 	 * @param int $unit_id Unit term ID.
 	 */
 	public function save_fields( $unit_id ) {
-		$city      = sanitize_text_field( $_REQUEST['unit-city'] ?? '' );
-		$directors = $_REQUEST['unit-directors'] ?? array();
+		$city        = sanitize_text_field( $_REQUEST['unit-city'] ?? '' );
+		$directors   = $_REQUEST['unit-directors'] ?? array();
+		$instructors = $_REQUEST['unit-instructors'] ?? array();
 
 		if ( ! empty( $city ) ) {
 			update_term_meta( $unit_id, 'ensemble-city', $city );
@@ -338,6 +409,16 @@ class Actions implements Loader {
 			}
 		} else {
 			delete_term_meta( $unit_id, 'ensemble-directors' );
+		}
+
+		if ( ! empty( $instructors ) ) {
+			$instructors = array_map( 'absint', $instructors );
+
+			foreach ( $instructors as $instructor ) {
+				wp_add_object_terms( $instructor, $unit_id, ( new Setup )->get_taxonomy_slug() );
+			}
+		} else {
+			delete_term_meta( $unit_id, 'ensemble-instructors' );
 		}
 	}
 

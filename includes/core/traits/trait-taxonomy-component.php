@@ -54,7 +54,7 @@ trait Taxonomy_Component {
 		$current_screen = get_current_screen();
 
 		if ( isset( $current_screen->taxonomy ) && $this->get_taxonomy_slug() === $current_screen->taxonomy ) {
-			$parent_file = 'ensemble-admin';
+			$parent_file = 'ensemble-unit-admin';
 		}
 
 		return $parent_file;
