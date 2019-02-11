@@ -37,7 +37,7 @@ class Menu implements Loader {
 	 */
 	public function register_submenu() {
 		add_submenu_page(
-			'ensemble-admin',
+			'ensemble-unit-admin',
 			__( 'Classifications', 'ensemble' ),
 			__( 'Classifications', 'ensemble' ),
 			'manage_ensemble',

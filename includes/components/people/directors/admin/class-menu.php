@@ -37,9 +37,9 @@ class Menu implements Menu_Router {
 	 */
 	public function register_submenu() {
 		add_submenu_page(
-			'ensemble-admin',
-			__( 'Unit Directors', 'ensemble' ),
-			__( 'Unit Directors', 'ensemble' ),
+			'ensemble-unit-admin',
+			__( 'Directors', 'ensemble' ),
+			__( 'Directors', 'ensemble' ),
 			'manage_options',
 			'ensemble-admin-people-directors',
 			array( $this, 'route_request' )

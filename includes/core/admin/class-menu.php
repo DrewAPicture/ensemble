@@ -29,7 +29,7 @@ class Menu implements Menu_Router {
 	 * @since 1.0.0
 	 */
 	public function load() {
-		add_action( 'admin_menu', array( $this, 'register_menu' ) );
+		add_action( 'admin_menu', array( $this, 'register_menus' ) );
 	}
 
 	/**
@@ -37,7 +37,7 @@ class Menu implements Menu_Router {
 	 *
 	 * @since 1.0.0
 	 */
-	public function register_menu() {
+	public function register_menus() {
 		add_menu_page(
 			__( 'Ensemble', 'ensemble' ),
 			__( 'Ensemble', 'ensemble' ),
@@ -45,6 +45,15 @@ class Menu implements Menu_Router {
 			'ensemble-admin',
 			array( $this, 'route_request' ),
 			'dashicons-universal-access-alt'
+		);
+
+		add_menu_page(
+			__( 'Competing Units', 'ensemble' ),
+			__( 'Competing Units', 'ensemble' ),
+			'manage_ensemble',
+			'ensemble-unit-admin',
+			array( $this, 'route_request' ),
+			'dashicons-universal-access'
 		);
 	}
 
