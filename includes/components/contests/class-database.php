@@ -126,7 +126,7 @@ class Database extends Core\Database {
 	 * Queries for contests.
 	 *
 	 * @since 1.0.0
-	 * @since 1.0.2 Added array support for querying by 'name', 'type', and 'status'. Clarified logic
+	 * @since 1.1.0 Added array support for querying by 'name', 'type', and 'status'. Clarified logic
 	 *              and documentation for querying based on the existence of an external URL.
 	 *
 	 * @see parse_global_args()

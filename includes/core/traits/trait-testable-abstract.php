@@ -13,14 +13,14 @@ namespace Ensemble\Core\Traits;
  * Core trait that sets up a registry for supplying externally-defined overrides
  * to tests for abstract class methods
  *
- * @since 1.0.2
+ * @since 1.1.0
  */
 trait Testable_Abstract {
 
 	/**
 	 * Testing overrides.
 	 *
-	 * @since 1.0.2
+	 * @since 1.1.0
 	 * @var   array
 	 */
 	private $overrides = array();
@@ -43,7 +43,7 @@ trait Testable_Abstract {
 	 *         public function sample_method_name() { return $this->get_override( 'arg_name' ); }
 	 *     }
 	 *
-	 * @since 1.0.2
+	 * @since 1.1.0
 	 *
 	 * @param array $args Various arguments for overriding stuff in unit testing.
 	 */

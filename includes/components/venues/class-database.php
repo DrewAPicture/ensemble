@@ -121,7 +121,7 @@ class Database extends Core\Database {
 	 * Queries for venues.
 	 *
 	 * @since 1.0.0
-	 * @since 1.0.2 Added array support for querying by 'name', 'type', and 'status'.
+	 * @since 1.1.0 Added array support for querying by 'name', 'type', and 'status'.
 	 *
 	 * @param array $query_args {
 	 *     Optional. Arguments for querying venues. See parse_global_args() for available

@@ -16,7 +16,7 @@ use function Ensemble\{clean_item_cache, get_wp_timezone};
  * Core database abstraction layer.
  *
  * @since 1.0.0
- * @since 1.0.2 Now uses the Testable_Abstract trait
+ * @since 1.1.0 Now uses the Testable_Abstract trait
  * @abstract
  *
  * @see Interfaces\Database
@@ -54,7 +54,7 @@ abstract class Database implements Interfaces\Database {
 	 * Sets up the database class.
 	 *
 	 * @since 1.0.0
-	 * @since 1.0.2 Introduced an optional `$overrides` parameter used for testing purposes
+	 * @since 1.1.0 Introduced an optional `$overrides` parameter used for testing purposes
 	 *              via use of the Testable_Abstract trait.
 	 *
 	 * @param null $overrides For unit testing purposes only -- unused for normal business.

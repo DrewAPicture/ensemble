@@ -25,7 +25,7 @@ abstract class User_Database implements Interfaces\User_Database {
 	/**
 	 * Sets up the User_Database superclass.
 	 *
-	 * @since 1.0.2
+	 * @since 1.1.0
 	 *
 	 * @param null $overrides For unit testing purposes only -- unused for normal business.
 	 */

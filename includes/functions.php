@@ -132,7 +132,7 @@ function print_notice( $notice_id, $atts = array() ) {
 /**
  * Cleans Ensemble notices query args from the current admin URL.
  *
- * @since 1.0.2
+ * @since 1.1.0
  *
  * @return string "Cleaned" admin URL if any notices were found and removed. Otherwise the current URL
  *                if in the admin or an empty string if not.

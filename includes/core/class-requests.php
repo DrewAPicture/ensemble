@@ -53,7 +53,7 @@ class Requests implements Loader {
 	 *
 	 * In the case of notices, this serves to prevent notices unnecessarily persisting across screens.
 	 *
-	 * @since 1.0.2
+	 * @since 1.1.0
 	 *
 	 * @param string $query_args Current query args.
 	 * @return string (Maybe) modified query args list.

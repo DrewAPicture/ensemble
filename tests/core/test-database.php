@@ -877,7 +877,7 @@ class Database_Tests extends UnitTestCase {
 	 * If needed, setting up abstract methods with return values from an actual
 	 * subclass allows the CRUD methods to be tested with real fixture data. Boom.
 	 *
-	 * @since 1.0.2
+	 * @since 1.1.0
 	 *
 	 * @see Testable_Abstract
 	 *

@@ -67,7 +67,7 @@ class User_Database_Tests extends UnitTestCase {
 	/**
 	 * Builds a "mock" abstract Core\User_Database object.
 	 *
-	 * @since 1.0.2
+	 * @since 1.1.0
 	 *
 	 * @see Testable_Abstract
 	 *
