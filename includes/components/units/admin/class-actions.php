@@ -354,18 +354,30 @@ class Actions implements Loader {
 			return $value;
 		}
 
-		$director_ids = get_objects_in_term( $unit_id, ( new Setup )->get_taxonomy_slug() );
+		$staff_ids = get_objects_in_term( $unit_id, ( new Setup )->get_taxonomy_slug() );
 
-		if ( ! empty( $director_ids ) ) {
+		$value = '';
+
+		if ( ! empty( $staff_ids ) ) {
 			$directors = ( new Directors\Database )->query( array(
-				'include' => $director_ids,
+				'include' => $staff_ids,
 				'fields'  => array( 'display_name' ),
 			) );
 
 			if ( ! empty( $directors ) ) {
-				$value = implode( ', ', wp_list_pluck( $directors, 'display_name' ) );
+				$value .= '<strong>' . __( 'Director(s):', 'ensemble' ) . '</strong><br />';
+				$value .= implode( ', ', wp_list_pluck( $directors, 'display_name' ) ) . '<br />';
 			}
 
+			$instructors = ( new Instructors\Database )->query( array(
+				'include' => $staff_ids,
+				'fields'  => array( 'display_name' ),
+			) );
+
+			if ( ! empty( $instructors ) ) {
+				$value .= '<strong>' . __( 'Instructor(s)', 'ensemble' ) . '</strong><br />';
+				$value .= implode( ', ', wp_list_pluck( $instructors, 'display_name' ) );
+			}
 		}
 
 		return $value;
@@ -379,8 +391,9 @@ class Actions implements Loader {
 	 * @param int $unit_id Unit term ID.
 	 */
 	public function save_fields( $unit_id ) {
-		$city      = sanitize_text_field( $_REQUEST['unit-city'] ?? '' );
-		$directors = $_REQUEST['unit-directors'] ?? array();
+		$city        = sanitize_text_field( $_REQUEST['unit-city'] ?? '' );
+		$directors   = $_REQUEST['unit-directors'] ?? array();
+		$instructors = $_REQUEST['unit-instructors'] ?? array();
 
 		if ( ! empty( $city ) ) {
 			update_term_meta( $unit_id, 'ensemble-city', $city );
@@ -396,6 +409,16 @@ class Actions implements Loader {
 			}
 		} else {
 			delete_term_meta( $unit_id, 'ensemble-directors' );
+		}
+
+		if ( ! empty( $instructors ) ) {
+			$instructors = array_map( 'absint', $instructors );
+
+			foreach ( $instructors as $instructor ) {
+				wp_add_object_terms( $instructor, $unit_id, ( new Setup )->get_taxonomy_slug() );
+			}
+		} else {
+			delete_term_meta( $unit_id, 'ensemble-instructors' );
 		}
 	}
 
