@@ -33,6 +33,7 @@ class Components implements Interfaces\Loader {
 		load( new Component\Venues\Setup );
 		load( new Component\Contests\Setup );
 		load( new Component\People\Directors\Setup );
+		load( new Component\People\Instructors\Setup );
 		load( new Component\Integrations\Setup );
 	}
 
