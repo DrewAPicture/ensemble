@@ -5,7 +5,7 @@
  * @package   Ensemble\Components\People\Instructors\Admin
  * @copyright Copyright (c) 2019, Drew Jaynes
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since     1.0.0
+ * @since     1.1.0
  */
 namespace Ensemble\Components\People\Instructors\Admin;
 
@@ -15,7 +15,7 @@ use function Ensemble\{load_view, get_current_view};
 /**
  * Sets up the People menu.
  *
- * @since 1.0.0
+ * @since 1.1.0
  *
  * @see Menu_Router
  */
@@ -24,7 +24,7 @@ class Menu implements Menu_Router {
 	/**
 	 * Initializes menu registrations.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	public function load() {
 		add_action( 'admin_menu', array( $this, 'register_submenu' ), 40 );
@@ -33,7 +33,7 @@ class Menu implements Menu_Router {
 	/**
 	 * Registers the Contests submenu.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	public function register_submenu() {
 		add_submenu_page(
@@ -49,7 +49,7 @@ class Menu implements Menu_Router {
 	/**
 	 * Routes the request based on the current ensbl-view value.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	public function route_request() {
 		load_view( new Actions, get_current_view() );

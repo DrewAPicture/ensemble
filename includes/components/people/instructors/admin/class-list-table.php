@@ -5,7 +5,7 @@
  * @package   Ensemble\Components\People\Instructors\Admin
  * @copyright Copyright (c) 2019, Drew Jaynes
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since     1.0.0
+ * @since     1.1.0
  */
 namespace Ensemble\Components\People\Instructors\Admin;
 
@@ -16,7 +16,7 @@ use Ensemble\Util\Date;
 /**
  * Implements a list table for instructors.
  *
- * @since 1.0.0
+ * @since 1.1.0
  *
  * @see \WP_List_Table
  */
@@ -25,7 +25,7 @@ class List_Table extends \WP_List_Table {
 	/**
 	 * Represents the default number of instructors to show per page.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 * @var   string
 	 */
 	public $per_page = 30;
@@ -33,7 +33,7 @@ class List_Table extends \WP_List_Table {
 	/**
 	 * Total number of items found.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 * @var   int
 	 */
 	public $total_count;
@@ -43,7 +43,7 @@ class List_Table extends \WP_List_Table {
 	 *
 	 * Used for the pagination controls with non-status filtered results.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 * @var   int
 	 */
 	public $current_count;
@@ -51,7 +51,7 @@ class List_Table extends \WP_List_Table {
 	/**
 	 * Sets up the list table.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 *
 	 * @param array|string $args {
 	 *     Array or string of arguments.
@@ -84,7 +84,7 @@ class List_Table extends \WP_List_Table {
 	/**
 	 * Calculates all count properties used in views.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	public function calculate_count() {
 		$this->total_count = ( new Database )->count();
@@ -93,7 +93,7 @@ class List_Table extends \WP_List_Table {
 	/**
 	 * Retrieves the view types.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 *
 	 * @return array All available views.
 	 */
@@ -115,7 +115,7 @@ class List_Table extends \WP_List_Table {
 	/**
 	 * Retrieves the name of the primary column.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 *
 	 * @return string Name of the primary column.
 	 */
@@ -126,7 +126,7 @@ class List_Table extends \WP_List_Table {
 	/**
 	 * Retrieves the list of columns.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 *
 	 * @return array $columns Array of all the list table columns
 	 */
@@ -140,7 +140,7 @@ class List_Table extends \WP_List_Table {
 		/**
 		 * Filters the instructors list table columns.
 		 *
-		 * @since 1.0.0
+		 * @since 1.1.0
 		 *
 		 * @param array      $columns The columns for this list table.
 		 * @param List_Table $this    List table instance.
@@ -151,7 +151,7 @@ class List_Table extends \WP_List_Table {
 	/**
 	 * Retrieves the list of sortable columns.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 *
 	 * @return array Array of all the sortable columns.
 	 */
@@ -164,7 +164,7 @@ class List_Table extends \WP_List_Table {
 	/**
 	 * Runs the query for the list table to display.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 *
 	 * @return array Query results.
 	 */
@@ -204,7 +204,7 @@ class List_Table extends \WP_List_Table {
 	/**
 	 * Prepares instructor items for display.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	public function prepare_items() {
 		$per_page = $this->get_items_per_page( 'ensemble_instructors_per_page', $this->per_page );
@@ -231,7 +231,7 @@ class List_Table extends \WP_List_Table {
 	/**
 	 * Default display callback for list table columns.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 *
 	 * @param Model  $instructor  The current instructor object.
 	 * @param string $column_name The name of the column.
@@ -288,7 +288,7 @@ class List_Table extends \WP_List_Table {
 		/**
 		 * Filters the default value for each instructors list table column.
 		 *
-		 * @since 1.0.0
+		 * @since 1.1.0
 		 *
 		 * @param string $value   The column data.
 		 * @param Model  $instructor The current instructor object.
@@ -299,7 +299,7 @@ class List_Table extends \WP_List_Table {
 	/**
 	 * Renders the message to be displayed when there are no instructors.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	function no_items() {
 		esc_html_e( 'You haven&#8217;t created any instructors yet!', 'ensemble' );
@@ -308,7 +308,7 @@ class List_Table extends \WP_List_Table {
 	/**
 	 * Generates and displays row action links.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 *
 	 * @param Model  $instructor  Current instructor object.
 	 * @param string $column_name Current column name.
@@ -339,7 +339,7 @@ class List_Table extends \WP_List_Table {
 		/**
 		 * Filters the array of row action links on the instructors list table.
 		 *
-		 * @since 1.0.0
+		 * @since 1.1.0
 		 *
 		 * @param string[] $actions An array of row action links.
 		 * @param Model    $instructor The current instructor object.

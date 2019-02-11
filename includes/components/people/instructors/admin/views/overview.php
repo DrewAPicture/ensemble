@@ -3,9 +3,9 @@
  * Instructors Overview Template
  *
  * @package   Ensemble\Admin\Templates
- * @copyright Copyright (c) 2018, Drew Jaynes
+ * @copyright Copyright (c) 2019, Drew Jaynes
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since     1.0.0
+ * @since     1.1.0
  */
 namespace Ensemble\Components\People\Instructors\Admin;
 

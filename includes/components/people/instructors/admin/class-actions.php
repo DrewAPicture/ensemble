@@ -5,7 +5,7 @@
  * @package   Ensemble\Components\People\Instructors\Admin
  * @copyright Copyright (c) 2019, Drew Jaynes
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since     1.0.0
+ * @since     1.1.0
  */
 namespace Ensemble\Components\People\Instructors\Admin;
 
@@ -16,7 +16,7 @@ use Ensemble\Core\Traits\{View_Loader, Tab_Loader};
 /**
  * Sets up logic for performing instructor-related actions.
  *
- * @since 1.0.0
+ * @since 1.1.0
  *
  * @see Loader
  * @see View_Loader
@@ -29,7 +29,7 @@ class Actions implements Loader {
 	/**
 	 * Registers hook callbacks for instructor actions.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	public function load() {
 		add_action( 'init', array( $this, 'add_instructor' ) );
@@ -42,7 +42,7 @@ class Actions implements Loader {
 	/**
 	 * Processes adding a new instructor.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	public function add_instructor() {
 		$valid_request = $_REQUEST['ensemble-add-instructor'] ?? false;
@@ -93,7 +93,7 @@ class Actions implements Loader {
 	/**
 	 * Processes updating a instructor.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	public function update_instructor() {
 		$valid_request = $_REQUEST['ensemble-update-instructor'] ?? false;
@@ -159,7 +159,7 @@ class Actions implements Loader {
 	/**
 	 * Processes deleting a instructor.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	public function delete_instructor() {
 		$valid_request = $_REQUEST['ensemble-delete-instructor'] ?? false;
@@ -206,7 +206,7 @@ class Actions implements Loader {
 	/**
 	 * Retrieves registered instructor views.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 *
 	 * @return array Registered instructor views.
 	 */
@@ -217,7 +217,7 @@ class Actions implements Loader {
 	/**
 	 * Retrieves the path/to/the/views.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 *
 	 * @return string Path to the view templates instructory.
 	 */
@@ -229,7 +229,7 @@ class Actions implements Loader {
 	 * Retrieves the identifier for the component whose tabs API
 	 * this component is hooking into.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 *
 	 * @return string Tab component identifier.
 	 */
@@ -240,7 +240,7 @@ class Actions implements Loader {
 	/**
 	 * Retrieves the tab slug.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 *
 	 * @return string Tab slug.
 	 */
@@ -251,7 +251,7 @@ class Actions implements Loader {
 	/**
 	 * Retrieves the tab label.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 *
 	 * @return string Tab label.
 	 */
@@ -262,7 +262,7 @@ class Actions implements Loader {
 	/**
 	 * Outputs the contents of the tab.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 */
 	public function output_tab_contents() {
 		$this->load_view( 'tab' );

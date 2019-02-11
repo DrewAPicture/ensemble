@@ -5,7 +5,7 @@
  * @package   Ensemble\Components\People
  * @copyright Copyright (c) 2019, Drew Jaynes
  * @license   http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since     1.0.0
+ * @since     1.1.0
  */
 namespace Ensemble\Components\People\Instructors;
 
@@ -14,7 +14,7 @@ use Ensemble\Core;
 /**
  * Instructors member database class.
  *
- * @since 1.0.0
+ * @since 1.1.0
  *
  * @see \Ensemble\Core\User_Database
  *
@@ -25,7 +25,7 @@ class Database extends Core\User_Database {
 	/**
 	 * Facilitates magic method calls.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 *
 	 * @param string $name      Method name.
 	 * @param array  $arguments Method arguments (if any)
@@ -42,7 +42,7 @@ class Database extends Core\User_Database {
 	/**
 	 * Queries for instructors in the Users database.
 	 *
-	 * @since 1.0.0
+	 * @since 1.1.0
 	 *
 	 * @param array $query_args Query arguments.
 	 * @param bool  $count      Optional. Whether this is a count query. Default false.
