@@ -60,7 +60,10 @@ class Assets implements Interfaces\Loader {
 
 		$special_screens = array( 'edit-tags.php', 'term.php' );
 
-		if ( false !== strpos( $hook_suffix, 'page_ensemble-admin' ) || in_array( $hook_suffix, $special_screens, true ) ) {
+		if ( false !== strpos( $hook_suffix, 'page_ensemble-admin' )
+			|| false !== strpos( $hook_suffix, 'page_ensemble-unit-admin' )
+			|| in_array( $hook_suffix, $special_screens, true )
+		) {
 			wp_enqueue_style( 'ensbl-admin-css' );
 			wp_enqueue_script( 'ensbl-admin' );
 		}
