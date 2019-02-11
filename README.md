@@ -14,7 +14,7 @@ A sister theme is in the works to bring all of this to the front end in the near
 
 Stable releases are available on WordPress.org: https://wordpress.org/plugins/ensemble/
 
-* Stable: v1.0.1
+* Stable: v1.1.0
 * Requires at least: WordPress 4.9.6
 * Requires at least: PHP 7.0
 * License: GPLv2
