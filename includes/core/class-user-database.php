@@ -68,6 +68,13 @@ abstract class User_Database implements Interfaces\User_Database {
 		if ( true === $count ) {
 			return count( $results );
 		} else {
+			if ( isset( $query_args['as_options'] ) && ! empty( $results ) ) {
+				foreach ( $results as $result ) {
+					$options[ $result->ID ] = $result->display_name;
+				}
+				return $options;
+			}
+
 			return $results;
 		}
 	}
