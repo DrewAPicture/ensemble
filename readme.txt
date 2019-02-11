@@ -60,6 +60,18 @@ A: You\'re welcome to submit an issue on the [Github repository](https://github.
 6. Contests overview.
 
 == Changelog ==
+
+= 1.1.0 =
+
+* New: Introduced an Instructor component and management screens to live alongside Directors
+* New: Added an 'External' label to contests with an external URL
+* New: Added two new contest types: Regional Competition and World Championships
+* Improved: Contests now default to published instead of private
+* Improved: Directors are now listed alphabetically by name
+* Fixed: Pagination controls were not displaying on all screens
+* Fixed: Notices were sometimes unnecessarily persisting across screens
+* Under the hood: Added full test coverage was added for all core components
+
 = 1.0.1 =
 
 Minor bug fixes:
