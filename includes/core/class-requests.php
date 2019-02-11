@@ -29,6 +29,8 @@ class Requests implements Loader {
 	public function load() {
 		add_action( 'query_vars', array( $this, 'whitelist_query_vars' ) );
 		add_filter( 'removable_query_args', array( $this, 'clear_admin_query_args' ) );
+
+		add_action( 'load-toplevel_page_ensemble-unit-admin', array( $this, 'redirect_units_menu' ) );
 	}
 
 	/**
@@ -68,6 +70,16 @@ class Requests implements Loader {
 		}
 
 		return $query_args;
+	}
+
+	/**
+	 * Redirects the top-level Competing Units menu page to the Units page.
+	 *
+	 * @since 1.1.0
+	 */
+	public function redirect_units_menu() {
+		wp_redirect( add_query_arg( 'taxonomy', 'ensemble_unit', admin_url( 'edit-tags.php' ) ) );
+		exit;
 	}
 
 }
