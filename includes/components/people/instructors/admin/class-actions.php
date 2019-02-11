@@ -67,13 +67,19 @@ class Actions implements Loader {
 		$email = sanitize_text_field( $_REQUEST['instructor-email'] ?? '' );
 		$units = array_map( 'absint', $_REQUEST['instructor-units'] ?? array() );
 
-		$user_id = wp_insert_user( array(
-			'user_login'   => $email,
-			'user_email'   => $email,
-			'user_pass'    => wp_generate_password( 24, true ),
-			'display_name' => $name,
-			'role'         => 'ensemble_instructor',
-		) );
+		if ( false !== $user = get_user_by( 'email', $email ) ) {
+			$user->add_role( 'ensemble_instructor' );
+
+			$user_id = $user->ID;
+		} else {
+			$user_id = wp_insert_user( array(
+				'user_login'   => $email,
+				'user_email'   => $email,
+				'user_pass'    => wp_generate_password( 24, true ),
+				'display_name' => $name,
+				'role'         => 'ensemble_instructor',
+			) );
+		}
 
 		if ( ! is_wp_error( $user_id ) ) {
 			if ( ! empty( $units ) ) {
