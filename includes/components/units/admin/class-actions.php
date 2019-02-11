@@ -36,7 +36,7 @@ class Actions implements Loader {
 		// List table columns.
 		add_filter( 'manage_edit-ensemble_unit_columns',  array( $this, 'filter_unit_table_columns' ),   100 );
 		add_filter( 'manage_ensemble_unit_custom_column', array( $this, 'column_city'               ), 11, 3 );
-		add_filter( 'manage_ensemble_unit_custom_column', array( $this, 'column_directors'          ), 12, 3 );
+		add_filter( 'manage_ensemble_unit_custom_column', array( $this, 'column_staff'              ), 12, 3 );
 
 		// Save meta.
 		add_action( 'create_ensemble_unit', array( $this, 'save_fields' ) );
@@ -298,10 +298,10 @@ class Actions implements Loader {
 		}
 
 		$new_columns = array(
-			'cb'        => $columns['cb'],
-			'name'      => $columns['name'],
-			'city'      => _x( 'City', 'competing unit', 'ensemble' ),
-			'directors' => _x( 'Director(s)', 'competing unit', 'ensemble' ),
+			'cb'    => $columns['cb'],
+			'name'  => $columns['name'],
+			'city'  => _x( 'City', 'competing unit', 'ensemble' ),
+			'staff' => _x( 'Staff', 'competing unit', 'ensemble' ),
 		);
 
 		/**
@@ -349,8 +349,8 @@ class Actions implements Loader {
 	 * @param int    $term_id     Term ID.
 	 * @return string Markup for the column row.
 	 */
-	public function column_directors( $value, $column_name, $unit_id ) {
-		if ( 'directors' !== $column_name ) {
+	public function column_staff( $value, $column_name, $unit_id ) {
+		if ( 'staff' !== $column_name ) {
 			return $value;
 		}
 
