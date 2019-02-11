@@ -9,7 +9,7 @@
  */
 namespace Ensemble\Components\Units\Admin;
 
-use Ensemble\Components\People\Directors;
+use Ensemble\Components\People\{Directors, Instructors};
 use Ensemble\Components\Units\Setup;
 use Ensemble\Core\Interfaces\Loader;
 use function Ensemble\html;
@@ -72,6 +72,9 @@ class Actions implements Loader {
 			<div class="form-group">
 				<?php $this->output_directors_field(); ?>
 			</div>
+			<div class="form-group">
+				<?php $this->output_instructors_field(); ?>
+			</div>
 			<?php
 			/**
 			 * Fires inside the form-field container in the Units > Add form.
@@ -111,6 +114,14 @@ class Actions implements Loader {
 				</th>
 				<td>
 					<?php $this->output_directors_field( $term ); ?>
+				</td>
+			</tr>
+			<tr class="form-field">
+				<th scope="row">
+					<label for="ensemble-instructors"><?php esc_html_e( 'Instructor(s)', 'ensemble' ); ?></label>
+				</th>
+				<td>
+					<?php $this->output_instructors_field( $term ); ?>?>
 				</td>
 			</tr>
 
@@ -182,6 +193,40 @@ class Actions implements Loader {
 
 			if ( ! empty( $directors ) ) {
 				$args['selected'] = $directors;
+			}
+
+			// If $term is available this is for the Units > Edit form where the label is output separately.
+			unset( $args['label'] );
+		}
+
+		// Output the element.
+		html()->select( $args );
+	}
+
+	/**
+	 * Private helper to output the markup for the 'Instructor(s)' field.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param null|\WP_Term $term Optional. Term object. Default null (ignored).
+	 */
+	private function output_instructors_field( $term = null ) {
+		$args = array(
+			'id'               => 'unit-instructors',
+			'name'             => 'unit-instructors[]',
+			'label'            => __( 'Instructor(s)', 'ensemble' ),
+			'class'            => array( 'form-control', 'form-control-sm' ),
+			'multiple'         => true,
+			'options'          => $this->get_instructors_as_options(),
+			'show_option_all'  => false,
+			'show_option_none' => false,
+		);
+
+		if ( null !== $term ) {
+			$instructors = get_objects_in_term( $term->term_id, ( new Setup )->get_taxonomy_slug() );
+
+			if ( ! empty( $instructors ) ) {
+				$args['selected'] = $instructors;
 			}
 
 			// If $term is available this is for the Units > Edit form where the label is output separately.
